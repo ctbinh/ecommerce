@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import Header from "./components/Header";
 import Navigation from "./components/Navigation";
-
-const index = () => {
+import { Main, Wraper } from "./components/style";
+const Admin = () => {
+  const [toogleNav, setToogleNav] = useState(true);
   return (
-    <div>
-      <Navigation />
-    </div>
+    <Wraper>
+      <Navigation toogleNav={!toogleNav} />
+      <Main width={toogleNav ? "270px" : "100px"}>
+        <Header setToogleNav={setToogleNav} />
+      </Main>
+    </Wraper>
   );
 };
 
-export default index;
+export default Admin;
