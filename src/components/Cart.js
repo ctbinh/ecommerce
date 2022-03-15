@@ -4,7 +4,10 @@ import { Container, Row, Col } from "react-grid-system";
 
 import Scrollbars from "react-scrollbars-custom";
 import RowOfTable from './RowOfTable';
-
+import {Link} from "react-router-dom";
+import Header from './Header';
+import Footer from './Footer';
+import React, { useState } from 'react';
 const lstCart = [
     {
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP0upF_DooL0hjwus-eb9Xb2WKRwGTdAkJig&usqp=CAU",
@@ -59,9 +62,12 @@ const lstCart = [
 ] 
 
 const Cart = () => {
-
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [address, setAddress] = useState("");
     return (
-        <div>   
+        <div> 
+            <Header/>  
             <Container fluid>
                 <Row>
                     <Col md={7.5}>
@@ -103,15 +109,15 @@ const Cart = () => {
                         <Title>Summary</Title>
                         <ContainerInput>
                             <NameInput>Name</NameInput>
-                            <Input type="text" />
+                            <Input type="text" onChange={e => setName(e.target.value)} />
                         </ContainerInput>
                         <ContainerInput>
                             <NameInput>Phone Number</NameInput>
-                            <Input type="text" />
+                            <Input type="text" onChange={e => setPhone(e.target.value)} />
                         </ContainerInput>
                         <ContainerInput>
                             <NameInput>Address</NameInput>
-                            <Input type="text" />
+                            <Input type="text" onChange={e => setAddress(e.target.value)} />
                         </ContainerInput>
                         <Line/>
                         <Row>
@@ -120,6 +126,7 @@ const Cart = () => {
                             </Col>
                             <Col lg={2.5}>
                                 <ValueShip>{(21000).toLocaleString()}</ValueShip>
+                                {/* <ValueShip>{document.getElementById("name").value}</ValueShip> */}
                             </Col>
                         </Row>
                         <br />
@@ -132,7 +139,16 @@ const Cart = () => {
                             </Col>
                         </Row>
                         <br />
-                        <ButtonCheckout>Proceed to Checkout</ButtonCheckout>
+                        <Link to="/checkout" style={LinkStyle} state={{ name: name, address: address, phone: phone }}>
+                            {name !== "" && phone !== "" && address !== "" && <ButtonCheckout >
+                                Proceed to Checkout
+                            </ButtonCheckout>}
+                            {(name === "" || phone === "" || address === "") && <ButtonCheckout 
+                                disabled    
+                            >
+                                Please fill all fields
+                            </ButtonCheckout>}
+                        </Link>
                         {/* <ButtonCheckout>      
                             <PayPalScriptProvider >
                                 Checkout with 
@@ -142,10 +158,13 @@ const Cart = () => {
                                 />
                             </PayPalScriptProvider>
                         </ButtonCheckout>     */}
-                        <ButtonMultiple>Checkout with Multiple Address</ButtonMultiple>    
+                        {name !== "" && phone !== "" && address !== "" && <ButtonMultiple>
+                            Checkout with Multiple Address
+                        </ButtonMultiple>}    
                     </Col>
                 </Row>
             </Container>
+            <Footer/>
         </div> 
     )
 }
@@ -205,11 +224,11 @@ const NameInput = styled.div`
     margin-bottom: 10px;
 `
 const Input = styled.input`
-    width: 95%;
+    width: 100%;
     height: 40px;
     border-radius: 5px;
     border: solid #CCCCCC 1px;
-    padding-left: 5%;
+    padding-left: 2%;
 `
 const Scrollbarstyled = {
     height: "47vh",
@@ -250,6 +269,9 @@ const ButtonCheckout = styled.button`
     }
     margin-bottom: 20px;
     cursor: pointer;
+    :disabled {
+        background-color: #444444;
+    }
 `
 const ButtonMultiple = styled.button`
     border-radius: 20px;
@@ -267,4 +289,7 @@ const ButtonMultiple = styled.button`
     margin-bottom: 10px;
     cursor: pointer;
 `
+const LinkStyle = {
+    textDecoration: "none",
+}
 export default Cart
