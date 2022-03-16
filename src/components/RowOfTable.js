@@ -19,7 +19,7 @@ const RowOfTable = (props) => {
     }
     return (
         <div>
-            <HoverRow>
+        <HoverRow>
         <Row style={RowTable}>
             <Col md={7}>
             <Row>
