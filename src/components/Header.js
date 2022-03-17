@@ -8,7 +8,7 @@ const Header = () => {
 const Row = styled.div`
   background-color: pink;
   width: 100%;
-  min-height: 100px;
+  min-height: 50px;
 `;
 
 export default Header;

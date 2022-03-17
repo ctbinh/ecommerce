@@ -1,12 +1,21 @@
 import './App.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Admin from './Admin';
+import Cart from './components/Cart';
+import Checkout from './components/Checkout';
+import Home from './components/Home/Home';
 
 function App() {
   return (
     <div className="App">
-      <Header/>
-      <Footer/>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="admin" element={<Admin />} />
+          <Route path="cart" element={<Cart/>} />
+          <Route path="checkout" element={<Checkout/>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
