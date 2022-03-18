@@ -149,3 +149,31 @@ export const HeaderWrapper = styled.div`
   font-size: 1.4em;
 `;
 export const Icon = styled.div``;
+export const IconCard = styled.div`
+  font-size: 50px;
+`;
+export const CardContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+export const Card = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: #ccc; */
+  width: 24%;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0px 0px 6px #b2b2b2;
+  background-color: #f2f2f2;
+`;
+export const CardLeft = styled.div``;
+export const CardNumber = styled.h3`
+  font-size: 28px;
+  font-weight: 600;
+  color: #297bff;
+  margin-bottom: 14px;
+`;
+export const CardTitle = styled.span``;
