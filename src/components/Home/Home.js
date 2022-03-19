@@ -1,9 +1,13 @@
-import React from 'react'
+import { MenuItem, Select } from '@mui/material'
+import AppsIcon from '@mui/icons-material/Apps';
+import ReorderIcon from '@mui/icons-material/Reorder';
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import Footer from '../Footer'
+// import Footer from '../Footer'
 import Header from '../Header'
 import images from '../images'
 import Filter from './Filter'
+import Product from './Product'
 
 const Home = () => {
   const brands = [
@@ -36,6 +40,188 @@ const Home = () => {
       img: images.thermaltake
     }
   ]
+  const products = [
+    {
+      id: 0,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 1,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 2,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 3,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 1,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 2,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 3,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 1,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 2,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 3,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 1,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 2,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 3,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 1,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 2,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 3,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 1,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 2,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 3,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 1,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 2,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 3,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    }
+  ]
+  const [display, setDisplay] = useState(0)
+  const changeDisplay = (value) => {
+    setDisplay(value);
+  }
   return (
     <>
     <Header/>
@@ -51,7 +237,31 @@ const Home = () => {
         <Content>
           <Filter brands={brands}/>
           <Products>
-            b
+            <Row>
+              <div>list of filter</div>
+              <DisplayOption>
+                <Select
+                  // value={'ac'}
+                  // // onChange={handleChange}
+                  // displayEmpty
+                  // inputProps={{ 'aria-label': 'Without label' }}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+                <Icon onClick={() => changeDisplay(0)}><AppsIcon/></Icon>
+                <Icon onClick={() => changeDisplay(1)}><ReorderIcon/></Icon>
+              </DisplayOption>
+            </Row>
+            {products.map((product) => {
+              return (
+                <Product display={display} product={product}/>
+              )
+            })}
           </Products>
         </Content>
       </Container>
@@ -60,13 +270,36 @@ const Home = () => {
   )
 }
 
+const Icon = styled.div`
+  :hover {
+    cursor: pointer;
+  }
+`
+
+const DisplayOption = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
+`
+
+const Row = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
 const Content = styled.div`
   display: flex;
   flex-direction: row;
 `
 const Products = styled.div`
   width: 80%;
-  background-color: greenyellow;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 5px;
 `
 
 const Brand = styled.img`
@@ -98,8 +331,9 @@ const Poster = styled.img`
 `
 
 const Container = styled.div`
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
+  height: 100vh;
 `
 
 export default Home

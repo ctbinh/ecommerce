@@ -29,5 +29,8 @@ const Btn = styled.button`
     border: 3px solid gray;
     color: gray;
   }
+  :hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
 `
 export default Button
