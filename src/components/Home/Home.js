@@ -1,4 +1,4 @@
-import { MenuItem, Select } from '@mui/material'
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material'
 import AppsIcon from '@mui/icons-material/Apps';
 import ReorderIcon from '@mui/icons-material/Reorder';
 import React, { useState } from 'react'
@@ -47,7 +47,11 @@ const Home = () => {
       instock: true,
       name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
       oldPrice: '599.00',
-      newPrice: '499.00'
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
     },
     {
       id: 1,
@@ -55,7 +59,11 @@ const Home = () => {
       instock: true,
       name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
       oldPrice: '599.00',
-      newPrice: '499.00'
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
     },
     {
       id: 2,
@@ -63,7 +71,11 @@ const Home = () => {
       instock: true,
       name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
       oldPrice: '599.00',
-      newPrice: '499.00'
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
     },
     {
       id: 3,
@@ -71,7 +83,11 @@ const Home = () => {
       instock: true,
       name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
       oldPrice: '599.00',
-      newPrice: '499.00'
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
     },
     {
       id: 1,
@@ -79,7 +95,11 @@ const Home = () => {
       instock: true,
       name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
       oldPrice: '599.00',
-      newPrice: '499.00'
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
     },
     {
       id: 2,
@@ -87,7 +107,11 @@ const Home = () => {
       instock: true,
       name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
       oldPrice: '599.00',
-      newPrice: '499.00'
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
     },
     {
       id: 3,
@@ -95,7 +119,11 @@ const Home = () => {
       instock: true,
       name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
       oldPrice: '599.00',
-      newPrice: '499.00'
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
     },
     {
       id: 1,
@@ -103,7 +131,11 @@ const Home = () => {
       instock: true,
       name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
       oldPrice: '599.00',
-      newPrice: '499.00'
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
     },
     {
       id: 2,
@@ -111,7 +143,11 @@ const Home = () => {
       instock: true,
       name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
       oldPrice: '599.00',
-      newPrice: '499.00'
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
     },
     {
       id: 3,
@@ -119,7 +155,11 @@ const Home = () => {
       instock: true,
       name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
       oldPrice: '599.00',
-      newPrice: '499.00'
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
     },
     {
       id: 1,
@@ -218,10 +258,14 @@ const Home = () => {
       newPrice: '499.00'
     }
   ]
+  const [num, setNum] = React.useState(30);
   const [display, setDisplay] = useState(0)
   const changeDisplay = (value) => {
     setDisplay(value);
   }
+  const handleChange = (event) => {
+    setNum(event.target.value);
+  };
   return (
     <>
     <Header/>
@@ -240,19 +284,22 @@ const Home = () => {
             <Row>
               <div>list of filter</div>
               <DisplayOption>
-                <Select
-                  // value={'ac'}
-                  // // onChange={handleChange}
-                  // displayEmpty
-                  // inputProps={{ 'aria-label': 'Without label' }}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
+                <FormControl sx={{ m: 1, minWidth: 200 }}>
+                  <InputLabel id="show">Show</InputLabel>
+                  <Select
+                    labelId="show"
+                    id="show"
+                    value={num}
+                    label="Show"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={10}>10 per page</MenuItem>
+                    <MenuItem value={20}>20 per page</MenuItem>
+                    <MenuItem value={30}>30 per page</MenuItem>
+                    <MenuItem value={40}>40 per page</MenuItem>
+                    <MenuItem value={50}>50 per page</MenuItem>
+                  </Select>
+                </FormControl>
                 <Icon onClick={() => changeDisplay(0)}><AppsIcon/></Icon>
                 <Icon onClick={() => changeDisplay(1)}><ReorderIcon/></Icon>
               </DisplayOption>
