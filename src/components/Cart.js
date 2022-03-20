@@ -147,7 +147,7 @@ const Cart = () => {
                         </Row>
                         <br />
                         <Link to="/checkout" style={LinkStyle} state={{ name: name, address: address, phone: phone, lstCart: lstCart }}>
-                            {name !== "" && phone !== "" && address !== "" && <ButtonCheckout >
+                            {name !== "" && phone !== "" && address !== "" && <ButtonCheckout>  
                                 Proceed to Checkout
                             </ButtonCheckout>}
                             {(name === "" || phone === "" || address === "") && <ButtonCheckout 
