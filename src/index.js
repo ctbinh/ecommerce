@@ -6,6 +6,7 @@ import Admin from "./Admin/index.jsx";
 import Cart from "./components/Cart"
 import Checkout from "./components/Checkout"
 
+
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
