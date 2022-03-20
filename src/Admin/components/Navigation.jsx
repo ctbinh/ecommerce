@@ -16,11 +16,11 @@ const Navigation = ({ toogleNav }) => {
   return (
     <Container toogle={!toogleNav}>
       <Header>
-        <Img
+        {/* <Img
           src="https://sinhvienudn.com/wp-content/uploads/2021/04/26/admin/logo-bkhcm.png"
           alt=""
           he
-        />
+        /> */}
         <Heading>BKU</Heading>
       </Header>
 

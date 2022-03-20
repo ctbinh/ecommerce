@@ -4,14 +4,19 @@ import Admin from './Admin';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Home from './components/Home/Home';
+import HomeAdmin from './Admin/components/Home';
+import Login from './Admin/components/Login';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="admin" element={<Admin />}>
+          <Route path="login" element={<Login />} />
+          <Route path="" element={<HomeAdmin />} />
+          </Route>
           <Route path="/" element={<Home />} />
-          <Route path="admin" element={<Admin />} />
           <Route path="cart" element={<Cart/>} />
           <Route path="checkout" element={<Checkout/>} />
         </Routes>

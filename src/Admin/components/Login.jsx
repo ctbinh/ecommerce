@@ -1,0 +1,137 @@
+import React from "react";
+import styled from "styled-components";
+import { AiOutlineUser } from "react-icons/ai";
+import { GiPadlock } from "react-icons/gi";
+const Wraper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: -20px -40px;
+  height: 100vh;
+  width: 100vw;
+  /* background-color: #ccc; */
+`;
+const InputLeft = styled.div`
+  padding: 0 40px;
+  min-width: 500px;
+`;
+const Img = styled.div`
+  background-color: #000;
+  border-radius: 10px;
+`;
+const Heading = styled.h3`
+  font-size: 28px;
+  margin-bottom: 14px;
+`;
+const Container = styled.div`
+  margin: 20px 0;
+`;
+const Label = styled.label`
+  color: #aaa;
+`;
+const Icon = styled.div`
+  position: absolute;
+  top: 2px;
+`;
+const InputWrap = styled.div`
+  /* display: flex; */
+  position: relative;
+`;
+const Input = styled.input`
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #000;
+  padding: 2px 20px;
+  width: 100%;
+`;
+const ImgSrc = styled.img`
+  width: 100%;
+  object-fit: cover;
+  /* border-radius: 10px; */
+`;
+const Remember = styled.div``;
+const ContainerBottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const LabelRemember = styled.span`
+  display: inline-block;
+`;
+const A = styled.a`
+  text-decoration: none;
+`;
+const InputRemember = styled.input`
+  margin-right: 4px;
+`;
+const ContainerButton = styled.div`
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+`;
+const Button = styled.button`
+  color: white;
+  background-color: #000;
+  border-radius: 14px;
+  padding: 10px 100px;
+  border: 1px solid #ccc;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover {
+    color: #000;
+    background-color: white;
+  }
+`;
+const Title = styled.h3`
+  color: white;
+  font-size: 8px;
+  padding: 10px 4px;
+  text-align: center;
+`;
+
+const Login = () => {
+  return (
+    <Wraper>
+      <InputLeft>
+        <Heading>Admin Login</Heading>
+        <Container>
+          <Label>User name</Label>
+          <InputWrap>
+            <Icon>
+              <AiOutlineUser />
+            </Icon>
+            <Input type="text"></Input>
+          </InputWrap>
+        </Container>
+        <Container>
+          <Label>Password</Label>
+          <InputWrap>
+            <Icon>
+              <GiPadlock />
+            </Icon>
+            <Input type="password"></Input>
+          </InputWrap>
+        </Container>
+        <ContainerBottom>
+          <Remember>
+            <InputRemember type="checkbox"></InputRemember>
+            <LabelRemember>Remember me</LabelRemember>
+          </Remember>
+          <Remember>
+            <A href="">Forgot password?</A>
+          </Remember>
+        </ContainerBottom>
+        <ContainerButton>
+          <Button>Login</Button>
+        </ContainerButton>
+      </InputLeft>
+      <Img>
+        <ImgSrc src="https://toscaleblog.co.uk/wp-content/uploads/elementor/thumbs/Saly-10-p5irc3tooikkemk635karj2rc4plfa69aa5g3d59s4.png"></ImgSrc>
+        <Title>Easy product management, as long as you have a network</Title>
+      </Img>
+    </Wraper>
+  );
+};
+
+export default Login;
