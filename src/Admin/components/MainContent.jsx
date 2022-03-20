@@ -3,14 +3,22 @@ import styled from "styled-components";
 // import { MainContentWrap } from "./style";
 const MainContentWrap = styled.div`
   display: flex;
-  margin-top: 14px;
+  /* margin-top: 50px; */
   gap: 20px;
+  flex-wrap: wrap;
 `;
 const Orders = styled.div`
   box-shadow: 0px 0px 6px #b2b2b2;
   flex: 3;
   padding: 10px 20px;
   border-radius: 8px;
+  @media (max-width: 1024px) {
+    flex: none;
+    width: 100%;
+  }
+  /* @media (max-width: 600px) {
+    width: 99%;
+  } */
 `;
 const Custommers = styled.div`
   box-shadow: 0px 0px 6px #b2b2b2;
@@ -78,15 +86,23 @@ const Td = styled.td`
 const CustomerList = styled.div`
   margin-top: 20px;
 `;
+const CustomerCountry = styled.h4`
+  font-size: 16px;
+  font-weight: 400;
+  color: #ccc;
+`;
 const CustomerItem = styled.div`
   padding: 8px 12px;
-  margin: 12px 0;
+  margin: 8px 0;
   display: flex;
   cursor: pointer;
   justify-content: flex-start;
   &:hover {
     background-color: #297bff;
     color: white;
+    ${CustomerCountry} {
+      color: white;
+    }
   }
 `;
 const CustomerImg = styled.img`
@@ -99,11 +115,6 @@ const CustomerImg = styled.img`
 const CustomerRight = styled.div``;
 const CustomerName = styled.h4`
   font-size: 18px;
-`;
-const CustomerCountry = styled.h4`
-  font-size: 16px;
-  font-weight: 400;
-  color: #ddd;
 `;
 
 // const Orders=styled.div``;

@@ -1,3 +1,4 @@
+import { Children } from "react";
 import styled from "styled-components";
 export const Container = styled.div`
   position: fixed;
@@ -7,19 +8,22 @@ export const Container = styled.div`
   transition: 0.5s;
   overflow-x: hidden;
   /* width: 18.75em; */
-  width: ${(props) => (props.toogle ? "16em" : "5.2em")};
+  width: ${(props) => (props.toogle ? "16em" : "4.8em")};
 `;
 export const Heading = styled.h2`
   padding-left: 15px;
+  font-size: 20px;
+  text-align: center;
 `;
 
 export const Header = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   font-size: 1.8em;
   color: white;
   padding: 1em 1em;
+  /* border-bottom: 1px solid #ccc; */
 `;
 export const Img = styled.img`
   height: 1.4em;
@@ -34,7 +38,7 @@ export const List = styled.ul`
 export const Item = styled.li`
   list-style-type: none;
   padding: 1em 1em;
-  font-size: 1.4em;
+  font-size: 1.2em;
   color: white;
   display: flex;
   align-items: center;
@@ -99,7 +103,7 @@ export const Item = styled.li`
   }
 `;
 export const Title = styled.span`
-  padding-left: 1.2em;
+  padding-left: 1.4em;
   display: inline-block;
 `;
 export const Main = styled.div`
@@ -108,7 +112,7 @@ export const Main = styled.div`
   width: ${(props) => "calc(100%" + " - " + parseInt(props.width) + "px)"};
   left: ${(props) => props.width};
 `;
-export const Wraper = styled.body`
+export const Wraper = styled.div`
   /* position: relative; */
 `;
 export const Search = styled.div`
@@ -155,6 +159,17 @@ export const IconCard = styled.div`
 export const CardContainer = styled.div`
   display: flex;
   gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+`;
+export const CardNumber = styled.h3`
+  font-size: 28px;
+  font-weight: 600;
+  color: #297bff;
+  margin-bottom: 14px;
+  /* &:hover {
+      color: inherit;
+    } */
 `;
 export const Card = styled.div`
   display: flex;
@@ -167,13 +182,24 @@ export const Card = styled.div`
   border: 1px solid #ccc;
   border-radius: 6px;
   box-shadow: 0px 0px 6px #b2b2b2;
-  background-color: #f2f2f2;
+  /* transition: 0.s; */
+  &:hover {
+    background-color: #297bff;
+    color: white;
+    ${CardNumber} {
+      color: white;
+    }
+  }
+  @media (max-width: 1024px) {
+    width: 49%;
+  }
+  @media (max-width: 600px) {
+    width: 99%;
+  }
 `;
 export const CardLeft = styled.div``;
-export const CardNumber = styled.h3`
-  font-size: 28px;
-  font-weight: 600;
-  color: #297bff;
-  margin-bottom: 14px;
+export const CardTitle = styled.span`
+  /* &:hover {
+    color: white;
+  } */
 `;
-export const CardTitle = styled.span``;
