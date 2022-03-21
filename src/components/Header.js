@@ -4,7 +4,7 @@ import { ShoppingCart, Person } from "@mui/icons-material";
 
 const Header = () => {
   return <Row>
-    <div style={{height: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
       <Logo src="https://www.hcmut.edu.vn/images/hcmut/logoBK.png" alt="Logo HCMUT">
       </Logo>
       <Title>
@@ -53,9 +53,13 @@ const Logo = styled.img`
   `
 const Title = styled.p`
   color: white;
-  font-weight: bold;
   font-size: 38px;
-  font-family: 'Candara', sans-serif;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 43px;
+  /* letter-spacing: 2px; */
   display: inline;
   margin: 0px 90px 0px 30px;
 `
