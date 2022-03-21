@@ -12,8 +12,5 @@ const Row = styled.div`
     color: white;
     width: 100%;
     min-height: 100px;
-    position: fixed;
-    bottom: 0;
-    position: fixed;
 `
 export default Footer

@@ -1,5 +1,5 @@
 import { Slider } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../Button'
 
@@ -9,8 +9,33 @@ const Filter = (props) => {
   function valuetext(value) {
     return `${value}°C`;
   }
-  const [value, setValue] = React.useState([0, 1000]);
-
+  const [value, setValue] = useState([0, 1000]);
+  // const [brandsTaget, setBrandsTaget] = useState([]);
+  const [ramFilter, setRamFilter] = useState([]);
+  const targetRam = (ram) => {
+    if(!ramFilter.includes(ram)) {
+      setRamFilter([...ramFilter, ram]);
+    }
+    else {
+      setRamFilter(ramFilter.filter(r => r !== ram));
+    }
+  }
+  const targetBrand = (brand) => {
+    if(!props.brandsTaget.includes(brand.id)) {
+      props.setBrandsTaget([...props.brandsTaget, brand.id]);
+    }
+    else {
+      props.setBrandsTaget(props.brandsTaget.filter(id => id !== brand.id));
+    }
+  };
+  const applyFilter = () => {
+    console.log(props.brandsTaget);
+  };
+  const clearFilter = () => {
+    props.setBrandsTaget([]);
+    setRamFilter([]);
+    setValue([0, 1000]);
+  }
   const handleChange = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
       return;
@@ -31,27 +56,27 @@ const Filter = (props) => {
   return (
     <Container>
       <Title>Filters</Title>
-      <Button type='transparent' text="Clear Filter"/>
+      <Button type='transparent' text="Clear Filter" onClick={() => clearFilter()}/>
       <TypeFilter>Brands</TypeFilter>
       <Brands>
         {props.brands.map((brand) => {
           return (
-            <Brand src={brand.img} alt='brand'/>
+            <Brand className={props.brandsTaget.includes(brand.id) ? 'active':''} src={brand.img} alt='brand' id={brand.id} onClick={() => targetBrand(brand)}/>
           )
         })}
       </Brands>
       <TypeFilter>RAM</TypeFilter>
       <Ram>
-        <div>4GB</div>
-        <div>15</div>
+        <input type="checkbox" name="4gbram" id="4gbram" value='4gb' checked={ramFilter.includes('4gb')} onChange={() => targetRam('4gb')}/>
+        <label for="4gbram"><span>4GB</span><span>15 Item(s)</span></label>
       </Ram>
       <Ram>
-        <div>8GB</div>
-        <div>15</div>
+        <input type="checkbox" name="8gbram" id="8gbram" value='8gb' checked={ramFilter.includes('8gb')} onChange={() => targetRam('8gb')}/>
+        <label for="8gbram"><span>8GB</span><span>15 Item(s)</span></label>
       </Ram>
       <Ram>
-        <div>16GB</div>
-        <div>1</div>
+        <input type="checkbox" name="16gbram" id="16gbram" value='16gb' checked={ramFilter.includes('16gb')} onChange={() => targetRam('16gb')}/>
+        <label for="16gbram"><span>16GB</span><span>15 Item(s)</span></label>
       </Ram>
       <TypeFilter>Price</TypeFilter>
       <Slider
@@ -69,7 +94,7 @@ const Filter = (props) => {
         <p style={{fontSize: '24px', color: 'gray'}}>-</p>
         <Input type='text' value={value[1]} onChange={(e) => changeMax(e)}></Input>
       </Row><br />
-      <Button text="Apply Filter"/>
+      <Button text="Apply Filter" onClick={applyFilter}/>
     </Container>
   )
 }
@@ -90,10 +115,16 @@ const Input = styled.input`
 const Ram = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
   padding: 5px 0;
-  :hover {
-    cursor: pointer;
+  & input {
+    flex: 1;
+    transform: scale(1.4);
+  }
+  & label {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
   }
 `
 const Brand = styled.img`
@@ -101,6 +132,9 @@ const Brand = styled.img`
   margin: 1px;
   background-color: white;
   padding: 5px 10px;
+  &.active {
+    border: 1px solid #0156FF;
+  }
   :hover {
     cursor: pointer;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;

@@ -54,8 +54,8 @@ const Logo = styled.img`
 const Title = styled.p`
   color: white;
   font-weight: bold;
-  font-size: 38px;
-  font-family: 'Candara', sans-serif;
+  font-size: 30px;
+  /* font-family: 'Candara', sans-serif; */
   display: inline;
   margin: 0px 90px 0px 30px;
 `
@@ -89,11 +89,11 @@ const NavBar = styled.div`
 const NavItem = styled.a`
   display: inline;
   text-decoration: none;
-  font-family: 'Muli', sans-serif;
+  /* font-family: 'Muli', sans-serif; */
   text-transform: uppercase;
   color: white;
   padding: 20px;
-  font-weight: 900;
+  font-weight: bold;
 `
 const CartIcon = styled(ShoppingCart)`
   color: white;
@@ -112,7 +112,7 @@ const CartCounter = styled.p`
   position: relative;
   bottom: 18px;
   right: 12px;
-  font-family: 'Helvetica Neue', Helvetica, Arial;
+  /* font-family: 'Helvetica Neue', Helvetica, Arial; */
 `
 const UserIcon = styled(Person)`
   color: white;

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Button = (props) => {
   return (
-    <Btn className={props.type}>{props.text}</Btn>
+    <Btn className={props.type} onClick={props.onClick}>{props.text}</Btn>
   )
 }
 

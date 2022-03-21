@@ -1,4 +1,4 @@
-import { FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@mui/material'
+import { FormControl, InputLabel, MenuItem, Pagination, Select } from '@mui/material'
 import AppsIcon from '@mui/icons-material/Apps';
 import ReorderIcon from '@mui/icons-material/Reorder';
 import React, { useState } from 'react'
@@ -8,6 +8,7 @@ import Header from '../Header'
 import images from '../images'
 import Filter from './Filter'
 import Product from './Product'
+import Footer from '../Footer';
 
 const Home = () => {
   const brands = [
@@ -259,12 +260,17 @@ const Home = () => {
     }
   ]
   const [num, setNum] = React.useState(30);
-  const [display, setDisplay] = useState(0)
+  const [display, setDisplay] = useState(0);
+  const [brandsTaget, setBrandsTaget] = useState([]);
   const changeDisplay = (value) => {
     setDisplay(value);
   }
   const handleChange = (event) => {
     setNum(event.target.value);
+  };
+  const filterBrand = (brandId) => {
+    setBrandsTaget([brandId]);
+    alert('Đang lấy dữ liệu để hiển thị sản phẩm');
   };
   return (
     <>
@@ -274,15 +280,15 @@ const Home = () => {
         <Brands>
           {brands.map((brand, key) => {
             return (
-              <Brand src={brand.img} alt="a" />
+              <Brand src={brand.img} alt="brand" onClick={() => filterBrand(brand.id)}/>
             )
           })}
         </Brands>
         <Content>
-          <Filter brands={brands}/>
+          <Filter brands={brands} brandsTaget={brandsTaget} setBrandsTaget={setBrandsTaget}/>
           <Products>
             <Row>
-              <div>list of filter</div>
+              <div></div>
               <DisplayOption>
                 <FormControl sx={{ m: 1, minWidth: 200 }}>
                   <InputLabel id="show">Show</InputLabel>
@@ -309,10 +315,13 @@ const Home = () => {
                 <Product display={display} product={product}/>
               )
             })}
+            <div style={{width: '100%', display:'flex', justifyContent:'center', margin:'20px 0'}}>
+              <Pagination count={10} color="primary" />
+            </div>
           </Products>
         </Content>
       </Container>
-    {/* <Footer/> */}
+      <Footer/>
     </>
   )
 }
@@ -322,7 +331,6 @@ const Icon = styled.div`
     cursor: pointer;
   }
 `
-
 const DisplayOption = styled.div`
   display: flex;
   flex-direction: row;
@@ -380,7 +388,6 @@ const Poster = styled.img`
 const Container = styled.div`
   width: 80%;
   margin: 0 auto;
-  height: 100vh;
 `
 
 export default Home
