@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 // import Footer from '../Footer'
 import Header from '../Header'
+import Footer from '../Footer'
 import images from '../images'
 import Filter from './Filter'
 import Product from './Product'
@@ -268,7 +269,7 @@ const Home = () => {
   };
   return (
     <>
-    <Header/>
+      <Header />
       <Container>
         <Poster src={images.poster} alt="poster" />
         <Brands>
@@ -279,7 +280,7 @@ const Home = () => {
           })}
         </Brands>
         <Content>
-          <Filter brands={brands}/>
+          <Filter brands={brands} />
           <Products>
             <Row>
               <div>list of filter</div>
@@ -300,19 +301,19 @@ const Home = () => {
                     <MenuItem value={50}>50 per page</MenuItem>
                   </Select>
                 </FormControl>
-                <Icon onClick={() => changeDisplay(0)}><AppsIcon/></Icon>
-                <Icon onClick={() => changeDisplay(1)}><ReorderIcon/></Icon>
+                <Icon onClick={() => changeDisplay(0)}><AppsIcon /></Icon>
+                <Icon onClick={() => changeDisplay(1)}><ReorderIcon /></Icon>
               </DisplayOption>
             </Row>
             {products.map((product) => {
               return (
-                <Product display={display} product={product}/>
+                <Product display={display} product={product} />
               )
             })}
           </Products>
         </Content>
       </Container>
-    {/* <Footer/> */}
+      <Footer />
     </>
   )
 }
@@ -379,8 +380,8 @@ const Poster = styled.img`
 
 const Container = styled.div`
   width: 80%;
-  margin: 0 auto;
-  height: 100vh;
+  margin: 0 auto 200px;
+  /* height: 100vh;  An moi đã comment cái này */
 `
 
 export default Home

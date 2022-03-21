@@ -74,7 +74,7 @@ const SearchInput = styled.input`
   display: inline;
   border: none;
   outline: none;
-  margin-left: 5px;
+  margin-left: 15px;
   width: 220px;
 `
 const SearchButton = styled.button`
