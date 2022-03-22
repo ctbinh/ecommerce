@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Facebook, Instagram, GitHub, YouTube, Twitter } from '@mui/icons-material'
+import { Facebook, Instagram, GitHub, YouTube } from '@mui/icons-material'
 import { Home, Email, LocalPhone, AccessTime } from '@mui/icons-material'
 
 const Footer = () => {
@@ -43,11 +43,11 @@ const Footer = () => {
       </Row >
       <SubRow>
         <Copyright>Copyright © 2022 BKU TEAM</Copyright>
-        <i class="fa fa-cc-paypal" style={{ fontSize: '40px', margin: 'auto 4px' }}></i>
-        <i class="fa fa-cc-visa" style={{ fontSize: '40px', margin: 'auto 4px' }}></i>
-        <i class="fa fa-cc-mastercard" style={{ fontSize: '40px', margin: 'auto 4px' }}></i>
-        <i class="fa fa-credit-card-alt" style={{ fontSize: '40px', margin: 'auto 4px' }}></i>
-        <i class="fa fa-cc-jcb" style={{ fontSize: '40px', margin: 'auto 4px' }}></i>
+        <i class="fa fa-cc-paypal"></i>
+        <i class="fa fa-cc-visa"></i>
+        <i class="fa fa-cc-mastercard"></i>
+        <i class="fa fa-credit-card-alt"></i>
+        <i class="fa fa-cc-jcb"></i>
         {/* <PaymentIcon src=""></PaymentIcon> */}
 
       </SubRow>
@@ -100,6 +100,11 @@ const SubRow = styled.div`
   justify-content: center;
   height: 60px;
   border-top: white solid 1px;
+
+  i {
+    font-size: 40px;
+    margin: auto 4px;
+  }
 `
 const Copyright = styled.div`
   position: absolute;

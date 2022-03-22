@@ -82,9 +82,11 @@ const SearchButton = styled.button`
   border: none;
   background-color: gray;
   border-radius: 50%;
-  width: 26px;
-  padding: 5px;
-  
+  width: 24px;
+  /* padding: 5px; */
+  i {
+    width: 16px;
+  }
 `
 const NavBar = styled.div`
   display: inline;
@@ -114,7 +116,7 @@ const CartCounter = styled.p`
   border: 1px black solid;
   display: inline;
   position: relative;
-  bottom: 18px;
+  bottom: 10px;
   right: 12px;
   font-family: 'Helvetica Neue', Helvetica, Arial;
 `

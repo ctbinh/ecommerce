@@ -7,26 +7,26 @@ const Product = (props) => {
   const product = props.product;
   return (
     <Container display={props.display}>
-      {product.instock ? 
-      <Status display={props.display}>
-      <i class="fa fa-check-circle" aria-hidden="true"></i> in stock
-      </Status> : ''}
+      {product.instock ?
+        <Status display={props.display}>
+          <i class="fa fa-check-circle" aria-hidden="true"></i> in stock
+        </Status> : ''}
       <Box display={props.display}>
         <div>
           <Image display={props.display}>
-            <img src={images.lap1} style={{maxWidth:'100%', maxHeight: '100%'}} alt="laptop" />
+            <img src={images.lap1} style={{ maxWidth: '100%', maxHeight: '100%' }} alt="laptop" />
           </Image>
           <Rate>
-            <Rating size='small' name="read-only" value={product.rating} readOnly/>
-            <p style={{fontSize: '13px', color: '#a6a6a6'}}>Reviews (4)</p>
+            <Rating size='small' name="read-only" value={product.rating} readOnly />
+            <p style={{ fontSize: '13px', color: '#a6a6a6' }}>Reviews (4)</p>
           </Rate>
         </div>
         <div>
           <Name>{product.name}</Name>
           {props.display === 1 && <Desc>{product.desc}</Desc>}
           <Box display={props.display}>
-            <p style={{color: 'gray'}}><s>{'$' + product.oldPrice}</s></p>
-            <p style={{fontSize: '20px'}}><b>{'$' + product.newPrice}</b></p>
+            <p style={{ color: 'gray' }}><s>{'$' + product.oldPrice}</s></p>
+            <p style={{ fontSize: '20px' }}><b>{'$' + product.newPrice}</b></p>
           </Box>
         </div>
       </Box>
