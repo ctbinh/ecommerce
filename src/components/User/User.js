@@ -3,10 +3,75 @@ import Footer from '../Footer'
 import Header from '../Header'
 import styled from 'styled-components'
 import { Breadcrumbs, Link, Typography } from '@mui/material'
+import Orders from './Orders'
+import Wishlist from './Wishlist'
 
 const User = () => {
+  const wishlist = [
+    {
+      id: 0,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 1,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 2,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 3,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 1,
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    }
+  ]
   const [targetNavItem, setTargetNavItem] = useState('my-account')
   const [targetNavChildItem, setTargetNavChildItem] = useState('infor')
+  const [targetTypeOrders, setTargetTypeOrders] = useState('all')
   const changeNavItem = (item) => {
     if(item !== 'my-account') {
       setTargetNavChildItem('')
@@ -19,6 +84,9 @@ const User = () => {
   const changeNavChildItem = (item) => {
     setTargetNavChildItem(item)
     setTargetNavItem('my-account')
+  }
+  const changeTypeOrders = (type) => {
+    setTargetTypeOrders(type)
   }
   return (
     <>
@@ -33,7 +101,7 @@ const User = () => {
         </Breadcrumbs>
         <h2 style={{marginTop: '10px'}}>My Account</h2>
       </Head>
-      <Content>
+      <Row>
         <NavBox>
           <NavItem className={targetNavItem==='my-account'?'active':''} onClick={() => changeNavItem('my-account')}>My Account</NavItem>
           <NavChildItem className={targetNavChildItem==='infor'?'active':''} onClick={() => changeNavChildItem('infor')}>Account information</NavChildItem>
@@ -42,20 +110,34 @@ const User = () => {
           <Hr/>
           <NavItem className={targetNavItem==='my-wishlist'?'active':''} onClick={() => changeNavItem('my-wishlist')}>My Wish List</NavItem>
         </NavBox>
-      </Content>
+        <Content>
+          {targetNavItem==='my-orders' && <Orders target={targetTypeOrders} changeTypeOrders={changeTypeOrders}/>}
+          {targetNavItem==='my-wishlist' && <Wishlist wishlist={wishlist}/>}
+          {targetNavChildItem==='change-pass' && <div>đây là trang đổi pass</div>}
+          {targetNavChildItem==='infor' && <div>đây là trang thông tin cá nhân</div>}
+        </Content>
+      </Row>
     </Container>
     <Footer/>
     </>
   )
 }
 
+
+const Content = styled.div`
+  width: 75%;
+  margin-left: 5%;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+`
 const Hr = styled.hr`
   margin-left: 15px;
-  border: 0; 
+  border: 0;
   height: 0.2px;
   background-image: -webkit-linear-gradient(#d6d6d6, #d6d6d6, #d6d6d6);
 `
-const Content = styled.div`
+const Row = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -81,6 +163,7 @@ const NavBox = styled.div`
   background-color: #F5F7FF;
   width: 20%;
   padding: 5px 15px 5px 0;
+  height: fit-content;
 `
 const Head = styled.div`
   display: flex;

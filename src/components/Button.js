@@ -24,6 +24,15 @@ const Btn = styled.button`
   touch-action: manipulation;
   word-break: break-word;
   border: 0;
+  &.sm{
+    width: 160px;
+    padding: 2px;
+  }
+  &.primary{
+    background: transparent;
+    border: 3px solid #0156FF;
+    color: #0156FF;
+  }
   &.transparent {
     background: transparent;
     border: 3px solid gray;
