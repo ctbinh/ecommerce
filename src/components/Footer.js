@@ -64,6 +64,7 @@ const Row = styled.div`
   /* align-items: center; */
   justify-content: space-evenly;
   padding-top: 50px;
+  margin-top: 200px;
 `
 const Logo = styled.img`
   height: 60%;
@@ -99,6 +100,7 @@ const SubRow = styled.div`
   flex-direction: row;
   justify-content: center;
   height: 60px;
+  border: none;
   border-top: white solid 1px;
 
   i {

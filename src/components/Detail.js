@@ -27,16 +27,38 @@ function CarouselImg(props) {
   </div>;
   // </Carousel.Item>;
 }
+// function Review(props) {
+//   const review = props.review
+//   return <div style={{ backgroundColor: 'gray', margin: '10px' }}>
+//     <div>{review.username}</div>
+//     <div>{review.comment}</div>
+//     <div>{review.rate}</div>
+//     <div>{review.datetime}</div>
+//   </div>;
+//   // </Carousel.Item>;
+// }
 const Detail = () => {
-  const [tab, setTab] = useState(1);
-
+  const [tab, setTab] = useState(0);
+  const reviews = [
+    {
+      username: 'Janifer Lowrence',
+      comment: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ',
+      rate: 4,
+      datetime: '30/09/2019'
+    },
+    {
+      username: 'Hoang kui',
+      comment: 'như bu*i',
+      rate: 1,
+      datetime: '23/03/2022'
+    }
+  ]
   return (
     <div>
       <Header />
       <TabNav>
         <TabItem onClick={() => setTab(0)} bottomBar={tab === 0}>
           About Product
-          {/* <span style={{backgroundColor: 'red', width: '20px', height: '10px'}}></span> */}
         </TabItem>
         <TabItem onClick={() => setTab(1)} bottomBar={tab === 1}>Specs</TabItem>
       </TabNav>
@@ -125,8 +147,49 @@ const Detail = () => {
         </ImgTab>
       </Content>
 
+      <div style={{ width: '70%', margin: '0 auto' }}>
 
-      haha
+        <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>More Information</h3>
+        <p style={{ margin: '20px 10px 0 40px' }}>
+          The quality of SAMSUNG Meets the accessibility of chrome OS. Its all-new light and compact design lets you stream, work, create, and play on a fast, secure device designed to take everywhere. You can download and save content and work with others using Google suite. Built with long-lasting, battery and Gigabit Wi-Fi connectivity, The new Samsung Chromebook 4 brings speed and efficiency to any and every task or adventure.
+        </p>
+        <img
+          style={{ margin: '20px 200px', maxWidth: '600px' }}
+          src='https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg'></img>
+
+        <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Warranty</h3>
+        <p style={{ margin: '20px 10px 0 40px' }}>
+          1 years.
+        </p>
+
+        <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Similar items you might like</h3>
+
+
+
+        <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Customer reviews {'&'} ratings</h3>
+        {/* 4.2 out of 5 */}
+        {reviews.map((review) => {
+          return (
+            <Review>
+              <div className='d-flex flex-row'>
+                <img src='https://mdbootstrap.com/img/Photos/Avatars/img%20(3).jpg' />
+                <div className='w-100'>
+                  <div className='username'>{review.username}</div>
+                  <div className='d-flex flex-row justify-content-between'>
+                    <div className='d-flex flex-row align-items-center'>
+                      <Rating size='small' name="read-only" value={4} readOnly />
+                      <p style={{ fontSize: '13px', color: '#a6a6a6', margin: '0 5px' }}> 4.0 </p>
+                    </div>
+                    <div className='datetime'>{review.datetime}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className='comment'>{review.comment}</div>
+            </Review>
+          )
+        })}
+      </div>
 
       <Footer />
     </div>
@@ -165,7 +228,6 @@ const TabContent = styled.div`
   height: 420px;
   overflow: auto;
 `
-
 const Status = styled.div`
   /* text-align: ${props => props.display === 0 ? 'left' : 'right'}; */
   color: #78A962;
@@ -220,10 +282,36 @@ const Price = styled.div`
     font-size: 36px;
   }
 `
-
 const ImgTab = styled.div`
     width: 50%;
     height: 570px;
 `
+const Review = styled.div`
+    background-color: #eaeaea;
+    margin: 10px 10px 10px 30px;
+    padding: 10px;
+    border-radius: 10px;
+  /* * {
+    border: 1px red solid;
+  } */
+  img {
+    border-radius: 50%;
+    max-height: 50px;
+    max-width: 50px;
+    margin: 0 10px 10px 0;
+  }
+  .username {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .comment {
+    margin: 5px 50px 10px 20px;
+  }
+  .datetime {
+    font-style: italic;
+    
+  }
+`
+
 
 export default Detail;

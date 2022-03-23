@@ -380,7 +380,7 @@ const Poster = styled.img`
 
 const Container = styled.div`
   width: 80%;
-  margin: 0 auto 200px;
+  margin: 0 auto;
   /* height: 100vh;  An moi đã comment cái này */
 `
 
