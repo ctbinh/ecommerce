@@ -91,6 +91,12 @@ const CustomerCountry = styled.h4`
   font-weight: 400;
   color: #ccc;
 `;
+const Span = styled.span`
+  background-color: ${(props) => props.color};
+  padding: 3px;
+  border-radius: 2px;
+  color: white;
+`;
 const CustomerItem = styled.div`
   padding: 8px 12px;
   margin: 8px 0;
@@ -139,25 +145,33 @@ const MainContent = () => {
               <Td>Nguyen Tran Hoang</Td>
               <Td>$1200</Td>
               <Td>Paid</Td>
-              <Td>Delivered</Td>
+              <Td>
+                <Span color="green">Delivered</Span>
+              </Td>
             </Tr>
             <Tr>
               <Td>Nguyen Tran Hoang</Td>
               <Td>$1200</Td>
               <Td>Paid</Td>
-              <Td>Delivered</Td>
+              <Td>
+                <Span color="green">Delivered</Span>
+              </Td>
             </Tr>
             <Tr>
               <Td>Nguyen Tran Hoang</Td>
               <Td>$1200</Td>
               <Td>Paid</Td>
-              <Td>Delivered</Td>
+              <Td>
+                <Span color="green">Delivered</Span>
+              </Td>
             </Tr>
             <Tr>
               <Td>Nguyen Tran Hoang</Td>
               <Td>$1200</Td>
               <Td>Paid</Td>
-              <Td>Delivered</Td>
+              <Td>
+                <Span color="green">Delivered</Span>
+              </Td>
             </Tr>
           </Table>
         </OrderContent>

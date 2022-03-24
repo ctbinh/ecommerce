@@ -12,7 +12,7 @@ import {
   Icon,
 } from "./style.jsx";
 
-const Navigation = ({ toogleNav }) => {
+const Navigation = ({ toogleNav, setIdOnClick }) => {
   return (
     <Container toogle={!toogleNav}>
       <Header>
@@ -25,29 +25,29 @@ const Navigation = ({ toogleNav }) => {
       </Header>
 
       <List>
-        <Item>
+        <Item onClick={() => setIdOnClick(0)}>
           <Icon>
             <AiOutlineHome />
           </Icon>
-          <Title>Dashboard</Title>
+          <Title>Dashboard 0</Title>
         </Item>
-        <Item>
+        <Item onClick={() => setIdOnClick(1)}>
           <Icon>
             <AiOutlineHome />
           </Icon>
-          <Title>Dashborad</Title>
+          <Title>Sản phẩm </Title>
         </Item>
-        <Item>
+        <Item onClick={() => setIdOnClick(2)}>
           <Icon>
             <AiOutlineHome />
           </Icon>
-          <Title>Dashborad</Title>
+          <Title>Dashborad 2</Title>
         </Item>
-        <Item>
+        <Item onClick={() => setIdOnClick(3)}>
           <Icon>
             <AiOutlineHome />
           </Icon>
-          <Title>Dashborad</Title>
+          <Title>Dashborad 3</Title>
         </Item>
       </List>
     </Container>
