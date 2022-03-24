@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineHome, AiOutlineMenu } from "react-icons/ai";
+import { FaProductHunt } from "react-icons/fa";
 import {
   Container,
   Header,
@@ -13,6 +15,7 @@ import {
 } from "./style.jsx";
 
 const Navigation = ({ toogleNav, setIdOnClick }) => {
+  const navigate = useNavigate();
   return (
     <Container toogle={!toogleNav}>
       <Header>
@@ -25,23 +28,23 @@ const Navigation = ({ toogleNav, setIdOnClick }) => {
       </Header>
 
       <List>
-        <Item onClick={() => setIdOnClick(0)}>
+        <Item onClick={() => navigate("./")}>
           <Icon>
             <AiOutlineHome />
           </Icon>
-          <Title>Dashboard 0</Title>
+          <Title>Dashboard</Title>
         </Item>
-        <Item onClick={() => setIdOnClick(1)}>
+        <Item onClick={() => navigate("product")}>
           <Icon>
-            <AiOutlineHome />
+            <FaProductHunt />
           </Icon>
-          <Title>Sản phẩm </Title>
+          <Title>Product</Title>
         </Item>
         <Item onClick={() => setIdOnClick(2)}>
           <Icon>
             <AiOutlineHome />
           </Icon>
-          <Title>Dashborad 2</Title>
+          <Title>Customer</Title>
         </Item>
         <Item onClick={() => setIdOnClick(3)}>
           <Icon>

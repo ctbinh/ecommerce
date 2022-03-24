@@ -8,6 +8,7 @@ import HomeAdmin from "./Admin/components/Home";
 import Login from "./Admin/components/Login";
 import Header from "./components/Header";
 import Product from "./Admin/components/products/index";
+import Detail from "./Admin/components/products/Detail";
 
 function App() {
   return (
@@ -15,9 +16,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="admin/login" element={<Login />} />
+          {/* <Route path="admin/product" element={<Detail />} /> */}
           <Route path="admin" element={<Admin />}>
-            {/* <Route path="login" element={<Login />} /> */}
-            {/* <Route path="product" element={<Product />} /> */}
+            <Route path="product" element={<Product />} />
+            <Route path="product/detail" element={<Detail />} />
             <Route path="" element={<HomeAdmin />} />
           </Route>
           <Route path="/" element={<Home />} />

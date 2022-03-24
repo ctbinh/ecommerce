@@ -16,20 +16,21 @@ const Admin = () => {
         toogleNav={width > 700 ? !toogleNav : true}
         setIdOnClick={setIdOnClick}
       />
+
       <Main width={toogleNav ? "270px" : "100px"}>
-        {idOnClick === 0 && (
+        <Header setToogleNav={setToogleNav} />
+        <Outlet />
+        {/* {idOnClick === 0 && (
           <>
-            <Header setToogleNav={setToogleNav} />
             <CardBox />
             <MainContent />
           </>
         )}
         {idOnClick === 1 && (
           <>
-            <Header setToogleNav={setToogleNav} isProduct={true} />
             <Product />
           </>
-        )}
+        )} */}
       </Main>
     </Wraper>
   );

@@ -87,7 +87,7 @@ function Table({ columns, data }) {
                   );
                 })}
                 <td>
-                  <Link to={`../product?id=${row.cells[2].value}`}>Detail</Link>
+                  <Link to={`detail?id=${row.cells[2].value}`}>Detail</Link>
                 </td>
                 <td>Remove</td>
               </tr>
