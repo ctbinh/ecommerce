@@ -6,6 +6,9 @@ import { Breadcrumbs, Link, Typography } from '@mui/material'
 import Orders from './Orders'
 import Wishlist from './Wishlist'
 
+import Information from './Information'
+import Password from './Password'
+
 const User = () => {
   const wishlist = [
     {
@@ -113,8 +116,8 @@ const User = () => {
         <Content>
           {targetNavItem==='my-orders' && <Orders target={targetTypeOrders} changeTypeOrders={changeTypeOrders}/>}
           {targetNavItem==='my-wishlist' && <Wishlist wishlist={wishlist}/>}
-          {targetNavChildItem==='change-pass' && <div>đây là trang đổi pass</div>}
-          {targetNavChildItem==='infor' && <div>đây là trang thông tin cá nhân</div>}
+          {targetNavChildItem==='infor' && <Information/>}
+          {targetNavChildItem==='change-pass' && <Password/>}
         </Content>
       </Row>
     </Container>
