@@ -90,21 +90,18 @@ const Detail = () => {
               src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg"
               alt=""
             />
-            <p className="legend">Legend 1</p>
           </div>
           <div>
             <img
               src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg"
               alt=""
             />
-            <p className="legend">Legend 2</p>
           </div>
           <div>
             <img
-              src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg"
+              src="https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-1_10ebeafae1d64bc5a00168a46e9db5b6_master.png"
               alt=""
             />
-            <p className="legend">Legend 3</p>
           </div>
         </Carousel>
         <ContainerComment>
