@@ -8,15 +8,21 @@ import HomeAdmin from './Admin/components/Home';
 import Login from './Admin/components/Login';
 import Header from './components/Header';
 import User from './components/User/User';
+import Product from "./Admin/components/products/index";
+import Detail from "./Admin/components/products/Detail";
+import Customer from "./Admin/components/customers/Customer";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="admin/login" element={<Login />} />
           <Route path="admin" element={<Admin />}>
-          <Route path="login" element={<Login />} />
-          <Route path="" element={<HomeAdmin />} />
+            <Route path="product" element={<Product />} />
+            <Route path="customer" element={<Customer />} />
+            <Route path="product/detail" element={<Detail />} />
+            <Route path="" element={<HomeAdmin />} />
           </Route>
           <Route path="/" element={<Home />} />
           <Route path="cart" element={<Cart/>} />

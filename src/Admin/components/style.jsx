@@ -176,7 +176,7 @@ export const Card = styled.div`
   justify-content: space-between;
   align-items: center;
   /* background-color: #ccc; */
-  width: 24%;
+  width: 48%;
   cursor: pointer;
   padding: 10px 20px;
   border: 1px solid #ccc;
@@ -193,9 +193,9 @@ export const Card = styled.div`
   @media (max-width: 1024px) {
     width: 49%;
   }
-  @media (max-width: 600px) {
+  /* @media (max-width: 600px) {
     width: 99%;
-  }
+  } */
 `;
 export const CardLeft = styled.div``;
 export const CardTitle = styled.span`

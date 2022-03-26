@@ -1,21 +1,38 @@
-import Home from "./components/Home";
-import Login from "./components/Login";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
+import Navigation from "./components/Navigation";
+import { Main, Wraper } from "./components/style";
+import { Link, Outlet } from "react-router-dom";
+import CardBox from "./components/CardBox";
+import MainContent from "./components/MainContent";
+import Product from "./components/products";
+import Header from "./components/Header";
 const Admin = () => {
+  const [toogleNav, setToogleNav] = useState(true);
+  const [idOnClick, setIdOnClick] = useState(0);
+  const width = window.innerWidth;
   return (
-    <Routes>
-      <Route path="login" element={<Login />} />
-      <Route path="/" element={<Home />} />
+    <Wraper>
+      <Navigation
+        toogleNav={width > 700 ? !toogleNav : true}
+        setIdOnClick={setIdOnClick}
+      />
 
-      {/* <Wraper>
-          <Navigation toogleNav={!toogleNav} />
-          <Main width={toogleNav ? "270px" : "100px"}>
-            <Header setToogleNav={setToogleNav} />
+      <Main width={toogleNav ? "270px" : "100px"}>
+        <Header setToogleNav={setToogleNav} />
+        <Outlet />
+        {/* {idOnClick === 0 && (
+          <>
             <CardBox />
             <MainContent />
-          </Main>
-        </Wraper> */}
-    </Routes>
+          </>
+        )}
+        {idOnClick === 1 && (
+          <>
+            <Product />
+          </>
+        )} */}
+      </Main>
+    </Wraper>
   );
 };
 

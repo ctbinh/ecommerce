@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { AiOutlineHome, AiOutlineMenu } from "react-icons/ai";
+import { BsFillPeopleFill } from "react-icons/bs";
+import { FaProductHunt } from "react-icons/fa";
 import {
   Container,
   Header,
@@ -12,7 +15,8 @@ import {
   Icon,
 } from "./style.jsx";
 
-const Navigation = ({ toogleNav }) => {
+const Navigation = ({ toogleNav, setIdOnClick }) => {
+  const navigate = useNavigate();
   return (
     <Container toogle={!toogleNav}>
       <Header>
@@ -25,29 +29,29 @@ const Navigation = ({ toogleNav }) => {
       </Header>
 
       <List>
-        <Item>
+        <Item onClick={() => navigate("./")}>
           <Icon>
             <AiOutlineHome />
           </Icon>
           <Title>Dashboard</Title>
         </Item>
-        <Item>
+        <Item onClick={() => navigate("product")}>
           <Icon>
-            <AiOutlineHome />
+            <FaProductHunt />
           </Icon>
-          <Title>Dashborad</Title>
+          <Title>Product</Title>
         </Item>
-        <Item>
+        <Item onClick={() => navigate("customer")}>
           <Icon>
-            <AiOutlineHome />
+            <BsFillPeopleFill />
           </Icon>
-          <Title>Dashborad</Title>
+          <Title>Customer</Title>
         </Item>
-        <Item>
+        <Item onClick={() => setIdOnClick(3)}>
           <Icon>
             <AiOutlineHome />
           </Icon>
-          <Title>Dashborad</Title>
+          <Title>Dashborad 3</Title>
         </Item>
       </List>
     </Container>

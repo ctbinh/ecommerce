@@ -91,6 +91,12 @@ const CustomerCountry = styled.h4`
   font-weight: 400;
   color: #ccc;
 `;
+const Span = styled.span`
+  background-color: ${(props) => props.color};
+  padding: 3px;
+  border-radius: 2px;
+  color: white;
+`;
 const CustomerItem = styled.div`
   padding: 8px 12px;
   margin: 8px 0;
@@ -139,25 +145,33 @@ const MainContent = () => {
               <Td>Nguyen Tran Hoang</Td>
               <Td>$1200</Td>
               <Td>Paid</Td>
-              <Td>Delivered</Td>
+              <Td>
+                <Span color="green">Delivered</Span>
+              </Td>
             </Tr>
             <Tr>
               <Td>Nguyen Tran Hoang</Td>
               <Td>$1200</Td>
               <Td>Paid</Td>
-              <Td>Delivered</Td>
+              <Td>
+                <Span color="green">Delivered</Span>
+              </Td>
             </Tr>
             <Tr>
               <Td>Nguyen Tran Hoang</Td>
               <Td>$1200</Td>
               <Td>Paid</Td>
-              <Td>Delivered</Td>
+              <Td>
+                <Span color="green">Delivered</Span>
+              </Td>
             </Tr>
             <Tr>
               <Td>Nguyen Tran Hoang</Td>
               <Td>$1200</Td>
               <Td>Paid</Td>
-              <Td>Delivered</Td>
+              <Td>
+                <Span color="green">Delivered</Span>
+              </Td>
             </Tr>
           </Table>
         </OrderContent>
@@ -165,14 +179,6 @@ const MainContent = () => {
       <Custommers>
         <CustomerHeader>Recent Cusomer</CustomerHeader>
         <CustomerList>
-          <CustomerItem>
-            <CustomerImg src="https://scontent.fsgn5-6.fna.fbcdn.net/v/t1.6435-9/148352211_1315852945481787_1410223456476714730_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=shoA0N3QZLUAX_ZqFow&_nc_ht=scontent.fsgn5-6.fna&oh=00_AT-E3sNuRhQXmASthK8E3eCWN_zvMiVxhfLyp68OPCvYgg&oe=6258EF21"></CustomerImg>
-            <CustomerRight>
-              <CustomerName>Tran Hoang</CustomerName>
-              <CustomerCountry>Vietnam</CustomerCountry>
-            </CustomerRight>
-          </CustomerItem>
-
           <CustomerItem>
             <CustomerImg src="https://scontent.fsgn5-6.fna.fbcdn.net/v/t1.6435-9/148352211_1315852945481787_1410223456476714730_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=shoA0N3QZLUAX_ZqFow&_nc_ht=scontent.fsgn5-6.fna&oh=00_AT-E3sNuRhQXmASthK8E3eCWN_zvMiVxhfLyp68OPCvYgg&oe=6258EF21"></CustomerImg>
             <CustomerRight>

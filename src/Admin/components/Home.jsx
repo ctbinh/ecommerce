@@ -7,15 +7,20 @@ import { Main, Wraper } from "./style";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 const Home = () => {
   const [toogleNav, setToogleNav] = useState(true);
+  const width = window.innerWidth;
   return (
-    <Wraper>
-      <Navigation toogleNav={!toogleNav} />
-      <Main width={toogleNav ? "270px" : "100px"}>
-        <Header setToogleNav={setToogleNav} />
-        <CardBox />
-        <MainContent />
-      </Main>
-    </Wraper>
+    // <Wraper>
+    //   <Navigation toogleNav={width > 700 ? !toogleNav : true} />
+    //   <Main width={toogleNav ? "270px" : "100px"}>
+    //     <Header setToogleNav={setToogleNav} />
+    //     <CardBox />
+    //     <MainContent />
+    //   </Main>
+    // </Wraper>
+    <>
+      <CardBox />
+      <MainContent />
+    </>
   );
 };
 
