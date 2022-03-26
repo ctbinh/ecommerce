@@ -4,7 +4,7 @@ import { ShoppingCart, Person } from "@mui/icons-material";
 
 const Header = () => {
   return <Row>
-    <div style={{height: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
       <Logo src="https://www.hcmut.edu.vn/images/hcmut/logoBK.png" alt="Logo HCMUT">
       </Logo>
       <Title>
@@ -53,9 +53,13 @@ const Logo = styled.img`
   `
 const Title = styled.p`
   color: white;
-  font-weight: bold;
-  font-size: 30px;
-  /* font-family: 'Candara', sans-serif; */
+  font-size: 38px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 35px;
+  line-height: 43px;
+  /* letter-spacing: 2px; */
   display: inline;
   margin: 0px 90px 0px 30px;
 `
@@ -70,7 +74,7 @@ const SearchInput = styled.input`
   display: inline;
   border: none;
   outline: none;
-  margin-left: 5px;
+  margin-left: 15px;
   width: 220px;
 `
 const SearchButton = styled.button`
@@ -78,9 +82,11 @@ const SearchButton = styled.button`
   border: none;
   background-color: gray;
   border-radius: 50%;
-  width: 26px;
-  padding: 5px;
-  
+  width: 24px;
+  /* padding: 5px; */
+  i {
+    width: 16px;
+  }
 `
 const NavBar = styled.div`
   display: inline;
@@ -110,7 +116,7 @@ const CartCounter = styled.p`
   border: 1px black solid;
   display: inline;
   position: relative;
-  bottom: 18px;
+  bottom: 10px;
   right: 12px;
   /* font-family: 'Helvetica Neue', Helvetica, Arial; */
 `

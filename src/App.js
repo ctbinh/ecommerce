@@ -9,8 +9,9 @@ import Login from './Admin/components/Login';
 import Header from './components/Header';
 import User from './components/User/User';
 import Product from "./Admin/components/products/index";
-import Detail from "./Admin/components/products/Detail";
+import AdminDetail from "./Admin/components/products/Detail";
 import Customer from "./Admin/components/customers/Customer";
+import Detail from './components/Detail';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="admin" element={<Admin />}>
             <Route path="product" element={<Product />} />
             <Route path="customer" element={<Customer />} />
-            <Route path="product/detail" element={<Detail />} />
+            <Route path="product/detail" element={<AdminDetail />} />
             <Route path="" element={<HomeAdmin />} />
           </Route>
           <Route path="/" element={<Home />} />
@@ -29,6 +30,7 @@ function App() {
           <Route path="checkout" element={<Checkout/>} />
           <Route path="header" element={<Header/>} />
           <Route path="user" element={<User/>} />
+          <Route path="detail" element={<Detail/>} />
         </Routes>
       </BrowserRouter>
     </div>
