@@ -7,7 +7,7 @@ import { Rating } from "@mui/material";
 import { Button } from "react-bootstrap";
 // import { Carousel } from 'react-bootstrap';
 
-import 'bootstrap/dist/css/bootstrap.css';//bug do cai nay ne =====================
+// import 'bootstrap/dist/css/bootstrap.css';//bug do cai nay ne =====================
 import Carousel from 'react-bootstrap/Carousel';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
@@ -218,8 +218,9 @@ const Detail = () => {
         </p>
         <img
           style={{ margin: "20px 200px", maxWidth: "600px" }}
+          alt='laptop'
           src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg"
-        ></img>
+        />
 
         <h3 style={{ fontWeight: "bold", marginTop: "40px" }}>Warranty</h3>
         <p style={{ margin: "20px 10px 0 40px" }}>1 years.</p>
@@ -229,17 +230,17 @@ const Detail = () => {
           loop
           nav
           margin={8} >
-          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204140/banner_12.jpg" alt="image" /> </div>
-          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204172/banner_2.jpg" alt="image" /> </div>
-          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204663/park-4174278_640.jpg" alt="image" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="image" /> </div>
-          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204172/banner_2.jpg" alt="image" /> </div>
-          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204663/park-4174278_640.jpg" alt="image" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="image" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="image" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="image" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="image" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="image" /> </div>
+          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204140/banner_12.jpg" alt="laptop" /> </div>
+          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204172/banner_2.jpg" alt="laptop" /> </div>
+          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204663/park-4174278_640.jpg" alt="laptop" /> </div>
+          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
+          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204172/banner_2.jpg" alt="laptop" /> </div>
+          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204663/park-4174278_640.jpg" alt="laptop" /> </div>
+          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
+          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
+          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
+          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
+          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
         </OwlCarousel>
 
         <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Customer reviews {'&'} ratings</h3>
@@ -248,7 +249,7 @@ const Detail = () => {
           return (
             <Review>
               <div className="d-flex flex-row">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(3).jpg" />
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(3).jpg" alt="laptop" />
                 <div className="w-100">
                   <div className="username">{review.username}</div>
                   <div className="d-flex flex-row justify-content-between">
