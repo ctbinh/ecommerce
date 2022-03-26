@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineHome, AiOutlineMenu } from "react-icons/ai";
+import { BsFillPeopleFill } from "react-icons/bs";
 import { FaProductHunt } from "react-icons/fa";
 import {
   Container,
@@ -40,9 +41,9 @@ const Navigation = ({ toogleNav, setIdOnClick }) => {
           </Icon>
           <Title>Product</Title>
         </Item>
-        <Item onClick={() => setIdOnClick(2)}>
+        <Item onClick={() => navigate("customer")}>
           <Icon>
-            <AiOutlineHome />
+            <BsFillPeopleFill />
           </Icon>
           <Title>Customer</Title>
         </Item>
