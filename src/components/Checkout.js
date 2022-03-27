@@ -18,6 +18,7 @@ const Checkout = () => {
     return (
         <div>
             <Header/>
+            <ContainerStyled>
             <TitleShipping>Shipping Address</TitleShipping>
                 <Container fluid>
                     <Row>
@@ -144,6 +145,7 @@ const Checkout = () => {
                         </Col>
                     </Row>
                 </Container>
+            </ContainerStyled>
             <Footer/>
         </div>
     )
@@ -280,7 +282,7 @@ const TitleSummary = styled.div`
     font-size: 1.2rem;
 `
 const Scrollbarstyled = {
-    height: "40vh",
+    height: "50vh",
 }
 const ImgProduct = styled.img`
     width: 100%;
@@ -314,5 +316,8 @@ const StyleRow = styled.div`
     padding-left: 10px;
     border-radius: 10px;
     transition: all .3s;
+`
+const ContainerStyled = styled.div`
+    margin-top: 30px;
 `
 export default Checkout;
