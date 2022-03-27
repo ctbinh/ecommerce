@@ -39,8 +39,9 @@ export const Item = styled.li`
   list-style-type: none;
   padding: 1em 1em;
   font-size: 1.2em;
-  color: white;
+  color: ${(props) => props.color};
   display: flex;
+  font-weight: ${(props) => (props.color === "white" ? 400 : 700)};
   align-items: center;
   /* height: 3.125em; */
   /* transition: 0.1s; */
@@ -49,7 +50,7 @@ export const Item = styled.li`
   line-height: 1em;
 
   &:hover {
-    color: #297bff;
+    color: ${(props) => (props.color === "white" ? "#297bff" : props.color)};
     background-color: white;
     border-top-left-radius: 1.875em;
     border-bottom-left-radius: 1.875em;
@@ -120,17 +121,20 @@ export const Search = styled.div`
   /* align-items: center; */
   /* gap: 10px; */
   position: relative;
+  width: 320px;
 `;
 export const Input = styled.input`
   outline: none;
-  padding: 10px 28px;
+  padding: 10px 20px 10px 30px;
   border-radius: 8px;
   border: 1px solid #ccc;
+  font-size: 14px;
+  width: 100%;
 `;
 export const IconSearch = styled.div`
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 7px;
+  left: 9px;
   font-size: 0.8em;
 `;
 export const Avatar = styled.div`
