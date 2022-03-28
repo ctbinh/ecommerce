@@ -21,20 +21,20 @@ const RowOfTable = (props) => {
         <div>
         <HoverRow>
         <Row style={RowTable}>
-            <Col md={7}>
+            <Col md={7} sm={3} xs={3}>
             <Row>
-                <Col lg={2.5}>
+                <Col sm={2.5}>
                     <ContainerImg> 
                         <ImgProduct src={props.product.img} alt="Nothing"/>
                     </ContainerImg>
                 </Col>
-                <Col lg ={9.5}><Describe>{props.product.des}</Describe></Col>
+                <ColResponesive sm={9.5}><Describe>{props.product.des}</Describe></ColResponesive>
             </Row>
             </Col>
-            <Col md={2}>
+            <Col md={2} sm={3} xs={3}>
                 {props.product.price.toLocaleString()}
             </Col>
-            <Col md={1.2}>
+            <Col md={1.2} sm={2.2} xs={2.2}>
                 <div style={ArrowIcon}>
                     {count}
                     <Arrow>
@@ -47,12 +47,12 @@ const RowOfTable = (props) => {
                     </Arrow>
                 </div>
             </Col>
-            <Col md={1.8}>
+            <CloseResponesive md={1.8} sm={2.8} xs={2.8}>
                 {props.product.subtotal.toLocaleString()}
-            <Close>
-                <AiOutlineCloseCircle size={18} color="#888888" onClick={Delete}/>
-            </Close>
-            </Col>
+                <Close>
+                    <AiOutlineCloseCircle size={18} color="#888888" onClick={Delete}/>
+                </Close>
+            </CloseResponesive>
         </Row>
         </HoverRow>
         <Line/>
@@ -74,6 +74,7 @@ const Close = styled.div`
         color: black;
         transform: scale(1.1);
     }
+    margin-left: 10px;
 `
 const Line = styled.hr`
     margin-top: 10px;
@@ -114,6 +115,7 @@ const ArrowIcon = {
     // paddingTop: "2px",
     // paddingBottom: "2px",
     borderRadius: "5px",
+    width: "50px",
 }
 const Arrow = styled.span`
     display: flex;
@@ -143,6 +145,16 @@ const ArrowDown = styled.i`
     :hover {
         transform: scale(1.3);
         color: #0066FF;
+    }
+`
+const ColResponesive = styled(Col)`
+    @media (max-width: 780px) {
+        display: none;
+    }
+`
+const CloseResponesive = styled(Col)`
+    @media (max-width: 480px) {
+        display: none;
     }
 `
 

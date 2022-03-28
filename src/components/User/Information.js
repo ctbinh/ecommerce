@@ -81,7 +81,7 @@ export default function Information () {
                                     onClick={onImageUpload}
                                     {...dragProps}
                                 >
-                                    <IconEdit size={40}/>
+                                    <IconEdit size={"3vw"}/>
                                 </ButtonEdit>
                                 
                             </ContainerEdit>
@@ -90,8 +90,8 @@ export default function Information () {
                     </ColStyled>
                     <Col>
                         <Row>
-                            <Col lg={2.5}><NameInput>Username: </NameInput> </Col>
-                            <Col lg={9.5}><NameInput>{User.username}</NameInput></Col>
+                            <Col sm={3}><NameInput>Username: </NameInput> </Col>
+                            <Col sm={9}><NameInput>{User.username}</NameInput></Col>
                         </Row>
                         <ContainerInput>
                             <Row>
@@ -234,7 +234,9 @@ const ButtonEdit = styled.div`
     z-index: 2;
     cursor: pointer;
     border-radius: 50%;
-    border: none;
+    border: solid 2.5px white;
+    left: 2vw;
+    
 `
 const ContainerEdit = styled.div`
     display: flex;

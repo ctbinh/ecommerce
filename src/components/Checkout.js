@@ -85,10 +85,10 @@ const Checkout = () => {
                                         <Input type="text" />
                                     </ContainerInput>}
                                     <Row>
-                                        <Col lg={8.5}>
+                                        <Col xs={8.5}>
                                             <Ship>Shipping</Ship>
                                         </Col>
-                                        <Col lg={2.5}>
+                                        <Col xs={2.5}>
                                             <ValueShip>{(21000).toLocaleString()}</ValueShip>
                                             {/* <ValueShip>{document.getElementById("name").value}</ValueShip> */}
                                         </Col>
@@ -101,7 +101,6 @@ const Checkout = () => {
                                         <Link to="/cart" style={LinkStyle}>
                                         <ButtonBack>Back</ButtonBack>
                                         </Link>
-                                            
                                         </Col>
                                     </Row>
                                     
@@ -133,8 +132,8 @@ const Checkout = () => {
                                                 {product.name}
                                             </Describe>
                                             <Row>
-                                                <Col lg={4}><QuanPrice>Qty: {product.quantity}</QuanPrice></Col>
-                                                <Col lg={8}><QuanPrice>Price: {product.price.toLocaleString()}</QuanPrice></Col>
+                                                <Col sm={4}><QuanPrice>Qty: {product.quantity}</QuanPrice></Col>
+                                                <Col sm={8}><QuanPrice>Price: {product.price.toLocaleString()}</QuanPrice></Col>
                                             </Row>
                                         </Col>
                                     </Row>

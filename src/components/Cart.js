@@ -1,13 +1,14 @@
 import styled from 'styled-components'
 import { Container, Row, Col } from "react-grid-system";
 // import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import Scrollbars from "react-scrollbars-custom";
 import RowOfTable from './RowOfTable';
 import {Link} from "react-router-dom";
 import Header from './Header';
 import Footer from './Footer';
 import React, { useState } from 'react';
+import 'react-notifications/lib/notifications.css';
 const lstCart = [
     {
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP0upF_DooL0hjwus-eb9Xb2WKRwGTdAkJig&usqp=CAU",
@@ -72,26 +73,55 @@ const Cart = () => {
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
+    const createNotification = (type) => {
+          switch (type) {
+            case 'info':
+              NotificationManager.info('Info message');
+              break;
+            case 'success':
+              NotificationManager.success('Success message', 'Title here');
+              break;
+            case 'warning':
+              NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+              break;
+            case 'errorName':
+              NotificationManager.warning('Name only contains 3 - 14 characters', 'Error Name!', 3000);
+              break;
+            case 'errorPhone':
+              NotificationManager.error('Phone only contains the numbers', 'Error Phone!', 3000);
+              break;
+            case 'errorAddress':
+              NotificationManager.warning('Address only contains 3 - 30 characters', 'Error Address!', 3000);
+              break;
+            default: 
+              break;
+          }
+      };
+      const ContainerNotification = (name, phone, address) => {
+          if (name.length < 3 || name.length > 14) createNotification('errorName');
+          if (!Number(phone)) createNotification('errorPhone');
+          if (address.length < 3 || address.length > 30) createNotification('errorAddress');
+      }
     return (
         <div> 
             <Header/>  
             <ContainerStyled fluid>
                 <Row>
-                    <Col md={7.5}>
+                    <Col xl={7.5}>
                         <Title>Shopping Cart</Title>
                             <Row style={RowHeader}>
-                                <Col md={7}>
+                                <Col md={7} sm={3} xs={3}>
                                     Item
                                 </Col>
-                                <Col md={2}>
+                                <Col md={2} sm={3} xs={3}>
                                     Price
                                 </Col>
-                                <Col md={1}>
+                                <Col md={1} sm={2} xs={2}>
                                     Qty 
                                 </Col>
-                                <Col md={2}>
+                                <CloseResponesive md={2} sm={3} xs={3}>
                                     SubTotal
-                                </Col>
+                                </CloseResponesive>
                             </Row>
                             <Line/>
                             <Scrollbars
@@ -104,15 +134,15 @@ const Cart = () => {
                             ))}
                         </Scrollbars>              
                         <Row>
-                            <Col sm={4}>
+                            <Col sm={6}>
                                 <ButtonContinue>Continue Shopping</ButtonContinue>
                             </Col>
-                            <Col sm={8}>
+                            <Col sm={6}>
                                 <ButtonClear>Clear Shopping Cart</ButtonClear>
                             </Col>
                         </Row>
                     </Col>
-                    <Col md={4} style={ContainerSummary}>
+                    <Col xl={4} style={ContainerSummary}>
                         <Title>Summary</Title>
                         <ContainerInput>
                             <NameInput>Name</NameInput>
@@ -128,34 +158,52 @@ const Cart = () => {
                         </ContainerInput>
                         <Line/>
                         <Row>
-                            <Col lg={8.5}>
+                            <Col sm={8.5} xs={8.5}>
                                 <Ship>Shipping</Ship>
                             </Col>
-                            <Col lg={2.5}>
+                            <Col sm={2.5} xs={2.5}>
                                 <ValueShip>{(21000).toLocaleString()}</ValueShip>
                                 {/* <ValueShip>{document.getElementById("name").value}</ValueShip> */}
                             </Col>
                         </Row>
                         <br />
                         <Row>
-                            <Col lg={8.5}>
+                            <Col sm={8.5} xs={8.5}>
                                 <Ship>Order Total</Ship>
                             </Col>
-                            <Col lg={2.5}>
+                            <Col sm={2.5} xs={2.5}>
                                 <ValueShip>{(13245).toLocaleString()}</ValueShip>
                             </Col>
                         </Row>
                         <br />
                         <Link to="/checkout" style={LinkStyle} state={{ name: name, address: address, phone: phone, lstCart: lstCart }}>
-                            {name !== "" && phone !== "" && address !== "" && <ButtonCheckout>  
+                            {name.length >= 3  
+                            && name.length <=14 
+                            && address.length >= 3  
+                            && address.length <= 30 
+                            && !/\D/.test(phone)
+                            && <ButtonCheckout>  
                                 Proceed to Checkout
                             </ButtonCheckout>}
-                            {(name === "" || phone === "" || address === "") && <ButtonCheckout 
-                                disabled    
-                            >
-                                Please fill all fields
-                            </ButtonCheckout>}
                         </Link>
+                        {/* {(name === "" || phone === "" || address === "") && <ButtonCheckout 
+                                disabled
+                        >
+                            Please fill all fields
+                        </ButtonCheckout>} */}
+                        {!(name.length >= 3  
+                            && name.length <=14 
+                            && address.length >= 3  
+                            && address.length <= 30 
+                            && !/\D/.test(phone)
+                        )
+                            && <ButtonFill
+                            // disabled
+                            onClick={() => ContainerNotification(name, phone, address)}
+                        >  
+                                Please fill all fields
+                            </ButtonFill>}
+                        <NotificationContainer/>
                         {/* <ButtonCheckout>      
                             <PayPalScriptProvider >
                                 Checkout with 
@@ -165,9 +213,15 @@ const Cart = () => {
                                 />
                             </PayPalScriptProvider>
                         </ButtonCheckout>     */}
-                        {name !== "" && phone !== "" && address !== "" && <ButtonMultiple>
-                            Checkout with Multiple Address
-                        </ButtonMultiple>}    
+                        {name.length >= 3  
+                            && name.length <=14 
+                            && address.length >= 3  
+                            && address.length <= 30 
+                            && !/\D/.test(phone)
+                            && <ButtonMultiple>  
+                                Checkout with Multiple Address
+                            </ButtonMultiple>}  
+                        
                     </Col>
                 </Row>
             </ContainerStyled>
@@ -298,10 +352,31 @@ const ButtonMultiple = styled.button`
     margin-bottom: 10px;
     cursor: pointer;
 `
+const ButtonFill = styled.button`
+    border-radius: 20px;
+    background-color: #AAAAAA;
+    /* color: #FFFFFF; */
+    font-weight: 600;
+    display: block;
+    height: 40px;
+    width: 100%;
+    border: none;
+    transition: all .5s;
+    :hover, :active {
+        background-color: #666666;
+    }
+    margin-bottom: 10px;
+    cursor: pointer;
+`
 const LinkStyle = {
     textDecoration: "none",
 }
 const ContainerStyled = styled(Container)`
     margin-top: 40px;
+`
+const CloseResponesive = styled(Col)`
+    @media (max-width: 480px) {
+        display: none;
+    }
 `
 export default Cart
