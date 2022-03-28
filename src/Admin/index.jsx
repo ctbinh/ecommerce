@@ -17,7 +17,7 @@ const Admin = () => {
         setIdOnClick={setIdOnClick}
       />
 
-      <Main width={toogleNav ? "270px" : "100px"}>
+      <Main width={toogleNav ? "256px" : "100px"}>
         <Header setToogleNav={setToogleNav} />
         <Outlet />
         {/* {idOnClick === 0 && (
