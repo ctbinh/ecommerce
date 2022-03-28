@@ -47,11 +47,12 @@ export const Item = styled.li`
   /* transition: 0.1s; */
   position: relative;
   cursor: pointer;
+
   line-height: 1em;
 
   &:hover {
     color: ${(props) => (props.color === "white" ? "#297bff" : props.color)};
-    background-color: white;
+    background-color: #f3f3f9;
     border-top-left-radius: 1.875em;
     border-bottom-left-radius: 1.875em;
   }
@@ -63,7 +64,7 @@ export const Item = styled.li`
     width: 3.125em;
     height: 3.125em;
     border-radius: 50%;
-    box-shadow: 2em 2em 0 10px white;
+    box-shadow: 2em 2em 0 10px #f3f3f9;
     background-color: transparent;
   }
 
@@ -99,13 +100,17 @@ export const Item = styled.li`
     width: 3.125em;
     height: 3.125em;
     border-radius: 50%;
-    box-shadow: 2em -2em 0px 10px white;
+    box-shadow: 2em -2em 0px 10px #f3f3f9;
     background-color: transparent;
   }
 `;
 export const Title = styled.span`
   padding-left: 1.4em;
   display: inline-block;
+  /* text-overflow: ellipsis; */
+  /* width: 200px; */
+  /* text-align: right; */
+  line-height: 0%;
 `;
 export const Main = styled.div`
   position: absolute;
@@ -122,6 +127,7 @@ export const Search = styled.div`
   /* gap: 10px; */
   position: relative;
   width: 320px;
+  background-color: #f3f3f9;
 `;
 export const Input = styled.input`
   outline: none;
@@ -130,6 +136,7 @@ export const Input = styled.input`
   border: 1px solid #ccc;
   font-size: 14px;
   width: 100%;
+  background-color: #f3f3f9;
 `;
 export const IconSearch = styled.div`
   position: absolute;
@@ -151,10 +158,17 @@ export const ImgAvatar = styled.img`
 `;
 export const HeaderWrapper = styled.div`
   padding: 8px;
+  z-index: 2;
+  position: fixed;
+  width: inherit;
+  /* margin-bottom: 100px; */
+  /* width: 100%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 1.4em;
+  background-color: white;
+  box-shadow: 0px 0px 6px #b2b2b2;
 `;
 export const Icon = styled.div``;
 export const IconCard = styled.div`
@@ -179,13 +193,13 @@ export const Card = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-color: #ccc; */
   width: 48%;
   cursor: pointer;
   padding: 10px 20px;
   border: 1px solid #ccc;
   border-radius: 6px;
   box-shadow: 0px 0px 6px #b2b2b2;
+  background-color: white;
   /* transition: 0.s; */
   &:hover {
     background-color: #297bff;

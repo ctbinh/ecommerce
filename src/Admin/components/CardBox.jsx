@@ -24,9 +24,10 @@ import {
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
   @media (max-width: 1024px) {
     flex-wrap: wrap;
-    width: 99%;
+    width: 100%;
   }
 `;
 const data = [
@@ -123,6 +124,10 @@ const CardBox = () => {
           left: "0",
           width: "100%",
           height: "100%",
+          backgroundColor: "white",
+          borderRadius: "5px",
+          padding: "4px 2px",
+          boxShadow: "0px 0px 6px #B2B2B2",
         }}
       >
         <ResponsiveContainer width={"99%"} height={300}>

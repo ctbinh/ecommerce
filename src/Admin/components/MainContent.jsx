@@ -12,6 +12,7 @@ const Orders = styled.div`
   flex: 3;
   padding: 10px 20px;
   border-radius: 8px;
+  background-color: white;
   @media (max-width: 1024px) {
     flex: none;
     width: 100%;
@@ -25,7 +26,7 @@ const Custommers = styled.div`
   padding: 10px 20px;
   border-radius: 8px;
   margin-right: 10px;
-
+  background-color: white;
   flex: 2;
 `;
 const OrderHeader = styled.div`

@@ -7,11 +7,10 @@ import { Main } from "./style";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 const Wraper = styled.div`
-  margin: 14px 12px 30px;
+  padding: 14px 12px 30px;
+  background-color: #f3f3f9;
 `;
 const Home = () => {
-  const [toogleNav, setToogleNav] = useState(true);
-  const width = window.innerWidth;
   return (
     <Wraper>
       <CardBox />

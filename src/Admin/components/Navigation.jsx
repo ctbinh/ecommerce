@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineHome, AiOutlineMenu } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineMenu, AiFillFileAdd } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FaProductHunt } from "react-icons/fa";
 import {
@@ -75,15 +75,15 @@ const Navigation = ({ toogleNav, setIdOnClick }) => {
         </Item>
         <Item
           onClick={() => {
-            navigate("orders");
+            navigate("addproduct");
             setIdClick(3);
           }}
           color={IdClick === 3 ? "black" : "white"}
         >
           <Icon>
-            <AiOutlineHome />
+            <AiFillFileAdd />
           </Icon>
-          <Title>Orders</Title>
+          <Title>Add Product</Title>
         </Item>
       </List>
     </Container>
