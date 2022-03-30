@@ -5,7 +5,6 @@ import Footer from "./Footer";
 import { useState } from "react";
 import { Rating } from "@mui/material";
 import { Button } from "react-bootstrap";
-// import { Carousel } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.css';//bug do cai nay ne =====================
 import Carousel from 'react-bootstrap/Carousel';
@@ -40,16 +39,7 @@ function CarouselImg(props) {
   );
   // </Carousel.Item>;
 }
-// function Review(props) {
-//   const review = props.review
-//   return <div style={{ backgroundColor: 'gray', margin: '10px' }}>
-//     <div>{review.username}</div>
-//     <div>{review.comment}</div>
-//     <div>{review.rate}</div>
-//     <div>{review.datetime}</div>
-//   </div>;
-//   // </Carousel.Item>;
-// }
+
 const Detail = () => {
   const [tab, setTab] = useState(0);
   const reviews = [
@@ -61,12 +51,252 @@ const Detail = () => {
       datetime: "30/09/2019",
     },
     {
-      username: "An moi",
+      username: "Hoang kui",
       comment: "như bu*i",
       rate: 1,
       datetime: "23/03/2022",
     },
   ];
+  const similarProduct = [
+    {
+      id: 0,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 5,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 1,
+      img: "https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-1_10ebeafae1d64bc5a00168a46e9db5b6_master.png",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 2,
+      img: "https://mayxaugiacao.com/wp-content/uploads/2022/02/top-laptop-dell-tot-nhat-2022.jpg",
+      rating: 1,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 3,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 1,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 2,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 3,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 1,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 2,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 3,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00',
+      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+      cpu: 'N/A',
+      featured: 'N/A',
+      ports: 'N/A'
+    },
+    {
+      id: 1,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 2,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 3,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 1,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 2,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 3,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 1,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 2,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 3,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 1,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 2,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    },
+    {
+      id: 3,
+      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+      rating: 4,
+      instock: true,
+      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+      oldPrice: '599.00',
+      newPrice: '499.00'
+    }
+  ]
   return (
     <div>
       <Header />
@@ -134,6 +364,7 @@ const Detail = () => {
                 </p>
               </Price>
 
+              <input type="number" value="1"/>
               <Button style={{ borderRadius: "20px", padding: "6px 20px" }}>
                 Add to cart
               </Button>
@@ -225,22 +456,42 @@ const Detail = () => {
         <h3 style={{ fontWeight: "bold", marginTop: "40px" }}>Warranty</h3>
         <p style={{ margin: "20px 10px 0 40px" }}>1 years.</p>
 
-        <OwlCarousel items={3}
+        <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Similar products</h3>
+        <OwlCarousel items={6}
           className="owl-theme"
-          loop
-          nav
-          margin={8} >
-          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204140/banner_12.jpg" alt="laptop" /> </div>
-          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204172/banner_2.jpg" alt="laptop" /> </div>
-          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204663/park-4174278_640.jpg" alt="laptop" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
-          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204172/banner_2.jpg" alt="laptop" /> </div>
-          <div> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1557204663/park-4174278_640.jpg" alt="laptop" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
-          <div> <img src="http://www.urbanui.com/fily/template/images/carousel/banner_2.jpg" alt="laptop" /> </div>
+          // loop
+          // nav
+          margin={18} >
+          {similarProduct.map((product) => {
+            return (
+              <SimilarItem>
+                <div className="img d-flex flex-row">
+                  <img src={product.img} />
+                </div>
+                <div className="d-flex flex-row align-items-center">
+                  <Rating
+                    size="small"
+                    name="read-only"
+                    value={product.rating}
+                    readOnly
+                  />
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      color: "#a6a6a6",
+                      margin: "0 5px",
+                    }}
+                  >
+                    {" "}
+                    {product.rating}{" "}
+                  </p>
+                </div>
+                <div className="name">{product.name}</div>
+                <p className="price" style={{ color: 'gray', margin: '0 0 0 5%' }}><s>{'$' + product.oldPrice}</s></p>
+                <p className="price" style={{ fontSize: '20px', margin: '0 0 0 5%' }}><b>{'$' + product.newPrice}</b></p>
+              </SimilarItem>
+            );
+          })}
         </OwlCarousel>
 
         <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Customer reviews {'&'} ratings</h3>
@@ -249,7 +500,7 @@ const Detail = () => {
           return (
             <Review>
               <div className="d-flex flex-row">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(3).jpg" alt="laptop"/>
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(3).jpg" alt="laptop" />
                 <div className="w-100">
                   <div className="username">{review.username}</div>
                   <div className="d-flex flex-row justify-content-between">
@@ -402,6 +653,31 @@ const Review = styled.div`
   .datetime {
     font-style: italic;
   }
+`;
+const SimilarItem = styled.div`
+  height: 250px;
+  margin-bottom: 5px;
+  /* border: solid 2px gray; */
+  /* border-radius: 10px; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px 0px;
+  /* padding-left: 4px; */
+  .img {
+    height: 45%;
+    /* border: solid 1px red; */
+  }
+  .name {
+    font-size: 12px;
+    height: 20%;
+    overflow: hidden;
+    margin-left: 5%;
+  }
+  .price {
+    margin-left: 5%;
+  }
+  /* :hover {
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  } */
 `;
 
 export default Detail;
