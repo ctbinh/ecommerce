@@ -11,7 +11,7 @@ const Header = () => {
         BK SHOP
       </Title>
     </div>
-    <SearchBar>
+    <SearchBar className="searchbar">
       <SearchButton >
         <i class="fa fa-search"></i>
       </SearchButton>
@@ -25,7 +25,7 @@ const Header = () => {
       <NavItem>DISCOUNT</NavItem>
     </NavBar>
 
-    <div>
+    <div style={{ marginLeft: 'auto', minWidth: '60px'}}>
       <CartIcon />
       <CartCounter>20</CartCounter>
     </div>
@@ -43,40 +43,48 @@ const Row = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  padding: 0px 60px 0px 20px;
-`
+  padding: 0px 4vw 0px 4vw;
+`;
 const Logo = styled.img`
-  /* max-width: 5%; */
-  margin-left: 20px;
   height: 80%;
   display: inline;
-  `
+  margin-right: 1vw;
+`;
 const Title = styled.p`
   color: white;
-  font-size: 38px;
+  font-size: 3vw;
+  width: 22vw;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
-  font-size: 35px;
   line-height: 43px;
   /* letter-spacing: 2px; */
   display: inline;
-  margin: 0px 90px 0px 30px;
-`
+  margin: 0px;
+  @media (max-width: 480px){
+    display: none;
+  }
+`;
 const SearchBar = styled.div`
-  display: inline;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   background-color: white;
   border: none;
   border-radius: 15px;
+  margin-right: 2vw;
   padding: 2px 10px 2px 2px;
-`
+  @media (max-width: 768px){
+    display: none;
+  }
+`;
 const SearchInput = styled.input`
   display: inline;
   border: none;
   outline: none;
   margin-left: 15px;
-  width: 220px;
-`
+  width: 10vw;
+`;
 const SearchButton = styled.button`
   display: inline;
   border: none;
@@ -87,25 +95,34 @@ const SearchButton = styled.button`
   i {
     width: 16px;
   }
-`
+`;
 const NavBar = styled.div`
-  display: inline;
-    
-`
+  display: flex;
+  flex-direction: row;
+  /* max-width: 300px; */
+  @media (max-width: 480px){
+    display: none;
+  }
+`;
 const NavItem = styled.a`
   display: inline;
   text-decoration: none;
   /* font-family: 'Muli', sans-serif; */
   text-transform: uppercase;
   color: white;
-  padding: 20px;
+  padding: 1vw;
   font-weight: bold;
-`
+  font-size: 1.5vw;
+  @media (max-width: 768px){
+    /* display: none; */
+    font-size: 2vw;
+  }
+`;
 const CartIcon = styled(ShoppingCart)`
   color: white;
   font-size: 50pt;
   display: inline;
-`
+`;
 const CartCounter = styled.p`
   color: black;
   background-color: white;
@@ -119,9 +136,13 @@ const CartCounter = styled.p`
   bottom: 10px;
   right: 12px;
   /* font-family: 'Helvetica Neue', Helvetica, Arial; */
-`
+  @media (max-width: 768px){
+    /* width: 15vw; */
+  }
+`;
 const UserIcon = styled(Person)`
   color: white;
-`
+  width: 10vw;
+`;
 
 export default Header;
