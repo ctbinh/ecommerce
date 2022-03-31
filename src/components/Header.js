@@ -1,66 +1,77 @@
 import React from "react";
 import styled from "styled-components";
 import { ShoppingCart, Person } from "@mui/icons-material";
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 
 const Header = () => {
-  return <Row>
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-      <Logo src="https://www.hcmut.edu.vn/images/hcmut/logoBK.png" alt="Logo HCMUT">
-      </Logo>
-      <Title>
-        BK SHOP
-      </Title>
-    </div>
-    <SearchBar className="searchbar">
-      <SearchButton >
-        <i class="fa fa-search"></i>
-      </SearchButton>
-      <SearchInput type="text" name="search_book" id="" placeholder="Search..." />
-    </SearchBar>
+    return <>
 
-    <NavBar>
-      <NavItem>ABOUT</NavItem>
-      <NavItem>NEWS</NavItem>
-      <NavItem>BEST SELLER</NavItem>
-      <NavItem>DISCOUNT</NavItem>
-    </NavBar>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Container style={{}}>
+                <Navbar.Brand href="#home" className="d-flex flex-row align-items-center">
+                    <img
+                        src="https://www.hcmut.edu.vn/images/hcmut/logoBK.png" alt="Logo HCMUT"
+                        width="55"
+                        height="55"
+                        className="d-inline-block align-top"
+                    />
+                    <Title>
+                        BK SHOP
+                    </Title>
+                </Navbar.Brand>
 
-    <div style={{ marginLeft: 'auto', minWidth: '60px'}}>
-      <CartIcon />
-      <CartCounter>20</CartCounter>
-    </div>
+                <Navbar.Collapse id="responsive-navbar-nav">
 
-    <UserIcon>
-    </UserIcon>
-  </Row>;
+                    <SearchBar className="searchbar">
+                        <SearchButton >
+                            <i class="fa fa-search"></i>
+                        </SearchButton>
+                        <SearchInput type="text" name="search_book" id="" placeholder="Search..." />
+                    </SearchBar>
+
+                    <Nav className="me-auto">
+                    </Nav>
+
+                    <Nav style={{ marginRight: '20px' }}>
+                        {/* <Nav.Link eventKey={2} href="#memes">
+                            Dank memes
+                        </Nav.Link> */}
+                        <Nav.Link href="#features">ABOUT</Nav.Link>
+                        <Nav.Link href="#pricing">NEWS</Nav.Link>
+                        <NavDropdown title="COLLECTION" id="collasible-nav-dropdown">
+                            <NavDropdown.Item href="#action/3.1">Best Seller</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.2">Discount</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="#action/3.4">My Wish List</NavDropdown.Item>
+                        </NavDropdown>
+
+                    </Nav>
+                </Navbar.Collapse>
+
+                <NavIcon>
+                    <div style={{ marginLeft: 'auto', minWidth: '60px' }}>
+                        <CartIcon />
+                        <CartCounter>20</CartCounter>
+                    </div>
+
+                    <UserIcon>
+                    </UserIcon>
+                </NavIcon>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            </Container>
+        </Navbar>
+    </>
 };
 
-const Row = styled.div`
-  background-color: black;
-  width: 100%;
-  height: 70px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 0px 4vw 0px 4vw;
-`;
-const Logo = styled.img`
-  height: 80%;
-  display: inline;
-  margin-right: 1vw;
-`;
 const Title = styled.p`
   color: white;
-  font-size: 3vw;
-  width: 22vw;
+  font-size: 2.5vw;
+  width: 15vw;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
-  line-height: 43px;
-  /* letter-spacing: 2px; */
-  display: inline;
-  margin: 0px;
+  margin: 0px 0 0 15px;
   @media (max-width: 480px){
     display: none;
   }
@@ -83,7 +94,7 @@ const SearchInput = styled.input`
   border: none;
   outline: none;
   margin-left: 15px;
-  width: 10vw;
+  width: 20vw;
 `;
 const SearchButton = styled.button`
   display: inline;
@@ -96,28 +107,17 @@ const SearchButton = styled.button`
     width: 16px;
   }
 `;
-const NavBar = styled.div`
-  display: flex;
-  flex-direction: row;
-  /* max-width: 300px; */
-  @media (max-width: 480px){
-    display: none;
-  }
-`;
-const NavItem = styled.a`
-  display: inline;
-  text-decoration: none;
-  /* font-family: 'Muli', sans-serif; */
-  text-transform: uppercase;
-  color: white;
-  padding: 1vw;
-  font-weight: bold;
-  font-size: 1.5vw;
+const NavIcon = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 20px;
+    margin-left: auto;
   @media (max-width: 768px){
-    /* display: none; */
-    font-size: 2vw;
+    /* position: relative; */
   }
 `;
+
 const CartIcon = styled(ShoppingCart)`
   color: white;
   font-size: 50pt;

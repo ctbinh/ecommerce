@@ -7,7 +7,7 @@ import { Rating } from "@mui/material";
 import { Button } from "react-bootstrap";
 
 import 'bootstrap/dist/css/bootstrap.css';//bug do cai nay ne =====================
-import Carousel from 'react-bootstrap/Carousel';
+import {Carousel, Breadcrumb } from 'react-bootstrap';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
@@ -22,7 +22,7 @@ function TableRow(props) {
 }
 function CarouselImg(props) {
   return (
-    <div style={{ display: "flex", alignItems: "center", height: "570px" }}>
+    <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
       <img
         className="d-block w-100"
         src={props.src}
@@ -30,7 +30,7 @@ function CarouselImg(props) {
         style={{
           display: "block",
           maxWidth: "735px",
-          maxHeight: "570px",
+          maxHeight: "50vw",
           width: "auto",
           height: "auto",
         }}
@@ -42,6 +42,7 @@ function CarouselImg(props) {
 
 const Detail = () => {
   const [tab, setTab] = useState(0);
+  const [numSimilarProduct, setnumSimilarProduct] = useState(0);
   const reviews = [
     {
       username: "Janifer Lowrence",
@@ -354,6 +355,8 @@ const Detail = () => {
               beautiful laptop that's available at a great price.
             </Description>
 
+            <div style={{ height: '200px' }}></div>
+
             <div style={{ position: "absolute", bottom: "0px" }}>
               <Price>
                 <p className="oldPrice">
@@ -364,7 +367,7 @@ const Detail = () => {
                 </p>
               </Price>
 
-              <input type="number" value="1"/>
+              <input type="number" value="1" />
               <Button style={{ borderRadius: "20px", padding: "6px 20px" }}>
                 Add to cart
               </Button>
@@ -419,8 +422,9 @@ const Detail = () => {
             </div>
           </TabContent>
         </Tab>
+
         <ImgTab>
-          <Carousel variant="dark">
+          <Carousel variant="dark" style={{ height: '100%' }} className="d-flex align-items-center">
             <Carousel.Item>
               <CarouselImg src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg"></CarouselImg>
             </Carousel.Item>
@@ -449,7 +453,7 @@ const Detail = () => {
         </p>
         <img
           alt="laptop"
-          style={{ margin: "20px 200px", maxWidth: "600px" }}
+          style={{ margin: "20px auto", width: '80vw' }}
           src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg"
         ></img>
 
@@ -457,42 +461,44 @@ const Detail = () => {
         <p style={{ margin: "20px 10px 0 40px" }}>1 years.</p>
 
         <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Similar products</h3>
-        <OwlCarousel items={6}
-          className="owl-theme"
-          // loop
-          // nav
-          margin={18} >
-          {similarProduct.map((product) => {
-            return (
-              <SimilarItem>
-                <div className="img d-flex flex-row">
-                  <img src={product.img} />
-                </div>
-                <div className="d-flex flex-row align-items-center">
-                  <Rating
-                    size="small"
-                    name="read-only"
-                    value={product.rating}
-                    readOnly
-                  />
-                  <p
-                    style={{
-                      fontSize: "13px",
-                      color: "#a6a6a6",
-                      margin: "0 5px",
-                    }}
-                  >
-                    {" "}
-                    {product.rating}{" "}
-                  </p>
-                </div>
-                <div className="name">{product.name}</div>
-                <p className="price" style={{ color: 'gray', margin: '0 0 0 5%' }}><s>{'$' + product.oldPrice}</s></p>
-                <p className="price" style={{ fontSize: '20px', margin: '0 0 0 5%' }}><b>{'$' + product.newPrice}</b></p>
-              </SimilarItem>
-            );
-          })}
-        </OwlCarousel>
+        <SimilarProduct>
+          <OwlCarousel items={6}
+            className="owl-theme"
+            // loop
+            // nav
+            margin={18} >
+            {similarProduct.map((product) => {
+              return (
+                <SimilarItem>
+                  <div className="img d-flex flex-row">
+                    <img src={product.img} />
+                  </div>
+                  <div className="d-flex flex-row align-items-center">
+                    <Rating
+                      size="small"
+                      name="read-only"
+                      value={product.rating}
+                      readOnly
+                    />
+                    <p
+                      style={{
+                        fontSize: "13px",
+                        color: "#a6a6a6",
+                        margin: "0 5px",
+                      }}
+                    >
+                      {" "}
+                      {product.rating}{" "}
+                    </p>
+                  </div>
+                  <div className="name">{product.name}</div>
+                  <p className="price" style={{ color: 'gray', margin: '0 0 0 5%' }}><s>{'$' + product.oldPrice}</s></p>
+                  <p className="price" style={{ fontSize: '20px', margin: '0 0 0 5%' }}><b>{'$' + product.newPrice}</b></p>
+                </SimilarItem>
+              );
+            })}
+          </OwlCarousel>
+        </SimilarProduct>
 
         <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Customer reviews {'&'} ratings</h3>
         {/* 4.2 out of 5 */}
@@ -533,7 +539,7 @@ const Detail = () => {
         })}
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
@@ -543,7 +549,7 @@ const TabNav = styled.div`
   flex-direction: row;
   align-items: center;
   height: 50px;
-  padding-left: 150px;
+  padding-left: 4vw;
 `;
 const TabItem = styled.button`
   margin: 0px 20px;
@@ -560,15 +566,21 @@ const Content = styled.div`
   min-height: 570px;
   display: flex;
   flex-direction: row;
+  @media (max-width: 768px){
+    flex-direction: column;
+  }
 `;
 const Tab = styled.div`
   width: 50%;
   background-color: #f5f7ff;
   padding-left: 10%;
+  @media (max-width: 768px){
+    width: 100%;
+  }
 `;
 const TabContent = styled.div`
   display: ${(props) => (props.display === true ? "block" : "none")};
-  height: 420px;
+  min-height: 420px;
   overflow: auto;
 `;
 const Status = styled.div`
@@ -627,7 +639,10 @@ const Price = styled.div`
 `;
 const ImgTab = styled.div`
   width: 50%;
-  height: 570px;
+  @media (max-width: 768px){
+    width: 100%;
+    margin: 30px 0;
+  }
 `;
 const Review = styled.div`
   background-color: #eaeaea;
@@ -652,6 +667,11 @@ const Review = styled.div`
   }
   .datetime {
     font-style: italic;
+  }
+`;
+const SimilarProduct = styled.div`
+  @media (max-width: 768px){
+    display: none;
   }
 `;
 const SimilarItem = styled.div`

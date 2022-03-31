@@ -7,6 +7,7 @@ import Home from "./components/Home/Home";
 import HomeAdmin from "./Admin/components/Home";
 import Login from "./Admin/components/Login";
 import Header from "./components/Header";
+import Header2 from "./components/Header2";
 import Footer from "./components/Footer"
 import User from "./components/User/User";
 import Product from "./Admin/components/products/index";
