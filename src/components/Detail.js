@@ -2,15 +2,19 @@ import styled from "styled-components";
 // import { Container, Row, Col } from "react-grid-system";
 import Header from "./Header";
 import Footer from "./Footer";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Rating } from "@mui/material";
 import { Button } from "react-bootstrap";
 
 import 'bootstrap/dist/css/bootstrap.css';//bug do cai nay ne =====================
-import {Carousel, Breadcrumb } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
+import { Breadcrumbs, Link, Typography } from '@mui/material'
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+
+import { MdKeyboardArrowUp } from 'react-icons/md';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 
 function TableRow(props) {
   return (
@@ -42,7 +46,35 @@ function CarouselImg(props) {
 
 const Detail = () => {
   const [tab, setTab] = useState(0);
-  const [numSimilarProduct, setnumSimilarProduct] = useState(0);
+  const options = {
+    margin: 30,
+    responsiveClass: true,
+    // nav: true,
+    // dots: false,
+    autoplay: false,
+    // navText: ["Prev", "Next"],
+    smartSpeed: 1000,
+    responsive: {
+      200: {
+        items: 1,
+      },
+      360: {
+        items: 2,
+      },
+      480: {
+        items: 3,
+      },
+      768: {
+        items: 5,
+      },
+      800: {
+        items: 5,
+      },
+      1000: {
+        items: 6,
+      }
+    },
+  };
   const reviews = [
     {
       username: "Janifer Lowrence",
@@ -298,6 +330,10 @@ const Detail = () => {
       newPrice: '499.00'
     }
   ]
+  const [count, setCount] = useState(1);
+
+  const incrementCount = () => setCount(count + 1);
+  let decrementCount = () => setCount(count - 1);
   return (
     <div>
       <Header />
@@ -311,9 +347,23 @@ const Detail = () => {
       </TabNav>
       <Content>
         <Tab>
-          <Path>
-            Home {">"} Laptop {">"} MSI
-          </Path>
+          {/* <Breadcrumb style={{margin: '10px 0 0px 0'}}>
+            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
+            <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
+              Laptop
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>MSI</Breadcrumb.Item>
+          </Breadcrumb> */}
+
+          <Breadcrumbs separator="›" maxItems={3} aria-label="breadcrumb" style={{ margin: '10px 0 0px 0' }}>
+            <Link underline="hover" color="inherit" href="/">
+              Home
+            </Link>
+            <Link underline="hover" color="inherit" href="/">
+              Laptop
+            </Link>
+            <Typography color="text.primary">My Account</Typography>
+          </Breadcrumbs>
 
           <Name>Laptop LG Gram 2021 14ZD90P-G.AX51A5 </Name>
 
@@ -367,10 +417,22 @@ const Detail = () => {
                 </p>
               </Price>
 
-              <input type="number" value="1" />
-              <Button style={{ borderRadius: "20px", padding: "6px 20px" }}>
-                Add to cart
-              </Button>
+              {/* <input type="number" /> */}
+              <div className="d-flex flex-row align-items-center" style={{ margin: '5px' }}>
+                <Input className="d-flex flex-row align-items-center">
+                  <div style={{ minWidth: '35px', textAlign: 'center' }}>
+                    {count}
+                  </div>
+                  <div className="d-flex flex-column align-items-center">
+                    <MdKeyboardArrowUp onClick={incrementCount} />
+                    <MdKeyboardArrowDown onClick={decrementCount} />
+                  </div>
+                </Input>
+
+                <Button style={{ borderRadius: "20px", padding: "6px 20px" }}>
+                  Add to cart
+                </Button>
+              </div>
             </div>
           </TabContent>
 
@@ -462,7 +524,9 @@ const Detail = () => {
 
         <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Similar products</h3>
         <SimilarProduct>
-          <OwlCarousel items={6}
+          <OwlCarousel
+            {...options}
+            // items={6}
             className="owl-theme"
             // loop
             // nav
@@ -471,7 +535,7 @@ const Detail = () => {
               return (
                 <SimilarItem>
                   <div className="img d-flex flex-row">
-                    <img src={product.img} />
+                    <img src={product.img} alt='similar product' />
                   </div>
                   <div className="d-flex flex-row align-items-center">
                     <Rating
@@ -539,7 +603,7 @@ const Detail = () => {
         })}
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
@@ -595,11 +659,6 @@ const Rate = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-`;
-const Path = styled.p`
-  margin-top: 20px;
-  margin-bottom: 0px;
-  font-size: 12px;
 `;
 const Name = styled.p`
   font-weight: 500;
@@ -671,7 +730,7 @@ const Review = styled.div`
 `;
 const SimilarProduct = styled.div`
   @media (max-width: 768px){
-    display: none;
+    /* display: none; */
   }
 `;
 const SimilarItem = styled.div`
@@ -698,6 +757,16 @@ const SimilarItem = styled.div`
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   } */
+`;
+
+
+const Input = styled.div`
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 3px;
+    box-shadow: 0px 4px 4px gray;
+    margin-right: 30px;
 `;
 
 export default Detail;
