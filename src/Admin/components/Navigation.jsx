@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineHome, AiOutlineMenu, AiFillFileAdd } from "react-icons/ai";
 import { BsFillPeopleFill } from "react-icons/bs";
-import { FaProductHunt } from "react-icons/fa";
+import { FaProductHunt, FaFirstOrder } from "react-icons/fa";
 import {
   Container,
   Header,
@@ -24,6 +24,8 @@ const Navigation = ({ toogleNav, setIdOnClick }) => {
     if (textPath === "customer") return 2;
     if (textPath === "orders") return 3;
   };
+  const width = window.innerWidth;
+  // console.log("a", width);
   const [IdClick, setIdClick] = useState(getId());
   return (
     <Container toogle={!toogleNav}>
@@ -84,6 +86,18 @@ const Navigation = ({ toogleNav, setIdOnClick }) => {
             <AiFillFileAdd />
           </Icon>
           <Title>Add Product</Title>
+        </Item>
+        <Item
+          onClick={() => {
+            navigate("orders");
+            setIdClick(4);
+          }}
+          color={IdClick === 4 ? "black" : "white"}
+        >
+          <Icon>
+            <FaFirstOrder />
+          </Icon>
+          <Title>Orders</Title>
         </Item>
       </List>
     </Container>

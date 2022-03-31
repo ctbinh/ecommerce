@@ -13,6 +13,8 @@ import AdminDetail from "./Admin/components/products/Detail";
 import Customer from "./Admin/components/customers/Customer";
 import Detail from "./components/Detail";
 import AddProduct from "./Admin/components/products/AddProduct";
+import Orders from "./Admin/components/orders/Orders";
+import Invoice from "./Admin/components/orders/Invoice";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
             <Route path="product" element={<Product />} />
             <Route path="customer" element={<Customer />} />
             <Route path="addproduct" element={<AddProduct />} />
+            <Route path="invoice" element={<Invoice />} />
+            <Route path="orders" element={<Orders />} />
             <Route path="product/detail" element={<AdminDetail />} />
             <Route path="" element={<HomeAdmin />} />
           </Route>
