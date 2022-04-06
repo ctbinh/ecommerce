@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { Row, Col } from "react-grid-system";
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { IoIosArrowDropup } from 'react-icons/io';
-import { IoIosArrowDropdown } from 'react-icons/io';
+import { MdKeyboardArrowUp } from 'react-icons/md';
+import { MdKeyboardArrowDown } from 'react-icons/md';
 
 import React, { useState } from 'react';
 
@@ -39,10 +39,10 @@ const RowOfTable = (props) => {
                     {count}
                     <Arrow>
                         <ArrowUp>
-                            <IoIosArrowDropup onClick={incrementCount}/>
+                            <MdKeyboardArrowUp onClick={incrementCount}/>
                         </ArrowUp>
                         <ArrowDown>
-                            <IoIosArrowDropdown onClick={decrementCount}/>
+                            <MdKeyboardArrowDown onClick={decrementCount}/>
                         </ArrowDown>
                     </Arrow>
                 </div>
@@ -104,41 +104,45 @@ const RowTable = {
     display: "flex",
     alignItems: "center",
 }
-const Arrow = styled.i`
+const ArrowIcon = {
+    display: "flex",
+    verticalAlign: "middle",   
+    alignItems: "center",
+    // backgroundColor: "red",
+    border: "solid 1px #DDDDDD",
+    paddingLeft: "10px",
+    // paddingTop: "2px",
+    // paddingBottom: "2px",
+    borderRadius: "5px",
+}
+const Arrow = styled.span`
     display: flex;
     flex-direction: column;
     margin-left: 5px;
     text-align: center;
     align-items: center;
-    border-radius: 10px;
+    border-radius: 5px;
+    /* background-color: red; */
 `
-const ArrowIcon = {
-    display: "flex",
-    verticalAlign: "middle",   
-    alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    paddingLeft: "10px",
-    paddingTop: "2px",
-    paddingBottom: "2px",
-    borderRadius: "10px",
-}
-const ArrowUp = styled.i`
+
+const ArrowUp = styled.span`
     color: #A2A6B0;
-    margin-bottom: 2px;
+    /* margin-bottom: 0px; */
     cursor: "pointer";
     transition: all .3s;
     :hover {
         transform: scale(1.1);
-        color: #E54646;
+        color: #0066FF;
     }
 `
+
 const ArrowDown = styled.i`
     color: #A2A6B0;
     cursor: "pointer";
     transition: all .3s;
     :hover {
-        transform: scale(1.1);
-        color: #E54646;
+        transform: scale(1.3);
+        color: #0066FF;
     }
 `
 

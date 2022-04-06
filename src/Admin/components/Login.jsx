@@ -3,13 +3,15 @@ import styled from "styled-components";
 import { AiOutlineUser } from "react-icons/ai";
 import { GiPadlock } from "react-icons/gi";
 const Wraper = styled.div`
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   padding: -20px -40px;
   height: 100vh;
-  width: 100vw;
-  /* background-color: #ccc; */
+  width: 100vw; */
+  background-color: #ccc;
+  height: 100vh;
+  overflow: hidden;
 `;
 const InputLeft = styled.div`
   padding: 0 40px;
@@ -89,47 +91,61 @@ const Title = styled.h3`
   padding: 10px 4px;
   text-align: center;
 `;
-
+const ContainerWraper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 40px;
+  margin: 14px;
+  height: 400px;
+  width: 932px;
+  margin: 130px auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 6px #b2b2b2;
+`;
 const Login = () => {
   return (
     <Wraper>
-      <InputLeft>
-        <Heading>Admin Login</Heading>
-        <Container>
-          <Label>User name</Label>
-          <InputWrap>
-            <Icon>
-              <AiOutlineUser />
-            </Icon>
-            <Input type="text"></Input>
-          </InputWrap>
-        </Container>
-        <Container>
-          <Label>Password</Label>
-          <InputWrap>
-            <Icon>
-              <GiPadlock />
-            </Icon>
-            <Input type="password"></Input>
-          </InputWrap>
-        </Container>
-        <ContainerBottom>
-          <Remember>
-            <InputRemember type="checkbox"></InputRemember>
-            <LabelRemember>Remember me</LabelRemember>
-          </Remember>
-          <Remember>
-            <A href="">Forgot password?</A>
-          </Remember>
-        </ContainerBottom>
-        <ContainerButton>
-          <Button>Login</Button>
-        </ContainerButton>
-      </InputLeft>
-      <Img>
-        <ImgSrc src="https://toscaleblog.co.uk/wp-content/uploads/elementor/thumbs/Saly-10-p5irc3tooikkemk635karj2rc4plfa69aa5g3d59s4.png"></ImgSrc>
-        <Title>Easy product management, as long as you have a network</Title>
-      </Img>
+      <ContainerWraper>
+        <InputLeft>
+          <Heading>Admin Login</Heading>
+          <Container>
+            <Label>User name</Label>
+            <InputWrap>
+              <Icon>
+                <AiOutlineUser />
+              </Icon>
+              <Input type="text"></Input>
+            </InputWrap>
+          </Container>
+          <Container>
+            <Label>Password</Label>
+            <InputWrap>
+              <Icon>
+                <GiPadlock />
+              </Icon>
+              <Input type="password"></Input>
+            </InputWrap>
+          </Container>
+          <ContainerBottom>
+            <Remember>
+              <InputRemember type="checkbox"></InputRemember>
+              <LabelRemember>Remember me</LabelRemember>
+            </Remember>
+            <Remember>
+              <A href="">Forgot password?</A>
+            </Remember>
+          </ContainerBottom>
+          <ContainerButton>
+            <Button>Login</Button>
+          </ContainerButton>
+        </InputLeft>
+        <Img>
+          <ImgSrc src="https://toscaleblog.co.uk/wp-content/uploads/elementor/thumbs/Saly-10-p5irc3tooikkemk635karj2rc4plfa69aa5g3d59s4.png"></ImgSrc>
+          <Title>Easy product management, as long as you have a network</Title>
+        </Img>
+      </ContainerWraper>
     </Wraper>
   );
 };

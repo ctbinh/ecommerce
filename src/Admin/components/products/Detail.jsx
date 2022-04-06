@@ -33,53 +33,6 @@ const Detail = () => {
   return (
     <Wrap>
       <Container>
-        <TextContainer>
-          <Label>ID</Label>
-          <Span>abcsxex</Span>
-        </TextContainer>
-        <TextContainer>
-          <Label>Name</Label>
-          <Span>Laptop LG Gram 2021 14ZD90P-G.AX51A5</Span>
-        </TextContainer>
-        <TextContainer>
-          <Label>Brand name</Label>
-          <Span>Dell</Span>
-        </TextContainer>
-        <TextContainer>
-          <Label>CPU</Label>
-          <Span>Intel Core i5-1135G7 2.4GHz up to 4.2GHz 8MB</Span>
-        </TextContainer>
-        <TextContainer>
-          <Label>RAM</Label>
-          <Span>8GB (4GBx2) LPDDR4X 4266MHz (Onboard)</Span>
-        </TextContainer>
-        <TextContainer>
-          <Label>GPU</Label>
-          <Span>Intel Iris Xe Graphics</Span>
-        </TextContainer>
-        <TextContainer>
-          <Label>OS</Label>
-          <Span>FreeDos</Span>
-        </TextContainer>
-        <TextContainer>
-          <Label>Display</Label>
-          <Span>14 WUXGA (1920x1200), 16:10, IPS, DCI-P3 99%</Span>
-        </TextContainer>
-        <TextContainer>
-          <Label>Size</Label>
-          <Span>313.4 x 215.2 x 16.8 mm</Span>
-        </TextContainer>
-        <TextContainer>
-          <Label>Description</Label>
-          <Span>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut cumque
-            esse iure eveniet voluptate. Unde aliquid voluptates accusantium.
-            Vel velit numquam eaque consectetur accusamus temporibus ullam nemo
-            aliquam iure reiciendis?
-          </Span>
-        </TextContainer>
-      </Container>
-      <Container>
         {/* <Img
           src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg"
           alt=""
@@ -171,6 +124,53 @@ const Detail = () => {
             </Tr>
           </Table>
         </ContainerComment>
+      </Container>
+      <Container>
+        <TextContainer>
+          <Label>ID</Label>
+          <Span>abcsxex</Span>
+        </TextContainer>
+        <TextContainer>
+          <Label>Name</Label>
+          <Span>Laptop LG Gram 2021 14ZD90P-G.AX51A5</Span>
+        </TextContainer>
+        <TextContainer>
+          <Label>Brand name</Label>
+          <Span>Dell</Span>
+        </TextContainer>
+        <TextContainer>
+          <Label>CPU</Label>
+          <Span>Intel Core i5-1135G7 2.4GHz up to 4.2GHz 8MB</Span>
+        </TextContainer>
+        <TextContainer>
+          <Label>RAM</Label>
+          <Span>8GB (4GBx2) LPDDR4X 4266MHz (Onboard)</Span>
+        </TextContainer>
+        <TextContainer>
+          <Label>GPU</Label>
+          <Span>Intel Iris Xe Graphics</Span>
+        </TextContainer>
+        <TextContainer>
+          <Label>OS</Label>
+          <Span>FreeDos</Span>
+        </TextContainer>
+        <TextContainer>
+          <Label>Display</Label>
+          <Span>14 WUXGA (1920x1200), 16:10, IPS, DCI-P3 99%</Span>
+        </TextContainer>
+        <TextContainer>
+          <Label>Size</Label>
+          <Span>313.4 x 215.2 x 16.8 mm</Span>
+        </TextContainer>
+        <TextContainer>
+          <Label>Description</Label>
+          <Span>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut cumque
+            esse iure eveniet voluptate. Unde aliquid voluptates accusantium.
+            Vel velit numquam eaque consectetur accusamus temporibus ullam nemo
+            aliquam iure reiciendis?
+          </Span>
+        </TextContainer>
       </Container>
     </Wrap>
   );

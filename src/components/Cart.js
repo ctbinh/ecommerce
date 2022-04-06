@@ -75,7 +75,7 @@ const Cart = () => {
     return (
         <div> 
             <Header/>  
-            <Container fluid>
+            <ContainerStyled fluid>
                 <Row>
                     <Col md={7.5}>
                         <Title>Shopping Cart</Title>
@@ -170,7 +170,7 @@ const Cart = () => {
                         </ButtonMultiple>}    
                     </Col>
                 </Row>
-            </Container>
+            </ContainerStyled>
             <Footer/>
         </div> 
     )
@@ -183,9 +183,9 @@ const Title = styled.div`
 `
 const ButtonContinue = styled.button`
     border-radius: 20px;
-    width: 160px;
-    height: 30px;
-    margin-top: 10px;
+    width: 180px;
+    height: 40px;
+    margin-top: 30px;
     transition: all 0.3s;
     border: solid #CCCCCC;
     :hover {
@@ -195,12 +195,13 @@ const ButtonContinue = styled.button`
     }
     padding-left: 10px;
     padding-right: 10px;
+    margin-bottom: 20px;
 `
 const ButtonClear = styled.button`
     border-radius: 20px;
-    width: 160px;
-    height: 30px;
-    margin-top: 10px;
+    width: 180px;
+    height: 40px;
+    margin-top: 30px;
     color: white;
     background-color: #111111;
     transition: all .3s;
@@ -212,6 +213,7 @@ const ButtonClear = styled.button`
     }
     padding-left: 10px;
     padding-right: 10px;
+    margin-bottom: 20px;
 `
 const Line = styled.hr`
     /* margin-top: 10px; */
@@ -299,4 +301,7 @@ const ButtonMultiple = styled.button`
 const LinkStyle = {
     textDecoration: "none",
 }
+const ContainerStyled = styled(Container)`
+    margin-top: 40px;
+`
 export default Cart

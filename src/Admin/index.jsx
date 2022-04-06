@@ -17,9 +17,11 @@ const Admin = () => {
         setIdOnClick={setIdOnClick}
       />
 
-      <Main width={toogleNav ? "270px" : "100px"}>
+      <Main width={toogleNav ? "256px" : "77px"}>
         <Header setToogleNav={setToogleNav} />
-        <Outlet />
+        <div style={{ marginTop: "60px" }}>
+          <Outlet />
+        </div>
         {/* {idOnClick === 0 && (
           <>
             <CardBox />

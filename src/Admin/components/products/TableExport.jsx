@@ -7,8 +7,11 @@ import makeData from "./makeData";
 
 const Styles = styled.div`
   padding: 1rem;
-  width: 100%;
-
+  /* width: 100%; */
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 6px #b2b2b2;
+  margin: 4px 10px;
   table {
     border-spacing: 0;
     border: 1px solid black;
