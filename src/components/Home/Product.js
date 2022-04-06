@@ -105,10 +105,18 @@ const Container = styled.div`
   max-height: 300px;
   margin-bottom: 5px;
   box-shadow: ${props=>props.display===1?'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px':'rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;'};
-  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
   :hover {
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  @media (max-width: 1080px){
+    width: ${props => props.display === 0 ? '25%' : '100%'};
+  }
+  @media (max-width: 768px){
+    width: ${props => props.display === 0 ? '33%' : '100%'};
+  }
+  @media (max-width: 480px){
+    width: ${props => props.display === 0 ? '50%' : '100%'};
   }
 `
 export default Product

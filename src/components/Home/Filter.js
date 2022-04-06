@@ -2,6 +2,7 @@ import { Slider } from '@mui/material'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from '../Button'
+import CloseIcon from '@mui/icons-material/Close';
 
 
 const Filter = (props) => {
@@ -9,7 +10,7 @@ const Filter = (props) => {
   function valuetext(value) {
     return `${value}°C`;
   }
-  const [value, setValue] = useState([0, 1000]);
+  const [value, setValue] = useState([500, 1500]);
   // const [brandsTaget, setBrandsTaget] = useState([]);
   const [ramFilter, setRamFilter] = useState([]);
   const targetRam = (ram) => {
@@ -29,7 +30,7 @@ const Filter = (props) => {
     }
   };
   const applyFilter = () => {
-    console.log(props.brandsTaget);
+    props.setShow(0);
   };
   const clearFilter = () => {
     props.setBrandsTaget([]);
@@ -55,7 +56,10 @@ const Filter = (props) => {
 
   return (
     <Container>
-      <Title>Filters</Title>
+      <Row>
+        <Title>Filters</Title>
+        {props.show === 1 && <CloseIcon onClick={()=>props.setShow(0)}/>}
+      </Row>
       <Button type='transparent' text="Clear Filter" onClick={() => clearFilter()}/>
       <TypeFilter>Brands</TypeFilter>
       <Brands>
@@ -80,6 +84,7 @@ const Filter = (props) => {
       </Ram>
       <TypeFilter>Price</TypeFilter>
       <Slider
+        style={{width: '90%', margin: '0 5%'}}
         getAriaLabel={() => 'Minimum distance'}
         value={value}
         max='3000'
@@ -129,7 +134,7 @@ const Ram = styled.div`
 `
 const Brand = styled.img`
   width: 48%;
-  margin: 1px;
+  margin: 1%;
   background-color: white;
   padding: 5px 10px;
   &.active {
@@ -139,12 +144,17 @@ const Brand = styled.img`
     cursor: pointer;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   }
+  @media (max-width: 768px){
+    width: 24%;
+    margin: 0.5%;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  }
 `
 const Brands = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  
 `
 
 const TypeFilter = styled.p`
@@ -160,12 +170,15 @@ const Title = styled.p`
   margin-bottom: 10px;
 `
 const Container = styled.div`
-  width: 20%;
+  width: 100%;
   padding: 10px;
   display: flex;
   flex-direction: column;
   background-color: #F5F7FF;
   height: fit-content;
+  @media (max-width: 768px){
+    background-color: white;
+  }
 `
 
 export default Filter

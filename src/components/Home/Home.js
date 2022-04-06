@@ -1,6 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Pagination, Select } from '@mui/material'
 import AppsIcon from '@mui/icons-material/Apps';
 import ReorderIcon from '@mui/icons-material/Reorder';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import React, { useState } from 'react'
 import styled from 'styled-components'
 // import Footer from '../Footer'
@@ -259,6 +260,7 @@ const Home = () => {
       newPrice: '499.00'
     }
   ]
+  const [show, setShow] = useState(0)
   const [num, setNum] = React.useState(30);
   const [display, setDisplay] = useState(0);
   const [brandsTaget, setBrandsTaget] = useState([]);
@@ -274,7 +276,7 @@ const Home = () => {
   };
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Container>
         <Poster src={images.poster} alt="poster" />
         <Brands>
@@ -284,59 +286,101 @@ const Home = () => {
             )
           })}
         </Brands>
-        <Content>
-          <Filter brands={brands} brandsTaget={brandsTaget} setBrandsTaget={setBrandsTaget}/>
-          <Products>
-            <Row>
-              <div></div>
-              <DisplayOption>
-                <FormControl sx={{ m: 1, minWidth: 200 }}>
-                  <InputLabel id="show">Show</InputLabel>
-                  <Select
-                    labelId="show"
-                    id="show"
-                    value={num}
-                    label="Show"
-                    onChange={handleChange}
-                  >
-                    <MenuItem value={10}>10 per page</MenuItem>
-                    <MenuItem value={20}>20 per page</MenuItem>
-                    <MenuItem value={30}>30 per page</MenuItem>
-                    <MenuItem value={40}>40 per page</MenuItem>
-                    <MenuItem value={50}>50 per page</MenuItem>
-                  </Select>
-                </FormControl>
-                <Icon onClick={() => changeDisplay(0)}><AppsIcon /></Icon>
-                <Icon onClick={() => changeDisplay(1)}><ReorderIcon /></Icon>
-              </DisplayOption>
-            </Row>
-            {products.map((product) => {
-              return (
-                <Product display={display} product={product} />
-              )
-            })}
-            <div style={{width: '100%', display:'flex', justifyContent:'center', margin:'20px 0'}}>
-              <Pagination count={10} color="primary" />
-            </div>
-          </Products>
-        </Content>
+          <Content>
+            <BoxFilter show={show}>
+              <Filter 
+                brands={brands} 
+                brandsTaget={brandsTaget} 
+                setBrandsTaget={setBrandsTaget}
+                setShow={setShow}
+                show={show}/>
+            </BoxFilter>
+            <Products>
+              <Row>
+                <div></div>
+                <DisplayOption>
+                  <div className="option">
+                    <FormControl sx={{ m: 1}} size='small'>
+                      <InputLabel id="show">Show</InputLabel>
+                      <Select
+                        labelId="show"
+                        id="show"
+                        value={num}
+                        label="Show"
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={10}>10 per page</MenuItem>
+                        <MenuItem value={20}>20 per page</MenuItem>
+                        <MenuItem value={30}>30 per page</MenuItem>
+                        <MenuItem value={40}>40 per page</MenuItem>
+                        <MenuItem value={50}>50 per page</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <Icon onClick={() => changeDisplay(0)}><AppsIcon /></Icon>
+                    <Icon onClick={() => changeDisplay(1)}><ReorderIcon /></Icon>
+                  </div>
+                  <div className="filter" onClick={() => setShow(1)}>
+                    <Icon><FilterAltOutlinedIcon /></Icon>
+                    <span>Filter</span>
+                  </div>
+                </DisplayOption>
+              </Row>
+              {products.map((product) => {
+                return (
+                  <Product display={display} product={product} />
+                )
+              })}
+              <div style={{width: '100%', display:'flex', justifyContent:'center', margin:'20px 0'}}>
+                <Pagination count={10} color="primary" />
+              </div>
+            </Products>
+          </Content>
       </Container>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   )
 }
 
+const BoxFilter = styled.div`
+  width: 20%;
+  @media (max-width: 768px){
+    left: ${props => props.show ? '0' : '-100%'};
+    top: 0;
+    width: 80%;
+    height: 100vh;
+    background-color: white;
+    position: fixed;
+    transition: all 0.5s ease;
+    z-index: 999;
+    box-shadow: ${props => props.show ? 'rgba(0, 0, 0, 0.4) 0px 30px 90px' : ''};
+  }
+`
 const Icon = styled.div`
   :hover {
     cursor: pointer;
   }
+  margin: 0 5px;
 `
 const DisplayOption = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 30%;
+  & .option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    @media (max-width: 768px){
+      display: none;
+    }
+  }
+  & .filter {
+    display: none;
+    @media (max-width: 768px){
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+  }
+  
 `
 
 const Row = styled.div`
@@ -355,6 +399,10 @@ const Products = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-left: 5px;
+  @media (max-width: 768px){
+    width: 100%;
+    margin-left: 0;
+  }
 `
 
 const Brand = styled.img`
@@ -367,6 +415,13 @@ const Brand = styled.img`
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
+  @media (max-width: 1080px){
+    width: 100px;
+    padding: 0px 5px;
+  }
+  @media (max-width: 768px){
+    width: 95px;
+  }
 `
 
 const Brands = styled.div`
@@ -377,7 +432,7 @@ const Brands = styled.div`
   border: 1px solid #E5E5E5;
   border-width: 2px 0 2px 0;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   flex-wrap: wrap;
 `
 
@@ -388,7 +443,10 @@ const Poster = styled.img`
 const Container = styled.div`
   width: 80%;
   margin: 0 auto;
-  /* height: 100vh;  An moi đã comment cái này */
+  @media (max-width: 1080px){
+    width: 100%;
+    margin: 0;
+  }
 `
 
 export default Home
