@@ -43,10 +43,11 @@ const Orders = (props) => {
           <Qty>1</Qty>
           <Price fw='bold'>$4,349.00</Price>
         </Item>
-        <p style={{textAlign:'right'}}>Delivery cost: $5</p>
+        <Text style={{textAlign:'right'}}>Delivery cost: $5</Text>
+        <Hr/>
         <Total>
-          <p className='time'>Date: 1/1/2020 - 02:30 PM</p>
-          <p className='total'>Total: $16,354.00</p>
+          <Text className='time'>Date: 1/1/2020 - 02:30 PM</Text>
+          <Text className='total'>Total: $16,354.00</Text>
         </Total>
       </Order>
       <Order>
@@ -72,16 +73,20 @@ const Orders = (props) => {
           <Qty>1</Qty>
           <Price fw='bold'>$4,349.00</Price>
         </Item>
-        <p style={{textAlign:'right'}}>Delivery cost: $5</p>
+        <Text style={{textAlign:'right'}}>Delivery cost: $5</Text>
+        <Hr/>
         <Total>
-          <p className='time'>Date: 1/1/2020 - 02:30 PM</p>
-          <p className='total'>Total: $16,354.00</p>
+          <Text className='time'>Date: 1/1/2020 - 02:30 PM</Text>
+          <Text className='total'>Total: $16,354.00</Text>
         </Total>
       </Order>
     </>
   )
 }
 
+const Text = styled.p`
+  margin: 0px;
+`
 const Total = styled.div`
   display: flex;
   flex-direction: row;
@@ -104,13 +109,13 @@ const Qty = styled.div`
   padding: 10px 0;
   border-radius: 5px;
 `
-const Price = styled.p`
+const Price = styled.span`
   font-weight: ${props=>props.fw?props.fw:''};
   width: 20%;
   padding: 10px 0;
   text-align: center;
 `
-const Desc = styled.p`
+const Desc = styled.span`
   width: 37%;
   margin-left: 3%;
   padding-top: 10px;
@@ -146,6 +151,7 @@ const NavOrders = styled.div`
 const Hr = styled.hr`
   border: 0;
   height: 0.2px;
+  margin: 0px;
   background-image: -webkit-linear-gradient(#d6d6d6, #d6d6d6, #d6d6d6);
 `
 

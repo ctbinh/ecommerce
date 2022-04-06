@@ -24,15 +24,15 @@ const Product = (props) => {
           </Image>
           <Rate display={props.display}>
             <Rating size='small' name="read-only" value={product.rating} readOnly/>
-            <p style={{fontSize: '13px', color: '#a6a6a6'}}>Reviews (4)</p>
+            <Text style={{fontSize: '13px', color: '#a6a6a6'}}>Reviews (4)</Text>
           </Rate>
         </div>
         <div className='detail'>
           <Name display={props.display}>{product.name}</Name>
           {props.display === 1 && <Desc>{product.desc}</Desc>}
           <Box display={props.display}>
-            <p style={{color: 'gray', marginRight:'10px'}}><s>{'$' + product.oldPrice}</s></p>
-            <p style={{fontSize: '20px'}}><b>{'$' + product.newPrice}</b></p>
+            <Text style={{color: 'gray', marginRight:'10px'}}><s>{'$' + product.oldPrice}</s></Text>
+            <Text style={{fontSize: '20px'}}><b>{'$' + product.newPrice}</b></Text>
           </Box>
           {props.display === 1 && 
             <ComboBtn>
@@ -46,13 +46,18 @@ const Product = (props) => {
   )
 }
 
+const Text = styled.span`
+  margin: 0;
+  padding: 0;
+`
+
 const ComboBtn = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 `
-const Desc = styled.p`
+const Desc = styled.span`
   width: 40%;
   font-size: 13px;
   max-height: 100px;
@@ -65,13 +70,12 @@ const Box = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-left: 10px;
   }
 `
 const Name = styled.div`
   font-size: 14px;
   font-weight: 400;
-  height: ${props=>props.display?'30px':'60px'};
+  height: ${props=>props.display?'30px':'40px'};
   overflow: hidden;
 `
 const Rate = styled.div`

@@ -135,6 +135,7 @@ const Content = styled.div`
   min-height: 400px;
 `
 const Hr = styled.hr`
+  margin: 0px;
   margin-left: 15px;
   border: 0;
   height: 0.2px;
