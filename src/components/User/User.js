@@ -167,6 +167,9 @@ const NavBox = styled.div`
   width: 20%;
   padding: 5px 15px 5px 0;
   height: fit-content;
+  @media (max-width: 768px) {
+        display: none;
+    }
 `
 const Head = styled.div`
   display: flex;
