@@ -276,7 +276,7 @@ const Home = () => {
   };
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <Container>
         <Poster src={images.poster} alt="poster" />
         <Brands>
@@ -336,7 +336,7 @@ const Home = () => {
             </Products>
           </Content>
       </Container>
-      {/* <Footer/> */}
+      <Footer/>
     </>
   )
 }
@@ -415,7 +415,7 @@ const Brand = styled.img`
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   }
-  @media (max-width: 1080px){
+  @media (max-width: 1024px){
     width: 100px;
     padding: 0px 5px;
   }
@@ -443,7 +443,7 @@ const Poster = styled.img`
 const Container = styled.div`
   width: 80%;
   margin: 0 auto;
-  @media (max-width: 1080px){
+  @media (max-width: 1024px){
     width: 100%;
     margin: 0;
   }

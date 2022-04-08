@@ -4,7 +4,7 @@ import images from '../images'
 
 const Orders = (props) => {
   return (
-    <>
+    <Container>
       <NavOrders>
         <TypeOrders className={props.target==='all'?'active':''} onClick={()=>props.changeTypeOrders('all')}>
           All
@@ -23,25 +23,31 @@ const Orders = (props) => {
       <Order>
         <Item>
           <Image>
-            <img src={images.item1} alt="item" style={{width:'100%',height:'100%'}}/>
+            <img src={images.item1} alt="item" style={{width:'auto',height:'100%'}}/>
           </Image>
-          <Desc>
-          MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty
-          </Desc>
-          <Price>$4,000.00</Price>
-          <Qty>3</Qty>
-          <Price fw='bold'>$12.000.00</Price>
+          <Detail>
+            <Name>MSI MEG Trident X 10SD-1012AU Intel</Name>
+            <Desc>
+              MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty
+            </Desc>
+            <Price>$4,000.00</Price>
+            <Qty>x3</Qty>
+            <Price fw='bold'>$12.000.00</Price>
+          </Detail>
         </Item>
         <Item>
           <Image>
-            <img src={images.lap1} alt="item" style={{width:'100%',height:'100%'}}/>
+            <img src={images.lap1} alt="item" style={{width:'auto',height:'100%'}}/>
           </Image>
-          <Desc>
-          MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty
-          </Desc>
-          <Price>$4,349.00</Price>
-          <Qty>1</Qty>
-          <Price fw='bold'>$4,349.00</Price>
+          <Detail>
+            <Name>MSI MEG Trident X 10SD-1012AU Intel</Name>
+            <Desc>
+              MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty
+            </Desc>
+            <Price>$4,349.00</Price>
+            <Qty>x1</Qty>
+            <Price fw='bold'>$4,349.00</Price>
+          </Detail>
         </Item>
         <Text style={{textAlign:'right'}}>Delivery cost: $5</Text>
         <Hr/>
@@ -51,27 +57,33 @@ const Orders = (props) => {
         </Total>
       </Order>
       <Order>
-        <Item>
+      <Item>
           <Image>
-            <img src={images.item1} alt="item" style={{width:'100%',height:'100%'}}/>
+            <img src={images.item1} alt="item" style={{width:'auto',height:'100%'}}/>
           </Image>
-          <Desc>
-          MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty
-          </Desc>
-          <Price>$4,000.00</Price>
-          <Qty>3</Qty>
-          <Price fw='bold'>$12.000.00</Price>
+          <Detail>
+            <Name>MSI MEG Trident X 10SD-1012AU Intel</Name>
+            <Desc>
+              MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty
+            </Desc>
+            <Price>$4,000.00</Price>
+            <Qty>x3</Qty>
+            <Price fw='bold'>$12.000.00</Price>
+          </Detail>
         </Item>
         <Item>
           <Image>
-            <img src={images.lap1} alt="item" style={{width:'100%',height:'100%'}}/>
+            <img src={images.lap1} alt="item" style={{width:'auto',height:'100%'}}/>
           </Image>
-          <Desc>
-          MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty
-          </Desc>
-          <Price>$4,349.00</Price>
-          <Qty>1</Qty>
-          <Price fw='bold'>$4,349.00</Price>
+          <Detail>
+            <Name>MSI MEG Trident X 10SD-1012AU Intel</Name>
+            <Desc>
+              MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty
+            </Desc>
+            <Price>$4,349.00</Price>
+            <Qty>x1</Qty>
+            <Price fw='bold'>$4,349.00</Price>
+          </Detail>
         </Item>
         <Text style={{textAlign:'right'}}>Delivery cost: $5</Text>
         <Hr/>
@@ -80,12 +92,29 @@ const Orders = (props) => {
           <Text className='total'>Total: $16,354.00</Text>
         </Total>
       </Order>
-    </>
+    </Container>
   )
 }
 
+
 const Text = styled.p`
   margin: 0px;
+`
+const Name = styled.div`
+  width: 100%;
+  font-weight: bold;
+  @media (max-width: 480px){
+    font-size: 16px;
+    font-weight: 400;
+  }
+`
+const Detail = styled.div`
+  width: 85%;
+  box-sizing: border-box;
+  padding-left: 10px;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
 `
 const Total = styled.div`
   display: flex;
@@ -98,39 +127,65 @@ const Total = styled.div`
   .total {
     font-weight: bold;
     font-size: 20px;
+    @media (max-width: 480px){
+      font-size: 18px;
+    }
   }
 `
 const Qty = styled.div`
-  width: 5%;
+  width: 50px;
   text-align: center;
   background-color: #F5F7FF;
   height: fit-content;
   margin: 0 auto;
   padding: 10px 0;
   border-radius: 5px;
+  color: gray;
 `
 const Price = styled.span`
   font-weight: ${props=>props.fw?props.fw:''};
-  width: 20%;
-  padding: 10px 0;
-  text-align: center;
+  flex: 1;
+  padding-top: 10px;
+  text-align: ${props=>props.fw?'right':'center'};
+  color: gray;
+  @media (max-width: 480px){
+    text-align: ${props=>props.fw?'right':'left'};
+  }
 `
 const Desc = styled.span`
-  width: 37%;
-  margin-left: 3%;
+  width: 35%;
+  height: 80%;
+  overflow: hidden;
   padding-top: 10px;
+  @media (max-width: 480px){
+    display: none;
+  }
 `
 const Image = styled.div`
-  width: 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 15%;
 `
 const Item = styled.div`
   display: flex;
   flex-direction: row;
+  height: 120px;
+  width: 100%;
   margin-bottom: 5px;
+  
+  @media (max-width: 768px){
+    height: 100px;
+  }
+  @media (max-width: 480px){
+    height: 80px;
+  }
 `
 const Order = styled.div`
   margin-top: 10px;
   padding: 10px;
+  width: 100%;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `
 const TypeOrders = styled.div`
@@ -152,7 +207,11 @@ const Hr = styled.hr`
   border: 0;
   height: 0.2px;
   margin: 0px;
-  background-image: -webkit-linear-gradient(#d6d6d6, #d6d6d6, #d6d6d6);
+  background-image: -webkit-linear-gradient(gray, gray, gray);
+`
+const Container = styled.div`
+  padding: 0;
+  width: 100%;
 `
 
 export default Orders

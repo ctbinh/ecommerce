@@ -133,6 +133,14 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 400px;
+  @media (max-width: 1024px){
+    width: 79%;
+    margin-left: 1%;
+  }
+  @media (max-width: 768px){
+    width: 100%;
+    margin-left: 0;
+  }
 `
 const Hr = styled.hr`
   margin: 0px;
@@ -168,6 +176,9 @@ const NavBox = styled.div`
   width: 20%;
   padding: 5px 15px 5px 0;
   height: fit-content;
+  @media (max-width: 768px){
+    display: none;
+  }
 `
 const Head = styled.div`
   display: flex;
@@ -179,6 +190,9 @@ const Container = styled.div`
   flex-direction: column;
   width: 80%;
   margin: 0 auto;
+  @media (max-width: 1024px){
+    width: 98%;
+  }
 `
 
 export default User
