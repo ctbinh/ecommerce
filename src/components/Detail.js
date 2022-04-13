@@ -362,7 +362,7 @@ const Detail = () => {
             <Link underline="hover" color="inherit" href="/">
               Laptop
             </Link>
-            <Typography color="text.primary">My Account</Typography>
+            <Typography color="text.primary">MSI</Typography>
           </Breadcrumbs>
 
           <Name>Laptop LG Gram 2021 14ZD90P-G.AX51A5 </Name>
@@ -515,7 +515,7 @@ const Detail = () => {
         </p>
         <img
           alt="laptop"
-          style={{ margin: "20px auto", width: '80vw' }}
+          style={{ margin: "20px auto", width: '100%' }}
           src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg"
         ></img>
 

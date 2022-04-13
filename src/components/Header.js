@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { ShoppingCart, Person } from "@mui/icons-material";
-import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown, Dropdown } from 'react-bootstrap';
 
 const Header = () => {
     return <>
 
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{ backgroundColor: 'black' }}>
             <Container style={{}}>
                 <Navbar.Brand href="#home" className="d-flex flex-row align-items-center">
                     <img
@@ -55,8 +55,23 @@ const Header = () => {
                         <CartCounter>20</CartCounter>
                     </div>
 
-                    <UserIcon>
-                    </UserIcon>
+                    {/* <UserIcon>
+                    </UserIcon> */}
+                    <Dropdown>
+                        <Dropdown.Toggle style={{ backgroundColor: 'transparent', border: 'none' }}>
+                            <UserIcon>
+                            </UserIcon>
+                        </Dropdown.Toggle>
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">Sign In</Dropdown.Item>
+                            <Dropdown.Item href="#/action-1">Sign Up</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">My Account</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">My Wishlist</Dropdown.Item>
+                            <Dropdown.Divider />
+                            <Dropdown.Item href="#/action-2">Sign out</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </NavIcon>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             </Container>
@@ -85,16 +100,17 @@ const SearchBar = styled.div`
   border-radius: 15px;
   margin-right: 2vw;
   padding: 2px 10px 2px 2px;
-  @media (max-width: 768px){
+  max-width: 250px;
+  /* @media (max-width: 768px){
     display: none;
-  }
+  } */
 `;
 const SearchInput = styled.input`
   display: inline;
   border: none;
   outline: none;
   margin-left: 15px;
-  width: 20vw;
+  width: 80%;
 `;
 const SearchButton = styled.button`
   display: inline;
@@ -113,6 +129,9 @@ const NavIcon = styled.div`
     align-items: center;
     margin: 0 20px;
     margin-left: auto;
+    .dropdown-toggle::after {
+  display: none !important; 
+}
   @media (max-width: 768px){
     /* position: relative; */
   }
