@@ -59,6 +59,7 @@ const H1 = styled.h1`
   line-height: 30px;
   text-align: ${(props) => props.textAlign || "left"};
   text-transform: uppercase;
+
   @media (max-width: 768px) {
     text-align: center;
   }
