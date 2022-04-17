@@ -58,20 +58,35 @@ const Footer = () => {
 const Row = styled.div`
   background-color: black;
   width: 100%;
-  height: 320px;
+  min-height: 320px;
   display: flex;
   flex-direction: row;
   /* align-items: center; */
   justify-content: space-evenly;
   padding-top: 50px;
   margin-top: 200px;
+  @media (max-width: 480px){
+    /* display: block; */
+    /* margin: auto; */
+    flex-direction: column;
+  }
 `
 const Logo = styled.img`
-  height: 60%;
+  height: 20vw;
+  @media (max-width: 480px){
+    height: 80vw;
+    margin: auto;
+  }
   `
 const Infor = styled.div`
   width: 300px;
   color: white;
+  @media (max-width: 480px){
+    width: 80vw;
+    margin: auto;
+    margin-top: 20px;
+    justify-content: center;
+  }
 `
 const InforTitle = styled.div`
   color: white;
@@ -79,6 +94,10 @@ const InforTitle = styled.div`
   font-size: 18px;
   line-height: 23px;
   margin-bottom: 20px;
+  @media (max-width: 480px){
+    text-align: center;
+    margin-bottom: 10px;
+  }
 `
 const InforItem = styled.p`
   color: white;
@@ -86,7 +105,9 @@ const InforItem = styled.p`
   font-size: 14px;
   line-height: 30px;
   margin: 5px 0 5px 10px;
-  /* display: inline; */
+  @media (max-width: 480px){
+    text-align: center;
+  }
 `
 const InforIcon = styled.div`
   display: flex;
@@ -113,5 +134,8 @@ const Copyright = styled.div`
   right: 12%;
   margin: auto 0px;
   line-height: 60px;
+  @media (max-width: 768px){
+    display: none;
+  }
 `
 export default Footer

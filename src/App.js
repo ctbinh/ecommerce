@@ -7,6 +7,7 @@ import Home from "./components/Home/Home";
 import HomeAdmin from "./Admin/components/Home";
 import Login from "./Admin/components/Login";
 import Header from "./components/Header";
+import Footer from "./components/Footer"
 import User from "./components/User/User";
 import Product from "./Admin/components/products/index";
 import AdminDetail from "./Admin/components/products/Detail";
@@ -31,6 +32,7 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="header" element={<Header />} />
+          <Route path="footer" element={<Footer />} />
           <Route path="user" element={<User />} />
           <Route path="detail" element={<Detail />} />
         </Routes>
