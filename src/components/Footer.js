@@ -64,7 +64,7 @@ const Row = styled.div`
   /* align-items: center; */
   justify-content: space-evenly;
   padding-top: 50px;
-  margin-top: 200px;
+  margin-top: 50px;
   @media (max-width: 480px){
     /* display: block; */
     /* margin: auto; */

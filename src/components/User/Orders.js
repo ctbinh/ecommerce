@@ -99,10 +99,12 @@ const Orders = (props) => {
 
 const Text = styled.p`
   margin: 0px;
+  font-size: 14px;
 `
 const Name = styled.div`
   width: 100%;
   font-weight: bold;
+  font-size: 14px;
   @media (max-width: 480px){
     font-size: 16px;
     font-weight: 400;
@@ -126,9 +128,9 @@ const Total = styled.div`
   }
   .total {
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     @media (max-width: 480px){
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 `
@@ -141,11 +143,13 @@ const Qty = styled.div`
   padding: 10px 0;
   border-radius: 5px;
   color: gray;
+  font-size: 13px;
 `
 const Price = styled.span`
   font-weight: ${props=>props.fw?props.fw:''};
   flex: 1;
   padding-top: 10px;
+  font-size: 14px;
   text-align: ${props=>props.fw?'right':'center'};
   color: gray;
   @media (max-width: 480px){
@@ -157,6 +161,7 @@ const Desc = styled.span`
   height: 80%;
   overflow: hidden;
   padding-top: 10px;
+  font-size: 13px;
   @media (max-width: 480px){
     display: none;
   }

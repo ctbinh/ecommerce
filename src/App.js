@@ -5,7 +5,7 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Home from "./components/Home/Home";
 import HomeAdmin from "./Admin/components/Home";
-import Login from "./Admin/components/Login";
+import AdminLogin from "./Admin/components/Login";
 import Header from "./components/Header";
 import Footer from "./components/Footer"
 import User from "./components/User/User";
@@ -16,13 +16,14 @@ import Detail from "./components/Detail";
 import AddProduct from "./Admin/components/products/AddProduct";
 import Orders from "./Admin/components/orders/Orders";
 import Invoice from "./Admin/components/orders/Invoice";
+import Login from "./components/Login/Login";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="admin/login" element={<Login />} />
+          <Route path="admin/login" element={<AdminLogin />} />
           <Route path="admin" element={<Admin />}>
             <Route path="product" element={<Product />} />
             <Route path="customer" element={<Customer />} />
@@ -33,6 +34,7 @@ function App() {
             <Route path="" element={<HomeAdmin />} />
           </Route>
           <Route path="/" element={<Home />} />
+          <Route path="login" element={<Login />} />
           <Route path="cart" element={<Cart />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="header" element={<Header />} />

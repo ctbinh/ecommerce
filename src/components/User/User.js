@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Breadcrumbs, Link, Typography } from '@mui/material'
 import Orders from './Orders'
 import Wishlist from './Wishlist'
-
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Information from './Information'
 import Password from './Password'
 
@@ -72,9 +72,10 @@ const User = () => {
       ports: 'N/A'
     }
   ]
-  const [targetNavItem, setTargetNavItem] = useState('my-account')
-  const [targetNavChildItem, setTargetNavChildItem] = useState('infor')
+  const [targetNavItem, setTargetNavItem] = useState('my-orders')
+  const [targetNavChildItem, setTargetNavChildItem] = useState('')
   const [targetTypeOrders, setTargetTypeOrders] = useState('all')
+  const [isEnabled, setIsEnabled] = useState(false)
   const changeNavItem = (item) => {
     if(item !== 'my-account') {
       setTargetNavChildItem('')
@@ -83,10 +84,12 @@ const User = () => {
       setTargetNavChildItem('infor')
     }
     setTargetNavItem(item)
+    setIsEnabled(false)
   }
   const changeNavChildItem = (item) => {
     setTargetNavChildItem(item)
     setTargetNavItem('my-account')
+    setIsEnabled(false)
   }
   const changeTypeOrders = (type) => {
     setTargetTypeOrders(type)
@@ -95,17 +98,21 @@ const User = () => {
     <>
     <Header/>
     <Container>
-      <Head>
-        <Breadcrumbs separator="›" maxItems={2} aria-label="breadcrumb">
+      <Head onClick={()=>setIsEnabled(!isEnabled)}>
+        <Breadcrumbs className='breadcrumbs' separator="›" maxItems={2} aria-label="breadcrumb">
           <Link underline="hover" color="inherit" href="/">
             Home
           </Link>
           <Typography color="text.primary">My Account</Typography>
         </Breadcrumbs>
-        <h2 style={{marginTop: '10px'}}>My Account</h2>
+        <h2 style={{marginTop: '10px'}}>
+          {targetNavItem==="my-account" ? "My Account" : 
+            (targetNavItem==="my-orders" ? "My Orders" : "My Wishlist")}
+        </h2>
+        <ArrowDropDownIcon className='dropdown-icon'/>
       </Head>
       <Row>
-        <NavBox>
+        <NavBox display={isEnabled}>
           <NavItem className={targetNavItem==='my-account'?'active':''} onClick={() => changeNavItem('my-account')}>My Account</NavItem>
           <NavChildItem className={targetNavChildItem==='infor'?'active':''} onClick={() => changeNavChildItem('infor')}>Account information</NavChildItem>
           <NavChildItem className={targetNavChildItem==='change-pass'?'active':''} onClick={() => changeNavChildItem('change-pass')}>Change password</NavChildItem>
@@ -153,6 +160,9 @@ const Row = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  @media (max-width: 768px){
+    flex-direction: column;
+  }
 `
 const NavChildItem = styled.div`
   padding: 10px 0;
@@ -177,13 +187,31 @@ const NavBox = styled.div`
   padding: 5px 15px 5px 0;
   height: fit-content;
   @media (max-width: 768px){
-    display: none;
+    display: ${props=> props.display ? '' : 'none'};
+    width: 100%;
   }
 `
 const Head = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 0;
+  & .breadcrumbs {
+    @media (max-width: 768px){
+      display: none;
+    }
+  }
+  & .dropdown-icon {
+    display: none;
+    @media (max-width: 768px){
+      display: block;
+    }
+  }
+  @media (max-width: 768px){
+    padding: 5px 0;
+    border-bottom: 1px solid #e1e1e1;
+    flex-direction: row;
+    align-items: center;
+  }
 `
 const Container = styled.div`
   display: flex;
