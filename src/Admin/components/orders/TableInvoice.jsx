@@ -6,6 +6,7 @@ const Table = styled.table`
   white-space: nowrap;
   background-color: white;
   overflow: hidden;
+  font-family: "Poppins", sans-serif;
 `;
 const Thead = styled.thead`
   text-align: left;
@@ -14,6 +15,7 @@ const Thead = styled.thead`
 `;
 const TrHead = styled.tr``;
 const TdHead = styled.td`
+  font-family: "Poppins", sans-serif;
   color: #707275;
   background-color: #f4f5f7;
   display: table-cell;
