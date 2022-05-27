@@ -2,7 +2,7 @@ import { FormControl, InputLabel, MenuItem, Pagination, Select } from '@mui/mate
 import AppsIcon from '@mui/icons-material/Apps';
 import ReorderIcon from '@mui/icons-material/Reorder';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 // import Footer from '../Footer'
 import Header from '../Header'
@@ -10,260 +10,267 @@ import Footer from '../Footer'
 import images from '../images'
 import Filter from './Filter'
 import Product from './Product'
+// import http from '../../http-common';
+import axios from 'axios';
 
 const Home = () => {
   const brands = [
     {
       id: 0,
-      img: images.adata
+      img: images.acer
     },
     {
       id: 1,
+      img: images.asus
+    },
+    {
+      id: 2,
       img: images.gigabyte
     },
     {
-      id: 2,
+      id: 3,
       img: images.hp
     },
     {
-      id: 3,
-      img: images.msi
-    },
-    {
       id: 4,
-      img: images.razer
+      img: images.lg
     },
     {
       id: 5,
-      img: images.roccat
+      img: images.msi
     },
     {
       id: 6,
-      img: images.thermaltake
+      img: images.razer
     }
   ]
-  const products = [
-    {
-      id: 0,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 1,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 2,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 3,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 1,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 2,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 3,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 1,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 2,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 3,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 1,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 2,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 3,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 1,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 2,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 3,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 1,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 2,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 3,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 1,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 2,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 3,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    }
-  ]
+  // const products = [
+  //   {
+  //     id: 0,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 1,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 2,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 3,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 1,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 2,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 3,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 1,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 2,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 3,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 1,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   },
+  //   {
+  //     id: 2,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   },
+  //   {
+  //     id: 3,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   },
+  //   {
+  //     id: 1,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   },
+  //   {
+  //     id: 2,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   },
+  //   {
+  //     id: 3,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   },
+  //   {
+  //     id: 1,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   },
+  //   {
+  //     id: 2,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   },
+  //   {
+  //     id: 3,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   },
+  //   {
+  //     id: 1,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   },
+  //   {
+  //     id: 2,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   },
+  //   {
+  //     id: 3,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00'
+  //   }
+  // ]
   const [show, setShow] = useState(0)
   const [num, setNum] = React.useState(30);
   const [display, setDisplay] = useState(0);
   const [brandsTaget, setBrandsTaget] = useState([]);
+  const [currPage, setcurrPage] = useState(1)
+  const [products, setproducts] = useState([])
+  const changePage = (event, value) => {
+    setcurrPage(value);
+  };
   const changeDisplay = (value) => {
     setDisplay(value);
   }
@@ -274,6 +281,15 @@ const Home = () => {
     setBrandsTaget([brandId]);
     alert('Đang lấy dữ liệu để hiển thị sản phẩm');
   };
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const res = await axios.get('http://localhost/ecommerce/backend/api/product/read.php');
+      console.log(res.data.data)
+      setproducts(res.data.data)
+    }
+    fetchProducts()
+  }, [])
+  
   return (
     <>
       <Header />
@@ -331,7 +347,7 @@ const Home = () => {
                 )
               })}
               <div style={{width: '100%', display:'flex', justifyContent:'center', margin:'20px 0'}}>
-                <Pagination count={10} color="primary" />
+                <Pagination count={10} defaultPage={currPage} color="primary" onChange={changePage}/>
               </div>
             </Products>
           </Content>
@@ -408,6 +424,7 @@ const Products = styled.div`
 const Brand = styled.img`
   background-color: white;
   width: 120px;
+  height: 60px;
   padding: 0px 10px;
   margin: 10px 5px 0px 5px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;

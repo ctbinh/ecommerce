@@ -135,6 +135,7 @@ const Ram = styled.div`
 const Brand = styled.img`
   width: 48%;
   margin: 1%;
+  height: 60px;
   background-color: white;
   padding: 5px 10px;
   &.active {

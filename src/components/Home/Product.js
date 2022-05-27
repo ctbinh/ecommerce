@@ -2,7 +2,6 @@ import { Rating } from '@mui/material';
 import React from 'react'
 import styled from 'styled-components'
 import Button from '../Button';
-import images from '../images';
 import { grey } from '@mui/material/colors';
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 
@@ -20,19 +19,19 @@ const Product = (props) => {
       <Box display={props.display}>
         <div>
           <Image display={props.display}>
-            <img src={images.lap1} style={{ maxWidth: '100%', maxHeight: '100%' }} alt="laptop" />
+            <img src={product.img_cover} style={{ maxWidth: '100%', maxHeight: '100%' }} alt="laptop" />
           </Image>
           <Rate display={props.display}>
             <Rating size='small' name="read-only" value={product.rating} readOnly/>
-            <Text style={{fontSize: '13px', color: '#a6a6a6'}}>Reviews (4)</Text>
+            <Text style={{fontSize: '13px', color: '#a6a6a6'}}>Reviews ({product.num_reviewer})</Text>
           </Rate>
         </div>
         <div className='detail'>
           <Name display={props.display}>{product.name}</Name>
-          {props.display === 1 && <Desc>{product.desc}</Desc>}
+          {props.display === 1 && <Desc>{product.description}</Desc>}
           <Box display={props.display}>
-            <Text style={{color: 'gray', marginRight:'10px'}}><s>{'$' + product.oldPrice}</s></Text>
-            <Text style={{fontSize: '20px'}}><b>{'$' + product.newPrice}</b></Text>
+            <Text style={{color: 'gray', marginRight:'10px'}}><s>{'$' + product.old_price}</s></Text>
+            <Text style={{fontSize: '20px'}}><b>{'$' + product.price}</b></Text>
           </Box>
           {props.display === 1 && 
             <ComboBtn>
