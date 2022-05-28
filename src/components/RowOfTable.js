@@ -7,7 +7,7 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import React, { useState } from 'react';
 
 const RowOfTable = (props) => {
-    const [count, setCount] = useState(props.product.quantity);
+    const [count, setCount] = useState(props.product.amount);
 
     const incrementCount = () => setCount(count + 1);
     let decrementCount = () => setCount(count - 1);
@@ -25,14 +25,15 @@ const RowOfTable = (props) => {
             <Row>
                 <Col sm={2.5}>
                     <ContainerImg> 
-                        <ImgProduct src={props.product.img} alt="Nothing"/>
+                        <ImgProduct src={props.product.img_cover} alt="Nothing"/>
                     </ContainerImg>
                 </Col>
-                <ColResponesive sm={9.5}><Describe>{props.product.des}</Describe></ColResponesive>
+                <ColResponesive sm={9.5}><Describe>{props.product.name}</Describe></ColResponesive>
             </Row>
             </Col>
             <Col md={2} sm={3} xs={3}>
-                {props.product.price.toLocaleString()}
+                {/* {props.product.price.toLocaleString()} */}
+                {props.product.price}
             </Col>
             <Col md={1.2} sm={2.2} xs={2.2}>
                 <div style={ArrowIcon}>
@@ -48,7 +49,8 @@ const RowOfTable = (props) => {
                 </div>
             </Col>
             <CloseResponesive md={1.8} sm={2.8} xs={2.8}>
-                {props.product.subtotal.toLocaleString()}
+                {/* {props.product.subtotal.toLocaleString()} */}
+                {props.product.price* props.product.amount}
                 <Close>
                     <AiOutlineCloseCircle size={18} color="#888888" onClick={Delete}/>
                 </Close>

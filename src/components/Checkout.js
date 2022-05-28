@@ -6,8 +6,7 @@ import Scrollbars from "react-scrollbars-custom";
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { BsPhoneVibrate } from 'react-icons/bs';
 import { BsPersonCircle } from 'react-icons/bs';
-import {Link} from "react-router-dom";
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {useState} from 'react'
 
 const Checkout = () => {
@@ -15,6 +14,7 @@ const Checkout = () => {
     const { name, address, phone, lstCart } = location.state
     console.log("asadaf", lstCart)
     const [cod, setCod] = useState("bank");
+    const navigate = useNavigate(); 
     return (
         <div>
             <Header/>
@@ -95,12 +95,14 @@ const Checkout = () => {
                                     </Row>
                                     <Row>
                                         <Col md={7}>
-                                           <ButtonPay>Pay {(12000000).toLocaleString()}</ButtonPay> 
+                                           <ButtonPay>
+                                               Pay $
+                                               {/* {lstCart.reduce((a, b) => {return a.amount *Number(a.price) + b.amount *Number(b.price)}, 0)} */}
+                                               {lstCart.reduce((sum, product) => {return sum + product.amount* product.price }, 0)}
+                                            </ButtonPay> 
                                         </Col>
                                         <Col md= {5}>
-                                        <Link to="/cart" style={LinkStyle}>
-                                        <ButtonBack>Back</ButtonBack>
-                                        </Link>
+                                        <ButtonBack onClick={ () => navigate(-1)}>Back</ButtonBack>
                                         </Col>
                                     </Row>
                                     
@@ -124,7 +126,7 @@ const Checkout = () => {
                                     <Row>
                                         <Col lg={3.5}>
                                             <ContainerImg> 
-                                                <ImgProduct src={product.img} alt="Nothing"/>
+                                                <ImgProduct src={product.img_cover} alt="Nothing"/>
                                             </ContainerImg>
                                         </Col>
                                         <Col lg={8.5}>
@@ -132,8 +134,8 @@ const Checkout = () => {
                                                 {product.name}
                                             </Describe>
                                             <Row>
-                                                <Col sm={4}><QuanPrice>Qty: {product.quantity}</QuanPrice></Col>
-                                                <Col sm={8}><QuanPrice>Price: {product.price.toLocaleString()}</QuanPrice></Col>
+                                                <Col sm={4}><QuanPrice>Qty: {product.amount}</QuanPrice></Col>
+                                                <Col sm={8}><QuanPrice>Price: ${product.price}</QuanPrice></Col>
                                             </Row>
                                         </Col>
                                     </Row>
@@ -267,9 +269,6 @@ const ValueShip = styled.span`
     font-weight: 600;
 
 `
-const LinkStyle = {
-    textDecoration: "none",
-}
 const ContainerSummary = styled.div`
     background-color: #F5F7FF;
     padding-top: 20px;
