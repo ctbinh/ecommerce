@@ -2,7 +2,7 @@ import styled from "styled-components";
 // // import { Container, Row, Col } from "react-grid-system";
 import Header from "./Header";
 import Footer from "./Footer";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Rating } from "@mui/material";
 import { Button } from "react-bootstrap";
 
@@ -15,8 +15,11 @@ import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import axios from 'axios';
+import { fontWeight } from "@mui/system";
 
 function TableRow(props) {
+  // if (product[props.field] != '')
   return (
     <tr>
       <td style={{ color: "black", fontWeight: "500" }}>{props.field}</td>
@@ -26,17 +29,19 @@ function TableRow(props) {
 }
 function CarouselImg(props) {
   return (
-    <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
+    <div className="d-flex align-items-center" style={{ height: "566px", width: "735px" }}>
       <img
-        className="d-block w-100"
+        // className="d-block w-100"
         src={props.src}
         alt="slide"
         style={{
           display: "block",
-          maxWidth: "735px",
-          maxHeight: "50vw",
+          maxWidth: "100%",
+          maxHeight: "100%",
+          margin: "auto",
+          // maxHeight: "566px",
           width: "auto",
-          height: "auto",
+          // height: "auto",
         }}
       />
     </div>
@@ -44,7 +49,60 @@ function CarouselImg(props) {
   // </Carousel.Item>;
 }
 
+function Status(props) {
+  if (props.amount > 0) {
+    return (
+      <div style={{ color: "#78a962", fontSize: "18px", marginRight: "30px", fontWeight: '700' }}>
+        <i className="fa fa-check-circle" aria-hidden="true"></i>  in stock
+      </div>
+    );
+  }
+  else {
+    return (
+      <div style={{ color: "#f00", fontSize: "18px", marginRight: "30px", fontWeight: '700' }}>
+        <i className="fa fa-ban" aria-hidden="true"></i>  out of stock
+      </div>
+    );
+  }
+}
+
 const Detail = () => {
+  let sampleCarousel = [
+    "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
+    // "https://mayxaugiacao.com/wp-content/uploads/2022/02/top-laptop-dell-tot-nhat-2022.jpg",
+    // "https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-1_10ebeafae1d64bc5a00168a46e9db5b6_master.png",
+    // "https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5-4_2e805f4b5f6b4cd4be72510dbc729944_master.png",
+    "https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg"
+  ]
+  const [product, setProduct] = useState({})
+  const [comment, setComment] = useState([])
+  const [similarProduct, setSimilarProduct] = useState([])
+  const spec_field = ['name', 'product_code', 'brand', 'cpu', 'ram', 'gpu', 'os', 'screen', 'size', 'battery']
+  const displayField = {
+    'name': 'Name', 'product_code': 'Product Code', 'brand': 'Brand', 'cpu': 'CPU', 'ram': 'RAM', 'gpu': 'GPU', 'os': 'Operating System', 'screen': 'Screen Size', 'size': 'Assembled Product Dimensions (L x W x H)', 'battery': 'Battery'
+  }
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get('http://localhost/ecommerce/backend/api/product/read_single.php?product_id=2');
+      const res_img = await axios.get('http://localhost/ecommerce/backend/api/product_image/read_single.php?product_id=2');
+      let _product = res.data;
+      // _product["listImg"] = sampleCarousel;
+      _product["listImg"] = res_img.data;
+      console.log("product", _product)
+      setProduct(_product)
+
+      const res_comment = await axios.get('http://localhost/ecommerce/backend/api/comment/read_single.php?product_id=2');
+      console.log("comment: ", res_comment.data)
+      setComment(res_comment.data)
+
+      const res_similarProduct = await axios.get('http://localhost/ecommerce/backend/api/product/read.php');
+      console.log("similarProduct: ", res_similarProduct.data.data)
+      setSimilarProduct(res_similarProduct.data.data)
+    }
+    getData()
+  }, [])
+
+  // tab is about product or specs
   const [tab, setTab] = useState(0);
   const options = {
     margin: 30,
@@ -75,268 +133,18 @@ const Detail = () => {
       }
     },
   };
-  const reviews = [
-    {
-      username: "Janifer Lowrence",
-      comment:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ",
-      rate: 4,
-      datetime: "30/09/2019",
-    },
-    {
-      username: "Hoang kui",
-      comment: "như bu*i",
-      rate: 1,
-      datetime: "23/03/2022",
-    },
-  ];
-  const similarProduct = [
-    {
-      id: 0,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 5,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 1,
-      img: "https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-1_10ebeafae1d64bc5a00168a46e9db5b6_master.png",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 2,
-      img: "https://mayxaugiacao.com/wp-content/uploads/2022/02/top-laptop-dell-tot-nhat-2022.jpg",
-      rating: 1,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 3,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 1,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 2,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 3,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 1,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 2,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 3,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 1,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 2,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 3,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 1,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 2,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 3,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 1,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 2,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 3,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 1,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 2,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    },
-    {
-      id: 3,
-      img: "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00'
-    }
-  ]
+
   const [count, setCount] = useState(1);
 
   const incrementCount = () => setCount(count + 1);
-  let decrementCount = () => setCount(count - 1);
+  let decrementCount = () => {
+    if (count > 1)
+      setCount(count - 1);
+  }
   return (
     <div>
       <Header />
+
       <TabNav>
         <TabItem onClick={() => setTab(0)} bottomBar={tab === 0}>
           About Product
@@ -345,16 +153,9 @@ const Detail = () => {
           Specs
         </TabItem>
       </TabNav>
+
       <Content>
         <Tab>
-          {/* <Breadcrumb style={{margin: '10px 0 0px 0'}}>
-            <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="https://getbootstrap.com/docs/4.0/components/breadcrumb/">
-              Laptop
-            </Breadcrumb.Item>
-            <Breadcrumb.Item active>MSI</Breadcrumb.Item>
-          </Breadcrumb> */}
-
           <Breadcrumbs separator="›" maxItems={3} aria-label="breadcrumb" style={{ margin: '10px 0 0px 0' }}>
             <Link underline="hover" color="inherit" href="/">
               Home
@@ -365,7 +166,7 @@ const Detail = () => {
             <Typography color="text.primary">MSI</Typography>
           </Breadcrumbs>
 
-          <Name>Laptop LG Gram 2021 14ZD90P-G.AX51A5 </Name>
+          <Name>{product.name}</Name>
 
           <Rate>
             <div
@@ -375,45 +176,48 @@ const Detail = () => {
                 alignItems: "center",
               }}
             >
-              <Rating size="small" name="read-only" value={4} readOnly />
+              <Rating size="small" name="read-only" value={parseInt(product.rating)} readOnly />
               <p
                 style={{ fontSize: "13px", color: "#a6a6a6", margin: "0 2px" }}
               >
-                Reviews (4)
+                Reviews ({product.num_reviewer})
               </p>
             </div>
-            <Status>
-              <i class="fa fa-check-circle" aria-hidden="true"></i> in stock
+            <Status amount={product.amount}>
+              {/* {() => {
+                if (product.amount)
+                  return (
+                    <i className="fa fa-check-circle" aria-hidden="true">in stock {product.amount}</i>
+                  );
+              }} */}
+
             </Status>
           </Rate>
 
           <TabContent display={tab === 0} style={{ position: "relative" }}>
             <div>
               <Field>Product code:</Field>
-              <Value>14ZD90P-G.AX51A5</Value>
+              <Value>{product.product_code}</Value>
             </div>
             <div>
               <Field>Brand:</Field>
-              <Value>LG</Value>
+              <Value>{product.brand}</Value>
             </div>
 
             <Description>
-              The metal chassis is built well and houses a comfortable keyboard
-              and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio,
-              and an SD card reader. Wi-Fi 6 is included, but there's no
-              Thunderbolt due to the AMD platform. Otherwise, this is a
-              beautiful laptop that's available at a great price.
+              {product.description}
             </Description>
 
             <div style={{ height: '200px' }}></div>
 
+            {/* price and  */}
             <div style={{ position: "absolute", bottom: "0px" }}>
               <Price>
                 <p className="oldPrice">
-                  <s>{"$" + 499}</s>
+                  <s>{"$" + product.old_price}</s>
                 </p>
                 <p className="price">
-                  <b>{"$" + 399}</b>
+                  <b>{"$" + product.price}</b>
                 </p>
               </Price>
 
@@ -429,7 +233,7 @@ const Detail = () => {
                   </div>
                 </Input>
 
-                <Button style={{ borderRadius: "20px", padding: "6px 20px" }}>
+                <Button style={{ borderRadius: "20px", padding: "6px 20px", display: 'disabled' }}>
                   Add to cart
                 </Button>
               </div>
@@ -437,48 +241,16 @@ const Detail = () => {
           </TabContent>
 
           <TabContent display={tab === 1}>
-            <div style={{ width: "90%", maxHeight: "100%", margin: "0 auto" }}>
-              <table class="table table-striped table-hover">
-                {/* <thead>
-                  <tr>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                  </tr>
-                </thead> */}
-                <tbody>
-                  <TableRow
-                    field="CPU"
-                    value="Intel Core i5-1135G7 2.4GHz up to 4.2GHz 8MB"
-                  ></TableRow>
-                  <TableRow
-                    field="RAM"
-                    value="8GB (4GBx2) LPDDR4X 4266MHz (Onboard)"
-                  ></TableRow>
-                  <TableRow
-                    field="GPU"
-                    value="Intel Iris Xe Graphics"
-                  ></TableRow>
-                  <TableRow field="OS" value="FreeDos"></TableRow>
-                  <TableRow
-                    field="Display"
-                    value="14 WUXGA (1920x1200), 16:10, IPS, DCI-P3 99%"
-                  ></TableRow>
-                  <TableRow
-                    field="Size"
-                    value="313.4 x 215.2 x 16.8 mm"
-                  ></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
-                  <TableRow field="CPU" value="N/A"></TableRow>
+            <div style={{ width: "90%", margin: "0 auto" }}>
+              <table className="table table-striped table-hover">
+                <tbody style={{ overflow: "scroll" }}>
+
+                  {spec_field.map((field) => {
+                    return (
+                      <TableRow field={displayField[field]} value={product[field]}></TableRow>
+                    );
+                  })}
+
                 </tbody>
               </table>
             </div>
@@ -487,15 +259,13 @@ const Detail = () => {
 
         <ImgTab>
           <Carousel variant="dark" style={{ height: '100%' }} className="d-flex align-items-center">
-            <Carousel.Item>
-              <CarouselImg src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg"></CarouselImg>
-            </Carousel.Item>
-            <Carousel.Item>
-              <CarouselImg src="https://mayxaugiacao.com/wp-content/uploads/2022/02/top-laptop-dell-tot-nhat-2022.jpg"></CarouselImg>
-            </Carousel.Item>
-            <Carousel.Item>
-              <CarouselImg src="https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-1_10ebeafae1d64bc5a00168a46e9db5b6_master.png"></CarouselImg>
-            </Carousel.Item>
+            {product.listImg?.map((img) => {
+              return (
+                <Carousel.Item>
+                  <CarouselImg src={img}></CarouselImg>
+                </Carousel.Item>
+              );
+            })}
           </Carousel>
         </ImgTab>
       </Content>
@@ -505,10 +275,7 @@ const Detail = () => {
           More Information
         </h3>
         <p style={{ margin: "20px 10px 0 40px" }}>
-          The quality of SAMSUNG Meets the accessibility of chrome OS. Its
-          all-new light and compact design lets you stream, work, create, and
-          play on a fast, secure device designed to take everywhere. You can
-          download and save content and work with others using Google suite.
+          The quality of SAMSUNG Meets the accessibility of chrome OS. Its all-new light and compact design lets you stream, work, create, and play on a fast, secure device designed to take everywhere. You can download and save content and work with others using Google suite.
           Built with long-lasting, battery and Gigabit Wi-Fi connectivity, The
           new Samsung Chromebook 4 brings speed and efficiency to any and every
           task or adventure.
@@ -526,7 +293,7 @@ const Detail = () => {
         <SimilarProduct>
           <OwlCarousel
             {...options}
-            // items={6}
+            items={6}
             className="owl-theme"
             // loop
             // nav
@@ -535,13 +302,13 @@ const Detail = () => {
               return (
                 <SimilarItem>
                   <div className="img d-flex flex-row">
-                    <img src={product.img} alt='similar product' />
+                    <img src={product.img_cover} alt='similar product' />
                   </div>
                   <div className="d-flex flex-row align-items-center">
                     <Rating
                       size="small"
                       name="read-only"
-                      value={product.rating}
+                      value={parseInt(product.rating)}
                       readOnly
                     />
                     <p
@@ -556,8 +323,8 @@ const Detail = () => {
                     </p>
                   </div>
                   <div className="name">{product.name}</div>
-                  <p className="price" style={{ color: 'gray', margin: '0 0 0 5%' }}><s>{'$' + product.oldPrice}</s></p>
-                  <p className="price" style={{ fontSize: '20px', margin: '0 0 0 5%' }}><b>{'$' + product.newPrice}</b></p>
+                  <p className="price" style={{ color: 'gray', margin: '0 0 0 5%' }}><s>{'$' + product.old_price}</s></p>
+                  <p className="price" style={{ fontSize: '20px', margin: '0 0 0 5%' }}><b>{'$' + product.price}</b></p>
                 </SimilarItem>
               );
             })}
@@ -565,8 +332,8 @@ const Detail = () => {
         </SimilarProduct>
 
         <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Customer reviews {'&'} ratings</h3>
-        {/* 4.2 out of 5 */}
-        {reviews.map((review) => {
+
+        {comment.map((review) => {
           return (
             <Review>
               <div className="d-flex flex-row">
@@ -627,7 +394,7 @@ const Content = styled.div`
   border-top: 2px solid rgb(231 231 231);
   border-bottom: 2px solid rgb(231 231 231);
   width: 100%;
-  min-height: 570px;
+  height: 570px;
   display: flex;
   flex-direction: row;
   @media (max-width: 768px){
@@ -644,15 +411,16 @@ const Tab = styled.div`
 `;
 const TabContent = styled.div`
   display: ${(props) => (props.display === true ? "block" : "none")};
-  min-height: 420px;
+  /* min-height: 420px; */
+  /* height: 100%; */
   overflow: auto;
 `;
-const Status = styled.div`
-  /* text-align: ${(props) => (props.display === 0 ? "left" : "right")}; */
-  color: #78a962;
-  font-size: 13px;
-  margin-right: 30px;
-`;
+// const Status = styled.div`
+//   /* text-align: ${(props) => (props.display === 0 ? "left" : "right")}; */
+//   color: #78a962;
+//   font-size: 13px;
+//   margin-right: 30px;
+// `;
 const Rate = styled.div`
   display: flex;
   flex-direction: row;
@@ -699,6 +467,7 @@ const Price = styled.div`
 const ImgTab = styled.div`
   width: 50%;
   @media (max-width: 768px){
+    display: none;
     width: 100%;
     margin: 30px 0;
   }

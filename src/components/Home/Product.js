@@ -14,7 +14,7 @@ const Product = (props) => {
     <Container display={props.display}>
       {product.instock ?
         <Status display={props.display}>
-          <i class="fa fa-check-circle" aria-hidden="true"></i> in stock
+          <i className="fa fa-check-circle" aria-hidden="true"></i> in stock
         </Status> : ''}
       <Box display={props.display}>
         <div>

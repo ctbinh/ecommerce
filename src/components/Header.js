@@ -35,7 +35,7 @@ const Header = () => {
 
                     <SearchBar className="searchbar">
                         <SearchButton >
-                            <i class="fa fa-search"></i>
+                            <i className="fa fa-search"></i>
                         </SearchButton>
                         <SearchInput type="text" name="search_book" id="" placeholder="Search..." />
                     </SearchBar>
@@ -62,7 +62,7 @@ const Header = () => {
 
                 <NavIcon>
                       <div style={{ marginLeft: 'auto', minWidth: '60px' }}>
-                    <Link to="/cart" state={{cart: cart }}>
+                    <Link style={{ textDecoration: 'none' }} to="/cart" state={{cart: cart }}>
                           <CartIcon />
                           <CartCounter>20</CartCounter>
                     </Link>

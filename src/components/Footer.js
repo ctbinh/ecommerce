@@ -43,11 +43,11 @@ const Footer = () => {
       </Row >
       <SubRow>
         <Copyright>Copyright © 2022 BKU TEAM</Copyright>
-        <i class="fa fa-cc-paypal"></i>
-        <i class="fa fa-cc-visa"></i>
-        <i class="fa fa-cc-mastercard"></i>
-        <i class="fa fa-credit-card-alt"></i>
-        <i class="fa fa-cc-jcb"></i>
+        <i className="fa fa-cc-paypal"></i>
+        <i className="fa fa-cc-visa"></i>
+        <i className="fa fa-cc-mastercard"></i>
+        <i className="fa fa-credit-card-alt"></i>
+        <i className="fa fa-cc-jcb"></i>
         {/* <PaymentIcon src=""></PaymentIcon> */}
 
       </SubRow>

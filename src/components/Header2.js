@@ -13,7 +13,7 @@ const Header2 = () => {
     </div>
     <SearchBar className="searchbar">
       <SearchButton >
-        <i class="fa fa-search"></i>
+        <i className="fa fa-search"></i>
       </SearchButton>
       <SearchInput type="text" name="search_book" id="" placeholder="Search..." />
     </SearchBar>

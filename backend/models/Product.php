@@ -48,19 +48,13 @@ class Product
   public function read_single()
   {
     // Create query
-    $query = 'SELECT
-          id,
-          name
-        FROM
-          ' . $this->table . '
-      WHERE id = ?
-      LIMIT 0,1';
+    $query = 'SELECT * FROM ' . $this->table . ' WHERE product_id = ? LIMIT 0,1';
 
     //Prepare statement
     $stmt = $this->conn->prepare($query);
 
     // Bind ID
-    $stmt->bindParam(1, $this->id);
+    $stmt->bindParam(1, $this->product_id);
 
     // Execute query
     $stmt->execute();
@@ -68,11 +62,34 @@ class Product
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // set properties
-    $this->id = $row['id'];
+    $this->product_id = $row['product_id'];
     $this->name = $row['name'];
+    $this->url = $row['url'];
+    $this->product_code = $row['product_code'];
+    $this->brand = $row['brand'];
+    $this->cpu = $row['cpu'];
+    $this->ram = $row['ram'];
+    $this->gpu = $row['gpu'];
+    $this->os = $row['os'];
+    $this->old_price = $row['old_price'];
+    $this->price = $row['price'];
+    $this->screen = $row['screen'];
+    $this->size = $row['size'];
+    $this->battery = $row['battery'];
+    $this->amount = $row['amount'];
+    $this->description = $row['description'];
+    $this->rating = $row['rating'];
+    $this->num_reviewer = $row['num_reviewer'];
+    $this->img_cover = $row['img_cover'];
   }
 
-  public function create() {}
-  public function update() {}
-  public function delete() {}
+  public function create()
+  {
+  }
+  public function update()
+  {
+  }
+  public function delete()
+  {
+  }
 }
