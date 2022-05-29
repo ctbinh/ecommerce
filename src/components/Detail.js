@@ -416,7 +416,6 @@ const Features = styled.h2`
   border-bottom: 1px #ccc solid;
   font-weight: normal;
   padding-bottom: 6px;
-  font-family: "Lato",Helvetica,Arial,sans-serif;
 `;
 const InforRow = styled.div`
   display: flex;
@@ -437,6 +436,7 @@ const InforDiv2 = styled.div`
   }
 `;
 const InforText = styled.div`
+  margin: 10px 0px;
   h3 {
     font-size: 24px;
     line-height: 24px;
