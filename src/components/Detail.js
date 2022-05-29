@@ -3,23 +3,19 @@ import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
 import React, { useState, useEffect } from "react";
-import { Rating } from "@mui/material";
-import { Button } from "react-bootstrap";
+import { Button, Carousel } from "react-bootstrap";
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
 
 import 'bootstrap/dist/css/bootstrap.css';//bug do cai nay ne =====================
-import { Carousel } from 'react-bootstrap';
-import { Breadcrumbs, Link, Typography } from '@mui/material'
+import { Rating, Breadcrumbs, Link, Typography } from '@mui/material'
+
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
-import { MdKeyboardArrowUp } from 'react-icons/md';
-import { MdKeyboardArrowDown } from 'react-icons/md';
 import axios from 'axios';
-import { fontWeight } from "@mui/system";
 
 function TableRow(props) {
-  // if (product[props.field] != '')
   return (
     <tr>
       <td style={{ color: "black", fontWeight: "500" }}>{props.field}</td>
@@ -48,7 +44,6 @@ function CarouselImg(props) {
   );
   // </Carousel.Item>;
 }
-
 function Status(props) {
   if (props.amount > 0) {
     return (
@@ -93,6 +88,10 @@ const Detail = () => {
 
       const res_comment = await axios.get('http://localhost/ecommerce/backend/api/comment/read_single.php?product_id=2');
       console.log("comment: ", res_comment.data)
+      // let rating = res_comment.data.reduce((a, b) => {
+      //   return a + parseInt(b.rate);
+      // }, 0);
+      // console.log(rating)
       setComment(res_comment.data)
 
       const res_similarProduct = await axios.get('http://localhost/ecommerce/backend/api/product/read.php');
@@ -141,6 +140,7 @@ const Detail = () => {
     if (count > 1)
       setCount(count - 1);
   }
+
   return (
     <div>
       <Header />
@@ -163,19 +163,13 @@ const Detail = () => {
             <Link underline="hover" color="inherit" href="/">
               Laptop
             </Link>
-            <Typography color="text.primary">MSI</Typography>
+            <Typography color="text.primary">{product.brand}</Typography>
           </Breadcrumbs>
 
           <Name>{product.name}</Name>
 
           <Rate>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
+            <div className="d-flex flex-row align-items-center" >
               <Rating size="small" name="read-only" value={parseInt(product.rating)} readOnly />
               <p
                 style={{ fontSize: "13px", color: "#a6a6a6", margin: "0 2px" }}
@@ -194,7 +188,7 @@ const Detail = () => {
             </Status>
           </Rate>
 
-          <TabContent display={tab === 0} style={{ position: "relative" }}>
+          <TabContent display={tab === 0} style={{ }}>
             <div>
               <Field>Product code:</Field>
               <Value>{product.product_code}</Value>
@@ -208,10 +202,10 @@ const Detail = () => {
               {product.description}
             </Description>
 
-            <div style={{ height: '200px' }}></div>
+            {/* <div style={{ height: '200px' }}></div> */}
 
             {/* price and  */}
-            <div style={{ position: "absolute", bottom: "0px" }}>
+            <div style={{  bottom: "0px" }}>
               <Price>
                 <p className="oldPrice">
                   <s>{"$" + product.old_price}</s>
@@ -233,21 +227,21 @@ const Detail = () => {
                   </div>
                 </Input>
 
-                <Button style={{ borderRadius: "20px", padding: "6px 20px", display: 'disabled' }}>
-                  Add to cart
+                <Button disabled={parseInt(product.amount) < 1} style={{ borderRadius: "20px", padding: "6px 20px" }}>
+                  {/* Add to cart */}
+                  {parseInt(product.amount) > 1 ? "Add to cart" : "Out of stock"}
                 </Button>
               </div>
             </div>
           </TabContent>
 
           <TabContent display={tab === 1}>
-            <div style={{ width: "90%", margin: "0 auto" }}>
-              <table className="table table-striped table-hover">
-                <tbody style={{ overflow: "scroll" }}>
-
-                  {spec_field.map((field) => {
+            <div style={{ height: "400px", overflow: "auto", width: "90%", margin: "0 auto" }}>
+              <table className="table table-striped table-hover" >
+                <tbody style={{ verticalAlign: "middle", overflow: "auto" }}>
+                  {spec_field.map((field, index) => {
                     return (
-                      <TableRow field={displayField[field]} value={product[field]}></TableRow>
+                      <TableRow key={index} field={displayField[field]} value={product[field]}></TableRow>
                     );
                   })}
 
@@ -259,9 +253,9 @@ const Detail = () => {
 
         <ImgTab>
           <Carousel variant="dark" style={{ height: '100%' }} className="d-flex align-items-center">
-            {product.listImg?.map((img) => {
+            {product.listImg?.map((img, index) => {
               return (
-                <Carousel.Item>
+                <Carousel.Item key={index}>
                   <CarouselImg src={img}></CarouselImg>
                 </Carousel.Item>
               );
@@ -270,39 +264,75 @@ const Detail = () => {
         </ImgTab>
       </Content>
 
-      <div style={{ width: "70%", margin: "0 auto" }}>
-        <h3 style={{ fontWeight: "bold", marginTop: "40px" }}>
-          More Information
-        </h3>
-        <p style={{ margin: "20px 10px 0 40px" }}>
-          The quality of SAMSUNG Meets the accessibility of chrome OS. Its all-new light and compact design lets you stream, work, create, and play on a fast, secure device designed to take everywhere. You can download and save content and work with others using Google suite.
-          Built with long-lasting, battery and Gigabit Wi-Fi connectivity, The
-          new Samsung Chromebook 4 brings speed and efficiency to any and every
-          task or adventure.
-        </p>
-        <img
-          alt="laptop"
-          style={{ margin: "20px auto", width: '100%' }}
-          src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg"
-        ></img>
+      <Features>Features</Features>
 
-        <h3 style={{ fontWeight: "bold", marginTop: "40px" }}>Warranty</h3>
-        <p style={{ margin: "20px 10px 0 40px" }}>1 years.</p>
+      <InforRow>
+        <InforDiv2>
+          <InforText>
+            <h3>Power, speed, {'&'} style</h3>
+            <p>Running Chrome OS with up to an AMD Ryzen™ 7 3700C processor and integrated AMD Radeon™ graphics, the ThinkPad C13 Yoga Chromebook Enterprise delivers powerful performance in a sleek and durable aluminum chassis. Bootup takes seconds and once an employee logs in, the device becomes unique to that user. Plus, unlike your typical ThinkPad, this laptop comes in Abyss Blue—adding a bit of flair to worker style.</p>
+          </InforText>
+          <InforText>
+            <h3>Perfectly mobile</h3>
+            <p>Weighing just 1.50kg / 3.3lbs., the ThinkPad C13 Yoga Chromebook Enterprise is designed for desk-free employees. With all-day battery life, this device can keep up with a full day’s worth of innovative ideas. But when you do need more juice, plug it in for just 60 minutes and Rapid Charge* will yield up to 80%.</p>
+          </InforText>
+        </InforDiv2>
+        <InforDiv2>
+          <div>
+            <img src="https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MTE4OTg1fGltYWdlL2pwZWd8aDk0L2g0MC8xMTI1NjcyMTU3MTg3MC5qcGd8MzgzZTkxNWI3NDk1YzdhM2ZmY2ZiYjQ0MjNhMmQ5Y2MxMTdlOTYxNWY0YzdhN2ZhZjU4NzNkMjFhNmI5YzRhYQ/bWFzdGVyfH.jpg"></img>
+          </div>
+        </InforDiv2>
+      </InforRow>
 
-        <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Similar products</h3>
+      <InforRow>
+        <InforDiv2>
+          <div>
+            <img src="https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MTY0NDc0fGltYWdlL2pwZWd8aDA3L2hkOS8xMTI1NjcyMTgwMTI0Ni5qcGd8ZjFjNTQwNGM1ODAyOTdmMDUyZDQ2NDdlN2E1YWE4Nzg3NmM5NjQ1YTEzODcxMjVjMGZjOWVlMTViODBmZDAwMw/bWFzdGVyfH.jpg"></img>
+          </div>
+        </InforDiv2>
+        <InforDiv2>
+          <InforText>
+            <h3>Create, collaborate {'&'} repeat</h3>
+            <p>Chromebooks are well known for making content creation and collaboration easy—and the ThinkPad C13 Yoga Chromebook Enterprise is no exception. It’s built for creating, editing, and sharing content. With a touchscreen and 360 degree hinge, it functions as a 2 in 1 laptop. So you can type, take notes with the optional garaged USI pen, or video-conference. There’s also an optional 5MP world-facing camera.</p>
+          </InforText>
+          <InforText>
+            <h3>Refined elegance</h3>
+            <p>Narrow bezels frame the display—an FHD IPS touchscreen model with a 72% color gamut—providing a larger screen to bezel ratio.  So whether the ThinkPad C13 Yoga Chromebook Enterprise is running a conference call, streaming a video, or building a presentation, this 2-in-1 device looks great.</p>
+          </InforText>
+        </InforDiv2>
+      </InforRow>
+
+      <InforRow>
+        <InforDiv2>
+          <InforText>
+            <h3>Seamless security</h3>
+            <p>ThinkShield combined with Chrome Enterprise equals an unbeatable combination for security. Our built-in security suite boasts a number of physical and biometric security features, like a webcam privacy shutter, the proprietary Google H1 TPM chip, and an optional touch fingerprint reader. Chrome Enterprise keeps your business safe with seamless updates and protection against evolving threats. Plus, each device includes a Kensington lock slot so it can be tethered when needed.</p>
+          </InforText>
+        </InforDiv2>
+        <InforDiv2>
+          <div>
+            <img src="https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MTgyMDMyfGltYWdlL2pwZWd8aDNjL2hlOS8xMTEyMTUzMDAxMTY3OC5qcGd8ZjMxMmZjYWMyZjc1MjMzMGI4MTFlZmZmODI4MTg4NjNkNzBmZTdlOTdhYzI1NDYyMjFjZjc2YzY1MTNhOTI0MA/bWFzdGVyfH.jpg"></img>
+          </div>
+        </InforDiv2>
+      </InforRow>
+
+      <Features>Similar products</Features>
+
+
+      <div style={{ width: "80%", margin: "0 auto" }}>
         <SimilarProduct>
           <OwlCarousel
             {...options}
-            items={6}
+            // items={6}
             className="owl-theme"
             // loop
             // nav
             margin={18} >
-            {similarProduct.map((product) => {
+            {similarProduct.map((product, index) => {
               return (
-                <SimilarItem>
+                <SimilarItem key={index}>
                   <div className="img d-flex flex-row">
-                    <img src={product.img_cover} alt='similar product' />
+                    <img src={product.img_cover} style={{ margin: "0 auto", width: "auto" }} alt='similar product' />
                   </div>
                   <div className="d-flex flex-row align-items-center">
                     <Rating
@@ -330,12 +360,14 @@ const Detail = () => {
             })}
           </OwlCarousel>
         </SimilarProduct>
+      </div>
 
-        <h3 style={{ fontWeight: 'bold', marginTop: '40px' }}>Customer reviews {'&'} ratings</h3>
+      <Features>Customer reviews {'&'} ratings</Features>
 
-        {comment.map((review) => {
+      <div style={{ width: "70%", margin: "0 auto" }}>
+        {comment.map((review, index) => {
           return (
-            <Review>
+            <Review key={index}>
               <div className="d-flex flex-row">
                 <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(3).jpg" alt="laptop" />
                 <div className="w-100">
@@ -345,7 +377,7 @@ const Detail = () => {
                       <Rating
                         size="small"
                         name="read-only"
-                        value={4}
+                        value={parseInt(review.rate)}
                         readOnly
                       />
                       <p
@@ -356,7 +388,7 @@ const Detail = () => {
                         }}
                       >
                         {" "}
-                        4.0{" "}
+                        {review.rate}{" "}
                       </p>
                     </div>
                     <div className="datetime">{review.datetime}</div>
@@ -374,6 +406,50 @@ const Detail = () => {
     </div>
   );
 };
+
+const Features = styled.h2`
+  width: 80%;
+  border-bottom: 1px solid black;
+  margin: 30px auto 20px auto;
+  line-height: 39px;
+  font-size: 32px;
+  border-bottom: 1px #ccc solid;
+  font-weight: normal;
+  padding-bottom: 6px;
+  font-family: "Lato",Helvetica,Arial,sans-serif;
+`;
+const InforRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+const InforDiv2 = styled.div`
+  max-width: 35%;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  div img {
+    max-width:100%;
+    max-height:100%;
+  }
+`;
+const InforText = styled.div`
+  h3 {
+    font-size: 24px;
+    line-height: 24px;
+    font-family: "Lato",Helvetica,Arial,sans-serif;
+  }
+  p {
+    text-align: justify;
+    color: #555;
+    font-size: 16px;
+    line-height: 22px;
+    font-family: "Lato",Helvetica,Arial,sans-serif;
+  }
+`;
 
 const TabNav = styled.div`
   display: flex;
@@ -415,12 +491,6 @@ const TabContent = styled.div`
   /* height: 100%; */
   overflow: auto;
 `;
-// const Status = styled.div`
-//   /* text-align: ${(props) => (props.display === 0 ? "left" : "right")}; */
-//   color: #78a962;
-//   font-size: 13px;
-//   margin-right: 30px;
-// `;
 const Rate = styled.div`
   display: flex;
   flex-direction: row;
