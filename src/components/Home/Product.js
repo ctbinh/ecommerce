@@ -57,7 +57,7 @@ const ComboBtn = styled.div`
   align-items: center;
 `
 const Desc = styled.span`
-  width: 40%;
+  width: 100%;
   font-size: 13px;
   max-height: 100px;
   overflow: hidden;

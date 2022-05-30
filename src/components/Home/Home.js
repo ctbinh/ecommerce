@@ -12,283 +12,163 @@ import Filter from './Filter'
 import Product from './Product'
 // import http from '../../http-common';
 import axios from 'axios';
-
+let isFirst = true;
+let data = []
 const Home = () => {
   const brands = [
     {
       id: 0,
+      name: 'ACER',
       img: images.acer
     },
     {
       id: 1,
+      name: 'ASUS',
       img: images.asus
     },
     {
       id: 2,
+      name: 'GIGABYTE',
       img: images.gigabyte
     },
     {
       id: 3,
+      name: 'HP',
       img: images.hp
     },
     {
       id: 4,
+      name: 'LG',
       img: images.lg
     },
     {
       id: 5,
+      name: 'MSI',
       img: images.msi
     },
     {
       id: 6,
+      name: 'RAZER',
       img: images.razer
     }
   ]
-  // const products = [
-  //   {
-  //     id: 0,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00',
-  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-  //     cpu: 'N/A',
-  //     featured: 'N/A',
-  //     ports: 'N/A'
-  //   },
-  //   {
-  //     id: 1,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00',
-  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-  //     cpu: 'N/A',
-  //     featured: 'N/A',
-  //     ports: 'N/A'
-  //   },
-  //   {
-  //     id: 2,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00',
-  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-  //     cpu: 'N/A',
-  //     featured: 'N/A',
-  //     ports: 'N/A'
-  //   },
-  //   {
-  //     id: 3,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00',
-  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-  //     cpu: 'N/A',
-  //     featured: 'N/A',
-  //     ports: 'N/A'
-  //   },
-  //   {
-  //     id: 1,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00',
-  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-  //     cpu: 'N/A',
-  //     featured: 'N/A',
-  //     ports: 'N/A'
-  //   },
-  //   {
-  //     id: 2,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00',
-  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-  //     cpu: 'N/A',
-  //     featured: 'N/A',
-  //     ports: 'N/A'
-  //   },
-  //   {
-  //     id: 3,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00',
-  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-  //     cpu: 'N/A',
-  //     featured: 'N/A',
-  //     ports: 'N/A'
-  //   },
-  //   {
-  //     id: 1,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00',
-  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-  //     cpu: 'N/A',
-  //     featured: 'N/A',
-  //     ports: 'N/A'
-  //   },
-  //   {
-  //     id: 2,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00',
-  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-  //     cpu: 'N/A',
-  //     featured: 'N/A',
-  //     ports: 'N/A'
-  //   },
-  //   {
-  //     id: 3,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00',
-  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-  //     cpu: 'N/A',
-  //     featured: 'N/A',
-  //     ports: 'N/A'
-  //   },
-  //   {
-  //     id: 1,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   },
-  //   {
-  //     id: 2,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   },
-  //   {
-  //     id: 3,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   },
-  //   {
-  //     id: 1,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   },
-  //   {
-  //     id: 2,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   },
-  //   {
-  //     id: 3,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   },
-  //   {
-  //     id: 1,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   },
-  //   {
-  //     id: 2,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   },
-  //   {
-  //     id: 3,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   },
-  //   {
-  //     id: 1,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   },
-  //   {
-  //     id: 2,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   },
-  //   {
-  //     id: 3,
-  //     rating: 4,
-  //     instock: true,
-  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-  //     oldPrice: '599.00',
-  //     newPrice: '499.00'
-  //   }
-  // ]
   const [show, setShow] = useState(0)
-  const [num, setNum] = React.useState(30);
+  const [num, setNum] = useState(10);
   const [display, setDisplay] = useState(0);
   const [brandsTaget, setBrandsTaget] = useState([]);
   const [currPage, setcurrPage] = useState(1)
   const [products, setproducts] = useState([])
+  const [countPage, setcountPage] = useState(0)
+  const [filteredProducts, setfilteredProducts] = useState([])
+
+  const [value, setValue] = useState([0, 3000]);
+  const [ramFilter, setRamFilter] = useState([]);
   const changePage = (event, value) => {
     setcurrPage(value);
   };
   const changeDisplay = (value) => {
     setDisplay(value);
   }
-  const handleChange = (event) => {
+  const changeNumPerPage = (event) => {
+    setcurrPage(1)
     setNum(event.target.value);
+    setcountPage(Math.ceil(filteredProducts.length/event.target.value))
   };
-  const filterBrand = (brandId) => {
-    setBrandsTaget([brandId]);
-    alert('Đang lấy dữ liệu để hiển thị sản phẩm');
+  const getProductPerPage = (products) => {
+    const indexLast = currPage*num
+    const indexFirst = indexLast - num
+    setproducts(products.slice(indexFirst, indexLast))
+  }
+  const filterBrand = (brand) => {
+    setcurrPage(1)
+    setBrandsTaget([brand.name]);
+    const productFiltered = data.filter(p => p.brand === brand.name)
+    getProductPerPage(productFiltered)
+    setfilteredProducts(productFiltered)
+    setcountPage(Math.ceil(productFiltered.length/num))
   };
+  const applyFilter = () => {
+    if (brandsTaget.length === 0 && ramFilter.length === 0 && value[0] === 0 && value[1] === 3000) {
+      getProductPerPage(data)
+      setfilteredProducts(data)
+      setcountPage(Math.ceil(data.length/num))
+    }
+    else {
+      setcurrPage(1)
+      const productFiltered = data.filter(p => {
+        const fBrand = brandsTaget.length !== 0
+        const fPrice = (value[0] !== 0 || value[1] !== 3000)
+        const fRam = ramFilter.length !== 0
+        if(!fBrand && !fPrice) {
+          return(
+            ramFilter.indexOf(p.ram.substring(0, 4).includes('4GB') ? '4GB': p.ram.substring(0, 4).includes('8GB') ? '8GB' : '16GB') > -1
+          )
+        }
+        else if(!fBrand && !fRam) {
+          return(
+            p.price >= value[0] && p.price <= value[1]
+          )
+        }
+        else if(!fPrice && !fRam) {
+          return (brandsTaget.indexOf(p.brand) > -1)
+        }
+        else if(!fBrand) {
+          return(
+            p.price >= value[0] && p.price <= value[1] &&
+            ramFilter.indexOf(p.ram.substring(0, 4).includes('4GB') ? '4GB': p.ram.substring(0, 4).includes('8GB') ? '8GB' : '16GB') > -1
+          )
+        }
+        else if(!fRam) {
+          return(
+            brandsTaget.indexOf(p.brand) > -1 &&
+            p.price >= value[0] && p.price <= value[1]
+          )
+        }
+        else if(!fPrice) {
+          return(
+            brandsTaget.indexOf(p.brand) > -1 &&
+            ramFilter.indexOf(p.ram.substring(0, 4).includes('4GB') ? '4GB': p.ram.substring(0, 4).includes('8GB') ? '8GB' : '16GB') > -1
+          )
+        }
+        else {
+          return (
+            brandsTaget.indexOf(p.brand) > -1 &&
+            ramFilter.indexOf(p.ram.substring(0, 4).includes('4GB') ? '4GB': p.ram.substring(0, 4).includes('8GB') ? '8GB' : '16GB') > -1 &&
+            p.price >= value[0] && p.price <= value[1]
+          )
+        }
+      })
+      getProductPerPage(productFiltered)
+      setfilteredProducts(productFiltered)
+      console.log(productFiltered)
+      setcountPage(Math.ceil(productFiltered.length/num))
+    }
+  }
+  const clearFilter = () => {
+    setBrandsTaget([]);
+    setRamFilter([]);
+    setValue([0, 3000]);
+    getProductPerPage(data)
+    setfilteredProducts(data)
+    setcountPage(Math.ceil(data.length/num))
+  }
+  
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await axios.get('http://localhost/ecommerce/backend/api/product/read.php');
-      console.log(res.data.data)
-      setproducts(res.data.data)
+      if(isFirst) {
+        const res = await axios.get('http://localhost/ecommerce/backend/api/product/read.php');
+        data = res.data.data
+        setcountPage(Math.ceil(data.length/num))
+        setfilteredProducts(data)
+        isFirst = false
+      }
+      const indexLast = currPage*num
+      const indexFirst = indexLast - num
+      const pds = filteredProducts.slice(indexFirst, indexLast)
+      setproducts(pds)
     }
     fetchProducts()
-  }, [])
+  }, [currPage, num, filteredProducts])
   
   return (
     <>
@@ -298,65 +178,77 @@ const Home = () => {
         <Brands>
           {brands.map((brand, key) => {
             return (
-              <Brand src={brand.img} alt="brand" onClick={() => filterBrand(brand.id)}/>
+              <Brand src={brand.img} alt="brand" onClick={() => filterBrand(brand)}/>
             )
           })}
         </Brands>
-          <Content>
-            <BoxFilter show={show}>
-              <Filter 
-                brands={brands} 
-                brandsTaget={brandsTaget} 
-                setBrandsTaget={setBrandsTaget}
-                setShow={setShow}
-                show={show}/>
-            </BoxFilter>
-            <Products>
-              <Row>
-                <div></div>
-                <DisplayOption>
-                  <div className="option">
-                    <FormControl sx={{ m: 1}} size='small'>
-                      <InputLabel id="show">Show</InputLabel>
-                      <Select
-                        labelId="show"
-                        id="show"
-                        value={num}
-                        label="Show"
-                        onChange={handleChange}
-                      >
-                        <MenuItem value={10}>10 per page</MenuItem>
-                        <MenuItem value={20}>20 per page</MenuItem>
-                        <MenuItem value={30}>30 per page</MenuItem>
-                        <MenuItem value={40}>40 per page</MenuItem>
-                        <MenuItem value={50}>50 per page</MenuItem>
-                      </Select>
-                    </FormControl>
-                    <Icon onClick={() => changeDisplay(0)}><AppsIcon /></Icon>
-                    <Icon onClick={() => changeDisplay(1)}><ReorderIcon /></Icon>
-                  </div>
-                  <div className="filter" onClick={() => setShow(1)}>
-                    <Icon><FilterAltOutlinedIcon /></Icon>
-                    <span>Filter</span>
-                  </div>
-                </DisplayOption>
-              </Row>
+        <Content>
+          <BoxFilter show={show}>
+            <Filter 
+              brands={brands} 
+              brandsTaget={brandsTaget} 
+              setBrandsTaget={setBrandsTaget}
+              value={value}
+              setValue={setValue}
+              ramFilter={ramFilter}
+              setRamFilter={setRamFilter}
+              setShow={setShow}
+              applyFilter={applyFilter}
+              clearFilter={clearFilter}
+              show={show}/>
+          </BoxFilter>
+          <Products>
+            <Row>
+              <div></div>
+              <DisplayOption>
+                <div className="option">
+                  <FormControl sx={{ m: 1}} size='small'>
+                    <InputLabel id="show">Show</InputLabel>
+                    <Select
+                      labelId="show"
+                      id="show"
+                      value={num}
+                      label="Show"
+                      onChange={changeNumPerPage}
+                    >
+                      <MenuItem value={10}>10 per page</MenuItem>
+                      <MenuItem value={20}>20 per page</MenuItem>
+                      <MenuItem value={30}>30 per page</MenuItem>
+                      <MenuItem value={40}>40 per page</MenuItem>
+                      <MenuItem value={50}>50 per page</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <Icon onClick={() => changeDisplay(0)}><AppsIcon /></Icon>
+                  <Icon onClick={() => changeDisplay(1)}><ReorderIcon /></Icon>
+                </div>
+                <div className="filter" onClick={() => setShow(1)}>
+                  <Icon><FilterAltOutlinedIcon /></Icon>
+                  <span>Filter</span>
+                </div>
+              </DisplayOption>
+            </Row>
+            <Pd>
               {products.map((product) => {
                 return (
                   <Product display={display} product={product} />
                 )
               })}
-              <div style={{width: '100%', display:'flex', justifyContent:'center', margin:'20px 0'}}>
-                <Pagination count={10} defaultPage={currPage} color="primary" onChange={changePage}/>
-              </div>
-            </Products>
-          </Content>
+            </Pd>
+            <div style={{width: '100%', display:'flex', justifyContent:'center', margin:'20px 0'}}>
+              <Pagination count={countPage} color="primary" onChange={changePage} page={currPage}/>
+            </div>
+          </Products>
+        </Content>
       </Container>
       <Footer/>
     </>
   )
 }
 
+const Pd = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
 const BoxFilter = styled.div`
   width: 20%;
   @media (max-width: 768px){
@@ -413,7 +305,7 @@ const Content = styled.div`
 const Products = styled.div`
   width: 80%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   margin-left: 5px;
   @media (max-width: 768px){
     width: 100%;
