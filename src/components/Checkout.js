@@ -289,9 +289,9 @@ const ImgProduct = styled.img`
     margin-bottom: 20px;
 `
 const ContainerImg = styled.div`
-    border: solid 1px;
-    height: 80px;
-    width: 80px;
+    /* border: solid 1px; */
+    height: 90px;
+    width: 90px;
     margin-bottom: 20px;
 `
 const Describe = styled.div`

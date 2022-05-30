@@ -32,6 +32,9 @@
             'img_cover' => $img_cover,
             'price' => $price,
             'amount' => $amount,
+            'cpu' => $cpu,
+            'screen' => $screen,
+            'product_id' => $product_id,
             
           );
 

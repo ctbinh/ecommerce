@@ -108,7 +108,7 @@ const Cart = () => {
                                 <Ship>Shipping</Ship>
                             </Col>
                             <Col sm={2.5} xs={2.5}>
-                                <ValueShip>{(21000).toLocaleString()}</ValueShip>
+                                <ValueShip>${(21000).toLocaleString()}</ValueShip>
                                 {/* <ValueShip>{document.getElementById("name").value}</ValueShip> */}
                             </Col>
                         </Row>
@@ -118,7 +118,9 @@ const Cart = () => {
                                 <Ship>Order Total</Ship>
                             </Col>
                             <Col sm={2.5} xs={2.5}>
-                                <ValueShip>{(13245).toLocaleString()}</ValueShip>
+                                <ValueShip>
+                                    ${cart.reduce((sum, product) => {return sum + product.amount* product.price }, 0).toFixed(2)}
+                                </ValueShip>
                             </Col>
                         </Row>
                         <br />
@@ -225,7 +227,7 @@ const Line = styled.hr`
 
 `
 const ContainerInput = styled.div`
-    background-color: #F5F7FF;
+    background-color: #C5D0FF;
     margin-bottom: 10px;
 `
 const NameInput = styled.div`
@@ -249,7 +251,7 @@ const RowHeader = {
     marginBottom: "10px",
 }
 const ContainerSummary = {
-    backgroundColor: "#F5F7FF",
+    backgroundColor: "#C5D0FF",
     // backgroundColor: "red",
     borderRadius: "10px",
     // boxShadow: "-5px 5px #444444",

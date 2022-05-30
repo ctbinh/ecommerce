@@ -3,13 +3,30 @@ import { Row, Col } from "react-grid-system";
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import axios from 'axios';
 
 import React, { useState } from 'react';
 
 const RowOfTable = (props) => {
     const [count, setCount] = useState(props.product.amount);
 
-    const incrementCount = () => setCount(count + 1);
+    const incrementCount = (id) => {
+        const data = {
+            user_id: 1, 
+            product_id: props.product.product_id, 
+            amount: count + 1
+        }
+        let config = {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        }
+        axios.post("http://localhost/ecommerce/backend/api/cart/updateitems.php", data, config)
+            .then((response) => {
+                console.log(response.data);
+            });
+        setCount(count + 1);
+    }
     let decrementCount = () => setCount(count - 1);
     const Delete = () => {
         setCount(0)
@@ -25,10 +42,10 @@ const RowOfTable = (props) => {
             <Row>
                 <Col sm={2.5}>
                     <ContainerImg> 
-                        <ImgProduct src={props.product.img_cover} alt="Nothing"/>
+                        <ImgProduct src={props.product.img_cover} alt="Image product"/>
                     </ContainerImg>
                 </Col>
-                <ColResponesive sm={9.5}><Describe>{props.product.name}</Describe></ColResponesive>
+                <ColResponesive sm={9.5}><Describe>{props.product.name + " " + props.product.cpu + " " + props.product.screen}</Describe></ColResponesive>
             </Row>
             </Col>
             <Col md={2} sm={3} xs={3}>
@@ -40,17 +57,17 @@ const RowOfTable = (props) => {
                     {count}
                     <Arrow>
                         <ArrowUp>
-                            <MdKeyboardArrowUp onClick={incrementCount}/>
+                            <MdKeyboardArrowUp onClick={() => (incrementCount(props.product.product_id))}/>
                         </ArrowUp>
                         <ArrowDown>
-                            <MdKeyboardArrowDown onClick={decrementCount}/>
+                            <MdKeyboardArrowDown onClick={() => decrementCount}/>
                         </ArrowDown>
                     </Arrow>
                 </div>
             </Col>
             <CloseResponesive md={1.8} sm={2.8} xs={2.8}>
                 {/* {props.product.subtotal.toLocaleString()} */}
-                {props.product.price* props.product.amount}
+                {(props.product.price* count).toFixed(2)}
                 <Close>
                     <AiOutlineCloseCircle size={18} color="#888888" onClick={Delete}/>
                 </Close>
@@ -62,9 +79,9 @@ const RowOfTable = (props) => {
     )
 }
 const ContainerImg = styled.div`
-    border: solid 1px;
-    height: 80px;
-    width: 80px;
+    /* border: solid 1px red; */
+    height: 90px;
+    width: 90px;
 `
 const Close = styled.div`
     position: absolute;
