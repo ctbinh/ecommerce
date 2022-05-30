@@ -1,9 +1,9 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useTable, useSortBy } from "react-table";
 import { Link } from "react-router-dom";
 
-import makeData from "./makeData";
+import axios from "axios";
 
 const Styles = styled.div`
   padding: 1rem;
@@ -112,11 +112,11 @@ const TableExport = () => {
         columns: [
           {
             Header: "Full Name",
-            accessor: "firstName",
+            accessor: "name",
           },
           {
             Header: "Brand Name",
-            accessor: "brandName",
+            accessor: "brand",
           },
         ],
       },
@@ -125,7 +125,7 @@ const TableExport = () => {
         columns: [
           {
             Header: "ID",
-            accessor: "id",
+            accessor: "product_id",
           },
           {
             Header: "CPU",
@@ -144,56 +144,61 @@ const TableExport = () => {
     ],
     []
   );
-
-  const data = useMemo(() => {
-    return [
-      {
-        firstName:
-          "MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop",
-        brandName: "Dell",
-        id: "abcsxex",
-        cpu: "Intel Core i7-11800H",
-        price: 28990000,
-        ram: "1 x 8GB DDR4 3200MHz",
-      },
-      {
-        firstName:
-          "MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop",
-        brandName: "Dell",
-        id: "abcsxex",
-        cpu: "Intel Core i7-11800H",
-        price: 28990000,
-        ram: "1 x 8GB DDR4 3200MHz",
-      },
-      {
-        firstName:
-          "MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop",
-        brandName: "Dell",
-        id: "abcsxex",
-        cpu: "Intel Core i7-11800H",
-        price: 28990000,
-        ram: "1 x 8GB DDR4 3200MHz",
-      },
-      {
-        firstName:
-          "MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop",
-        brandName: "Dell",
-        id: "abcsxex",
-        cpu: "Intel Core i7-11800H",
-        price: 28990000,
-        ram: "1 x 8GB DDR4 3200MHz",
-      },
-      {
-        firstName:
-          "MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop",
-        brandName: "Dell",
-        id: "abcsxex",
-        cpu: "Intel Core i7-11800H",
-        price: 28990000,
-        ram: "1 x 8GB DDR4 3200MHz",
-      },
-    ];
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost/ecommerce/backend/api/product/read.php")
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data.data);
+        // return data.data;
+      });
   }, []);
+  // const data = useMemo(() => {
+
+  //   return [
+  //     {
+  //       name: "MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop",
+  //       brand: "Dell",
+  //       product_id: "abcsxex",
+  //       cpu: "Intel Core i7-11800H",
+  //       price: 28990000,
+  //       ram: "1 x 8GB DDR4 3200MHz",
+  //     },
+  //     {
+  //       name: "MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop",
+  //       brand: "Dell",
+  //       product_id: "abcsxex",
+  //       cpu: "Intel Core i7-11800H",
+  //       price: 28990000,
+  //       ram: "1 x 8GB DDR4 3200MHz",
+  //     },
+  //     {
+  //       name: "MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop",
+  //       brand: "Dell",
+  //       product_id: "abcsxex",
+  //       cpu: "Intel Core i7-11800H",
+  //       price: 28990000,
+  //       ram: "1 x 8GB DDR4 3200MHz",
+  //     },
+  //     {
+  //       name: "MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop",
+  //       brand: "Dell",
+  //       product_id: "abcsxex",
+  //       cpu: "Intel Core i7-11800H",
+  //       price: 28990000,
+  //       ram: "1 x 8GB DDR4 3200MHz",
+  //     },
+  //     {
+  //       name: "MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop",
+  //       brand: "Dell",
+  //       product_id: "abcsxex",
+  //       cpu: "Intel Core i7-11800H",
+  //       price: 28990000,
+  //       ram: "1 x 8GB DDR4 3200MHz",
+  //     },
+  //   ];
+  // }, []);
 
   return (
     <Styles>

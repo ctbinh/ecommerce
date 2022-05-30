@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import TextContainer from "./TextContainer";
+import { useSearchParams } from "react-router-dom";
 const Wrap = styled.div`
   display: flex;
   justify-content: center;
@@ -16,13 +20,13 @@ const Img = styled.img`
   object-fit: cover;
   width: 100%;
 `;
-const TextContainer = styled.div`
-  display: flex;
-  background-color: #e3e5ec;
-  border: 1px solid #ccc;
-  padding: 10px;
-  align-items: center;
-`;
+// const TextContainer = styled.div`
+//   display: flex;
+//   background-color: #e3e5ec;
+//   border: 1px solid #ccc;
+//   padding: 10px;
+//   align-items: center;
+// `;
 const Label = styled.label`
   min-width: 100px;
 `;
@@ -30,6 +34,22 @@ const Span = styled.span`
   color: #8d95b4;
 `;
 const Detail = () => {
+  let [searchParams, setSearchParams] = useSearchParams();
+  const [product, setProduct] = useState({});
+  // let { id } = useParams();
+  // console.log(id);
+
+  useEffect(() => {
+    let id = searchParams.get("id");
+    axios
+      .get(
+        `http://localhost/ecommerce/backend/api/product/read_single.php?id=${id}`
+      )
+      .then((res) => {
+        setProduct(res.data);
+      });
+    // const id = axios.get;
+  }, []);
   return (
     <Wrap>
       <Container>
@@ -126,9 +146,22 @@ const Detail = () => {
         </ContainerComment>
       </Container>
       <Container>
-        <TextContainer>
+        <TextContainer label="ID" text={product.product_id} />
+        <TextContainer label="Name" text={product.name} />
+        <TextContainer label="Brand" text={product.brand} />
+        <TextContainer label="Amount" text={product.amount} />
+        <TextContainer label="CPU" text={product.cpu} />
+        <TextContainer label="Description" text={product.description} />
+        <TextContainer label="GPU" text={product.gpu} />
+        <TextContainer label="OS" text={product.os} />
+        <TextContainer label="Price" text={product.price} />
+        <TextContainer label="Ram" text={product.ram} />
+        <TextContainer label="Rating" text={product.rating} />
+        <TextContainer label="Screen" text={product.screen} />
+        <TextContainer label="Size" text={product.size} />
+        {/* <TextContainer>
           <Label>ID</Label>
-          <Span>abcsxex</Span>
+          <Span>{product.d}</Span>
         </TextContainer>
         <TextContainer>
           <Label>Name</Label>
@@ -170,7 +203,7 @@ const Detail = () => {
             Vel velit numquam eaque consectetur accusamus temporibus ullam nemo
             aliquam iure reiciendis?
           </Span>
-        </TextContainer>
+        </TextContainer> */}
       </Container>
     </Wrap>
   );
