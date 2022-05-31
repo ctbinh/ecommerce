@@ -1,14 +1,55 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
-
 import styled from 'styled-components'
 import Footer from '../Footer'
 import Header from '../Header'
+import axios from 'axios'
+import { Navigate } from 'react-router-dom'
 
 const Login = () => {
   const [targetTab, settargetTab] = useState('login')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [fName, setFName] = useState('')
+  const [lName, setLName] = useState('')
+  const [cfPassword, setCfPassword] = useState('')
+  const [user, setUser] = useState(null)
+  const login = () => {
+    const data = {
+      'username': username,
+      'password': password,
+    }
+    axios.post(`http://localhost/ecommerce/backend/api/auth/login.php`, data)
+    .then(function (response) {
+      console.log(response.data);
+      if(response.data.status === 'OK') {setUser(response.data)}      
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+  }
+  const signup = () => {
+    if(password !== cfPassword) {
+      alert('Wrong!')
+      return
+    }
+    const data = {
+      'username': username,
+      'password': password,
+      'fName': fName,
+      'lName': lName
+    }
+    axios.post(`http://localhost/ecommerce/backend/api/auth/register.php`, data)
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+  }
   return (
     <>
+    {user && <Navigate to="/" replace={true} />}
     <Header/>
     <Container>
       <Head>
@@ -29,15 +70,15 @@ const Login = () => {
             <Form.Label>If you have an account, sign in.</Form.Label>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Label>Username <span style={{color: 'red'}}>*</span></Label>
-              <Form.Control type="text" placeholder="Your username" />
+              <Form.Control type="text" placeholder="Your username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Label>Password <span style={{color: 'red'}}>*</span></Label>
-              <Form.Control type="password" placeholder="Your password" />
+              <Form.Control type="password" placeholder="Your password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
             </Form.Group>
           </Form>
           <TextLink>Forgot your password?</TextLink>
-          <Button variant="primary" style={{width: '200px', borderRadius: '20px', margin: '0px auto'}}>Sign in</Button>
+          <Button variant="primary" style={{width: '200px', borderRadius: '20px', margin: '0px auto'}} onClick={login}>Sign in</Button>
         </Box>
         <Box className='intro'>
           <Title>New Customer?</Title>
@@ -60,28 +101,28 @@ const Login = () => {
             <Form.Label>Just create an account, you can buy everything.</Form.Label>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Label>Username <span style={{color: 'red'}}>*</span></Label>
-              <Form.Control type="text" placeholder="Your username" />
+              <Form.Control type="text" placeholder="Your username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
             </Form.Group>
             <Row>
               <Form.Group style={{marginRight: '5px'}} className="mb-3" controlId="exampleForm.ControlInput1">
                 <Label>First name <span style={{color: 'red'}}>*</span></Label>
-                <Form.Control type="text" placeholder="Your first name" />
+                <Form.Control type="text" placeholder="Your first name" value={fName} onChange={(e)=>setFName(e.target.value)}/>
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Label>Last name <span style={{color: 'red'}}>*</span></Label>
-                <Form.Control type="text" placeholder="Your last name" />
+                <Form.Control type="text" placeholder="Your last name" value={lName} onChange={(e)=>setLName(e.target.value)}/>
               </Form.Group>
             </Row>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Label>Password <span style={{color: 'red'}}>*</span></Label>
-              <Form.Control type="password" placeholder="Your password" />
+              <Form.Control type="password" placeholder="Your password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Label>Confirm password <span style={{color: 'red'}}>*</span></Label>
-              <Form.Control type="password" placeholder="Your password" />
+              <Form.Control type="password" placeholder="Your password" value={cfPassword} onChange={(e)=>setCfPassword(e.target.value)}/>
             </Form.Group>
           </Form>
-          <Button variant="primary" style={{width: '200px', borderRadius: '20px', margin: '0px auto'}}>
+          <Button variant="primary" style={{width: '200px', borderRadius: '20px', margin: '0px auto'}} onClick={signup}>
               Create an account
           </Button>
         </Box>
