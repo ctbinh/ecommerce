@@ -39,7 +39,8 @@
             'amout' => $amount,
             'rating' => $rating,
             'num_reviewer' => $num_reviewer,
-            'img_cover' => $img_cover
+            'img_cover' => $img_cover,
+            'description' => $description
           );
 
           // Push to "data"

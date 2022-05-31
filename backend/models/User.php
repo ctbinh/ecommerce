@@ -1,5 +1,5 @@
 <?php
-class Product
+class User
 {
   // DB Stuff
   private $conn;
@@ -20,6 +20,25 @@ class Product
   public function __construct($db)
   {
     $this->conn = $db;
+  }
+
+  public function login() {
+    $query = 'SELECT * FROM ' . $this->table . ' WHERE username = ? LIMIT 1';
+    
+    $stmt = $this->conn->prepare($query);
+
+    $stmt->bindParam(1, $this->username);
+    
+    if($stmt->execute()){
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      if($row) {
+        $this->username = $row['username'];
+        $this->password = $row['password'];
+        return true;
+      }
+    }
+    // printf("Error: %s.\n", $stmt->error);
+    return false;
   }
 
   public function read()
@@ -50,7 +69,7 @@ class Product
     $stmt = $this->conn->prepare($query);
 
     // Bind ID
-    $stmt->bindParam(1, $this->id);
+    $stmt->bindParam(1, $this->username);
 
     // Execute query
     $stmt->execute();
@@ -58,11 +77,27 @@ class Product
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // set properties
-    $this->id = $row['id'];
-    $this->name = $row['name'];
+    $this->username = $row['username'];
+    $this->password = $row['password'];
   }
 
-  public function create() {}
+  public function create() {
+    $query = 'INSERT INTO ' . $this->table . ' SET username = :username, password = :password, fName = :fName, lName = :lName';
+    $stmt = $this->conn->prepare($query);
+    $this->username = htmlspecialchars(strip_tags($this->username));
+    $this->password = htmlspecialchars(strip_tags($this->password));
+    $this->fName = htmlspecialchars(strip_tags($this->fName));
+    $this->lName = htmlspecialchars(strip_tags($this->lName));
+    $stmt->bindParam(':username', $this->username);
+    $stmt->bindParam(':password', $this->password);
+    $stmt->bindParam(':fName', $this->fName);
+    $stmt->bindParam(':lName', $this->lName);
+    if($stmt->execute()) {
+      return true;
+    }
+    printf("Error: %s.\n", $stmt->error);
+    return false;
+  }
   public function update() {}
   public function delete() {}
 }
