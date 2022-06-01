@@ -11,6 +11,16 @@ export const getProducts = createAsyncThunk(
     return response.data.data;
   }
 );
+export const updateProduct = createAsyncThunk(
+  "product/singleProductUpdate",
+  async (updatedProduct) => {
+    const response = await axios.put(
+      "http://localhost/ecommerce/backend/api/product/update.php",
+      updatedProduct
+    );
+    return response.data;
+  }
+);
 export const getSingleProduct = createAsyncThunk(
   "product/singleProductsFetched",
   async (id) => {
@@ -103,6 +113,18 @@ const productsSlice = createSlice({
     },
     [getSingleProduct.rejected]: (state, action) => {
       console.log("Failed to get single product!!!");
+    },
+
+    // Update product
+    [updateProduct.pending]: (state, action) => {
+      console.log("Fetching products from backend ....");
+    },
+    [updateProduct.fulfilled]: (state, action) => {
+      console.log("Done");
+      // state.allProducts = action.payload;
+    },
+    [updateProduct.rejected]: (state, action) => {
+      console.log("Failed to get products!!!");
     },
   },
 });

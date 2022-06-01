@@ -3,7 +3,7 @@ import styled from "styled-components";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TextContainer from "./TextContainer";
 import { useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -11,7 +11,9 @@ import {
   getSingleProduct,
   singleProductsSelector,
 } from "../../store/reducers/productsSlice";
-
+import { Box, CircularProgress, Fab } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
 const Detail = () => {
   // param in url
   let [searchParams, setSearchParams] = useSearchParams();
@@ -28,111 +30,138 @@ const Detail = () => {
     dispatch(getSingleProduct(searchParams.get("id")));
     window.scrollTo(0, 0);
   }, [dispatch]);
-
-  if (product.loading) return <h1>Loading</h1>;
+  // navigate
+  const navigate = useNavigate();
+  if (product.loading) return <CircularProgress />;
   return (
-    <Wrap>
-      <Container>
-        <Carousel autoPlay>
-          <div>
-            <img src={product.img_cover} alt="" />
-          </div>
-          {product.imgList.map((imgItem) => (
+    <>
+      <Wrap>
+        <Container>
+          <Carousel autoPlay>
             <div>
-              <img src={imgItem.url} alt="" />
+              <img src={product.img_cover} alt="" />
             </div>
-          ))}
-          {/* <div>
+            {product.imgList.map((imgItem) => (
+              <div>
+                <img src={imgItem.url} alt="" />
+              </div>
+            ))}
+            {/* <div>
             <img
               src="https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-1_10ebeafae1d64bc5a00168a46e9db5b6_master.png"
               alt=""
             />
           </div> */}
-        </Carousel>
-        <ContainerComment>
-          <Header>
-            <Heading>Comment</Heading>
-          </Header>
-          <Table>
-            <Tr>
-              <Th>Name</Th>
-              <Th>Content</Th>
-              <Th>Action</Th>
-            </Tr>
-            <Tr>
-              <Td>An moixxxxxx</Td>
-              <Td>Như cc</Td>
-              <Td>Remove</Td>
-            </Tr>
-            <Tr>
-              <Td>An moi</Td>
-              <Td>Như cc</Td>
-              <Td>Remove</Td>
-            </Tr>
-            <Tr>
-              <Td>An moi</Td>
-              <Td>Như cc</Td>
-              <Td>Remove</Td>
-            </Tr>
-            <Tr>
-              <Td>An moi</Td>
-              <Td>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptas veritatis laudantium est. Est dolorem voluptatum maxime
-                dicta amet ducimus repudiandae, odit, autem aut illo ullam,
-                doloribus sequi temporibus voluptates ipsa?
-              </Td>
-              <Td>Remove</Td>
-            </Tr>
-            <Tr>
-              <Td>An moi</Td>
-              <Td>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptas veritatis laudantium est. Est dolorem voluptatum maxime
-                dicta amet ducimus repudiandae, odit, autem aut illo ullam,
-                doloribus sequi temporibus voluptates ipsa?
-              </Td>
-              <Td>Remove</Td>
-            </Tr>
-            <Tr>
-              <Td>An moi</Td>
-              <Td>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptas veritatis laudantium est. Est dolorem voluptatum maxime
-                dicta amet ducimus repudiandae, odit, autem aut illo ullam,
-                doloribus sequi temporibus voluptates ipsa?
-              </Td>
-              <Td>Remove</Td>
-            </Tr>
-            <Tr>
-              <Td>An moi</Td>
-              <Td>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptas veritatis laudantium est. Est dolorem voluptatum maxime
-                dicta amet ducimus repudiandae, odit, autem aut illo ullam,
-                doloribus sequi temporibus voluptates ipsa?
-              </Td>
-              <Td>Remove</Td>
-            </Tr>
-          </Table>
-        </ContainerComment>
-      </Container>
-      <Container>
-        <TextContainer label="ID" text={product.product_id} />
-        <TextContainer label="Name" text={product.name} />
-        <TextContainer label="Brand" text={product.brand} />
-        <TextContainer label="Amount" text={product.amount} />
-        <TextContainer label="CPU" text={product.cpu} />
-        <TextContainer label="Description" text={product.description} />
-        <TextContainer label="GPU" text={product.gpu} />
-        <TextContainer label="OS" text={product.os} />
-        <TextContainer label="Price" text={product.price} />
-        <TextContainer label="Ram" text={product.ram} />
-        <TextContainer label="Rating" text={product.rating} />
-        <TextContainer label="Screen" text={product.screen} />
-        <TextContainer label="Size" text={product.size} />
-      </Container>
-    </Wrap>
+          </Carousel>
+          <ContainerComment>
+            <Header>
+              <Heading>Comment</Heading>
+            </Header>
+            <Table>
+              <Tr>
+                <Th>Name</Th>
+                <Th>Content</Th>
+                <Th>Action</Th>
+              </Tr>
+              <Tr>
+                <Td>An moixxxxxx</Td>
+                <Td>Như cc</Td>
+                <Td>Remove</Td>
+              </Tr>
+              <Tr>
+                <Td>An moi</Td>
+                <Td>Như cc</Td>
+                <Td>Remove</Td>
+              </Tr>
+              <Tr>
+                <Td>An moi</Td>
+                <Td>Như cc</Td>
+                <Td>Remove</Td>
+              </Tr>
+              <Tr>
+                <Td>An moi</Td>
+                <Td>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Voluptas veritatis laudantium est. Est dolorem voluptatum
+                  maxime dicta amet ducimus repudiandae, odit, autem aut illo
+                  ullam, doloribus sequi temporibus voluptates ipsa?
+                </Td>
+                <Td>Remove</Td>
+              </Tr>
+              <Tr>
+                <Td>An moi</Td>
+                <Td>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Voluptas veritatis laudantium est. Est dolorem voluptatum
+                  maxime dicta amet ducimus repudiandae, odit, autem aut illo
+                  ullam, doloribus sequi temporibus voluptates ipsa?
+                </Td>
+                <Td>Remove</Td>
+              </Tr>
+              <Tr>
+                <Td>An moi</Td>
+                <Td>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Voluptas veritatis laudantium est. Est dolorem voluptatum
+                  maxime dicta amet ducimus repudiandae, odit, autem aut illo
+                  ullam, doloribus sequi temporibus voluptates ipsa?
+                </Td>
+                <Td>Remove</Td>
+              </Tr>
+              <Tr>
+                <Td>An moi</Td>
+                <Td>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Voluptas veritatis laudantium est. Est dolorem voluptatum
+                  maxime dicta amet ducimus repudiandae, odit, autem aut illo
+                  ullam, doloribus sequi temporibus voluptates ipsa?
+                </Td>
+                <Td>Remove</Td>
+              </Tr>
+            </Table>
+          </ContainerComment>
+        </Container>
+        <Container>
+          <Box
+            sx={{
+              "& > :not(style)": { m: 1 },
+              position: "fixed",
+              // display: "flex",
+              // justifyContent: "flex-end",
+              right: "10px",
+              bottom: "20px",
+            }}
+          >
+            <Fab color="primary" aria-label="add">
+              <AddIcon />
+            </Fab>
+            <Fab
+              color="secondary"
+              aria-label="edit"
+              onClick={() =>
+                navigate(`../product/edit?id=${product.product_id}`)
+              }
+            >
+              <EditIcon />
+            </Fab>
+          </Box>
+
+          <TextContainer label="ID" text={product.product_id} />
+          <TextContainer label="Name" text={product.name} />
+          <TextContainer label="Brand" text={product.brand} />
+          <TextContainer label="Amount" text={product.amount} />
+          <TextContainer label="CPU" text={product.cpu} />
+          <TextContainer label="Description" text={product.description} />
+          <TextContainer label="GPU" text={product.gpu} />
+          <TextContainer label="OS" text={product.os} />
+          <TextContainer label="Price" text={product.price} />
+          <TextContainer label="Ram" text={product.ram} />
+          <TextContainer label="Rating" text={product.rating} />
+          <TextContainer label="Screen" text={product.screen} />
+          <TextContainer label="Size" text={product.size} />
+        </Container>
+      </Wrap>
+    </>
   );
 };
 // CSS
@@ -145,7 +174,7 @@ const Wrap = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: 700px;
 `;
 const Img = styled.img`
   object-fit: cover;

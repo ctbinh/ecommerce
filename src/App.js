@@ -7,10 +7,11 @@ import Home from "./components/Home/Home";
 import HomeAdmin from "./Admin/components/Home";
 import AdminLogin from "./Admin/components/Login";
 import Header from "./components/Header";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
 import User from "./components/User/User";
 import Product from "./Admin/components/products/index";
 import AdminDetail from "./Admin/components/products/Detail";
+import AdminEdit from "./Admin/components/products/Edit";
 import Customer from "./Admin/components/customers/Customer";
 import Detail from "./components/Detail";
 import AddProduct from "./Admin/components/products/AddProduct";
@@ -31,6 +32,7 @@ function App() {
             <Route path="invoice" element={<Invoice />} />
             <Route path="orders" element={<Orders />} />
             <Route path="product/detail" element={<AdminDetail />} />
+            <Route path="product/edit" element={<AdminEdit />} />
             <Route path="" element={<HomeAdmin />} />
           </Route>
           <Route path="/" element={<Home />} />
