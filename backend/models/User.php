@@ -1,5 +1,5 @@
 <?php
-class Product
+class User
 {
   // DB Stuff
   private $conn;
@@ -65,4 +65,11 @@ class Product
   public function create() {}
   public function update() {}
   public function delete() {}
+  public function update_Img($user_id, $img) {
+    $query = 'UPDATE user SET url_avt = ' . $img . ' WHERE user_id = ' . $user_id;
+    // Prepare statement
+    $stmt = $this->conn->prepare($query);
+    // Execute query
+    $stmt->execute();
+  }
 }
