@@ -9,6 +9,7 @@ import Header from './Header';
 import Footer from './Footer';
 import React, { useState } from 'react';
 import 'react-notifications/lib/notifications.css';
+import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const Cart = () => {
@@ -17,8 +18,10 @@ const Cart = () => {
     const [address, setAddress] = useState("");
 
     const location = useLocation()
-    const { cart } = location.state
+    const { cartt } = location.state
+    const [cart, setCart] = useState(cartt);
     const navigate = useNavigate(); 
+
     const createNotification = (type) => {
           switch (type) {
             case 'info':
@@ -48,6 +51,21 @@ const Cart = () => {
           if (!Number(phone)) createNotification('errorPhone');
           if (address.length < 3 || address.length > 30) createNotification('errorAddress');
       }
+      const ClearAll = () => {
+          setCart([])
+          const data = {
+            user_id: 1, 
+        }
+        let config = {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        }
+        axios.post("http://localhost/ecommerce/backend/api/cart/deleteAll.php", data, config)
+            .then((response) => {
+                console.log(response.data);
+            });
+      }
     return (
         <div> 
             <Header/>  
@@ -75,16 +93,17 @@ const Cart = () => {
                                 style={Scrollbarstyled}
                                 noScrollX
                             >
-                            {cart.map(product => (
-                                <RowOfTable product={product}/>
-                            ))}
+                            {cart.length !== 0 ? cart.map(product => (
+                                <RowOfTable product={product} cart={cart} setCart={setCart}/> 
+                                // <RowOfTable product={product}/> 
+                            )) : <NoItemInCart>( No Items In Your Cart )</NoItemInCart>}
                             </Scrollbars>              
                         <Row>
                             <Col sm={6}>
                                 <ButtonContinue onClick={ () => navigate(-1) }>Continue Shopping</ButtonContinue>
                             </Col>
                             <Col sm={6}>
-                                <ButtonClear>Clear Shopping Cart</ButtonClear>
+                                <ButtonClear onClick={ClearAll}>Clear Shopping Cart</ButtonClear>
                             </Col>
                         </Row>
                     </Col>
@@ -326,5 +345,11 @@ const CloseResponesive = styled(Col)`
     @media (max-width: 480px) {
         display: none;
     }
+`
+const NoItemInCart = styled.h2`
+    font-style: italic;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 30px;
 `
 export default Cart

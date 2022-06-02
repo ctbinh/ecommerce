@@ -29,7 +29,21 @@ const RowOfTable = (props) => {
     }
     let decrementCount = () => setCount(count - 1);
     const Delete = () => {
+        props.setCart(props.cart.filter(pro => pro.product_id !== props.product.product_id && pro.user_id !== 1))
+        const data = {
+            user_id: 1, 
+            product_id: props.product.product_id, 
+        }
+        let config = {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        }
         setCount(0)
+        axios.post("http://localhost/ecommerce/backend/api/cart/delete.php", data, config)
+            .then((response) => {
+                console.log(response.data);
+            });
     }
     if(count <= 0) {
         return <></> 
