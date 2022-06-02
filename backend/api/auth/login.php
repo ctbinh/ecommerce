@@ -22,7 +22,7 @@ $user->username = $data->username;
 $user->password = $data->password;
 
 if($user->login()) {
-  if($user->password == $data->password) {
+  if(password_verify($data->password, $user->password)) {
     echo json_encode(
       array('message' => 'Login successful',
       'status' => 'OK')

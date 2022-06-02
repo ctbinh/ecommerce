@@ -18,7 +18,7 @@ $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
 $user->username = $data->username;
-$user->password = $data->password;
+$user->password = password_hash($data->password, PASSWORD_DEFAULT);
 $user->fName = $data->fName;
 $user->lName = $data->lName;
 // Create Category
