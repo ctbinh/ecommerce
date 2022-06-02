@@ -46,6 +46,9 @@ CREATE TABLE `cart` (
   `product_id` int(11) NOT NULL,
   `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `cart` (user_id, product_id, amount) 
+VALUES (1 ,1, 2), (1, 2, 3), (2, 2, 4)
+
 
 -- --------------------------------------------------------
 
@@ -446,6 +449,11 @@ CREATE TABLE `user` (
   `birthday` date NOT NULL,
   `url_avt` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+INSERT INTO `user` (user_id, username, password, fName, lName, email, phone, birthday, url_avt)
+VALUES (1, "Thalo", "123456", "Nguyễn", "Long", "vodanh@gmail.com", "0123445667","01-01-2001", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYpR4DvujRhJleInDuoohGQ-nthBJNBrYiHA&usqp=CAU"),
+(2, "Thalo1", "123456", "Nguyễn", "Long", "vodanh@gmail.com", "0123445667","01-01-2001", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYpR4DvujRhJleInDuoohGQ-nthBJNBrYiHA&usqp=CAU")
 
 --
 -- Indexes for dumped tables

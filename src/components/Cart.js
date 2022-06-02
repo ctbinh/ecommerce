@@ -9,70 +9,19 @@ import Header from './Header';
 import Footer from './Footer';
 import React, { useState } from 'react';
 import 'react-notifications/lib/notifications.css';
-const lstCart = [
-    {
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP0upF_DooL0hjwus-eb9Xb2WKRwGTdAkJig&usqp=CAU",
-        "des": "MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty",
-        "price": 13599000,
-        "quantity": 1,
-        "subtotal": 12543,
-        "name": "MSI MEG Trident X 10SD-1012AU"
-    },
-    {
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP0upF_DooL0hjwus-eb9Xb2WKRwGTdAkJig&usqp=CAU",
-        "des": "MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty",
-        "price": 13599000,
-        "quantity": 1,
-        "subtotal": 12543,
-        "name": "MSI MEG Trident X 10SD-1012AU"
-    },
-    {
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP0upF_DooL0hjwus-eb9Xb2WKRwGTdAkJig&usqp=CAU",
-        "des": "MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty",
-        "price": 13599000,
-        "quantity": 1,
-        "subtotal": 12543,
-        "name": "MSI MEG Trident X 10SD-1012AU"
-    },
-    {
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP0upF_DooL0hjwus-eb9Xb2WKRwGTdAkJig&usqp=CAU",
-        "des": "MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty",
-        "price": 13599000,
-        "quantity": 1,
-        "subtotal": 12543,
-        "name": "MSI MEG Trident X 10SD-1012AU"
-    },
-    {
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP0upF_DooL0hjwus-eb9Xb2WKRwGTdAkJig&usqp=CAU",
-        "des": "MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty",
-        "price": 13599000,
-        "quantity": 1,
-        "subtotal": 12543,
-        "name": "MSI MEG Trident X 10SD-1012AU"
-    },
-    {
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP0upF_DooL0hjwus-eb9Xb2WKRwGTdAkJig&usqp=CAU",
-        "des": "MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty",
-        "price": 13599000,
-        "quantity": 1,
-        "subtotal": 12543,
-        "name": "MSI MEG Trident X 10SD-1012AU"
-    },
-    {
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP0upF_DooL0hjwus-eb9Xb2WKRwGTdAkJig&usqp=CAU",
-        "des": "MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty",
-        "price": 13599000,
-        "quantity": 1,
-        "subtotal": 12543,
-        "name": "MSI MEG Trident X 10SD-1012AU"
-    },
-    
-] 
+import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Cart = () => {
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
+
+    const location = useLocation()
+    const { cartt } = location.state
+    const [cart, setCart] = useState(cartt);
+    const navigate = useNavigate(); 
+
     const createNotification = (type) => {
           switch (type) {
             case 'info':
@@ -102,6 +51,21 @@ const Cart = () => {
           if (!Number(phone)) createNotification('errorPhone');
           if (address.length < 3 || address.length > 30) createNotification('errorAddress');
       }
+      const ClearAll = () => {
+          setCart([])
+          const data = {
+            user_id: 1, 
+        }
+        let config = {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        }
+        axios.post("http://localhost/ecommerce/backend/api/cart/deleteAll.php", data, config)
+            .then((response) => {
+                console.log(response.data);
+            });
+      }
     return (
         <div> 
             <Header/>  
@@ -129,16 +93,17 @@ const Cart = () => {
                                 style={Scrollbarstyled}
                                 noScrollX
                             >
-                            {lstCart.map(product => (
-                                <RowOfTable product={product}/>
-                            ))}
-                        </Scrollbars>              
+                            {cart.length !== 0 ? cart.map(product => (
+                                <RowOfTable product={product} cart={cart} setCart={setCart}/> 
+                                // <RowOfTable product={product}/> 
+                            )) : <NoItemInCart>( No Items In Your Cart )</NoItemInCart>}
+                            </Scrollbars>              
                         <Row>
                             <Col sm={6}>
-                                <ButtonContinue>Continue Shopping</ButtonContinue>
+                                <ButtonContinue onClick={ () => navigate(-1) }>Continue Shopping</ButtonContinue>
                             </Col>
                             <Col sm={6}>
-                                <ButtonClear>Clear Shopping Cart</ButtonClear>
+                                <ButtonClear onClick={ClearAll}>Clear Shopping Cart</ButtonClear>
                             </Col>
                         </Row>
                     </Col>
@@ -162,7 +127,7 @@ const Cart = () => {
                                 <Ship>Shipping</Ship>
                             </Col>
                             <Col sm={2.5} xs={2.5}>
-                                <ValueShip>{(21000).toLocaleString()}</ValueShip>
+                                <ValueShip>${(21000).toLocaleString()}</ValueShip>
                                 {/* <ValueShip>{document.getElementById("name").value}</ValueShip> */}
                             </Col>
                         </Row>
@@ -172,11 +137,13 @@ const Cart = () => {
                                 <Ship>Order Total</Ship>
                             </Col>
                             <Col sm={2.5} xs={2.5}>
-                                <ValueShip>{(13245).toLocaleString()}</ValueShip>
+                                <ValueShip>
+                                    ${cart.reduce((sum, product) => {return sum + product.amount* product.price }, 0).toFixed(2)}
+                                </ValueShip>
                             </Col>
                         </Row>
                         <br />
-                        <Link to="/checkout" style={LinkStyle} state={{ name: name, address: address, phone: phone, lstCart: lstCart }}>
+                        <Link to="/checkout" style={LinkStyle} state={{ name: name, address: address, phone: phone, lstCart: cart }}>
                             {name.length >= 3  
                             && name.length <=14 
                             && address.length >= 3  
@@ -279,7 +246,7 @@ const Line = styled.hr`
 
 `
 const ContainerInput = styled.div`
-    background-color: #F5F7FF;
+    background-color: #C5D0FF;
     margin-bottom: 10px;
 `
 const NameInput = styled.div`
@@ -303,7 +270,7 @@ const RowHeader = {
     marginBottom: "10px",
 }
 const ContainerSummary = {
-    backgroundColor: "#F5F7FF",
+    backgroundColor: "#C5D0FF",
     // backgroundColor: "red",
     borderRadius: "10px",
     // boxShadow: "-5px 5px #444444",
@@ -378,5 +345,11 @@ const CloseResponesive = styled(Col)`
     @media (max-width: 480px) {
         display: none;
     }
+`
+const NoItemInCart = styled.h2`
+    font-style: italic;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 30px;
 `
 export default Cart

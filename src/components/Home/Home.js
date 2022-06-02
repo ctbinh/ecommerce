@@ -12,7 +12,7 @@ import Filter from './Filter'
 import Product from './Product'
 // import http from '../../http-common';
 import axios from 'axios';
-let isFirst = true;
+
 let data = []
 const Home = () => {
   const brands = [
@@ -60,7 +60,7 @@ const Home = () => {
   const [products, setproducts] = useState([])
   const [countPage, setcountPage] = useState(0)
   const [filteredProducts, setfilteredProducts] = useState([])
-
+  const [isFirst, setIsFirst] = useState(true)
   const [value, setValue] = useState([0, 3000]);
   const [ramFilter, setRamFilter] = useState([]);
   const changePage = (event, value) => {
@@ -140,7 +140,6 @@ const Home = () => {
       })
       getProductPerPage(productFiltered)
       setfilteredProducts(productFiltered)
-      console.log(productFiltered)
       setcountPage(Math.ceil(productFiltered.length/num))
     }
   }
@@ -160,7 +159,6 @@ const Home = () => {
         data = res.data.data
         setcountPage(Math.ceil(data.length/num))
         setfilteredProducts(data)
-        isFirst = false
       }
       const indexLast = currPage*num
       const indexFirst = indexLast - num
@@ -168,7 +166,8 @@ const Home = () => {
       setproducts(pds)
     }
     fetchProducts()
-  }, [currPage, num, filteredProducts])
+    setIsFirst(false)
+  }, [currPage, num, filteredProducts, isFirst])
   
   return (
     <>

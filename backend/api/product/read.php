@@ -1,37 +1,37 @@
-<?php 
-  // Headers
-  header('Access-Control-Allow-Origin: *');
-  header('Content-Type: application/json');
+<?php
+// Headers
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
 
-  include_once '../../config/Database.php';
-  include_once '../../models/Product.php';
+include_once '../../config/Database.php';
+include_once '../../models/Product.php';
 
-  // Instantiate DB & connect
-  $database = new Database();
-  $db = $database->connect();
+// Instantiate DB & connect
+$database = new Database();
+$db = $database->connect();
 
-  // Instantiate category object
-  $product = new Product($db);
+// Instantiate category object
+$product = new Product($db);
 
-  // Category read query
-  $result = $product->read();
-  
-  // Get row count
-  $num = $result->rowCount();
+// Category read query
+$result = $product->read();
 
-  // Check if any categories
-  if($num > 0) {
-        // Cat array
-        $pd_arr = array();
-        $pd_arr['data'] = array();
+// Get row count
+$num = $result->rowCount();
 
-        while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-          extract($row);
+// Check if any categories
+if ($num > 0) {
+    // Cat array
+    $pd_arr = array();
+    $pd_arr['data'] = array();
 
-          $pd_item = array(
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+
+        $pd_item = array(
             'product_id' => $product_id,
-            'name' => $name, 
-            'brand' => $brand, 
+            'name' => $name,
+            'brand' => $brand,
             'name' => $name,
             'ram' => $ram,
             'price' => $price,
@@ -40,19 +40,20 @@
             'rating' => $rating,
             'num_reviewer' => $num_reviewer,
             'img_cover' => $img_cover,
+            'cpu' => $cpu,
             'description' => $description
-          );
-
-          // Push to "data"
-          array_push($pd_arr['data'], $pd_item);
-        }
-
-        // Turn to JSON & output
-        echo json_encode($pd_arr);
-
-  } else {
-        // No Categories
-        echo json_encode(
-          array('message' => 'No Categories Found')
         );
-  }
+
+        // Push to "data"
+        array_push($pd_arr['data'], $pd_item);
+    }
+
+    // Turn to JSON & output
+    echo json_encode($pd_arr);
+
+} else {
+    // No Categories
+    echo json_encode(
+        array('message' => 'No Categories Found')
+    );
+}

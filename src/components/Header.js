@@ -2,8 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { ShoppingCart, Person } from "@mui/icons-material";
 import { Navbar, Container, Nav, NavDropdown, Dropdown } from 'react-bootstrap';
+import axios from 'axios';
+import {Link} from "react-router-dom";
+import { useState, useEffect } from 'react';
 
 const Header = () => {
+    const [cart, setCart] = useState([]);
+    
+    useEffect(() => {
+      axios.get("http://localhost/ecommerce/backend/api/cart/finditems.php").then((response) => {
+          if (response.data.data) setCart(response.data.data);
+          console.log(response.data.message);
+      });
+    }, []);
     return <>
 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{ backgroundColor: 'black' }}>
@@ -50,10 +61,12 @@ const Header = () => {
                 </Navbar.Collapse>
 
                 <NavIcon>
-                    <div style={{ marginLeft: 'auto', minWidth: '60px' }}>
-                        <CartIcon />
-                        <CartCounter>20</CartCounter>
-                    </div>
+                      <div style={{ marginLeft: 'auto', minWidth: '60px' }}>
+                    <Link to="/cart" state={{cartt: cart }}>
+                          <CartIcon />
+                          <CartCounter>20</CartCounter>
+                    </Link>
+                      </div>
 
                     {/* <UserIcon>
                     </UserIcon> */}
