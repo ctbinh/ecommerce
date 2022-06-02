@@ -14,7 +14,7 @@ $db = $database->connect();
 $product = new ImageProduct($db);
 
 // Get ID
-$product->id = isset($_GET['id']) ? $_GET['id'] : die();
+$product->product_id = isset($_GET['id']) ? $_GET['id'] : die();
 
 // Get product
 $result = $product->read_single();
@@ -31,6 +31,7 @@ if ($num > 0) {
 
         $pd_item = array(
             // 'product_id' => $product_id,
+            'id' => $id,
             'url' => $url,
         );
 

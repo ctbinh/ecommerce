@@ -21,6 +21,15 @@ export const updateProduct = createAsyncThunk(
     return response.data;
   }
 );
+export const getImgForProduct = createAsyncThunk(
+  "product/singleimg",
+  async (id) => {
+    const res = await axios.get(
+      `http://localhost/ecommerce/backend/api/imgProduct/read_single.php?id=${id}`
+    );
+    return res.data;
+  }
+);
 export const getSingleProduct = createAsyncThunk(
   "product/singleProductsFetched",
   async (id) => {
@@ -47,6 +56,26 @@ export const getSingleProduct = createAsyncThunk(
     //   `http://localhost/ecommerce/backend/api/product/read_single.php?id=${id}`
     // );
     return response;
+  }
+);
+
+export const createImg = createAsyncThunk(
+  "product/img",
+  async ({ id, url }) => {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+    };
+    const res = await axios.post(
+      `http://localhost/ecommerce/backend/api/imgProduct/create.php?id=${id}`,
+      {
+        url: url,
+      },
+      config
+    );
+    return res.data;
   }
 );
 const productsSlice = createSlice({
@@ -107,8 +136,8 @@ const productsSlice = createSlice({
     [getSingleProduct.fulfilled]: (state, action) => {
       console.log("Done");
       state.product = {
-        loading: false,
         ...action.payload,
+        loading: false,
       };
     },
     [getSingleProduct.rejected]: (state, action) => {
@@ -125,6 +154,32 @@ const productsSlice = createSlice({
     },
     [updateProduct.rejected]: (state, action) => {
       console.log("Failed to get products!!!");
+    },
+
+    // Update product
+    [createImg.pending]: (state, action) => {
+      console.log("create img from backend ....");
+    },
+    [createImg.fulfilled]: (state, action) => {
+      console.log("Done");
+    },
+    [createImg.rejected]: (state, action) => {
+      console.log("Failed to create img ");
+    },
+
+    // get img product
+    [getImgForProduct.pending]: (state, action) => {
+      console.log("get img for product from backend ....");
+    },
+    [getImgForProduct.fulfilled]: (state, action) => {
+      console.log("Done");
+      state.product = {
+        ...state.product,
+        imgList: action.payload,
+      };
+    },
+    [getImgForProduct.rejected]: (state, action) => {
+      console.log("Failed to get img products!!!");
     },
   },
 });

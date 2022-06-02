@@ -7,6 +7,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import TextContainer from "./TextContainer";
 import { useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 import {
   getSingleProduct,
   singleProductsSelector,

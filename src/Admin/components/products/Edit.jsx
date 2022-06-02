@@ -2,21 +2,33 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+// import Carousel from "./Carousel";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import TextContainer from "./TextContainer";
 import { useSearchParams } from "react-router-dom";
 import swal from "sweetalert";
 import { useSelector, useDispatch } from "react-redux";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 import {
   getSingleProduct,
   singleProductsSelector,
   updateProduct,
 } from "../../store/reducers/productsSlice";
-import { Box, CircularProgress, Fab, Input, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Fab,
+  Input,
+  TextField,
+  Tooltip,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DoneIcon from "@mui/icons-material/Done";
+import ImgUpload from "./ImgUpload";
 const Detail = () => {
   // handle change input
   const handleChange = (e) => {
@@ -80,84 +92,89 @@ const Detail = () => {
     <>
       <Wrap className="mb-10">
         <Container>
-          <Carousel autoPlay>
-            <div>
+          <Carousel>
+            <div className="position-relative">
               <img src={product.img_cover} alt="" />
+              <Popup
+                trigger={
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="medium"
+                    placement="top-end"
+                    className="position-absolute top-10 start-50"
+                    onClick={() => alert("them img ")}
+                  >
+                    Add
+                  </Button>
+                }
+                modal
+              >
+                <span>
+                  {" "}
+                  {/* Modal content */}
+                  <ImgUpload idProduct={product.product_id} />
+                </span>
+              </Popup>
             </div>
             {product.imgList.map((imgItem) => (
               <div>
                 <img src={imgItem.url} alt="" />
+                <Tooltip
+                  title="Delete"
+                  placement="top-end"
+                  className="position-absolute bottom-40 start-0"
+                >
+                  <Button
+                    variant="contained"
+                    color="error"
+                    size="medium"
+                    placement="top-end"
+                    onClick={() => alert("xoa img id=" + imgItem.id)}
+                  >
+                    Delete
+                  </Button>
+                </Tooltip>
+                {/* <Tooltip
+                  title="Add"
+                  placement="top-end"
+                  className="position-absolute top-10 start-50 "
+                > */}
+                {/* <Button
+                    variant="contained"
+                    color="primary"
+                    size="medium"
+                    placement="top-end"
+                    onClick={() => alert("them img ")}
+                  > */}
+                <Popup
+                  trigger={(open) => {
+                    console.log(open);
+                    return (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="medium"
+                        placement="top-end"
+                        className="position-absolute top-10 start-50"
+                      >
+                        Add
+                      </Button>
+                    );
+                  }}
+                  lockScroll={true}
+                  modal
+                >
+                  <div style={{ overflowY: "scroll" }}>
+                    <ImgUpload idProduct={product.product_id} />
+                  </div>
+                </Popup>
+                {/* Add
+                  </Button> */}
+                {/* </Tooltip> */}
               </div>
             ))}
           </Carousel>
-          {/*           
-          <ContainerComment>
-            <Header>
-              <Heading>Comment</Heading>
-            </Header>
-            <Table>
-              <Tr>
-                <Th>Name</Th>
-                <Th>Content</Th>
-                <Th>Action</Th>
-              </Tr>
-              <Tr>
-                <Td>An moixxxxxx</Td>
-                <Td>Như cc</Td>
-                <Td>Remove</Td>
-              </Tr>
-              <Tr>
-                <Td>An moi</Td>
-                <Td>Như cc</Td>
-                <Td>Remove</Td>
-              </Tr>
-              <Tr>
-                <Td>An moi</Td>
-                <Td>Như cc</Td>
-                <Td>Remove</Td>
-              </Tr>
-              <Tr>
-                <Td>An moi</Td>
-                <Td>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Voluptas veritatis laudantium est. Est dolorem voluptatum
-                  maxime dicta amet ducimus repudiandae, odit, autem aut illo
-                  ullam, doloribus sequi temporibus voluptates ipsa?
-                </Td>
-                <Td>Remove</Td>
-              </Tr>
-              <Tr>
-                <Td>An moi</Td>
-                <Td>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Voluptas veritatis laudantium est. Est dolorem voluptatum
-                  maxime dicta amet ducimus repudiandae, odit, autem aut illo
-                  ullam, doloribus sequi temporibus voluptates ipsa?
-                </Td>
-                <Td>Remove</Td>
-              </Tr>
-              <Tr>
-                <Td>An moi</Td>
-                <Td>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Voluptas veritatis laudantium est. Est dolorem voluptatum
-                  maxime dicta amet ducimus repudiandae, odit, autem aut illo
-                  ullam, doloribus sequi temporibus voluptates ipsa?
-                </Td>
-                <Td>Remove</Td>
-              </Tr>
-              <Tr>
-                <Td>An moi</Td>
-                <Td>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Voluptas veritatis laudantium est. Est dolorem voluptatum
-                  maxime dicta amet ducimus repudiandae, odit, autem aut illo
-                  ullam, doloribus sequi temporibus voluptates ipsa?
-                </Td>
-                <Td>Remove</Td>
-              </Tr>
-            </Table>
-          </ContainerComment> */}
         </Container>
         <Container>
           <Box
@@ -244,7 +261,6 @@ const Detail = () => {
             fullWidth
             autoComplete
           />
-          {/* <Input label="Description" text={updatedProduct.description} /> */}
           <TextField
             id="outlined-basic"
             className="mt-3"
@@ -256,7 +272,6 @@ const Detail = () => {
             fullWidth
             autoComplete
           />
-          {/* <Input label="GPU" text={updatedProduct.gpu} /> */}
           <TextField
             id="outlined-basic"
             className="mt-3"
@@ -268,7 +283,6 @@ const Detail = () => {
             fullWidth
             autoComplete
           />
-          {/* <Input label="OS" text={updatedProduct.os} /> */}
           <TextField
             id="outlined-basic"
             className="mt-3"
@@ -280,7 +294,6 @@ const Detail = () => {
             fullWidth
             autoComplete
           />
-          {/* <Input label="Price" text={updatedProduct.price} /> */}
           <TextField
             id="outlined-basic"
             className="mt-3"
@@ -292,7 +305,6 @@ const Detail = () => {
             fullWidth
             autoComplete
           />
-          {/* <Input label="Ram" text={updatedProduct.ram} /> */}
           <TextField
             id="outlined-basic"
             label="Rating"
@@ -303,7 +315,6 @@ const Detail = () => {
             fullWidth
             disabled
           />
-          {/* <Input label="Rating" text={updatedProduct.rating} /> */}
           <TextField
             id="outlined-basic"
             className="mt-3"
@@ -315,7 +326,6 @@ const Detail = () => {
             fullWidth
             autoComplete
           />
-          {/* <Input label="Screen" text={updatedProduct.screen} /> */}
           <TextField
             id="outlined-basic"
             className="mt-3"
@@ -327,7 +337,6 @@ const Detail = () => {
             fullWidth
             autoComplete
           />
-          {/* <Input label="Size" text={updatedProduct.size} /> */}
         </Container>
       </Wrap>
     </>

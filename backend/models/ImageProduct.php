@@ -7,6 +7,7 @@ class ImageProduct
 
     // Properties
     public $product_id;
+    public $id;
     public $url;
 
     // Constructor with DB
@@ -39,7 +40,7 @@ class ImageProduct
         $stmt = $this->conn->prepare($query);
 
         // Bind ID
-        $stmt->bindParam(1, $this->id);
+        $stmt->bindParam(1, $this->product_id);
 
         // Execute query
         $stmt->execute();
@@ -49,7 +50,19 @@ class ImageProduct
     }
 
     public function create()
-    {}
+    {
+        $query = "INSERT into product_image (product_id,url) VALUES (?,?)";
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // Bind ID
+        $stmt->bindParam(1, $this->product_id);
+        $stmt->bindParam(2, $this->url);
+
+        // Execute query
+        $stmt->execute();
+        return $stmt;
+    }
     public function update()
     {}
     public function delete()
