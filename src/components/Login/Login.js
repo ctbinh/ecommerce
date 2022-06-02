@@ -22,13 +22,13 @@ const Login = () => {
     axios.post(`http://localhost/ecommerce/backend/api/auth/login.php`, data)
     .then(function (response) {
       console.log(response.data);
-      if(response.data.status === 'OK') {setUser(response.data)}      
+      if(response.data.status === 'OK') {setUser(response.data)}
     })
     .catch(function (error) {
         console.log(error);
     });
   }
-  const signup = () => {
+  const signup = async () => {
     if(password !== cfPassword) {
       alert('Wrong!')
       return
@@ -39,13 +39,8 @@ const Login = () => {
       'fName': fName,
       'lName': lName
     }
-    axios.post(`http://localhost/ecommerce/backend/api/auth/register.php`, data)
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
+    const res = await axios.post(`http://localhost/ecommerce/backend/api/auth/register.php`, data);
+    console.log(res.data)
   }
   return (
     <>

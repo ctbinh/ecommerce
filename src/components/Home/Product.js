@@ -12,10 +12,12 @@ const Product = (props) => {
   const product = props.product;
   return (
     <Container display={props.display}>
-      {product.instock ?
+      {product.amount > 0 ?
         <Status display={props.display}>
           <i class="fa fa-check-circle" aria-hidden="true"></i> in stock
-        </Status> : ''}
+        </Status> : <Status display={props.display} color="#cf2115">
+          <i class="fa fa-check-circle" aria-hidden="true"></i> out of stock
+        </Status>}
       <Box display={props.display}>
         <div>
           <Image display={props.display}>
@@ -87,7 +89,7 @@ const Rate = styled.div`
 
 const Status = styled.div`
   text-align: ${props => props.display === 0 ? 'left' : 'right'};
-  color: #78A962;
+  color: ${props => props.color ? props.color : '#78A962'};
   font-size: 13px;
 `
 const Image = styled.div`
