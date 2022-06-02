@@ -36,7 +36,7 @@
             'ram' => $ram,
             'price' => $price,
             'old_price' => $old_price,
-            'amout' => $amount,
+            'amount' => $amount,
             'rating' => $rating,
             'num_reviewer' => $num_reviewer,
             'img_cover' => $img_cover,

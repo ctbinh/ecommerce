@@ -82,21 +82,18 @@ class User
   }
 
   public function create() {
-    $query = 'INSERT INTO ' . $this->table . ' SET username = :username, password = :password, fName = :fName, lName = :lName';
+    $query = "INSERT into user (username,password, fName, lName) VALUES (?,?,?,?)";
+    // Prepare statement
     $stmt = $this->conn->prepare($query);
-    $this->username = htmlspecialchars(strip_tags($this->username));
-    $this->password = htmlspecialchars(strip_tags($this->password));
-    $this->fName = htmlspecialchars(strip_tags($this->fName));
-    $this->lName = htmlspecialchars(strip_tags($this->lName));
-    $stmt->bindParam(':username', $this->username);
-    $stmt->bindParam(':password', $this->password);
-    $stmt->bindParam(':fName', $this->fName);
-    $stmt->bindParam(':lName', $this->lName);
-    if($stmt->execute()) {
-      return true;
-    }
-    printf("Error: %s.\n", $stmt->error);
-    return false;
+
+    // Bind ID
+    $stmt->bindParam(1, $this->username);
+    $stmt->bindParam(2, $this->password);
+    $stmt->bindParam(3, $this->fName);
+    $stmt->bindParam(4, $this->lName);
+
+    // Execute query
+    return $stmt->execute();
   }
   public function update() {}
   public function delete() {}
