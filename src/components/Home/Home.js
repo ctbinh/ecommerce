@@ -4,17 +4,15 @@ import ReorderIcon from '@mui/icons-material/Reorder';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-// import Footer from '../Footer'
 import Header from '../Header'
 import Footer from '../Footer'
 import images from '../images'
 import Filter from './Filter'
 import Product from './Product'
-// import http from '../../http-common';
 import axios from 'axios';
 
 let data = []
-const Home = () => {
+const Home = (props) => {
   const brands = [
     {
       id: 0,
@@ -171,13 +169,13 @@ const Home = () => {
   
   return (
     <>
-      <Header />
+      <Header/>
       <Container>
         <Poster src={images.poster} alt="poster" />
         <Brands>
-          {brands.map((brand, key) => {
+          {brands.map((brand, idx) => {
             return (
-              <Brand src={brand.img} alt="brand" onClick={() => filterBrand(brand)}/>
+              <Brand key={idx} src={brand.img} alt="brand" onClick={() => filterBrand(brand)}/>
             )
           })}
         </Brands>
@@ -227,9 +225,9 @@ const Home = () => {
               </DisplayOption>
             </Row>
             <Pd>
-              {products.map((product) => {
+              {products.map((product, idx) => {
                 return (
-                  <Product display={display} product={product} />
+                  <Product key={idx} idx={idx} display={display} product={product} />
                 )
               })}
             </Pd>

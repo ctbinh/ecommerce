@@ -34,6 +34,7 @@ class User
       if($row) {
         $this->username = $row['username'];
         $this->password = $row['password'];
+        $this->user_id = $row['user_id'];
         return true;
       }
     }
@@ -56,29 +57,13 @@ class User
   // Get Single Category
   public function read_single()
   {
-    // Create query
-    $query = 'SELECT
-          id,
-          name
-        FROM
-          ' . $this->table . '
-      WHERE id = ?
-      LIMIT 0,1';
-
-    //Prepare statement
+    $query = 'SELECT * FROM ' . $this->table . ' WHERE user_id = ? LIMIT 1';
+    
     $stmt = $this->conn->prepare($query);
 
-    // Bind ID
-    $stmt->bindParam(1, $this->username);
-
-    // Execute query
+    $stmt->bindParam(1, $this->user_id);
     $stmt->execute();
-
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // set properties
-    $this->username = $row['username'];
-    $this->password = $row['password'];
+    return $stmt;
   }
 
   public function create() {

@@ -1,5 +1,4 @@
 <?php
-session_start();
 // Headers
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
@@ -25,10 +24,9 @@ if($user->login()) {
   if(password_verify($data->password, $user->password)) {
     echo json_encode(
       array('message' => 'Login successful',
-      'status' => 'OK')
+      'status' => 'OK',
+      'user_id' => $user->user_id)
     );
-    $_SESSION['username'] = $user->username;
-    $_SESSION['password'] = $user->password;
     return;
   }
 }

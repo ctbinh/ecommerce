@@ -8,18 +8,25 @@ import { useState, useEffect } from 'react';
 
 const Header = () => {
     const [cart, setCart] = useState([]);
-    
+    const signout = () => {
+      sessionStorage.clear();
+    }
+    const [user, setUser] = useState(null)
     useEffect(() => {
       axios.get("http://localhost/ecommerce/backend/api/cart/finditems.php").then((response) => {
           if (response.data.data) setCart(response.data.data);
           console.log(response.data.message);
       });
+      const data = sessionStorage.getItem('user_id');
+      if(data) {
+        setUser(data)
+      }
     }, []);
     return <>
 
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{ backgroundColor: 'black' }}>
             <Container style={{}}>
-                <Navbar.Brand href="#home" className="d-flex flex-row align-items-center">
+                <Navbar.Brand href="/" className="d-flex flex-row align-items-center">
                     <img
                         src="https://www.hcmut.edu.vn/images/hcmut/logoBK.png" alt="Logo HCMUT"
                         width="55"
@@ -35,7 +42,7 @@ const Header = () => {
 
                     <SearchBar className="searchbar">
                         <SearchButton >
-                            <i class="fa fa-search"></i>
+                            <i className="fa fa-search"></i>
                         </SearchButton>
                         <SearchInput type="text" name="search_book" id="" placeholder="Search..." />
                     </SearchBar>
@@ -75,14 +82,18 @@ const Header = () => {
                             <UserIcon>
                             </UserIcon>
                         </Dropdown.Toggle>
-
+                        
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Sign In</Dropdown.Item>
-                            <Dropdown.Item href="#/action-1">Sign Up</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">My Account</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">My Wishlist</Dropdown.Item>
+                        {user ?
+                          <>
+                            
+                            <Dropdown.Item href="/user">My Account</Dropdown.Item>
                             <Dropdown.Divider />
-                            <Dropdown.Item href="#/action-2">Sign out</Dropdown.Item>
+                            <Dropdown.Item href="/login" onClick={signout}>Sign out</Dropdown.Item>
+                          </> : <>
+                            <Dropdown.Item href="/login">Sign In</Dropdown.Item>
+                            <Dropdown.Item href="/login">Sign Up</Dropdown.Item>
+                          </>}
                         </Dropdown.Menu>
                     </Dropdown>
                 </NavIcon>

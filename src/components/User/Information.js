@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 import { Container, Row, Col } from "react-grid-system";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ImageUploading from "react-images-uploading";
 import { GrEdit } from "react-icons/gr"
+import axios from 'axios'
 const User = {
     "username": "Long",
     "password": "123456",
@@ -14,7 +15,7 @@ const User = {
     "url_avt": "https://pdp.edu.vn/wp-content/uploads/2021/05/hinh-anh-avatar-trang-dep-1.jpg",
     "birthday": "2001-01-01",
 }
-export default function Information () {
+export default function Information (props) {
 
     const choices = [
         {
@@ -34,6 +35,16 @@ export default function Information () {
     const [checked, setChecked] = useState(1);
 
     const [images, setImages] = useState([]);
+    const [userInfor, setUserInfor] = useState(
+        {   
+            'username': '', 
+            'fName': '', 
+            'lName':'',
+            'birthday': '',
+            'phone':'',
+            'email':'',
+            'gender': 'M'
+        })
     // images.data_url = User.url_avt;
     // const maxNumber = 69;
     const onChange = (imageList, addUpdateIndex) => {
@@ -41,6 +52,16 @@ export default function Information () {
         console.log(imageList, addUpdateIndex);
         setImages(imageList);
     };
+    useEffect(() => {
+        const fetchUser = async () => {
+            const id = sessionStorage.getItem('user_id')
+            const res = await axios.get('http://localhost/ecommerce/backend/api/user/read_single.php?user_id='+id);
+            setUserInfor(res.data)
+            console.log(res.data)
+          }
+          fetchUser()
+    }, [])
+    
     return (
         <div>
             <Title>Account Information</Title>
@@ -91,30 +112,30 @@ export default function Information () {
                     <Col>
                         <Row>
                             <Col sm={3}><NameInput>Username: </NameInput> </Col>
-                            <Col sm={9}><NameInput>{User.username}</NameInput></Col>
+                            <Col sm={9}><NameInput>{userInfor.username}</NameInput></Col>
                         </Row>
                         <ContainerInput>
                             <Row>
                                 <Col lg={2.5}><NameInput>First Name</NameInput></Col>
-                                <Col lg={9.5}><Input type="text" placeholder={User.fname}/></Col>
+                                <Col lg={9.5}><Input type="text" placeholder={userInfor.fName}/></Col>
                             </Row>
                         </ContainerInput>
                         <ContainerInput>
                             <Row>
                                 <Col lg={2.5}><NameInput>Last Name</NameInput></Col>
-                                <Col lg={9.5}><Input type="text" placeholder={User.lname}/></Col>
+                                <Col lg={9.5}><Input type="text" placeholder={userInfor.lName}/></Col>
                             </Row>
                         </ContainerInput>
                         <ContainerInput>
                             <Row>
                                 <Col lg={2.5}><NameInput>Email</NameInput></Col>
-                                <Col lg={9.5}><Input type="text" placeholder={User.email}/></Col>
+                                <Col lg={9.5}><Input type="text" placeholder={userInfor.email}/></Col>
                             </Row>
                         </ContainerInput>
                         <ContainerInput>
                             <Row>
                                 <Col lg={2.5}><NameInput>Phone</NameInput></Col>
-                                <Col lg={9.5}><Input type="text" placeholder={User.phone}/></Col>
+                                <Col lg={9.5}><Input type="text" placeholder={userInfor.phone}/></Col>
                             </Row>
                         </ContainerInput>
                         <Row>
@@ -134,7 +155,7 @@ export default function Information () {
                         </Row>
                         <Row>
                             <Col lg={2.5}><NameInput>Birthday</NameInput></Col>
-                            <Col lg={9.5}><Input type="date" id="start" name="trip-start" value={User.birthday} min="2018-01-01" max="2022-12-31"/></Col>
+                            <Col lg={9.5}><Input type="date" id="start" name="trip-start" value={userInfor.birthday} min="2018-01-01" max="2022-12-31"/></Col>
                         </Row>
                             <ButtonSave>Save</ButtonSave>
                     </Col>

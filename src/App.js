@@ -6,8 +6,6 @@ import Checkout from "./components/Checkout";
 import Home from "./components/Home/Home";
 import HomeAdmin from "./Admin/components/Home";
 import AdminLogin from "./Admin/components/Login";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import User from "./components/User/User";
 import Product from "./Admin/components/products/index";
 import AdminDetail from "./Admin/components/products/Detail";
@@ -18,8 +16,17 @@ import AddProduct from "./Admin/components/products/AddProduct";
 import Orders from "./Admin/components/orders/Orders";
 import Invoice from "./Admin/components/orders/Invoice";
 import Login from "./components/Login/Login";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [user, setUser] = useState(null)
+  useEffect(() => {
+    const data = sessionStorage.getItem('user_id');
+    if(data) {
+      setUser(data)
+    }
+  }, [])
+  
   return (
     <div className="App">
       <BrowserRouter>
@@ -35,14 +42,12 @@ function App() {
             <Route path="product/edit" element={<AdminEdit />} />
             <Route path="" element={<HomeAdmin />} />
           </Route>
-          <Route path="/" element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="checkout" element={<Checkout />} />
-          <Route path="header" element={<Header />} />
-          <Route path="footer" element={<Footer />} />
-          <Route path="user" element={<User />} />
-          <Route path="detail" element={<Detail />} />
+          <Route path="/" element={<Home user={user}/>} />
+          <Route path="login" element={<Login user={user}/>} />
+          <Route path="cart" element={<Cart user={user}/>} />
+          <Route path="checkout" element={<Checkout user={user}/>} />
+          {user && <Route path="user" element={<User user={user}/>} />}
+          <Route path="detail" element={<Detail user={user}/>} />
         </Routes>
       </BrowserRouter>
     </div>

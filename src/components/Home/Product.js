@@ -11,12 +11,12 @@ const Product = (props) => {
   }
   const product = props.product;
   return (
-    <Container display={props.display}>
+    <Container key={props.idx} display={props.display}>
       {product.amount > 0 ?
         <Status display={props.display}>
-          <i class="fa fa-check-circle" aria-hidden="true"></i> in stock
+          <i className="fa fa-check-circle" aria-hidden="true"></i> in stock
         </Status> : <Status display={props.display} color="#cf2115">
-          <i class="fa fa-check-circle" aria-hidden="true"></i> out of stock
+          <i className="fa fa-check-circle" aria-hidden="true"></i> out of stock
         </Status>}
       <Box display={props.display}>
         <div>

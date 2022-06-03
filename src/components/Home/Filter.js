@@ -58,9 +58,9 @@ const Filter = (props) => {
       <Button type='transparent' text="Clear Filter" onClick={() => props.clearFilter()}/>
       <TypeFilter>Brands</TypeFilter>
       <Brands>
-        {props.brands.map((brand) => {
+        {props.brands.map((brand, idx) => {
           return (
-            <Brand className={props.brandsTaget.includes(brand.name) ? 'active':''} src={brand.img} alt='brand' id={brand.id} onClick={() => targetBrand(brand)}/>
+            <Brand key={idx} className={props.brandsTaget.includes(brand.name) ? 'active':''} src={brand.img} alt='brand' id={brand.id} onClick={() => targetBrand(brand)}/>
           )
         })}
       </Brands>

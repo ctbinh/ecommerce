@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../Footer'
 import Header from '../Header'
 import styled from 'styled-components'
@@ -8,74 +8,76 @@ import Wishlist from './Wishlist'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Information from './Information'
 import Password from './Password'
+import axios from 'axios'
 
 const User = () => {
-  const wishlist = [
-    {
-      id: 0,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 1,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 2,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 3,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    },
-    {
-      id: 1,
-      rating: 4,
-      instock: true,
-      name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
-      oldPrice: '599.00',
-      newPrice: '499.00',
-      desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
-      cpu: 'N/A',
-      featured: 'N/A',
-      ports: 'N/A'
-    }
-  ]
-  const [targetNavItem, setTargetNavItem] = useState('my-orders')
-  const [targetNavChildItem, setTargetNavChildItem] = useState('')
+  // const wishlist = [
+  //   {
+  //     id: 0,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 1,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 2,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 3,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   },
+  //   {
+  //     id: 1,
+  //     rating: 4,
+  //     instock: true,
+  //     name: 'EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On...',
+  //     oldPrice: '599.00',
+  //     newPrice: '499.00',
+  //     desc: 'MSI CREATOR 17 A10SFS-240AU 17 UHD 4K HDR Thin Bezel Intel 10th Gen i7 10875H - RTX 2070 SUPER MAX Q - 16GB RAM - 1TB SSD NVME - Windows 10 PRO Laptop',
+  //     cpu: 'N/A',
+  //     featured: 'N/A',
+  //     ports: 'N/A'
+  //   }
+  // ]
+  const [targetNavItem, setTargetNavItem] = useState('my-account')
+  const [targetNavChildItem, setTargetNavChildItem] = useState('infor')
   const [targetTypeOrders, setTargetTypeOrders] = useState('all')
   const [isEnabled, setIsEnabled] = useState(false)
+  const [userInfor, setUserInfor] = useState(null)
   const changeNavItem = (item) => {
     if(item !== 'my-account') {
       setTargetNavChildItem('')
@@ -94,6 +96,16 @@ const User = () => {
   const changeTypeOrders = (type) => {
     setTargetTypeOrders(type)
   }
+  useEffect(() => {
+    const fetchUser = async () => {
+      const id = sessionStorage.getItem('user_id')
+      const res = await axios.get('http://localhost/ecommerce/backend/api/user/read_single.php?user_id='+id);
+      setUserInfor(res.data)
+      console.log(res.data)
+    }
+    fetchUser()
+  }, [])
+  
   return (
     <>
     <Header/>
@@ -122,8 +134,8 @@ const User = () => {
         </NavBox>
         <Content>
           {targetNavItem==='my-orders' && <Orders target={targetTypeOrders} changeTypeOrders={changeTypeOrders}/>}
-          {targetNavItem==='my-wishlist' && <Wishlist wishlist={wishlist}/>}
-          {targetNavChildItem==='infor' && <Information/>}
+          {targetNavItem==='my-wishlist' && <Wishlist wishlist={[]}/>}
+          {targetNavChildItem==='infor' && <Information info={userInfor}/>}
           {targetNavChildItem==='change-pass' && <Password/>}
         </Content>
       </Row>

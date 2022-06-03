@@ -4,16 +4,16 @@ import styled from 'styled-components'
 import Footer from '../Footer'
 import Header from '../Header'
 import axios from 'axios'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
-const Login = () => {
+const Login = (props) => {
+  let navigate = useNavigate(); 
   const [targetTab, settargetTab] = useState('login')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [fName, setFName] = useState('')
   const [lName, setLName] = useState('')
   const [cfPassword, setCfPassword] = useState('')
-  const [user, setUser] = useState(null)
   const login = () => {
     const data = {
       'username': username,
@@ -22,7 +22,10 @@ const Login = () => {
     axios.post(`http://localhost/ecommerce/backend/api/auth/login.php`, data)
     .then(function (response) {
       console.log(response.data);
-      if(response.data.status === 'OK') {setUser(response.data)}
+      if(response.data.status === 'OK') {
+        sessionStorage.setItem('user_id', response.data.user_id);
+        navigate('/');
+      }
     })
     .catch(function (error) {
         console.log(error);
@@ -42,9 +45,10 @@ const Login = () => {
     const res = await axios.post(`http://localhost/ecommerce/backend/api/auth/register.php`, data);
     console.log(res.data)
   }
+  
   return (
     <>
-    {user && <Navigate to="/" replace={true} />}
+    {props.user && <Navigate to="/" replace={true} />}
     <Header/>
     <Container>
       <Head>
