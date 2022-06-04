@@ -11,8 +11,8 @@ const Header = () => {
     
     useEffect(() => {
       axios.get("http://localhost/ecommerce/backend/api/cart/finditems.php").then((response) => {
-          setCart(response.data.data);
-          console.log(response.data.data);
+          if (response.data.data) setCart(response.data.data);
+          console.log(response.data.message);
       });
     }, []);
     return <>
@@ -62,7 +62,7 @@ const Header = () => {
 
                 <NavIcon>
                       <div style={{ marginLeft: 'auto', minWidth: '60px' }}>
-                    <Link to="/cart" state={{cart: cart }}>
+                    <Link to="/cart" state={{cartt: cart }}>
                           <CartIcon />
                           <CartCounter>20</CartCounter>
                     </Link>

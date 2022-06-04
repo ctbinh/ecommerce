@@ -41,4 +41,20 @@ class Cart
     // Execute query
     $stmt->execute();
   }
+  public function deleteItem($user_id, $product_id) {
+    $query = 'DELETE FROM cart 
+              WHERE product_id = ' . $product_id . ' AND user_id = ' . $user_id;
+    // Prepare statement
+    $stmt = $this->conn->prepare($query);
+    // Execute query
+    $stmt->execute();
+  }
+  public function deleteAll($user_id) {
+    $query = 'DELETE FROM cart 
+              WHERE user_id = ' . $user_id;
+    // Prepare statement
+    $stmt = $this->conn->prepare($query);
+    // Execute query
+    $stmt->execute();
+  }
 }
