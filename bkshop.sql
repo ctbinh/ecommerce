@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2022 at 02:09 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.25
+-- Generation Time: Jun 04, 2022 at 04:32 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,9 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `bkshop`
 --
-drop Database if exists `bkshop`;
-CREATE Database `bkshop`;
-use `bkshop`;
+
 -- --------------------------------------------------------
 
 --
@@ -35,6 +33,13 @@ CREATE TABLE `admin` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `username`, `password`) VALUES
+(1, 'hoangkui', '$2y$10$evD4mFDUA3eogKcW8ON9x.gVUL8Y4W6qDk.FYYEw10EXoN4taZEbC');
+
 -- --------------------------------------------------------
 
 --
@@ -46,9 +51,6 @@ CREATE TABLE `cart` (
   `product_id` int(11) NOT NULL,
   `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-INSERT INTO `cart` (user_id, product_id, amount) 
-VALUES (1 ,1, 2), (1, 2, 3)
-
 
 -- --------------------------------------------------------
 
@@ -200,7 +202,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `name`, `url`, `product_code`, `brand`, `cpu`, `ram`, `gpu`, `os`, `old_price`, `price`, `screen`, `size`, `battery`, `amount`, `description`, `rating`, `num_reviewer`, `img_cover`) VALUES
-(1, 'Laptop LG Gram 2021 14ZD90P-G.AX51A5', 'https://hangchinhhieu.vn/products/laptop-lg-gram-2021-14zd90p-g-ax51a5-i5-1135g7', '14ZD90P-G.AX51A5', 'LG', 'Intel Core i5-1135G7 2.4GHz up to 4.2GHz 8MB', '8GB (4GBx2) LPDDR4X 4266MHz (Onboard)', 'Intel Iris Xe Graphics', 'FreeDos', 34.99, 29.99, '14\" WUXGA (1920x1200), 16:10, IPS, DCI-P3 99%', '313.4 x 215.2 x 16.8 mm', 72, 5, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 3, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5_a2e71f3575f543d8940d22d64592e887_master.png'),
+(1, 'Laptop Acer Nitro 5 Eagle AN515-57-54MV', 'https://hangchinhhieu.vn/products/laptop-lg-gram-2021-14zd90p-g-ax51a5-i5-1135g7', '14ZD90P-G.AX51A5', 'ACER', 'Intel Core i5-11400H 2.7GHz up to 4.5GHz 12MB', '4GB DDR4', 'NVIDIA GeForce RTX™ 3050 4GB GDDR6', 'Windows 11 Home', 34.99, 22.49, ' 15.6&amp;amp;amp;amp;amp;amp;amp;amp;amp;#039; FHD (1920 x 1080) IPS, 144Hz, Anti-Glare, 45% NTSC, 65% sRGB', '363.4 x 255 x 23.9 mm', 72, 10, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 0, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5_a2e71f3575f543d8940d22d64592e887_master.png'),
 (2, 'Laptop LG Gram 2021 16Z90P-G.AH73A5', 'https://hangchinhhieu.vn/products/laptop-lg-gram-2021-16z90p-g-ah73a5-i7-1165g7', '16Z90P-G.AH73A5', 'LG', 'Intel Core i7-1165G7 2.8GHz up to 4.7GHz 12MB', '16GB (8GBx2) LPDDR4X 4266MHz (Onboard)', 'Intel Iris Xe Graphics', 'Windows 10 Home', 49.99, 40.89, '16\" WQXGA (2560 x 1600), 16:10, IPS, DCI-P3 99%', '355.9 x 243.4 x 16.8 mm', 80, 4, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5_1022f07220d34034b8ca6da3ca669dea_master.png'),
 (3, 'Laptop LG Gram 2021 17ZD90P-G.AX71A5', 'https://hangchinhhieu.vn/products/laptop-lg-gram-2021-17zd90p-g-ax71a5-i7-1165g7', '17ZD90P-G.AX71A5', 'LG', 'Intel Core i7-1165G7 2.8GHz up to 4.7GHz 12MB', '16GB (8GBx2) LPDDR4X 4266MHz (Onboard)', 'Intel Iris Xe Graphics', NULL, 44.99, 39.99, '17\" WQXGA (2560 x 1600), 16:10, IPS, DCI-P3 99%', '380.2 x 260.1 x 17.8 mm', 80, 4, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 1, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5_40aab526d08649d89764e9934615febd_master.png'),
 (4, 'Laptop Acer Nitro 5 Eagle AN515-57-54MV', 'https://hangchinhhieu.vn/products/laptop-acer-nitro-5-eagle-an515-57-54mv-i5-11400h', 'AN515-57-54MV', 'ACER', 'Intel Core i5-11400H 2.7GHz up to 4.5GHz 12MB', '4GB DDR4', 'NVIDIA GeForce RTX™ 3050 4GB GDDR6', 'Windows 11 Home', 26.49, 22.49, '15.6\" FHD (1920 x 1080) IPS, 144Hz, Anti-Glare, 45% NTSC, 65% sRGB', '363.4 x 255 x 23.9 mm', 4, 4, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 3, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h_b20e2a1a86f04fd7ae3921d1a60b1edd_master.png'),
@@ -229,7 +231,8 @@ INSERT INTO `product` (`product_id`, `name`, `url`, `product_code`, `brand`, `cp
 (27, 'Laptop Acer Aspire 5 A514-54-59QK', 'https://hangchinhhieu.vn/products/laptop-acer-aspire-5-a514-54-59qk-i5-1135g7', 'A514-54-59QK', 'ACER', 'Intel Core i5-1135G7 2.4GHz up to 4.2GHz 8MB', '4GB DDR4', 'Intel Iris Xe Graphics', 'Windows 11 Home', 99.99, 0, '14\" FHD (1920 x 1080) IPS, Acer ComfyView LCD', '328 x 233 x 17.95 (mm)', 3, 4, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 2, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7_8aabaa1c8fd34b24b85b2d275f4d55a5_master.png'),
 (28, 'Laptop Acer Aspire 3 A315-56-38B1', 'https://hangchinhhieu.vn/products/laptop-acer-aspire-3-a315-56-38b1-i3-1005g1', 'A315-56-38B1', 'ACER', 'Intel Core i3-1005G1 1.2GHz up to 3.4GHz 4MB', '4GB DDR4', 'Intel UHD Graphics', 'Windows 11 Home', 12.99, 10.99, '15.6\" FHD (1920 x 1080) Acer ComfyView LCD, Anti-Glare', '363 x 247.5 x 19.9 (mm)', 2, 5, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 1, 'https://product.hstatic.net/1000233206/product/acer-aspire-3-a315-56-38b1-i3-1005g1_8381143191f9431ba8eb33bf3887833b_master.png'),
 (29, 'Laptop ASUS TUF Gaming F15 FX506LH-HN188W', 'https://hangchinhhieu.vn/products/laptop-asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h', 'FX506LH-HN188W', 'ASUS', 'Intel Core i5-10300H 2.5GHz up to 4.5GHz 8MB', '4GB DDR4', 'NVIDIA GeForce GTX 1650 4GB GDDR6 + Intel® UHD Graphics', 'Windows 11 Home', 21.99, 18.99, '15.6\" FHD (1920 x 1080) IPS, 144Hz, Wide View, 250nits, Narrow Bezel, Non-Glare with 45% NTSC, 63% sRGB', '35.9 x 25.6 x 2.47 ~ 2.49 cm', 3, 3, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 1, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h_7b032cec13484888b599410a3cc8b3c7_master.png'),
-(30, 'Laptop Acer TravelMate B3 TMB311-31-C2HB', 'https://hangchinhhieu.vn/products/laptop-acer-travelmate-b3-tmb311-31-c2hb-c-n4020', 'TMB311-31-C2HB', 'ACER', 'Intel® Celeron® C-N4020 1.1GHz up to 2.8GHz 4MB', '4GB DDR4 2400MHz Onboard', 'Intel® UHD Graphics 605', 'Windows 11 Home', 9.99, 7.99, '11.6\" HD (1366 x 768) Acer ComfyView LED-backlit TFT LCD', '395 x 262 x 25.9 (mm)', 3, 3, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 0, 0, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb_0982a0fd828f4400b61fe5d86967e9e1_master.png');
+(30, 'Laptop Acer TravelMate B3 TMB311-31-C2HB', 'https://hangchinhhieu.vn/products/laptop-acer-travelmate-b3-tmb311-31-c2hb-c-n4020', 'TMB311-31-C2HB', 'ACER', 'Intel® Celeron® C-N4020 1.1GHz up to 2.8GHz 4MB', '4GB DDR4 2400MHz Onboard', 'Intel® UHD Graphics 605', 'Windows 11 Home', 9.99, 7.99, '11.6\" HD (1366 x 768) Acer ComfyView LED-backlit TFT LCD', '395 x 262 x 25.9 (mm)', 3, 3, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 0, 0, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb_0982a0fd828f4400b61fe5d86967e9e1_master.png'),
+(32, 'test', 'tesst', 'test', 'test', 'test', 'test', 'test', 'test', 10, 10, 'test', 'test', 1, 1, 'test', 5, 10, 'test');
 
 -- --------------------------------------------------------
 
@@ -238,6 +241,7 @@ INSERT INTO `product` (`product_id`, `name`, `url`, `product_code`, `brand`, `cp
 --
 
 CREATE TABLE `product_image` (
+  `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -246,191 +250,200 @@ CREATE TABLE `product_image` (
 -- Dumping data for table `product_image`
 --
 
-INSERT INTO `product_image` (`product_id`, `url`) VALUES
-(1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-1_10ebeafae1d64bc5a00168a46e9db5b6_master.png'),
-(1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-2_28a143359c51479bb89d4252dad842b1_master.png'),
-(1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-3_03b1f2e7d7ed4fd18e2d52214563128b_master.png'),
-(1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-4_25d72d460cd84e3983f7acfa138bdc78_master.png'),
-(1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-5_c445e016edf74fe38a1e71e51df134b7_master.png'),
-(1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5_a2e71f3575f543d8940d22d64592e887_master.png'),
-(2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5-1_8da5c7050bf0484aa0d97b15576b5635_master.png'),
-(2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5-2_4c3d2b1214c5417080bc83a9a4d7e4a1_master.png'),
-(2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5-3_ff25507954dd41d5a4c3677c77d93de5_master.png'),
-(2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5-4_2e805f4b5f6b4cd4be72510dbc729944_master.png'),
-(2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5-5_d83dc6fc22fc42ed87f0c6c4e17718af_master.png'),
-(2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5_1022f07220d34034b8ca6da3ca669dea_master.png'),
-(3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5-1_6e71a7ed27e844b08461082ff0713aec_master.png'),
-(3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5-2_e149592385de466e81e9a70c430d8b79_master.png'),
-(3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5-3_1a05187fe74d4600b2dd41a5e973477b_master.png'),
-(3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5-4_2415f41d0ecd44879698901d6689e36b_master.png'),
-(3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5-5_7839cb46392449ce8c79ab52abdfcb03_master.png'),
-(3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5_40aab526d08649d89764e9934615febd_master.png'),
-(4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h-1_bb93b3f6f3c546a2be0d8b4bd590470f_master.png'),
-(4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h-2_986a76db0364476fb5a851ceb8c52530_master.png'),
-(4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h-3_9245f807a89d49dcbc844f0fa6ae351c_master.png'),
-(4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h-4_b120d4c2fb47405cb5a7b3a35c12399f_master.png'),
-(4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h-5_c3c55a10bbd44300a0935a7c4bd37bcc_master.png'),
-(4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h_b20e2a1a86f04fd7ae3921d1a60b1edd_master.png'),
-(5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a-i7-11800h-1_4280e835b3b84ccfa67ef110785ba8f0_master.png'),
-(5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a-i7-11800h-2_39329e00d6f14a4b86418e0b5eb1f2af_master.png'),
-(5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a-i7-11800h-3_e076d4c6cb9a4fc68cf80e3c876d7ad6_master.png'),
-(5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a-i7-11800h-4_62a550a8459444538cb635e110e557c2_master.png'),
-(5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a-i7-11800h-5_0dc6b66241dc4194a8d1ee438775f42c_master.png'),
-(5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a_ee7399d9507a49219d3da0f9bc3efa84_master.png'),
-(6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-5_f96892c43cfb4ebd9f22d3e8146d31a0_master.png'),
-(6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-i5-11400h-1_9e6ea0e45b214d398e41f927a9d6b4e2_master.png'),
-(6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-i5-11400h-2_0abace3a0e5342c1a11fc2682dc92bf4_master.png'),
-(6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-i5-11400h-3_0a3ab5dfb87648c490ef672ce3edc010_master.png'),
-(6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-i5-11400h-4_b869936750cc49eda27f8fa7754d6821_master.png'),
-(6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-i5-11400h_c8e0d7d294b14d64aef3bdbeef0f5eb0_master.png'),
-(7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r6ev-r5-5600h-1_5684aa5a718e49cc8b2aec39c70180a0_master.png'),
-(7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r6ev-r5-5600h-3_cb1558fcf56b4cad9a14c2167d59a49a_master.png'),
-(7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r6ev-r5-5600h-4_ac4a19048b8d49f39b2768bb903f1b2a_master.png'),
-(7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r6ev-r5-5600h_081c5fd05db540dfbfaa4ff3d93c7563_master.png'),
-(7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r6ev_746d1fcd9db94270bb71085c13ec9b59_master.png'),
-(7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r86d-r7-5800h-3_3bbda66436274ad9ad134d60d72488ec_master.png'),
-(8, 'https://product.hstatic.net/1000233206/product/msi-bravo-15-b5dd-276vn-r5-5600h-1_42ac9a732de74a83847dd554efa3cc3d_master.png'),
-(8, 'https://product.hstatic.net/1000233206/product/msi-bravo-15-b5dd-276vn-r5-5600h-2_c631fab63ba245b186334ea0b5a873a6_master.png'),
-(8, 'https://product.hstatic.net/1000233206/product/msi-bravo-15-b5dd-276vn-r5-5600h-3_437e10b8e7f34ce0914da0eacb55f8f4_master.png'),
-(8, 'https://product.hstatic.net/1000233206/product/msi-bravo-15-b5dd-276vn-r5-5600h-4_abdb30960fad4c77a223674b314414c5_master.png'),
-(8, 'https://product.hstatic.net/1000233206/product/msi-bravo-15-b5dd-276vn-r5-5600h_b1f030f36782439e8c7111b0358e695d_master.png'),
-(9, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0177ax-4r0u9pa-1_39d3f0e0035147de91fc722ee386f0e6_master.png'),
-(9, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0177ax-4r0u9pa-2_e9df765db4c34c31b2a9fa8f66e860e9_master.png'),
-(9, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0177ax-4r0u9pa-3_61150e35ce83465aa0e7871a14465494_master.png'),
-(9, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0177ax-4r0u9pa-4_e24282a2e6f545a09f8212eab6412af8_master.png'),
-(9, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0177ax-4r0u9pa_ee1239f3c6ab4d768fe53fe30262aab5_master.png'),
-(10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5-1_9c244279095946fc8d6726897be49985_master.png'),
-(10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5-2_fb2d0d4b706d4a94a0843cf4e8a5eb68_master.png'),
-(10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5-3_da727b5818154dbbb37277455d141bc4_master.png'),
-(10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5-4_1a6ecfe417964c3682348ded968c0981_master.png'),
-(10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5-5_16f2d2c4c56c4c79993591c8dcddd6c3_master.png'),
-(10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5_a6f0d976a3404efcb3074deef72e42da_master.png'),
-(11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5-1_408bf08b044443bf856acdfbaa17f76a_master.png'),
-(11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5-2_81af659c930844c1b53c2da61565c18b_master.png'),
-(11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5-3_a71c014f12904b8cb7ae5a5f4ba5e9ab_master.png'),
-(11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5-4_f32b289c2e04417dbdc4047157d0d79c_master.png'),
-(11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5-5_039bcef84aa34f92a045b27e9f7f9661_master.png'),
-(11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5_d3ed2a82c16b40dba4e6bb6f1ba16680_master.png'),
-(12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5-1_ab0b456777684cf3a37562b2b1f6587b_master.png'),
-(12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5-2_5e2f25644bbf4cfa9c3f908ddc5a0884_master.png'),
-(12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5-3_c221baca5bc84470906c76f8347e54c3_master.png'),
-(12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5-4_13ddec76b22748b295f5512df57b25c8_master.png'),
-(12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5-5_de5242c542c847188f11822d74a153a0_master.png'),
-(12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5_380b5307c0ec4c00880473f1008bc26c_master.png'),
-(13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5-1_1c5a725ec3ff4006b17be20830bc2943_master.png'),
-(13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5-2_18d41c632d464d0ea9658b9c1a7a3476_master.png'),
-(13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5-3_e2d610d9fc8549d4be97556adf5eea31_master.png'),
-(13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5-4_f61182dd23a9423f99af70dc218f3aa0_master.png'),
-(13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5-5_10aef12169ce4453b8711d0d9edfbaaf_master.png'),
-(13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5_65b9a5140ca6490db2e77217f0ee142e_master.png'),
-(14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5-1_c90138c6dbe24d2aa48e96b4a1c45694_master.png'),
-(14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5-2_106385fc399040bd9950c894692647e0_master.png'),
-(14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5-3_e77ddc5ec58940b1a718666d54ae9c86_master.png'),
-(14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5-4_82195ca311464622a76198a68eaf3c01_master.png'),
-(14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5-5_df1d261184a94d348972c1c399424542_master.png'),
-(14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5_2c4cec86ac4b4970910719e71b8440ec_master.png'),
-(15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5-1_2c3c5cd63c944de3ba1782f3ca46b10f_master.png'),
-(15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5-2_51196e372bf7451195e99b359f3642b8_master.png'),
-(15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5-3_38ad150e6fc244f7ae1353b8d7e72300_master.png'),
-(15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5-4_5c35b17cfa4e4009ab4ef7bfb9db04b9_master.png'),
-(15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5-5_9fbbd744809440849ddede15ca43605c_master.png'),
-(15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5_514e3b112baa48c88bf7a25c65dec831_master.png'),
-(16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-1_2f3489bc011d4432a2b90fe3eaccf88f_master.png'),
-(16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-2_ff40bfc95e804b45a09f425ed36d463c_master.png'),
-(16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-3_3d57a6d558464733828f487b40f342e3_master.png'),
-(16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-4_acca1bc1a3aa42688d9039ba562750fe_master.png'),
-(16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-5_e33df0c7b23a416cb2d6e9e189a5c4ee_master.png'),
-(16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-6_167d2c53105a4ec6a51bb5c4670a668f_master.png'),
-(16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-7_47298bc61dc341ee80a121f1363f1fa9_master.png'),
-(16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-8_0f72e0eadd20455e99c86f85e9400425_master.png'),
-(16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w_60f1e35971f6430faa01581f979d55a4_master.png'),
-(17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-1_91517bdc672c47ada270941d0735e381_master.png'),
-(17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-2_13c4d0d1bee94ae28d5bea2350c2be64_master.png'),
-(17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-3_565a11c6ceca4bd8ba2416c3a34c817f_master.png'),
-(17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-4_3e8960a28501477fb4537423ff2e3af5_master.png'),
-(17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-5_25d5b9f7858f42419c9786083b104609_master.png'),
-(17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv_4671e13d89574fb99e37db9be1fdd633_master.png'),
-(18, 'https://product.hstatic.net/1000233206/product/hp-victus-16-d0204tx-4r0u5pa-i5-11400h-1_d01c1d03bd29466e8d523a15a8a90208_master.png'),
-(18, 'https://product.hstatic.net/1000233206/product/hp-victus-16-d0204tx-4r0u5pa-i5-11400h-2_c4c34385a9cf4a8199de591ead0538e4_master.png'),
-(18, 'https://product.hstatic.net/1000233206/product/hp-victus-16-d0204tx-4r0u5pa-i5-11400h-3_7afdcb7a448a4b84984e6a4ef4d757c6_master.png'),
-(18, 'https://product.hstatic.net/1000233206/product/hp-victus-16-d0204tx-4r0u5pa-i5-11400h-4_1d1a5e5537a74cb1970c83196ee12dc5_master.png'),
-(18, 'https://product.hstatic.net/1000233206/product/hp-victus-16-d0204tx-4r0u5pa-i5-11400h_db7305379f8341beb100cab8edc07f0d_master.png'),
-(19, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0175ax-4r0u8pa-1_f8c6cd3680714516a26869f50c1d26c1_master.png'),
-(19, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0175ax-4r0u8pa-2_8b847cdd8e1c4f43bc1173b2f819429e_master.png'),
-(19, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0175ax-4r0u8pa-3_fe1004b64bfd40a79b21c3c332b8cd75_master.png'),
-(19, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0175ax-4r0u8pa-4_6aeceb60ea3c4db4b9e0d213239c3053_master.png'),
-(19, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0175ax-4r0u8pa_48d317e08aea4bd195fe9b0cf09b6610_master.png'),
-(20, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0170ax-4r0u7pa-r7-5800h-1_d26bfc8b9ec94af99bed5259a27f9cbd_master.png'),
-(20, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0170ax-4r0u7pa-r7-5800h-2_a9bea9056fd94a4ca7067dc78ba2df29_master.png'),
-(20, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0170ax-4r0u7pa-r7-5800h-3_1798af1ec8354520b7b65df305bdf6a7_master.png'),
-(20, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0170ax-4r0u7pa-r7-5800h-4_8227883dd9fb4ced940bcc64ed35c2c8_master.png'),
-(20, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0170ax-4r0u7pa-r7-5800h_cfd6622f3789416688233bd66f793fbc_master.png'),
-(21, 'https://product.hstatic.net/1000233206/product/asus-zenbook-14x-oled-um5401qa-kn209w-r5-5600h-1_fffc4a6a84284dc98039ea610dacdd95_master.png'),
-(21, 'https://product.hstatic.net/1000233206/product/asus-zenbook-14x-oled-um5401qa-kn209w-r5-5600h-2_e1dc4c33c570489a88a29c3d6c868606_master.png'),
-(21, 'https://product.hstatic.net/1000233206/product/asus-zenbook-14x-oled-um5401qa-kn209w-r5-5600h-3_fdd5e8a3255d461f8cf28bf925738110_master.png'),
-(21, 'https://product.hstatic.net/1000233206/product/asus-zenbook-14x-oled-um5401qa-kn209w-r5-5600h-4_2957c8c9ee184289802cc3e232fc5da0_master.png'),
-(21, 'https://product.hstatic.net/1000233206/product/asus-zenbook-14x-oled-um5401qa-kn209w-r5-5600h_a7350e4f7647402bbd95cb12c1543ac8_master.png'),
-(22, 'https://product.hstatic.net/1000233206/product/gigabyte-g7-md-71s1123so-i7-11800h-1_cc3268a84c65403f8495c6019fbd9139_master.png'),
-(22, 'https://product.hstatic.net/1000233206/product/gigabyte-g7-md-71s1123so-i7-11800h-2_a486efd9d0124f03a84685d594eee4a5_master.png'),
-(22, 'https://product.hstatic.net/1000233206/product/gigabyte-g7-md-71s1123so-i7-11800h-3_cdc522bf689f4b68889c9b770dbca9eb_master.png'),
-(22, 'https://product.hstatic.net/1000233206/product/gigabyte-g7-md-71s1123so-i7-11800h_cb0ad385960c47be8628323b89f0c9f9_master.png'),
-(23, 'https://product.hstatic.net/1000233206/product/acer-aspire-7-a715-42g-r4xx-1_1f63633eb8a048cf817f5f5c7e5a1790_master.png'),
-(23, 'https://product.hstatic.net/1000233206/product/acer-aspire-7-a715-42g-r4xx-2_f6c8d99710e6470c919f8b8189d3a96c_master.png'),
-(23, 'https://product.hstatic.net/1000233206/product/acer-aspire-7-a715-42g-r4xx-3_f546f04afb8341518832e7b6f93c5410_master.png'),
-(23, 'https://product.hstatic.net/1000233206/product/acer-aspire-7-a715-42g-r4xx-4_8d349adff2f64e0db07bfc46da828602_master.png'),
-(23, 'https://product.hstatic.net/1000233206/product/acer-aspire-7-a715-42g-r4xx-5_b1532f6b4893432dbaffdf6e770c7f24_master.png'),
-(24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-1_495cc96deb4a422486449aa2dd6a4499_master.png'),
-(24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-2_1246b1da48a74ec5bb334ba865736f22_master.png'),
-(24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-3_5bec7e6f7d614e22bc068cded6d505ea_master.png'),
-(24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-4_64179678a2954c9e8cea64ec72945b3c_master.png'),
-(24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-5_ebfe2769ba0040c59929f58641d85409_master.png'),
-(24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-6_89e3c50335064d65b15e572f95612ed0_master.png'),
-(24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-7_8eb671b00815405fb9b89d57fd75fcdb_master.png'),
-(24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-8_e51e5cb6b4a84512b0be18cd1b491642_master.png'),
-(24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h_21eec226f57c41a7865fdc18004a57c8_master.png'),
-(25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-1_9441d30c24b948edb9353713e6a735b5_master.png'),
-(25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-2_a7f89524d3044a4bb41e91fe39246e60_master.png'),
-(25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-3_f981f413a2d6413db0debeca26165929_master.png'),
-(25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-4_f5bf5ad165a840efb6bfd4bfa6eb9637_master.png'),
-(25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-5_b4c59bdb99054650b155d34edffbf475_master.png'),
-(25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-6_26f92251029e40249df817245cf753b8_master.png'),
-(25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w_0f64729a570f4c91a8dc493c9aa264c7_master.png'),
-(26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-1_f4d4aa32e27d4370b156530bd22ba585_master.png'),
-(26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-2_0d47741d22d643fb868e77185dd73d06_master.png'),
-(26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-3_938d438fa1d8430bb218f332d5271da9_master.png'),
-(26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-4_79648e994f68475384b3f08087117dc1_master.png'),
-(26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-5_c4b1f983e4a7486984ee51194676fe21_master.png'),
-(26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-6_4779a4a4e16641c4adf3611f27f425ff_master.png'),
-(26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-7_cb10d014e45e49ea8739a429de60d699_master.png'),
-(26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-8_6de57eedef724ddba9fd6ff306655f28_master.png'),
-(26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c_64382f97d7604e02a5cbb3c5d5dc8464_master.png'),
-(27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-1_2b13350a5f8344bf853f4fa3006a8085_master.png'),
-(27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-2_d892b311f3cb4e72a025e011a48b5244_master.png'),
-(27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-3_1e96c772068141b888d20f023017ae30_master.png'),
-(27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-4_bbcc7ea6ed054998baee7518c26a348f_master.png'),
-(27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-5_0cb7dc73616d44999ae414422df70e03_master.png'),
-(27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-6_0c4502f27d564cf98a5b3d762492bbfb_master.png'),
-(27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-7_6d54846af2334d929e76e42d48c41328_master.png'),
-(27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7_8aabaa1c8fd34b24b85b2d275f4d55a5_master.png'),
-(28, 'https://product.hstatic.net/1000233206/product/acer-aspire-3-a315-56-38b1-i3-1005g1-2_19605d11526f44368e297b62d799ea90_master.png'),
-(28, 'https://product.hstatic.net/1000233206/product/acer-aspire-3-a315-56-38b1-i3-1005g1-3_bd2db4787afa470ba264069da38e000d_master.png'),
-(28, 'https://product.hstatic.net/1000233206/product/acer-aspire-3-a315-56-38b1-i3-1005g1-4_373087c239774402a6329608eee21bf5_master.png'),
-(28, 'https://product.hstatic.net/1000233206/product/acer-aspire-3-a315-56-38b1-i3-1005g1-5_979634d3e3f34c70b39a7040b08ca791_master.png'),
-(28, 'https://product.hstatic.net/1000233206/product/acer-aspire-3-a315-56-38b1-i3-1005g1_8381143191f9431ba8eb33bf3887833b_master.png'),
-(29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-1_e6fab1ea39334ef2a506dba9992f0680_master.png'),
-(29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-2_edb17c6aa4974178b2607360d5eaa2ee_master.png'),
-(29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-3_de67f8d09dd7491095dc947e384a6d7f_master.png'),
-(29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-4_b007991c1a1d45bda60db3cf8214b6ee_master.png'),
-(29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-5_fa9e5ef9e776452d85aa2b3626c81a60_master.png'),
-(29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-6_fd9202b0ba03407cb479e9be048b4638_master.png'),
-(29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h_7b032cec13484888b599410a3cc8b3c7_master.png'),
-(30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb-1_517e28121f9944af875175eeece50ae9_master.png'),
-(30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb-2_fb32b9a4205a4e4898675b0ff5bc5990_master.png'),
-(30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb-3_04cdbcc926d044b6ad75b588033abf97_master.png'),
-(30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb-4_b6e9b66eb6af48639820caccbb9f0743_master.png'),
-(30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb-5_33325b80880f4256b7768ddc109bd20f_master.png'),
-(30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb_0982a0fd828f4400b61fe5d86967e9e1_master.png'),
-(30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb_ab87fdffd34049a1b700722f1fa51ba4_master.png');
+INSERT INTO `product_image` (`id`, `product_id`, `url`) VALUES
+(1, 1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-1_10ebeafae1d64bc5a00168a46e9db5b6_master.png'),
+(2, 1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-2_28a143359c51479bb89d4252dad842b1_master.png'),
+(3, 1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-3_03b1f2e7d7ed4fd18e2d52214563128b_master.png'),
+(4, 1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-4_25d72d460cd84e3983f7acfa138bdc78_master.png'),
+(5, 1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5-5_c445e016edf74fe38a1e71e51df134b7_master.png'),
+(6, 1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5_a2e71f3575f543d8940d22d64592e887_master.png'),
+(7, 2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5-1_8da5c7050bf0484aa0d97b15576b5635_master.png'),
+(8, 2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5-2_4c3d2b1214c5417080bc83a9a4d7e4a1_master.png'),
+(9, 2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5-3_ff25507954dd41d5a4c3677c77d93de5_master.png'),
+(10, 2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5-4_2e805f4b5f6b4cd4be72510dbc729944_master.png'),
+(11, 2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5-5_d83dc6fc22fc42ed87f0c6c4e17718af_master.png'),
+(12, 2, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5_1022f07220d34034b8ca6da3ca669dea_master.png'),
+(13, 3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5-1_6e71a7ed27e844b08461082ff0713aec_master.png'),
+(14, 3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5-2_e149592385de466e81e9a70c430d8b79_master.png'),
+(15, 3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5-3_1a05187fe74d4600b2dd41a5e973477b_master.png'),
+(16, 3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5-4_2415f41d0ecd44879698901d6689e36b_master.png'),
+(17, 3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5-5_7839cb46392449ce8c79ab52abdfcb03_master.png'),
+(18, 3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5_40aab526d08649d89764e9934615febd_master.png'),
+(19, 4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h-1_bb93b3f6f3c546a2be0d8b4bd590470f_master.png'),
+(20, 4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h-2_986a76db0364476fb5a851ceb8c52530_master.png'),
+(21, 4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h-3_9245f807a89d49dcbc844f0fa6ae351c_master.png'),
+(22, 4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h-4_b120d4c2fb47405cb5a7b3a35c12399f_master.png'),
+(23, 4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h-5_c3c55a10bbd44300a0935a7c4bd37bcc_master.png'),
+(24, 4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h_b20e2a1a86f04fd7ae3921d1a60b1edd_master.png'),
+(25, 5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a-i7-11800h-1_4280e835b3b84ccfa67ef110785ba8f0_master.png'),
+(26, 5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a-i7-11800h-2_39329e00d6f14a4b86418e0b5eb1f2af_master.png'),
+(27, 5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a-i7-11800h-3_e076d4c6cb9a4fc68cf80e3c876d7ad6_master.png'),
+(28, 5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a-i7-11800h-4_62a550a8459444538cb635e110e557c2_master.png'),
+(29, 5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a-i7-11800h-5_0dc6b66241dc4194a8d1ee438775f42c_master.png'),
+(30, 5, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-720a_ee7399d9507a49219d3da0f9bc3efa84_master.png'),
+(31, 6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-5_f96892c43cfb4ebd9f22d3e8146d31a0_master.png'),
+(32, 6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-i5-11400h-1_9e6ea0e45b214d398e41f927a9d6b4e2_master.png'),
+(33, 6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-i5-11400h-2_0abace3a0e5342c1a11fc2682dc92bf4_master.png'),
+(34, 6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-i5-11400h-3_0a3ab5dfb87648c490ef672ce3edc010_master.png'),
+(35, 6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-i5-11400h-4_b869936750cc49eda27f8fa7754d6821_master.png'),
+(36, 6, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-5669-i5-11400h_c8e0d7d294b14d64aef3bdbeef0f5eb0_master.png'),
+(37, 7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r6ev-r5-5600h-1_5684aa5a718e49cc8b2aec39c70180a0_master.png'),
+(38, 7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r6ev-r5-5600h-3_cb1558fcf56b4cad9a14c2167d59a49a_master.png'),
+(39, 7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r6ev-r5-5600h-4_ac4a19048b8d49f39b2768bb903f1b2a_master.png'),
+(40, 7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r6ev-r5-5600h_081c5fd05db540dfbfaa4ff3d93c7563_master.png'),
+(41, 7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r6ev_746d1fcd9db94270bb71085c13ec9b59_master.png'),
+(42, 7, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-an515-45-r86d-r7-5800h-3_3bbda66436274ad9ad134d60d72488ec_master.png'),
+(43, 8, 'https://product.hstatic.net/1000233206/product/msi-bravo-15-b5dd-276vn-r5-5600h-1_42ac9a732de74a83847dd554efa3cc3d_master.png'),
+(44, 8, 'https://product.hstatic.net/1000233206/product/msi-bravo-15-b5dd-276vn-r5-5600h-2_c631fab63ba245b186334ea0b5a873a6_master.png'),
+(45, 8, 'https://product.hstatic.net/1000233206/product/msi-bravo-15-b5dd-276vn-r5-5600h-3_437e10b8e7f34ce0914da0eacb55f8f4_master.png'),
+(46, 8, 'https://product.hstatic.net/1000233206/product/msi-bravo-15-b5dd-276vn-r5-5600h-4_abdb30960fad4c77a223674b314414c5_master.png'),
+(47, 8, 'https://product.hstatic.net/1000233206/product/msi-bravo-15-b5dd-276vn-r5-5600h_b1f030f36782439e8c7111b0358e695d_master.png'),
+(48, 9, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0177ax-4r0u9pa-1_39d3f0e0035147de91fc722ee386f0e6_master.png'),
+(49, 9, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0177ax-4r0u9pa-2_e9df765db4c34c31b2a9fa8f66e860e9_master.png'),
+(50, 9, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0177ax-4r0u9pa-3_61150e35ce83465aa0e7871a14465494_master.png'),
+(51, 9, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0177ax-4r0u9pa-4_e24282a2e6f545a09f8212eab6412af8_master.png'),
+(52, 9, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0177ax-4r0u9pa_ee1239f3c6ab4d768fe53fe30262aab5_master.png'),
+(53, 10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5-1_9c244279095946fc8d6726897be49985_master.png'),
+(54, 10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5-2_fb2d0d4b706d4a94a0843cf4e8a5eb68_master.png'),
+(55, 10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5-3_da727b5818154dbbb37277455d141bc4_master.png'),
+(56, 10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5-4_1a6ecfe417964c3682348ded968c0981_master.png'),
+(57, 10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5-5_16f2d2c4c56c4c79993591c8dcddd6c3_master.png'),
+(58, 10, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16zd90p-g.ax54a5_a6f0d976a3404efcb3074deef72e42da_master.png'),
+(59, 11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5-1_408bf08b044443bf856acdfbaa17f76a_master.png'),
+(60, 11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5-2_81af659c930844c1b53c2da61565c18b_master.png'),
+(61, 11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5-3_a71c014f12904b8cb7ae5a5f4ba5e9ab_master.png'),
+(62, 11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5-4_f32b289c2e04417dbdc4047157d0d79c_master.png'),
+(63, 11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5-5_039bcef84aa34f92a045b27e9f7f9661_master.png'),
+(64, 11, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah76a5_d3ed2a82c16b40dba4e6bb6f1ba16680_master.png'),
+(65, 12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5-1_ab0b456777684cf3a37562b2b1f6587b_master.png'),
+(66, 12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5-2_5e2f25644bbf4cfa9c3f908ddc5a0884_master.png'),
+(67, 12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5-3_c221baca5bc84470906c76f8347e54c3_master.png'),
+(68, 12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5-4_13ddec76b22748b295f5512df57b25c8_master.png'),
+(69, 12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5-5_de5242c542c847188f11822d74a153a0_master.png'),
+(70, 12, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17z90p-g.ah78a5_380b5307c0ec4c00880473f1008bc26c_master.png'),
+(71, 13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5-1_1c5a725ec3ff4006b17be20830bc2943_master.png'),
+(72, 13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5-2_18d41c632d464d0ea9658b9c1a7a3476_master.png'),
+(73, 13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5-3_e2d610d9fc8549d4be97556adf5eea31_master.png'),
+(74, 13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5-4_f61182dd23a9423f99af70dc218f3aa0_master.png'),
+(75, 13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5-5_10aef12169ce4453b8711d0d9edfbaaf_master.png'),
+(76, 13, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5_65b9a5140ca6490db2e77217f0ee142e_master.png'),
+(77, 14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5-1_c90138c6dbe24d2aa48e96b4a1c45694_master.png'),
+(78, 14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5-2_106385fc399040bd9950c894692647e0_master.png'),
+(79, 14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5-3_e77ddc5ec58940b1a718666d54ae9c86_master.png'),
+(80, 14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5-4_82195ca311464622a76198a68eaf3c01_master.png'),
+(81, 14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5-5_df1d261184a94d348972c1c399424542_master.png'),
+(82, 14, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5_2c4cec86ac4b4970910719e71b8440ec_master.png'),
+(83, 15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5-1_2c3c5cd63c944de3ba1782f3ca46b10f_master.png'),
+(84, 15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5-2_51196e372bf7451195e99b359f3642b8_master.png'),
+(85, 15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5-3_38ad150e6fc244f7ae1353b8d7e72300_master.png'),
+(86, 15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5-4_5c35b17cfa4e4009ab4ef7bfb9db04b9_master.png'),
+(87, 15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5-5_9fbbd744809440849ddede15ca43605c_master.png'),
+(88, 15, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5_514e3b112baa48c88bf7a25c65dec831_master.png'),
+(89, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-1_2f3489bc011d4432a2b90fe3eaccf88f_master.png'),
+(90, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-2_ff40bfc95e804b45a09f425ed36d463c_master.png'),
+(91, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-3_3d57a6d558464733828f487b40f342e3_master.png'),
+(92, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-4_acca1bc1a3aa42688d9039ba562750fe_master.png'),
+(93, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-5_e33df0c7b23a416cb2d6e9e189a5c4ee_master.png'),
+(94, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-6_167d2c53105a4ec6a51bb5c4670a668f_master.png'),
+(95, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-7_47298bc61dc341ee80a121f1363f1fa9_master.png'),
+(96, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-8_0f72e0eadd20455e99c86f85e9400425_master.png'),
+(97, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w_60f1e35971f6430faa01581f979d55a4_master.png'),
+(98, 17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-1_91517bdc672c47ada270941d0735e381_master.png'),
+(99, 17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-2_13c4d0d1bee94ae28d5bea2350c2be64_master.png'),
+(100, 17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-3_565a11c6ceca4bd8ba2416c3a34c817f_master.png'),
+(101, 17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-4_3e8960a28501477fb4537423ff2e3af5_master.png'),
+(102, 17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-5_25d5b9f7858f42419c9786083b104609_master.png'),
+(103, 17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv_4671e13d89574fb99e37db9be1fdd633_master.png'),
+(104, 18, 'https://product.hstatic.net/1000233206/product/hp-victus-16-d0204tx-4r0u5pa-i5-11400h-1_d01c1d03bd29466e8d523a15a8a90208_master.png'),
+(105, 18, 'https://product.hstatic.net/1000233206/product/hp-victus-16-d0204tx-4r0u5pa-i5-11400h-2_c4c34385a9cf4a8199de591ead0538e4_master.png'),
+(106, 18, 'https://product.hstatic.net/1000233206/product/hp-victus-16-d0204tx-4r0u5pa-i5-11400h-3_7afdcb7a448a4b84984e6a4ef4d757c6_master.png'),
+(107, 18, 'https://product.hstatic.net/1000233206/product/hp-victus-16-d0204tx-4r0u5pa-i5-11400h-4_1d1a5e5537a74cb1970c83196ee12dc5_master.png'),
+(108, 18, 'https://product.hstatic.net/1000233206/product/hp-victus-16-d0204tx-4r0u5pa-i5-11400h_db7305379f8341beb100cab8edc07f0d_master.png'),
+(109, 19, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0175ax-4r0u8pa-1_f8c6cd3680714516a26869f50c1d26c1_master.png'),
+(110, 19, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0175ax-4r0u8pa-2_8b847cdd8e1c4f43bc1173b2f819429e_master.png'),
+(111, 19, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0175ax-4r0u8pa-3_fe1004b64bfd40a79b21c3c332b8cd75_master.png'),
+(112, 19, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0175ax-4r0u8pa-4_6aeceb60ea3c4db4b9e0d213239c3053_master.png'),
+(113, 19, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0175ax-4r0u8pa_48d317e08aea4bd195fe9b0cf09b6610_master.png'),
+(114, 20, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0170ax-4r0u7pa-r7-5800h-1_d26bfc8b9ec94af99bed5259a27f9cbd_master.png'),
+(115, 20, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0170ax-4r0u7pa-r7-5800h-2_a9bea9056fd94a4ca7067dc78ba2df29_master.png'),
+(116, 20, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0170ax-4r0u7pa-r7-5800h-3_1798af1ec8354520b7b65df305bdf6a7_master.png'),
+(117, 20, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0170ax-4r0u7pa-r7-5800h-4_8227883dd9fb4ced940bcc64ed35c2c8_master.png'),
+(118, 20, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0170ax-4r0u7pa-r7-5800h_cfd6622f3789416688233bd66f793fbc_master.png'),
+(119, 21, 'https://product.hstatic.net/1000233206/product/asus-zenbook-14x-oled-um5401qa-kn209w-r5-5600h-1_fffc4a6a84284dc98039ea610dacdd95_master.png'),
+(120, 21, 'https://product.hstatic.net/1000233206/product/asus-zenbook-14x-oled-um5401qa-kn209w-r5-5600h-2_e1dc4c33c570489a88a29c3d6c868606_master.png'),
+(121, 21, 'https://product.hstatic.net/1000233206/product/asus-zenbook-14x-oled-um5401qa-kn209w-r5-5600h-3_fdd5e8a3255d461f8cf28bf925738110_master.png'),
+(122, 21, 'https://product.hstatic.net/1000233206/product/asus-zenbook-14x-oled-um5401qa-kn209w-r5-5600h-4_2957c8c9ee184289802cc3e232fc5da0_master.png'),
+(123, 21, 'https://product.hstatic.net/1000233206/product/asus-zenbook-14x-oled-um5401qa-kn209w-r5-5600h_a7350e4f7647402bbd95cb12c1543ac8_master.png'),
+(124, 22, 'https://product.hstatic.net/1000233206/product/gigabyte-g7-md-71s1123so-i7-11800h-1_cc3268a84c65403f8495c6019fbd9139_master.png'),
+(125, 22, 'https://product.hstatic.net/1000233206/product/gigabyte-g7-md-71s1123so-i7-11800h-2_a486efd9d0124f03a84685d594eee4a5_master.png'),
+(126, 22, 'https://product.hstatic.net/1000233206/product/gigabyte-g7-md-71s1123so-i7-11800h-3_cdc522bf689f4b68889c9b770dbca9eb_master.png'),
+(127, 22, 'https://product.hstatic.net/1000233206/product/gigabyte-g7-md-71s1123so-i7-11800h_cb0ad385960c47be8628323b89f0c9f9_master.png'),
+(128, 23, 'https://product.hstatic.net/1000233206/product/acer-aspire-7-a715-42g-r4xx-1_1f63633eb8a048cf817f5f5c7e5a1790_master.png'),
+(129, 23, 'https://product.hstatic.net/1000233206/product/acer-aspire-7-a715-42g-r4xx-2_f6c8d99710e6470c919f8b8189d3a96c_master.png'),
+(130, 23, 'https://product.hstatic.net/1000233206/product/acer-aspire-7-a715-42g-r4xx-3_f546f04afb8341518832e7b6f93c5410_master.png'),
+(131, 23, 'https://product.hstatic.net/1000233206/product/acer-aspire-7-a715-42g-r4xx-4_8d349adff2f64e0db07bfc46da828602_master.png'),
+(132, 23, 'https://product.hstatic.net/1000233206/product/acer-aspire-7-a715-42g-r4xx-5_b1532f6b4893432dbaffdf6e770c7f24_master.png'),
+(133, 24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-1_495cc96deb4a422486449aa2dd6a4499_master.png'),
+(134, 24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-2_1246b1da48a74ec5bb334ba865736f22_master.png'),
+(135, 24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-3_5bec7e6f7d614e22bc068cded6d505ea_master.png'),
+(136, 24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-4_64179678a2954c9e8cea64ec72945b3c_master.png'),
+(137, 24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-5_ebfe2769ba0040c59929f58641d85409_master.png'),
+(138, 24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-6_89e3c50335064d65b15e572f95612ed0_master.png'),
+(139, 24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-7_8eb671b00815405fb9b89d57fd75fcdb_master.png'),
+(140, 24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h-8_e51e5cb6b4a84512b0be18cd1b491642_master.png'),
+(141, 24, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-tiger-an515-58-52sp-i5-12500h_21eec226f57c41a7865fdc18004a57c8_master.png'),
+(142, 25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-1_9441d30c24b948edb9353713e6a735b5_master.png'),
+(143, 25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-2_a7f89524d3044a4bb41e91fe39246e60_master.png'),
+(144, 25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-3_f981f413a2d6413db0debeca26165929_master.png'),
+(145, 25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-4_f5bf5ad165a840efb6bfd4bfa6eb9637_master.png'),
+(146, 25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-5_b4c59bdb99054650b155d34edffbf475_master.png'),
+(147, 25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w-6_26f92251029e40249df817245cf753b8_master.png'),
+(148, 25, 'https://product.hstatic.net/1000233206/product/asus-tuf-dash-f15-fx516pm-hn002w_0f64729a570f4c91a8dc493c9aa264c7_master.png'),
+(149, 26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-1_f4d4aa32e27d4370b156530bd22ba585_master.png'),
+(150, 26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-2_0d47741d22d643fb868e77185dd73d06_master.png'),
+(151, 26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-3_938d438fa1d8430bb218f332d5271da9_master.png'),
+(152, 26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-4_79648e994f68475384b3f08087117dc1_master.png'),
+(153, 26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-5_c4b1f983e4a7486984ee51194676fe21_master.png'),
+(154, 26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-6_4779a4a4e16641c4adf3611f27f425ff_master.png'),
+(155, 26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-7_cb10d014e45e49ea8739a429de60d699_master.png'),
+(156, 26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c-8_6de57eedef724ddba9fd6ff306655f28_master.png'),
+(157, 26, 'https://product.hstatic.net/1000233206/product/acer_aspire_vero_phien_ban_national_geographic_av15-51r-541c_64382f97d7604e02a5cbb3c5d5dc8464_master.png'),
+(158, 27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-1_2b13350a5f8344bf853f4fa3006a8085_master.png'),
+(159, 27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-2_d892b311f3cb4e72a025e011a48b5244_master.png'),
+(160, 27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-3_1e96c772068141b888d20f023017ae30_master.png'),
+(161, 27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-4_bbcc7ea6ed054998baee7518c26a348f_master.png'),
+(162, 27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-5_0cb7dc73616d44999ae414422df70e03_master.png'),
+(163, 27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-6_0c4502f27d564cf98a5b3d762492bbfb_master.png'),
+(164, 27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7-7_6d54846af2334d929e76e42d48c41328_master.png'),
+(165, 27, 'https://product.hstatic.net/1000233206/product/acer-aspire-5-a514-54-59qk-i5-1135g7_8aabaa1c8fd34b24b85b2d275f4d55a5_master.png'),
+(166, 28, 'https://product.hstatic.net/1000233206/product/acer-aspire-3-a315-56-38b1-i3-1005g1-2_19605d11526f44368e297b62d799ea90_master.png'),
+(167, 28, 'https://product.hstatic.net/1000233206/product/acer-aspire-3-a315-56-38b1-i3-1005g1-3_bd2db4787afa470ba264069da38e000d_master.png'),
+(168, 28, 'https://product.hstatic.net/1000233206/product/acer-aspire-3-a315-56-38b1-i3-1005g1-4_373087c239774402a6329608eee21bf5_master.png'),
+(169, 28, 'https://product.hstatic.net/1000233206/product/acer-aspire-3-a315-56-38b1-i3-1005g1-5_979634d3e3f34c70b39a7040b08ca791_master.png'),
+(170, 28, 'https://product.hstatic.net/1000233206/product/acer-aspire-3-a315-56-38b1-i3-1005g1_8381143191f9431ba8eb33bf3887833b_master.png'),
+(171, 29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-1_e6fab1ea39334ef2a506dba9992f0680_master.png'),
+(172, 29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-2_edb17c6aa4974178b2607360d5eaa2ee_master.png'),
+(173, 29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-3_de67f8d09dd7491095dc947e384a6d7f_master.png'),
+(174, 29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-4_b007991c1a1d45bda60db3cf8214b6ee_master.png'),
+(175, 29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-5_fa9e5ef9e776452d85aa2b3626c81a60_master.png'),
+(176, 29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h-6_fd9202b0ba03407cb479e9be048b4638_master.png'),
+(177, 29, 'https://product.hstatic.net/1000233206/product/asus-tuf-gaming-f15-fx506lh-hn188w-i5-10300h_7b032cec13484888b599410a3cc8b3c7_master.png'),
+(178, 30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb-1_517e28121f9944af875175eeece50ae9_master.png'),
+(179, 30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb-2_fb32b9a4205a4e4898675b0ff5bc5990_master.png'),
+(180, 30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb-3_04cdbcc926d044b6ad75b588033abf97_master.png'),
+(181, 30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb-4_b6e9b66eb6af48639820caccbb9f0743_master.png'),
+(182, 30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb-5_33325b80880f4256b7768ddc109bd20f_master.png'),
+(183, 30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb_0982a0fd828f4400b61fe5d86967e9e1_master.png'),
+(184, 30, 'https://product.hstatic.net/1000233206/product/acer-travelmate-b3-tmb311-31-c2hb_ab87fdffd34049a1b700722f1fa51ba4_master.png'),
+(185, 32, 'test'),
+(186, 32, 'test2'),
+(187, 32, 'test3'),
+(188, 32, 'test3'),
+(190, 1, 'http://res.cloudinary.com/dd8b69mls/image/upload/v1654164360/wzfnacxqq6rvnclmlnxu.jpg'),
+(191, 1, 'http://res.cloudinary.com/dd8b69mls/image/upload/v1654164392/tpr6qr38hcxqrdyjsglu.jpg'),
+(192, 1, 'http://res.cloudinary.com/dd8b69mls/image/upload/v1654164439/prkk9yjvyvcgv4ti8z3w.png'),
+(193, 1, 'http://res.cloudinary.com/dd8b69mls/image/upload/v1654171543/jq6ztjvsqcijtdnrnobr.jpg'),
+(195, 1, 'http://res.cloudinary.com/dd8b69mls/image/upload/v1654171846/dtndg4nhtkslzyamsc1q.jpg');
 
 -- --------------------------------------------------------
 
@@ -449,10 +462,6 @@ CREATE TABLE `user` (
   `birthday` date NOT NULL,
   `url_avt` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-INSERT INTO `user` (user_id, username, password, fName, lName, email, phone, birthday, url_avt)
-VALUES (1, "Thalo", "123456", "Nguyễn", "Long", "vodanh@gmail.com", "0123445667","01-01-2001", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYpR4DvujRhJleInDuoohGQ-nthBJNBrYiHA&usqp=CAU")
 
 --
 -- Indexes for dumped tables
@@ -502,7 +511,7 @@ ALTER TABLE `product`
 -- Indexes for table `product_image`
 --
 ALTER TABLE `product_image`
-  ADD PRIMARY KEY (`product_id`,`url`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -519,7 +528,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -531,7 +540,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `product_image`
+--
+ALTER TABLE `product_image`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
 
 --
 -- AUTO_INCREMENT for table `user`

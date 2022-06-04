@@ -78,6 +78,20 @@ export const createImg = createAsyncThunk(
     return res.data;
   }
 );
+export const deleteImg = createAsyncThunk("product/img/delete", async (id) => {
+  const config = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
+  };
+  const res = await axios.delete(
+    `http://localhost/ecommerce/backend/api/imgProduct/delete.php?id=${id}`,
+    config
+  );
+  return parseInt(res.data.id);
+});
+
 const productsSlice = createSlice({
   name: "products",
   initialState: {
@@ -162,6 +176,10 @@ const productsSlice = createSlice({
     },
     [createImg.fulfilled]: (state, action) => {
       console.log("Done");
+      state.product = {
+        ...state.product,
+        imgList: [...state.product.imgList, action.payload],
+      };
     },
     [createImg.rejected]: (state, action) => {
       console.log("Failed to create img ");
@@ -180,6 +198,24 @@ const productsSlice = createSlice({
     },
     [getImgForProduct.rejected]: (state, action) => {
       console.log("Failed to get img products!!!");
+    },
+
+    // delete img by id
+    [deleteImg.pending]: (state, action) => {
+      console.log("delte img ingggg");
+    },
+    [deleteImg.fulfilled]: (state, action) => {
+      console.log("Done delte");
+      const imgListFilter = state.product.imgList.filter((item) => {
+        if (item.id !== action.payload) return item;
+      });
+      state.product = {
+        ...state.product,
+        imgList: imgListFilter,
+      };
+    },
+    [deleteImg.rejected]: (state, action) => {
+      console.log("Failed to delete!!!");
     },
   },
 });
