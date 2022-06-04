@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import {
+  deleteImg,
   getSingleProduct,
   singleProductsSelector,
   updateProduct,
@@ -49,6 +50,7 @@ const Detail = () => {
 
   //state
   const [updatedProduct, setUpdatedProduct] = useState({ ...product });
+  const [numberSelected, setNumberSelected] = useState(0);
 
   useEffect(() => {
     dispatch(getSingleProduct(searchParams.get("id")));
@@ -66,7 +68,7 @@ const Detail = () => {
     return <CircularProgress />;
   }
 
-  // handle update
+  // handle update product
   const handleUpdateProduct = () => {
     swal({
       title: "Are you sure?",
@@ -74,8 +76,8 @@ const Detail = () => {
       icon: "warning",
       buttons: true,
       dangerMode: true,
-    }).then((willDelete) => {
-      if (willDelete) {
+    }).then((willUpdated) => {
+      if (willUpdated) {
         dispatch(updateProduct(updatedProduct));
         swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
@@ -87,12 +89,45 @@ const Detail = () => {
     });
     dispatch(updateProduct(updatedProduct));
   };
+
+  // handle delete one img
+  const handleDelete = (id) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this image!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDeleted) => {
+      if (willDeleted) {
+        // setNumberSelected(() => 0);
+        dispatch(deleteImg(id));
+        swal("Poof! Your image has been deleted!", {
+          icon: "success",
+        });
+        // console.log(numberSelected);
+        navigate(`../product/edit/?id=${updatedProduct.product_id}`);
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    });
+  };
+
+  // handle change carosel
+  const handleChangeCarosel = (index, item) => {
+    console.log("index item", index, item);
+  };
   console.log("????", updatedProduct);
   return (
     <>
       <Wrap className="mb-10">
         <Container>
-          <Carousel>
+          <Carousel
+            selectedItem={numberSelected}
+            onChange={(index, item) => handleChangeCarosel(index, item)}
+            // onSwipeEnd={() => setNumberSelected(10000)}
+            // renderItem={(isSeleted) => console.log(isSeleted)}
+          >
             <div className="position-relative">
               <img src={product.img_cover} alt="" />
               <Popup
@@ -130,7 +165,7 @@ const Detail = () => {
                     color="error"
                     size="medium"
                     placement="top-end"
-                    onClick={() => alert("xoa img id=" + imgItem.id)}
+                    onClick={() => handleDelete(imgItem.id)}
                   >
                     Delete
                   </Button>

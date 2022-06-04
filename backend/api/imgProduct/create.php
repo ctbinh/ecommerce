@@ -38,7 +38,7 @@ function cors()
         exit(0);
     }
 
-    echo "You have CORS!";
+    // echo "You have CORS!";
 }
 cors();
 // Headers
@@ -67,7 +67,40 @@ $data = json_decode(file_get_contents("php://input"));
 $product->url = $data->url;
 
 $result = $product->create();
-// print_r($result);
-echo json_encode(
-    array('id' => 'file is uploaded')
-);
+$result = $product->read_last();
+
+$num = $result->rowCount();
+
+if ($num > 0) {
+    // Cat array
+    $pd_arr = array();
+    // $pd_arr['data'] = array();
+
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+
+        $pd_item = array(
+            // 'product_id' => $product_id,
+            'id' => $id,
+            'url' => $url,
+        );
+
+        // Push to "data"
+
+        array_push($pd_arr, $pd_item);
+    }
+
+    // Turn to JSON & output
+    echo json_encode($pd_arr);
+
+} else {
+    // No Categories
+    echo json_encode(
+        array('message' => 'No Categories Found')
+    );
+}
+
+// // print_r($result);
+// echo json_encode(
+//     array('id' => 'file is uploaded')
+// );

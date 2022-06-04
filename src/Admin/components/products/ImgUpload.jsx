@@ -35,7 +35,7 @@ const ImgUpload = ({ idProduct }) => {
     console.log("tt", idProduct, res.data.url);
     dispatch(createImg({ id: idProduct, url: res.data.url }));
 
-    dispatch(getImgForProduct(idProduct));
+    // dispatch(getImgForProduct(idProduct));
     console.log("xongggg");
     swal("Good job!", "One Img da dc them", "success");
   };
