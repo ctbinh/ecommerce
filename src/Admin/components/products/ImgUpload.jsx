@@ -18,12 +18,9 @@ const ImgUpload = ({ idProduct }) => {
   const maxNumber = 69;
 
   const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
   const handleAddImg = async () => {
-    console.log(images);
     const formData = new FormData();
     formData.append("file", images[0].file);
     formData.append("api_key", 174989952789425);

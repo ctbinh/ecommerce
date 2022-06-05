@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-// import Carousel from "./Carousel";
-import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import TextContainer from "./TextContainer";
+import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import swal from "sweetalert";
 import { useSelector, useDispatch } from "react-redux";
@@ -33,8 +30,6 @@ import ImgUpload from "./ImgUpload";
 const Detail = () => {
   // handle change input
   const handleChange = (e) => {
-    console.log("e.target.name", e.target.name);
-    console.log("e.target.value", e.target.value);
     setUpdatedProduct({
       ...updatedProduct,
       [e.target.name]: e.target.value,
@@ -100,12 +95,10 @@ const Detail = () => {
       dangerMode: true,
     }).then((willDeleted) => {
       if (willDeleted) {
-        // setNumberSelected(() => 0);
         dispatch(deleteImg(id));
         swal("Poof! Your image has been deleted!", {
           icon: "success",
         });
-        // console.log(numberSelected);
         navigate(`../product/edit/?id=${updatedProduct.product_id}`);
       } else {
         swal("Your imaginary file is safe!");
@@ -184,7 +177,6 @@ const Detail = () => {
                   > */}
                 <Popup
                   trigger={(open) => {
-                    console.log(open);
                     return (
                       <Button
                         variant="contained"

@@ -16,18 +16,15 @@ import {
 import { Box, CircularProgress, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
+import Comment from "./Comment";
 const Detail = () => {
   // param in url
   let [searchParams, setSearchParams] = useSearchParams();
 
   // redux
   const product = useSelector(singleProductsSelector);
-  // const { imgList } = product;
-  // console.log("??", imgList);
   const dispatch = useDispatch();
-  //
 
-  console.log("???", product.loading);
   useEffect(() => {
     dispatch(getSingleProduct(searchParams.get("id")));
     window.scrollTo(0, 0);
@@ -55,6 +52,7 @@ const Detail = () => {
             />
           </div> */}
           </Carousel>
+          {/* 
           <ContainerComment>
             <Header>
               <Heading>Comment</Heading>
@@ -121,7 +119,9 @@ const Detail = () => {
                 <Td>Remove</Td>
               </Tr>
             </Table>
-          </ContainerComment>
+          </ContainerComment> */}
+
+          {/* <Comment /> */}
         </Container>
         <Container>
           <Box
@@ -163,6 +163,7 @@ const Detail = () => {
           <TextContainer label="Size" text={product.size} />
         </Container>
       </Wrap>
+      <Comment id={product.product_id} />
     </>
   );
 };
