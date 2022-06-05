@@ -69,7 +69,7 @@ const Header = () => {
 
                 <NavIcon>
                       <div style={{ marginLeft: 'auto', minWidth: '60px' }}>
-                    <Link style={{ textDecoration: 'none' }} to="/cart" state={{cart: cart }}>
+                    <Link style={{ textDecoration: 'none' }} to="/cart" state={{cartt: cart }}>
                           <CartIcon />
                           <CartCounter>20</CartCounter>
                     </Link>
