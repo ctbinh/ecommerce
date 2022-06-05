@@ -75,7 +75,7 @@ const User = () => {
   // ]
   const [targetNavItem, setTargetNavItem] = useState('my-account')
   const [targetNavChildItem, setTargetNavChildItem] = useState('infor')
-  const [targetTypeOrders, setTargetTypeOrders] = useState('all')
+  
   const [isEnabled, setIsEnabled] = useState(false)
   const [userInfor, setUserInfor] = useState(null)
   const changeNavItem = (item) => {
@@ -93,9 +93,7 @@ const User = () => {
     setTargetNavItem('my-account')
     setIsEnabled(false)
   }
-  const changeTypeOrders = (type) => {
-    setTargetTypeOrders(type)
-  }
+  
   useEffect(() => {
     const fetchUser = async () => {
       const id = sessionStorage.getItem('user_id')
@@ -133,7 +131,7 @@ const User = () => {
           <NavItem className={targetNavItem==='my-wishlist'?'active':''} onClick={() => changeNavItem('my-wishlist')}>My Wish List</NavItem>
         </NavBox>
         <Content>
-          {targetNavItem==='my-orders' && <Orders target={targetTypeOrders} changeTypeOrders={changeTypeOrders}/>}
+          {targetNavItem==='my-orders' && <Orders/>}
           {targetNavItem==='my-wishlist' && <Wishlist wishlist={[]}/>}
           {targetNavChildItem==='infor' && <Information info={userInfor}/>}
           {targetNavChildItem==='change-pass' && <Password/>}

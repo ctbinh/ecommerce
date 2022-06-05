@@ -1,26 +1,83 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import images from '../images'
+import axios from 'axios'
 
 const Orders = (props) => {
+  const [orders, setOrders] = useState([])
+  const [targetTypeOrders, setTargetTypeOrders] = useState('all')
+  const changeTypeOrders = (type) => {
+    setTargetTypeOrders(type)
+  }
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const id = sessionStorage.getItem('user_id')
+      const res = await axios.get('http://localhost/ecommerce/backend/api/orders/read_single_user.php?user_id='+id);
+      setOrders([res.data])
+      console.log(Object.keys(res.data))
+    }
+    fetchOrders()
+  }, [])
+  
   return (
     <Container>
       <NavOrders>
-        <TypeOrders className={props.target==='all'?'active':''} onClick={()=>props.changeTypeOrders('all')}>
+        <TypeOrders className={targetTypeOrders==='all'?'active':''} onClick={()=>changeTypeOrders('all')}>
           All
         </TypeOrders>
-        <TypeOrders className={props.target==='delivering'?'active':''} onClick={()=>props.changeTypeOrders('delivering')}>
+        <TypeOrders className={targetTypeOrders==='delivering'?'active':''} onClick={()=>changeTypeOrders('delivering')}>
           Delivering
         </TypeOrders>
-        <TypeOrders className={props.target==='delivered'?'active':''} onClick={()=>props.changeTypeOrders('delivered')}>
+        <TypeOrders className={targetTypeOrders==='delivered'?'active':''} onClick={()=>changeTypeOrders('delivered')}>
           Delivered
         </TypeOrders>
-        <TypeOrders className={props.target==='cancelled'?'active':''} onClick={()=>props.changeTypeOrders('cancelled')}>
+        <TypeOrders className={targetTypeOrders==='cancelled'?'active':''} onClick={()=>changeTypeOrders('cancelled')}>
           Cancelled
         </TypeOrders>
       </NavOrders>
       <Hr color='#b8b8b8'/>
-      <Order>
+      {orders.map((ord, idx) => {
+        return(
+          <Order>
+            <Item>
+              <Image>
+                <img src={images.item1} alt="item" style={{width:'auto',height:'100%'}}/>
+              </Image>
+              <Detail>
+                <Name>MSI MEG Trident X 10SD-1012AU Intel</Name>
+                <Desc>
+                  MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty
+                </Desc>
+                <Price>$4,000.00</Price>
+                <Qty>x3</Qty>
+                <Price fw='bold'>$12.000.00</Price>
+              </Detail>
+            </Item>
+            <Item>
+              <Image>
+                <img src={images.lap1} alt="item" style={{width:'auto',height:'100%'}}/>
+              </Image>
+              <Detail>
+                <Name>MSI MEG Trident X 10SD-1012AU Intel</Name>
+                <Desc>
+                  MSI MEG Trident X 10SD-1012AU Intel i7 10700K, 2070 SUPER, 32GB RAM, 1TB SSD, Windows 10 Home, Gaming Keyboard and Mouse 3 Years Warranty
+                </Desc>
+                <Price>$4,349.00</Price>
+                <Qty>x1</Qty>
+                <Price fw='bold'>$4,349.00</Price>
+              </Detail>
+            </Item>
+            <Text style={{textAlign:'right'}}>Delivery cost: $5</Text>
+            <Hr/>
+            <Total>
+              <Text className='time'>Date: 1/1/2020 - 02:30 PM</Text>
+              <Text className='total'>Total: $16,354.00</Text>
+            </Total>
+          </Order>
+        )
+      }
+      )}
+      {/* <Order>
         <Item>
           <Image>
             <img src={images.item1} alt="item" style={{width:'auto',height:'100%'}}/>
@@ -91,7 +148,7 @@ const Orders = (props) => {
           <Text className='time'>Date: 1/1/2020 - 02:30 PM</Text>
           <Text className='total'>Total: $16,354.00</Text>
         </Total>
-      </Order>
+      </Order> */}
     </Container>
   )
 }

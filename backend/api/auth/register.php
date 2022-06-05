@@ -24,10 +24,10 @@ $user->lName = $data->lName;
 // Create Category
 if($user->create()) {
   echo json_encode(
-    array('message' => 'Account Created')
+    array('message' => 'Account Created', 'status' => 'Success')
   );
 } else {
   echo json_encode(
-    array('message' => 'Account Not Created')
+    array('message' => 'Account Not Created', 'status' => 'Fail')
   );
 }

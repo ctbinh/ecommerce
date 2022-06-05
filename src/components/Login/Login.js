@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Alert, Button, Form } from 'react-bootstrap'
 import styled from 'styled-components'
 import Footer from '../Footer'
 import Header from '../Header'
@@ -14,6 +14,7 @@ const Login = (props) => {
   const [fName, setFName] = useState('')
   const [lName, setLName] = useState('')
   const [cfPassword, setCfPassword] = useState('')
+  const [isSuccess, setIsSuccess] = useState(-1)
   const login = () => {
     const data = {
       'username': username,
@@ -22,9 +23,12 @@ const Login = (props) => {
     axios.post(`http://localhost/ecommerce/backend/api/auth/login.php`, data)
     .then(function (response) {
       console.log(response.data);
-      if(response.data.status === 'OK') {
+      if(response.data.status === 'Success') {
         sessionStorage.setItem('user_id', response.data.user_id);
         navigate('/');
+      }
+      else {
+        setIsSuccess(0)
       }
     })
     .catch(function (error) {
@@ -33,7 +37,7 @@ const Login = (props) => {
   }
   const signup = async () => {
     if(password !== cfPassword) {
-      alert('Wrong!')
+      alert('Password incorrect!')
       return
     }
     const data = {
@@ -44,6 +48,16 @@ const Login = (props) => {
     }
     const res = await axios.post(`http://localhost/ecommerce/backend/api/auth/register.php`, data);
     console.log(res.data)
+    if(res.data.status === 'Success') {
+      setIsSuccess(1)
+    }
+    else {
+      setIsSuccess(0)
+    }
+  }
+  const changeTab = (tab) => {
+    setIsSuccess(-1)
+    settargetTab(tab)
   }
   
   return (
@@ -56,7 +70,7 @@ const Login = (props) => {
           {targetTab==="login" ? "Customer Login" : 'Create Account'}
         </h2>
         <Button className='phone' variant="primary" style={{borderRadius: '20px'}}
-          onClick={targetTab==="login" ? ()=>settargetTab(1) : ()=> settargetTab('login')}>
+          onClick={targetTab==="login" ? ()=>changeTab(1) : ()=> changeTab('login')}>
           {targetTab==="login" ? "Sign up" : 'Sign in'}
         </Button>
       </Head>
@@ -67,6 +81,14 @@ const Login = (props) => {
           <Form>
             <Title>Registered Customer</Title>
             <Form.Label>If you have an account, sign in.</Form.Label>
+            {isSuccess === 0 &&
+            <Alert variant="danger" onClose={() => setIsSuccess(-1)} dismissible>
+              <Alert.Heading>Failed to login!</Alert.Heading>
+              <p>
+                Incorrect account or password.
+              </p>
+            </Alert>
+            }
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Label>Username <span style={{color: 'red'}}>*</span></Label>
               <Form.Control type="text" placeholder="Your username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
@@ -88,7 +110,7 @@ const Login = (props) => {
             <li>Track orders and more</li>
           </ul>
           <Button variant="primary" style={{width: '200px', borderRadius: '20px'}} 
-            onClick={()=>settargetTab(1)}>
+            onClick={()=>changeTab(1)}>
               Create an account
           </Button>
         </Box>
@@ -98,6 +120,22 @@ const Login = (props) => {
           <Form>
             <Title>New Customer</Title>
             <Form.Label>Just create an account, you can buy everything.</Form.Label>
+            {isSuccess === 0 &&
+            <Alert variant="danger" onClose={() => setIsSuccess(-1)} dismissible>
+              <Alert.Heading>Failed to create account!</Alert.Heading>
+              <p>
+                Username already exist.
+              </p>
+            </Alert>
+            }
+            {isSuccess === 1 &&
+            <Alert variant="success" onClose={() => setIsSuccess(-1)} dismissible>
+              <Alert.Heading>Successful!</Alert.Heading>
+              <p>
+                Create account success
+              </p>
+            </Alert>
+            }
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Label>Username <span style={{color: 'red'}}>*</span></Label>
               <Form.Control type="text" placeholder="Your username" value={username} onChange={(e)=>setUsername(e.target.value)}/>
@@ -133,7 +171,7 @@ const Login = (props) => {
             <li>Keep more than one address</li>
             <li>Track orders and more</li>
           </ul>
-          <Button variant="primary" style={{width: '200px', borderRadius: '20px'}} onClick={()=>settargetTab('login')}>
+          <Button variant="primary" style={{width: '200px', borderRadius: '20px'}} onClick={()=>changeTab('login')}>
             Login
           </Button>
         </Box></>)}

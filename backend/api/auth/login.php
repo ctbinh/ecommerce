@@ -24,7 +24,7 @@ if($user->login()) {
   if(password_verify($data->password, $user->password)) {
     echo json_encode(
       array('message' => 'Login successful',
-      'status' => 'OK',
+      'status' => 'Success',
       'user_id' => $user->user_id)
     );
     return;
@@ -32,6 +32,6 @@ if($user->login()) {
 }
 echo json_encode(
   array('message' => 'Login failed.', 
-  'status' => 'error')
+  'status' => 'Fail')
 );
 
