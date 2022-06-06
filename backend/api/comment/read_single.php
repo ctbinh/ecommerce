@@ -47,6 +47,6 @@ if ($num > 0) {
 } else {
     // No Categories
     echo json_encode(
-        array('message' => 'No Comment Found')
+        array()
     );
 }
