@@ -1,6 +1,8 @@
 import { useTable, useSortBy } from "react-table";
 import { Link } from "react-router-dom";
-
+import { Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { toggleStatus } from "../../store/reducers/productsSlice";
 export function Table({ columns, data }) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
@@ -12,7 +14,10 @@ export function Table({ columns, data }) {
     );
 
   const firstPageRows = rows.slice(0, rows.length);
-
+  const dispatch = useDispatch();
+  const handleToggle = (id) => {
+    dispatch(toggleStatus(id));
+  };
   return (
     <>
       <table {...getTableProps()}>
@@ -35,7 +40,7 @@ export function Table({ columns, data }) {
                 </th>
               ))}
               <th>Action</th>
-              <th>Action</th>
+              <th>Status</th>
             </tr>
           ))}
         </thead>
@@ -50,9 +55,18 @@ export function Table({ columns, data }) {
                   );
                 })}
                 <td>
-                  <Link to={`detail?id=${row.cells[2].value}`}>Detail</Link>
+                  <Link to={`detail?id=${row.cells[2].value}`}>
+                    <Button>Detail</Button>
+                  </Link>
                 </td>
-                <td>Remove</td>
+                <td>
+                  <Button
+                    style={{ fontSize: "8px" }}
+                    onClick={() => handleToggle(data[i].product_id)}
+                  >
+                    {data[i].isDisabled === 1 ? "Blocked" : "Active"}
+                  </Button>
+                </td>
               </tr>
             );
           })}
