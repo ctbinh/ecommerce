@@ -2,21 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { ShoppingCart, Person } from "@mui/icons-material";
 import { Navbar, Container, Nav, NavDropdown, Dropdown } from 'react-bootstrap';
-import axios from 'axios';
 import {Link} from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 const Header = () => {
-    const [cart, setCart] = useState([]);
     const signout = () => {
       sessionStorage.clear();
     }
     const [user, setUser] = useState(null)
     useEffect(() => {
-      axios.get("http://localhost/ecommerce/backend/api/cart/finditems.php").then((response) => {
-          if (response.data.data) setCart(response.data.data);
-          console.log(response.data.message);
-      });
       const data = sessionStorage.getItem('user_id');
       if(data) {
         setUser(data)
@@ -69,7 +63,7 @@ const Header = () => {
 
                 <NavIcon>
                       <div style={{ marginLeft: 'auto', minWidth: '60px' }}>
-                    <Link style={{ textDecoration: 'none' }} to="/cart" state={{cartt: cart }}>
+                    <Link style={{ textDecoration: 'none' }} to="/cart">
                           <CartIcon />
                           <CartCounter>20</CartCounter>
                     </Link>

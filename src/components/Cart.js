@@ -10,21 +10,23 @@ import RowOfTable from "./RowOfTable";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import "react-notifications/lib/notifications.css";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const Cart = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
-  const location = useLocation();
-  const { cartt } = location.state;
-  const [cart, setCart] = useState(cartt);
+//   const location = useLocation();
+//   const { cartt } = location.state;
+//   const [cart, setCart] = useState(cartt);
+  const [cart, setCart] = useState([]);
   const navigate = useNavigate();
-
   const createNotification = (type) => {
     switch (type) {
       case "info":
@@ -60,11 +62,37 @@ const Cart = () => {
           "Error Address!",
           3000
         );
-        break;
+        break;          
       default:
         break;
     }
   };
+  const IsSure = () => {
+    confirmAlert({
+      title: 'Are you sure !!!',
+      // message: 'Are you sure to delete !!!',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => ClearAll()
+        },
+        {
+          label: 'No',
+          onClick: () => console.log("Ignore delete all product")
+        }
+      ]
+    });
+  };
+  useEffect(() => {
+    axios.get("http://localhost/ecommerce/backend/api/cart/finditems.php").then((response) => {
+        if (response.data.data) setCart(response.data.data);
+        console.log(response.data.message);
+    });
+    // const data = sessionStorage.getItem('user_id');
+    // if(data) {
+    //   setUser(data)
+    // }
+  }, []);
   const ContainerNotification = (name, phone, address) => {
     if (name.length < 3 || name.length > 14) createNotification("errorName");
     if (!Number(phone)) createNotification("errorPhone");
@@ -134,7 +162,8 @@ const Cart = () => {
                 </ButtonContinue>
               </Col>
               <Col sm={6}>
-                <ButtonClear onClick={ClearAll}>
+                {/* <ButtonClear onClick={ClearAll}> */}
+                <ButtonClear onClick={() => IsSure()}>
                   Clear Shopping Cart
                 </ButtonClear>
               </Col>

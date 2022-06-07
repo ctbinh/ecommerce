@@ -35,6 +35,7 @@
             'cpu' => $cpu,
             'screen' => $screen,
             'product_id' => $product_id,
+            'available' => $available,
             
           );
 

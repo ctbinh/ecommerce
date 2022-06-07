@@ -4,13 +4,31 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { MdKeyboardArrowUp } from 'react-icons/md';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import axios from 'axios';
-
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { NotificationContainer, NotificationManager } from "react-notifications";
 import React, { useState } from 'react';
 
 const RowOfTable = (props) => {
     const [count, setCount] = useState(props.product.amount);
-
+    const createNotification = (type) => {
+        switch (type) {
+          case "notavailable":
+            NotificationManager.warning(
+              `This product is available ${props.product.available}`,
+              "Error !!!",
+              2000
+            );
+            break;         
+          default:
+            break;
+        }
+    };
     const incrementCount = (id) => {
+        if (count + 1 > props.product.available) {
+            createNotification("notavailable");
+            return;
+        }
         const data = {
             user_id: 1, 
             product_id: props.product.product_id, 
@@ -24,12 +42,41 @@ const RowOfTable = (props) => {
         axios.post("http://localhost/ecommerce/backend/api/cart/updateitems.php", data, config)
             .then((response) => {
                 console.log(response.data);
-            });
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
         setCount(count + 1);
     }
-    let decrementCount = () => setCount(count - 1);
+    const decrementCount = () => {
+        console.log("Run here")
+        if (count > 1) {
+            const data = {
+                user_id: 1, 
+                product_id: props.product.product_id, 
+                amount: count - 1
+            }
+            let config = {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            }
+            axios.post("http://localhost/ecommerce/backend/api/cart/updateitems.php", data, config)
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+                
+            setCount(count - 1);
+        }
+        else {
+            IsSure("Are you sure !!!", () => Delete(), "Ignore delete one")
+        }
+    }
     const Delete = () => {
-        props.setCart(props.cart.filter(pro => pro.product_id !== props.product.product_id && pro.user_id !== 1))
+        // props.setCart(props.cart.filter(pro => pro.product_id !== props.product.product_id))
         const data = {
             user_id: 1, 
             product_id: props.product.product_id, 
@@ -43,14 +90,34 @@ const RowOfTable = (props) => {
         axios.post("http://localhost/ecommerce/backend/api/cart/delete.php", data, config)
             .then((response) => {
                 console.log(response.data);
-            });
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
+    const IsSure = (title, dispath, log) => {
+        confirmAlert({
+          title: title,
+          // message: 'Are you sure to delete !!!',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => dispath()
+            },
+            {
+              label: 'No',
+              onClick: () => console.log(log)
+            }
+          ]
+        });
+      };
     if(count <= 0) {
         return <></> 
     }
     return (
         <div>
         <HoverRow>
+        <NotificationContainer />
         <Row style={RowTable}>
             <Col md={7} sm={3} xs={3}>
             <Row>
@@ -64,7 +131,7 @@ const RowOfTable = (props) => {
             </Col>
             <Col md={2} sm={3} xs={3}>
                 {/* {props.product.price.toLocaleString()} */}
-                {props.product.price}
+                ${props.product.price}
             </Col>
             <Col md={1.2} sm={2.2} xs={2.2}>
                 <div style={ArrowIcon}>
@@ -74,7 +141,7 @@ const RowOfTable = (props) => {
                             <MdKeyboardArrowUp onClick={() => (incrementCount(props.product.product_id))}/>
                         </ArrowUp>
                         <ArrowDown>
-                            <MdKeyboardArrowDown onClick={() => decrementCount}/>
+                            <MdKeyboardArrowDown onClick={() => decrementCount()}/>
                         </ArrowDown>
                     </Arrow>
                 </div>
@@ -83,7 +150,7 @@ const RowOfTable = (props) => {
                 {/* {props.product.subtotal.toLocaleString()} */}
                 {(props.product.price* count).toFixed(2)}
                 <Close>
-                    <AiOutlineCloseCircle size={18} color="#888888" onClick={Delete}/>
+                    <AiOutlineCloseCircle size={18} color="#888888" onClick={() => IsSure("Are you sure !!!", () => Delete(), "Ignore delete one")}/>
                 </Close>
             </CloseResponesive>
         </Row>

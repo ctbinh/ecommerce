@@ -59,6 +59,7 @@ CREATE TABLE `cart` (
 INSERT INTO `cart` (`user_id`, `product_id`, `amount`) VALUES
 (1, 1, 2),
 (1, 2, 3),
+(1, 3, 1),
 (2, 2, 4);
 
 -- --------------------------------------------------------
