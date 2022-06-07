@@ -25,10 +25,11 @@ if ($num > 0) {
     // Cat array
     $ord_arr = array();
     $ord_arr['data'] = array();
-
+    $curr_ord_id = -1;
+    $idx = -1;
+    $total = 0;
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
-
         $ord_item = array(
             'product_id' => $product_id,
             'amount' => $amount,
@@ -39,18 +40,22 @@ if ($num > 0) {
             'cpu' => $cpu,
             'description' => $description
         );
-
-        // Push to "data"
-        if(!isset($ord_arr['data'][$order_id])) {
-            $ord_arr['data'][$order_id] = array(
+        if($curr_ord_id != $order_id) {
+            $curr_ord_id = $order_id;
+            $idx++;
+            array_push($ord_arr['data'], array(
+                'order_id' => $order_id,
                 'state' => $state,
                 'item' => array($ord_item),
                 'date' => $date,
                 'total_ship' => $total_ship,
-            );
+                'total' => 0
+            ));
+            $ord_arr['data'][$idx]['total'] += $price*$amount;
         }
         else {
-            array_push($ord_arr['data'][$order_id]['item'], $ord_item);
+            array_push($ord_arr['data'][$idx]['item'], $ord_item);
+            $ord_arr['data'][$idx]['total'] += $price*$amount;
         }
     }
 

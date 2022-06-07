@@ -10,6 +10,7 @@ import images from '../images'
 import Filter from './Filter'
 import Product from './Product'
 import axios from 'axios';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 let data = []
 const Home = (props) => {
@@ -50,6 +51,7 @@ const Home = (props) => {
       img: images.razer
     }
   ]
+  let navigate = useNavigate(); 
   const [show, setShow] = useState(0)
   const [num, setNum] = useState(10);
   const [display, setDisplay] = useState(0);
@@ -149,6 +151,9 @@ const Home = (props) => {
     setfilteredProducts(data)
     setcountPage(Math.ceil(data.length/num))
   }
+  const targetProduct = (id) => {
+    navigate('/detail?id='+id)
+  }
   
   useEffect(() => {
     const fetchProducts = async () => {
@@ -163,6 +168,7 @@ const Home = (props) => {
       const pds = filteredProducts.slice(indexFirst, indexLast)
       setproducts(pds)
     }
+    console.log(data)
     fetchProducts()
     setIsFirst(false)
   }, [currPage, num, filteredProducts, isFirst])
@@ -227,7 +233,7 @@ const Home = (props) => {
             <Pd>
               {products.map((product, idx) => {
                 return (
-                  <Product key={idx} idx={idx} display={display} product={product} />
+                  <Product key={idx} idx={idx} display={display} product={product} onClick={targetProduct}/>
                 )
               })}
             </Pd>

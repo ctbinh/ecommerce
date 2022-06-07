@@ -32,7 +32,7 @@ class Orders
   // Get Single Category
   public function read_single_user($user_id)
   {
-    $query = 'SELECT O.order_id, O.state, O.total_ship, O.date, I.amount, I.product_id, I.price, P.name, P.cpu, P.description, P.img_cover FROM orders AS O, order_item AS I, product AS P WHERE O.user_id = ? AND O.order_id = I.order_id AND I.product_id = P.product_id';
+    $query = 'SELECT O.order_id, O.state, O.total_ship, O.date, I.amount, I.product_id, I.price, P.name, P.cpu, P.description, P.img_cover FROM orders AS O, order_item AS I, product AS P WHERE O.user_id = ? AND O.order_id = I.order_id AND I.product_id = P.product_id ORDER BY O.order_id';
     
     $stmt = $this->conn->prepare($query);
 
@@ -43,5 +43,15 @@ class Orders
 
   public function create() {
     
+  }
+  public function update() {
+    $query = 'UPDATE orders SET state = ?, date = ? WHERE order_id = ?';
+    $stmt = $this->conn->prepare($query);
+
+    $stmt->bindParam(1, $this->state);
+    $stmt->bindParam(2, $this->date);
+    $stmt->bindParam(3, $this->order_id);
+    $stmt->execute();
+    return $stmt;
   }
 }
