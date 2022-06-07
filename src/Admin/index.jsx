@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "./components/Navigation";
 import { Main, Wraper } from "./components/style";
-import { Link, Outlet } from "react-router-dom";
-import CardBox from "./components/CardBox";
-import MainContent from "./components/MainContent";
-import Product from "./components/products";
+import { Outlet, useNavigate } from "react-router-dom";
+
 import Header from "./components/Header";
 import store from "./store";
 import { Provider } from "react-redux";
 const Admin = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!sessionStorage.getItem("admin")) {
+      navigate("/admin/login");
+    }
+  }, []);
   const [toogleNav, setToogleNav] = useState(true);
   const [idOnClick, setIdOnClick] = useState(0);
   const width = window.innerWidth;
@@ -25,17 +29,6 @@ const Admin = () => {
           <div style={{ marginTop: "60px" }}>
             <Outlet />
           </div>
-          {/* {idOnClick === 0 && (
-          <>
-            <CardBox />
-            <MainContent />
-          </>
-        )}
-        {idOnClick === 1 && (
-          <>
-            <Product />
-          </>
-        )} */}
         </Main>
       </Wraper>
     </Provider>
