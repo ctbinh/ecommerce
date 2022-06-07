@@ -61,7 +61,7 @@ export function Table({ columns, data }) {
                 </td>
                 <td>
                   <Button
-                    style={{ fontSize: "8px" }}
+                    // style={{ fontSize: "8px" }}
                     onClick={() => handleToggle(data[i].product_id)}
                   >
                     {data[i].isDisabled === 1 ? "Blocked" : "Active"}
