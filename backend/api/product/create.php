@@ -14,7 +14,7 @@
   // Instantiate blog post object
   $product = new Product($db);
 
-  // Get raw posted data
+  // Get raw posted data  
   $data = json_decode(file_get_contents("php://input"));
 
   $product->name = $data->name;
