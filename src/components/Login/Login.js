@@ -43,7 +43,8 @@ const Login = (props) => {
   }
   const signup = async () => {
     if(password !== cfPassword) {
-      alert('Password incorrect!')
+      setMsg('Password incorrect!')
+      setIsSuccess(0)
       return
     }
     const data = {
@@ -55,9 +56,11 @@ const Login = (props) => {
     const res = await axios.post(`http://localhost/ecommerce/backend/api/auth/register.php`, data);
     console.log(res.data)
     if(res.data.status === 'Success') {
+      setMsg('Create account success!')
       setIsSuccess(1)
     }
     else {
+      setMsg('Username already exist!')
       setIsSuccess(0)
     }
   }
@@ -130,7 +133,7 @@ const Login = (props) => {
             <Alert variant="danger" onClose={() => setIsSuccess(-1)} dismissible>
               <Alert.Heading>Failed to create account!</Alert.Heading>
               <p>
-                Username already exist.
+                {msg}
               </p>
             </Alert>
             }
@@ -138,7 +141,7 @@ const Login = (props) => {
             <Alert variant="success" onClose={() => setIsSuccess(-1)} dismissible>
               <Alert.Heading>Successful!</Alert.Heading>
               <p>
-                Create account success
+                {msg}
               </p>
             </Alert>
             }

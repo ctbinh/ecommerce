@@ -16,7 +16,7 @@ import images from "../images";
 import Filter from "./Filter";
 import Product from "./Product";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 
 let data = [];
@@ -60,7 +60,7 @@ const Home = (props) => {
   ];
   let navigate = useNavigate();
   const [show, setShow] = useState(0);
-  const [num, setNum] = useState(10);
+  const [num, setNum] = useState(20);
   const [display, setDisplay] = useState(0);
   const [brandsTaget, setBrandsTaget] = useState([]);
   const [currPage, setcurrPage] = useState(1);
@@ -200,14 +200,20 @@ const Home = (props) => {
       const pds = filteredProducts.slice(indexFirst, indexLast);
       setproducts(pds);
     };
-    console.log(data);
     fetchProducts();
     setIsFirst(false);
   }, [currPage, num, filteredProducts, isFirst]);
 
   return (
     <>
-      <Header />
+      <Header
+        setfilteredProducts={setfilteredProducts}
+        getProductPerPage={getProductPerPage}
+        setcountPage={setcountPage}
+        num={num}
+        data={data}
+        setcurrPage={setcurrPage}
+      />
       <Container>
         <Carousel>
           <Carousel.Item style={{ width: "100%", height: "100%" }}>
@@ -429,6 +435,12 @@ const Brands = styled.div`
 
 const Poster = styled.img`
   height: 300px;
+  @media (max-width: 1024px) {
+    height: 200px;
+  }
+  @media (max-width: 768px) {
+    height: 100px;
+  }
 `;
 
 const Container = styled.div`

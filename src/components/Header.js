@@ -1,111 +1,144 @@
 import React from "react";
 import styled from "styled-components";
 import { ShoppingCart, Person } from "@mui/icons-material";
-import { Navbar, Container, Nav, NavDropdown, Dropdown } from 'react-bootstrap';
-import {Link} from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { Navbar, Container, Nav, NavDropdown, Dropdown } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-const Header = () => {
-    const signout = () => {
-      sessionStorage.clear();
+const Header = (props) => {
+  const signout = () => {
+    sessionStorage.clear();
+  };
+  const [user, setUser] = useState(null);
+  const [searchVal, setSearchVal] = useState('')
+  const searchProduct = (e) => {
+    if(e.code === "Enter") {
+      const filteredProduct = props.data.filter((p) => p.name.toLowerCase().includes(e.target.value.toLowerCase()))
+      props.setcurrPage(1)
+      props.setfilteredProducts(filteredProduct)
+      props.getProductPerPage(filteredProduct)
+      props.setcountPage(Math.ceil(filteredProduct.length / props.num))
     }
-    const [user, setUser] = useState(null)
-    useEffect(() => {
-      const data = sessionStorage.getItem('user_id');
-      if(data) {
-        setUser(data)
-      }
-    }, []);
-    return <>
+  }
+  useEffect(() => {
+    const data = sessionStorage.getItem("user_id");
+    if (data) {
+      setUser(data);
+    }
+    console.log(props.data)
+  }, [props.data]);
+  return (
+    <>
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="dark"
+        variant="dark"
+        style={{ backgroundColor: "black" }}
+      >
+        <Container style={{}}>
+          <Navbar.Brand href="/" className="d-flex flex-row align-items-center">
+            <img
+              src="https://www.hcmut.edu.vn/images/hcmut/logoBK.png"
+              alt="Logo HCMUT"
+              width="55"
+              height="55"
+              className="d-inline-block align-top"
+            />
+            <Title>BK SHOP</Title>
+          </Navbar.Brand>
 
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{ backgroundColor: 'black' }}>
-            <Container style={{}}>
-                <Navbar.Brand href="/" className="d-flex flex-row align-items-center">
-                    <img
-                        src="https://www.hcmut.edu.vn/images/hcmut/logoBK.png" alt="Logo HCMUT"
-                        width="55"
-                        height="55"
-                        className="d-inline-block align-top"
-                    />
-                    <Title>
-                        BK SHOP
-                    </Title>
-                </Navbar.Brand>
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <SearchBar className="searchbar">
+              <SearchButton>
+                <i className="fa fa-search"></i>
+              </SearchButton>
+              <SearchInput
+                type="text"
+                name="search_product"
+                id=""
+                value={searchVal}
+                onChange={(e)=>setSearchVal(e.target.value)}
+                placeholder="Search by name..."
+                onKeyUp={(e)=> searchProduct(e)}
+              />
+            </SearchBar>
 
-                <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="me-auto"></Nav>
 
-                    <SearchBar className="searchbar">
-                        <SearchButton >
-                            <i className="fa fa-search"></i>
-                        </SearchButton>
-                        <SearchInput type="text" name="search_book" id="" placeholder="Search..." />
-                    </SearchBar>
-
-                    <Nav className="me-auto">
-                    </Nav>
-
-                    <Nav style={{ marginRight: '20px' }}>
-                        {/* <Nav.Link eventKey={2} href="#memes">
+            <Nav style={{ marginRight: "20px" }}>
+              {/* <Nav.Link eventKey={2} href="#memes">
                             Dank memes
                         </Nav.Link> */}
-                        <Nav.Link href="#features">ABOUT</Nav.Link>
-                        <Nav.Link href="#pricing">NEWS</Nav.Link>
-                        <NavDropdown title="COLLECTION" id="collasible-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Best Seller</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Discount</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">My Wish List</NavDropdown.Item>
-                        </NavDropdown>
+              <Nav.Link href="#features">ABOUT</Nav.Link>
+              <Nav.Link href="#pricing">NEWS</Nav.Link>
+              <NavDropdown title="COLLECTION" id="collasible-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">
+                  Best Seller
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">Discount</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Something
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  My Wish List
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
 
-                    </Nav>
-                </Navbar.Collapse>
+          <NavIcon>
+            <div style={{ marginLeft: "auto", minWidth: "60px" }}>
+              <Link style={{ textDecoration: "none" }} to="/cart">
+                <CartIcon />
+                <CartCounter>20</CartCounter>
+              </Link>
+            </div>
 
-                <NavIcon>
-                      <div style={{ marginLeft: 'auto', minWidth: '60px' }}>
-                    <Link style={{ textDecoration: 'none' }} to="/cart">
-                          <CartIcon />
-                          <CartCounter>20</CartCounter>
-                    </Link>
-                      </div>
-
-                    {/* <UserIcon>
+            {/* <UserIcon>
                     </UserIcon> */}
-                    <Dropdown>
-                        <Dropdown.Toggle style={{ backgroundColor: 'transparent', border: 'none' }}>
-                            <UserIcon>
-                            </UserIcon>
-                        </Dropdown.Toggle>
-                        
-                        <Dropdown.Menu style={{zIndex: '9999'}}>
-                        {user ?
-                          <>
-                            
-                            <Dropdown.Item href="/user">My Account</Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item href="/login" onClick={signout}>Sign out</Dropdown.Item>
-                          </> : <>
-                            <Dropdown.Item href="/login">Sign In</Dropdown.Item>
-                            <Dropdown.Item href="/login">Sign Up</Dropdown.Item>
-                          </>}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </NavIcon>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            </Container>
-        </Navbar>
+            <Dropdown>
+              <Dropdown.Toggle
+                style={{ backgroundColor: "transparent", border: "none" }}
+              >
+                <UserIcon></UserIcon>
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu style={{ zIndex: "9999" }}>
+                {user ? (
+                  <>
+                    <Dropdown.Item href="/user">My Account</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item href="/login" onClick={signout}>
+                      Sign out
+                    </Dropdown.Item>
+                  </>
+                ) : (
+                  <>
+                    <Dropdown.Item href="/login">Sign In</Dropdown.Item>
+                    <Dropdown.Item href="/login">Sign Up</Dropdown.Item>
+                  </>
+                )}
+              </Dropdown.Menu>
+            </Dropdown>
+          </NavIcon>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        </Container>
+      </Navbar>
     </>
+  );
 };
 
 const Title = styled.p`
   color: white;
   font-size: 2.5vw;
   width: 15vw;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 700;
   margin: 0px 0 0 15px;
-  @media (max-width: 480px){
+  @media (max-width: 480px) {
     display: none;
   }
 `;
@@ -142,15 +175,15 @@ const SearchButton = styled.button`
   }
 `;
 const NavIcon = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 0 20px;
-    margin-left: auto;
-    .dropdown-toggle::after {
-  display: none !important; 
-}
-  @media (max-width: 768px){
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 20px;
+  margin-left: auto;
+  .dropdown-toggle::after {
+    display: none !important;
+  }
+  @media (max-width: 768px) {
     /* position: relative; */
   }
 `;
@@ -173,7 +206,7 @@ const CartCounter = styled.p`
   bottom: 10px;
   right: 12px;
   /* font-family: 'Helvetica Neue', Helvetica, Arial; */
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     /* width: 15vw; */
   }
 `;
