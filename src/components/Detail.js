@@ -108,8 +108,17 @@ const Detail = () => {
   const handleClick = (url) => {
     navigate(url)
   };
-  const handleAddToCart = () => {
-
+  const handleAddToCart = async () => {
+    let data = {
+      "product_id": product_id,
+      "user_id": "1", /////////////////////////////////
+      "amount": count
+    };
+    console.log("data addToCart: ", data)
+    await axios.post('http://localhost/ecommerce/backend/api/cart/addToCart.php', data)
+      .then((response) => {
+        console.log(response.data);
+      });
   }
   const getComment = async () => {
     const res_comment = await axios.get('http://localhost/ecommerce/backend/api/comment/read_single.php?product_id=' + String(product_id));
@@ -276,7 +285,7 @@ const Detail = () => {
                   </div>
                 </Input>
 
-                <Button disabled={parseInt(product.amount) < 1} style={{ borderRadius: "20px", padding: "6px 20px" }}>
+                <Button disabled={parseInt(product.amount) < 1} style={{ borderRadius: "20px", padding: "6px 20px" }} onClick={handleAddToCart}>
                   {/* Add to cart */}
                   {parseInt(product.amount) > 0 ? "Add to cart" : "Out of stock"}
                 </Button>
