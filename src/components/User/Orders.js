@@ -110,7 +110,7 @@ const Orders = (props) => {
               <Text className="time">Date: {ord.date}</Text>
               <Text className="total">Total: ${ord.total}</Text>
             </Total>
-            {ord.state === "Delivering" && (
+            {ord.state === "Pending" && (
               <div
                 style={{ textAlign: "right" }}
                 onClick={() => cancelOrders(ord.order_id)}
