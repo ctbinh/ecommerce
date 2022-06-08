@@ -159,7 +159,7 @@ const Home = (props) => {
     const fetchProducts = async () => {
       if(isFirst) {
         const res = await axios.get('http://localhost/ecommerce/backend/api/product/read.php');
-        data = res.data.data
+        data = res.data.data.filter((p) => p.isDisabled === 0)
         setcountPage(Math.ceil(data.length/num))
         setfilteredProducts(data)
       }

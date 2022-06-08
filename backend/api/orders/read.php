@@ -4,52 +4,60 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 include_once '../../config/Database.php';
-include_once '../../models/Product.php';
+include_once '../../models/Orders.php';
 
 // Instantiate DB & connect
 $database = new Database();
 $db = $database->connect();
 
-// Instantiate category object
-$product = new Product($db);
+// Instantiate blog post object
+$orders = new Orders($db);
 
-// Category read query
-$result = $product->read();
+// Get product
+$result = $orders->read();
 
-// Get row count
 $num = $result->rowCount();
-
-// Check if any categories
+// Create array
 if ($num > 0) {
     // Cat array
-    $pd_arr = array();
-    $pd_arr['data'] = array();
-
+    $ord_arr = array();
+    $ord_arr['data'] = array();
+    $curr_ord_id = -1;
+    $idx = -1;
+    $total = 0;
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
-
-        $pd_item = array(
+        $ord_item = array(
             'product_id' => $product_id,
-            'name' => $name,
-            'brand' => $brand,
-            'name' => $name,
-            'ram' => $ram,
-            'price' => $price,
-            'old_price' => $old_price,
             'amount' => $amount,
-            'rating' => $rating,
-            'num_reviewer' => $num_reviewer,
+            'price' => $price,
+            'name' => $name,
+            'amount' => $amount,
             'img_cover' => $img_cover,
             'cpu' => $cpu,
             'description' => $description
         );
-
-        // Push to "data"
-        array_push($pd_arr['data'], $pd_item);
+        if($curr_ord_id != $order_id) {
+            $curr_ord_id = $order_id;
+            $idx++;
+            array_push($ord_arr['data'], array(
+                'order_id' => $order_id,
+                'state' => $state,
+                'item' => array($ord_item),
+                'date' => $date,
+                'total_ship' => $total_ship,
+                'total' => 0
+            ));
+            $ord_arr['data'][$idx]['total'] += $price*$amount;
+        }
+        else {
+            array_push($ord_arr['data'][$idx]['item'], $ord_item);
+            $ord_arr['data'][$idx]['total'] += $price*$amount;
+        }
     }
 
     // Turn to JSON & output
-    echo json_encode($pd_arr);
+    echo json_encode($ord_arr);
 
 } else {
     // No Categories

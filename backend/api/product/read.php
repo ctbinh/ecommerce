@@ -41,7 +41,8 @@ if ($num > 0) {
             'num_reviewer' => $num_reviewer,
             'img_cover' => $img_cover,
             'cpu' => $cpu,
-            'description' => $description
+            'description' => $description,
+            'isDisabled' => $isDisabled
         );
 
         // Push to "data"

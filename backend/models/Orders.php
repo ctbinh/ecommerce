@@ -19,14 +19,12 @@ class Orders
 
   public function read()
   {
-    // Create query
-    // $query = 'SELECT id, name, created_at FROM' . $this->table . ' ORDER BY created_at DESC';
-    // // Prepare statement
-    // $stmt = $this->conn->prepare($query);
-    // // Execute query
-    // $stmt->execute();
+    $query = 'SELECT O.order_id, O.state, O.total_ship, O.date, I.amount, I.product_id, I.price, P.name, P.cpu, P.description, P.img_cover FROM orders AS O, order_item AS I, product AS P WHERE O.order_id = I.order_id AND I.product_id = P.product_id ORDER BY O.order_id';
+    
+    $stmt = $this->conn->prepare($query);
 
-    // return $stmt;
+    $stmt->execute();
+    return $stmt;
   }
 
   // Get Single Category
@@ -45,7 +43,7 @@ class Orders
     
   }
   public function update() {
-    $query = 'UPDATE orders SET state = ?, date = ? WHERE order_id = ?';
+    $query = 'UPDATE orders SET state = ?, date = ? WHERE order_id = ? AND state = "Pending"';
     $stmt = $this->conn->prepare($query);
 
     $stmt->bindParam(1, $this->state);

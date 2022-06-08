@@ -15,6 +15,7 @@ class User
   public $phone;
   public $birthday;
   public $url_avt;
+  public $isBlocked;
 
   // Constructor with DB
   public function __construct($db)
@@ -35,6 +36,7 @@ class User
         $this->username = $row['username'];
         $this->password = $row['password'];
         $this->user_id = $row['user_id'];
+        $this->isBlocked = $row['isBlocked'];
         return true;
       }
     }

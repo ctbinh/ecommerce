@@ -15,6 +15,7 @@ const Login = (props) => {
   const [lName, setLName] = useState('')
   const [cfPassword, setCfPassword] = useState('')
   const [isSuccess, setIsSuccess] = useState(-1)
+  const [msg, setMsg] = useState('')
   const login = () => {
     const data = {
       'username': username,
@@ -27,7 +28,12 @@ const Login = (props) => {
         sessionStorage.setItem('user_id', response.data.user_id);
         navigate('/');
       }
+      else if(response.data.status === 'Blocked') {
+        setMsg('Your account has been blocked!')
+        setIsSuccess(0)
+      }
       else {
+        setMsg('Wrong username or password')
         setIsSuccess(0)
       }
     })
@@ -85,7 +91,7 @@ const Login = (props) => {
             <Alert variant="danger" onClose={() => setIsSuccess(-1)} dismissible>
               <Alert.Heading>Failed to login!</Alert.Heading>
               <p>
-                Incorrect account or password.
+                {msg}
               </p>
             </Alert>
             }

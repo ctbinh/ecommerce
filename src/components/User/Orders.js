@@ -9,7 +9,6 @@ const Orders = (props) => {
     setTargetTypeOrders(state)
   }
   const cancelOrders = (id) => {
-    console.log(id)
     const data = {
       'order_id': id,
       'state': "Cancelled",
@@ -50,6 +49,12 @@ const Orders = (props) => {
           onClick={() => filterOrders("All")}
         >
           All
+        </TypeOrders>
+        <TypeOrders
+          className={targetTypeOrders === "Pending" ? "active" : ""}
+          onClick={() => filterOrders("Pending")}
+        >
+          Pending
         </TypeOrders>
         <TypeOrders
           className={targetTypeOrders === "Delivering" ? "active" : ""}
@@ -229,7 +234,25 @@ const TypeOrders = styled.div`
 const NavOrders = styled.div`
   display: flex;
   flex-direction: row;
+  overflow: scroll;
   width: 100%;
+  &::-webkit-scrollbar {
+    height: 5px;
+    display: none;
+  }
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 3px;
+  }
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #757575;
+  }
 `;
 const Hr = styled.hr`
   border: 0;
