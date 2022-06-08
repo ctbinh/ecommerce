@@ -47,32 +47,32 @@ export default function Information (props) {
         })
     // images.data_url = User.url_avt;
     // const maxNumber = 69;
-    const onChange = (imageList, addUpdateIndex) => {
+    const onChange = async (imageList, addUpdateIndex) => {
     // data for submit
-        console.log("test", sessionStorage.getItem('user_id'));
         setImages(imageList);
-        const data = {
-            user_id: sessionStorage.getItem('user_id'),
-            img: imageList[imageList.length - 1].data_url
-          };
-          let config = {
+        let config = {
             headers: {
-              "Content-Type": "multipart/form-data",
+                "Content-Type": "multipart/form-data",
             },
-          };
-          axios
-            .post(
-              "http://localhost/ecommerce/backend/api/user/updateImg.php",
-              data,
-              config
-            )
-            .then((response) => {
-              console.log(response.data);
-            });
-    };
-    const changImg = () => {
+        };
+        const formData = new FormData();
+        formData.append("file", imageList[0].file);
+        formData.append("api_key", 174989952789425);
+        formData.append("upload_preset", "iinnk03t");
+        const res = await axios.post("https://api.cloudinary.com/v1_1/dd8b69mls/image/upload", formData)
 
-    }
+        console.log("test", res.data.url)
+        const data = {
+            // user_id: sessionStorage.getItem('user_id'),
+            // img: res.data.url
+            user_id: 3,
+            img: "http://res.cloudinary.com/dd8b69mls/image/upload/v1654701112/wooaepgtnk88bvh7adal.jpg"
+        };
+        axios.post("http://localhost/ecommerce/backend/api/user/updateImg.php", data, config)
+            .then((response) => {
+                console.log(response);
+            })  
+    };
     useEffect(() => {
         const fetchUser = async () => {
             const id = sessionStorage.getItem('user_id')

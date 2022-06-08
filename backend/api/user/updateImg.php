@@ -16,5 +16,3 @@
   // Category read query
   $user->update_Img($_POST['user_id'], $_POST['img']);
   echo "Update Done (user_id = " .  $_POST['user_id'] . " with new image with = " . $_POST['img'] . ")";
-
-
