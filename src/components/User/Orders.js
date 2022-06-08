@@ -76,7 +76,7 @@ const Orders = (props) => {
         </TypeOrders>
       </NavOrders>
       <Hr color="#b8b8b8" />
-      {(targetTypeOrders === "All"
+      {orders && (targetTypeOrders === "All"
         ? orders
         : orders.filter((ord) => ord.state === targetTypeOrders)
       ).map((ord, idx) => {
