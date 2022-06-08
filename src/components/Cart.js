@@ -63,6 +63,13 @@ const Cart = () => {
           3000
         );
         break;          
+      case "noItems":
+        NotificationManager.warning(
+          "There is no item in cart",
+          "Empty cart !!!",
+          2000
+        );
+        break;          
       default:
         break;
     }
@@ -94,10 +101,23 @@ const Cart = () => {
     // }
   }, []);
   const ContainerNotification = (name, phone, address) => {
-    if (name.length < 3 || name.length > 14) createNotification("errorName");
-    if (!Number(phone)) createNotification("errorPhone");
-    if (address.length < 3 || address.length > 30)
+    if (cart.length === 0) {
+      createNotification("noItems");
+      return 
+    }
+    if (name.length < 3 || name.length > 14) {
+      createNotification("errorName");
+      return
+    }
+    if (!Number(phone)) {
+      createNotification("errorPhone");
+      return
+    }
+    if (address.length < 3 || address.length > 30) {
+
       createNotification("errorAddress");
+      return
+    }
   };
   const ClearAll = () => {
     setCart([]);
@@ -224,6 +244,7 @@ const Cart = () => {
                 name.length <= 14 &&
                 address.length >= 3 &&
                 address.length <= 30 &&
+                cart.length !== 0 && 
                 !/\D/.test(phone) && (
                   <ButtonCheckout>Proceed to Checkout</ButtonCheckout>
                 )}
@@ -238,6 +259,7 @@ const Cart = () => {
               name.length <= 14 &&
               address.length >= 3 &&
               address.length <= 30 &&
+              cart.length !== 0 &&
               !/\D/.test(phone)
             ) && (
               <ButtonFill

@@ -4,13 +4,13 @@ import axios from "axios";
 // Reducer Thunk
 export const getAllOrder = createAsyncThunk("orders/all", async () => {
   const response = await axios.get(
-    `http://localhost/ecommerce/backend/api/orders/read.php`
+    `http://localhost/ecommerce/backend/api/order/read.php`
   );
   return response.data.data;
 });
 export const getOrder = createAsyncThunk("orders/single", async (id) => {
   const res = await axios.get(
-    `http://localhost/ecommerce/backend/api/orders/read_single_user.php?user_id=${id}`
+    `http://localhost/ecommerce/backend/api/order/read_single_user.php?user_id=${id}`
   );
   return res.data.data;
 });
