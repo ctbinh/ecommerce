@@ -23,12 +23,13 @@ class Order_item
   {
       // Create query
       $query = 'INSERT INTO ' . $this->table . 
-            ' SET product_id = :product_id, amount = :amount, price = :price';
+            ' SET order_id = :order_id, product_id = :product_id, amount = :amount, price = :price';
 
       // Prepare statement
       $stmt = $this->conn->prepare($query);
 
       // Clean data
+      $this->order_id = htmlspecialchars(strip_tags($this->order_id));
       $this->product_id = htmlspecialchars(strip_tags($this->product_id));
       $this->amount = htmlspecialchars(strip_tags($this->amount));
       $this->price = htmlspecialchars(strip_tags($this->price));
@@ -36,6 +37,7 @@ class Order_item
       // $this->product_id = htmlspecialchars(strip_tags($this->product_id));
 
       // Bind data
+      $stmt->bindParam(':order_id', $this->order_id);
       $stmt->bindParam(':product_id', $this->product_id);
       $stmt->bindParam(':amount', $this->amount);
       $stmt->bindParam(':price', $this->price);

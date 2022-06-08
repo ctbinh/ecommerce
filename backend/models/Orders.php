@@ -11,6 +11,9 @@ class Orders
   public $state;
   public $total_ship;
   public $date;
+  public $phone;
+  public $username;
+  public $address;
 
 
   // Constructor with DB
@@ -24,7 +27,7 @@ class Orders
   {
       // Create query
       $query = 'INSERT INTO ' . $this->table . 
-            ' SET user_id = :user_id, state = :state, total_ship = :total_ship, date = :date';
+            ' SET user_id = :user_id, state = :state, total_ship = :total_ship, date = :date, username = :username, phone = :phone, address = :address';
 
       // Prepare statement
       $stmt = $this->conn->prepare($query);
@@ -34,6 +37,9 @@ class Orders
       $this->state = htmlspecialchars(strip_tags($this->state));
       $this->total_ship = htmlspecialchars(strip_tags($this->total_ship));
       $this->date = htmlspecialchars(strip_tags($this->date));
+      $this->username = htmlspecialchars(strip_tags($this->username));
+      $this->phone = htmlspecialchars(strip_tags($this->phone));
+      $this->address = htmlspecialchars(strip_tags($this->address));
       
       // $this->product_id = htmlspecialchars(strip_tags($this->product_id));
 
@@ -42,11 +48,15 @@ class Orders
       $stmt->bindParam(':state', $this->state);
       $stmt->bindParam(':total_ship', $this->total_ship);
       $stmt->bindParam(':date', $this->date);
+      $stmt->bindParam(':username', $this->username);
+      $stmt->bindParam(':phone', $this->phone);
+      $stmt->bindParam(':address', $this->address);
       
       // $stmt->bindParam(':product_id', $this->product_id);
       // Execute query
       if ($stmt->execute()) {
-          return true;
+          $last_id = $this->conn->lastInsertId();
+          return $last_id;
       }
 
       // Print error if something goes wrong

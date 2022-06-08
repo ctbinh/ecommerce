@@ -7,13 +7,14 @@
 
     include_once '../../config/Database.php';
     include_once '../../models/Orders.php';
+    include_once '../../models/Order_item.php';
     // Instantiate DB & connect
     $database = new Database();
     $db = $database->connect();
 
     // Instantiate blog post object
     $product = new Orders($db);
-
+    $order_item = new Order_item($db);
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
@@ -22,7 +23,19 @@
     $product->state = $data->state;
     $product->total_ship = $data->total_ship;
     $product->date = $data->date;
+    $product->date = $data->date;
+    $product->username = $data->username;
+    $product->phone = $data->phone;
+    $product->address = $data->address;
 
-    $product->create();
+    for($i = 0; $i < count($data->cart); $i ++) {
+        $order_last_insert = $product->create();
+
+        $order_item->order_id = $order_last_insert;
+        $order_item->product_id = $data->cart[$i]->product_id;
+        $order_item->amount = $data->cart[$i]->amount;
+        $order_item->price = $data->cart[$i]->price;
+        $order_item->create();
+    }
 
     echo "Create done";
