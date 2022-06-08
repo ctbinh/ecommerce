@@ -25,7 +25,7 @@ class Cart
             cart.product_id, name, product.img_cover, price, cart.amount, cpu, screen, product.amount as available
             FROM
                 cart, product
-            WHERE cart.user_id = 3 AND cart.product_id = product.product_id
+            WHERE cart.user_id = " . $id . " AND cart.product_id = product.product_id
           ";
     // Prepare statement
     $stmt = $this->conn->prepare($query);

@@ -4,17 +4,17 @@
   header('Content-Type: application/json');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Cart.php';
+  include_once '../../models/User.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
   // Instantiate category object
-  $cart = new Cart($db);
+  $cart = new User($db);
   $user_id = $_SERVER["QUERY_STRING"];
   // Category read query
-  $result = $cart->find_product(substr($user_id, 8));
+  $result = $cart->find_user(substr($user_id, 8));
   // Get row count
   $num = $result->rowCount();
 
@@ -28,15 +28,14 @@
           extract($row);
 
           $pd_item = array(
-            'name' => $name, 
-            'img_cover' => $img_cover,
-            'price' => $price,
-            'amount' => $amount,
-            'cpu' => $cpu,
-            'screen' => $screen,
-            'product_id' => $product_id,
-            'available' => $available,
-            
+            'username' => $username, 
+            'password' => $password,
+            'fName' => $fName,
+            'lName' => $lName,
+            'email' => $email,
+            'phone' => $phone,
+            'birthday' => $birthday,
+            'url_avt' => $url_avt,           
           );
 
           // Push to "data"
@@ -49,6 +48,6 @@
   } else {
         // No Categories
         echo json_encode(
-          array('message' => 'No Product in Found')
+          array('message' => 'No User in Found')
         );
   }

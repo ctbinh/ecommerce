@@ -77,7 +77,7 @@ const User = () => {
   const [targetNavChildItem, setTargetNavChildItem] = useState('infor')
   
   const [isEnabled, setIsEnabled] = useState(false)
-  const [userInfor, setUserInfor] = useState(null)
+  // const [userInfor, setUserInfor] = useState(null)
   const changeNavItem = (item) => {
     if(item !== 'my-account') {
       setTargetNavChildItem('')
@@ -94,15 +94,15 @@ const User = () => {
     setIsEnabled(false)
   }
   
-  useEffect(() => {
-    const fetchUser = async () => {
-      const id = sessionStorage.getItem('user_id')
-      const res = await axios.get('http://localhost/ecommerce/backend/api/user/read_single.php?user_id='+id);
-      setUserInfor(res.data)
-      console.log(res.data)
-    }
-    fetchUser()
-  }, [])
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const id = sessionStorage.getItem('user_id')
+  //     const res = await axios.get('http://localhost/ecommerce/backend/api/user/read_single.php?user_id='+id);
+  //     setUserInfor(res.data)
+  //     console.log(res.data)
+  //   }
+  //   fetchUser()
+  // }, [])
   
   return (
     <>
@@ -133,7 +133,8 @@ const User = () => {
         <Content>
           {targetNavItem==='my-orders' && <Orders/>}
           {targetNavItem==='my-wishlist' && <Wishlist wishlist={[]}/>}
-          {targetNavChildItem==='infor' && <Information info={userInfor}/>}
+          {/* {targetNavChildItem==='infor' && <Information info={userInfor}/>} */}
+          {targetNavChildItem==='infor' && <Information/>}
           {targetNavChildItem==='change-pass' && <Password/>}
         </Content>
       </Row>

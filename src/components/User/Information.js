@@ -5,16 +5,16 @@ import { useEffect, useState } from 'react';
 import ImageUploading from "react-images-uploading";
 import { GrEdit } from "react-icons/gr"
 import axios from 'axios'
-const User = {
-    "username": "Long",
-    "password": "123456",
-    "fname": "Nguyen",
-    "lname": "Long",
-    "email": "Nothing@gmail.com",
-    "phone": "0984046827",
-    "url_avt": "https://pdp.edu.vn/wp-content/uploads/2021/05/hinh-anh-avatar-trang-dep-1.jpg",
-    "birthday": "2001-01-01",
-}
+// const User = {
+//     "username": "Long",
+//     "password": "123456",
+//     "fname": "Nguyen",
+//     "lname": "Long",
+//     "email": "Nothing@gmail.com",
+//     "phone": "0984046827",
+//     "url_avt": "https://pdp.edu.vn/wp-content/uploads/2021/05/hinh-anh-avatar-trang-dep-1.jpg",
+//     "birthday": "2001-01-01",
+// }
 export default function Information (props) {
 
     const choices = [
@@ -35,26 +35,12 @@ export default function Information (props) {
     const [checked, setChecked] = useState(1);
 
     const [images, setImages] = useState([]);
-    const [userInfor, setUserInfor] = useState(
-        {   
-            'username': '', 
-            'fName': '', 
-            'lName':'',
-            'birthday': '',
-            'phone':'',
-            'email':'',
-            'gender': 'M'
-        })
+    const [userInfor, setUserInfor] = useState([])
     // images.data_url = User.url_avt;
     // const maxNumber = 69;
     const onChange = async (imageList, addUpdateIndex) => {
     // data for submit
         setImages(imageList);
-        let config = {
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
-        };
         const formData = new FormData();
         formData.append("file", imageList[0].file);
         formData.append("api_key", 174989952789425);
@@ -63,12 +49,10 @@ export default function Information (props) {
 
         console.log("test", res.data.url)
         const data = {
-            // user_id: sessionStorage.getItem('user_id'),
-            // img: res.data.url
-            user_id: 3,
-            img: "http://res.cloudinary.com/dd8b69mls/image/upload/v1654701112/wooaepgtnk88bvh7adal.jpg"
+            user_id: sessionStorage.getItem('user_id'),
+            url_avt: res.data.url
         };
-        axios.post("http://localhost/ecommerce/backend/api/user/updateImg.php", data, config)
+        axios.post("http://localhost/ecommerce/backend/api/user/updateImg.php", data)
             .then((response) => {
                 console.log(response);
             })  
@@ -76,9 +60,9 @@ export default function Information (props) {
     useEffect(() => {
         const fetchUser = async () => {
             const id = sessionStorage.getItem('user_id')
-            const res = await axios.get('http://localhost/ecommerce/backend/api/user/read_single.php?user_id='+id);
-            setUserInfor(res.data)
-            console.log(res.data)
+            const res = await axios.get('http://localhost/ecommerce/backend/api/user/getUser.php?user_id=' + id);
+            console.log("trs", res.data.data)
+            setUserInfor(res.data.data[0])
           }
           fetchUser()
     }, [])
@@ -108,7 +92,7 @@ export default function Information (props) {
                         }) => (
                             <ContainerEdit className="upload__image-wrapper">
                                 {imageList.length === 0 && <ContainerImg> 
-                                    <ImgProduct src={User.url_avt} alt="UserImage"/>     
+                                    <ImgProduct src={userInfor["url_avt"]} alt="UserImage"/>     
                                 </ContainerImg>}
                                 {imageList.map((image, index) => (
                                     // <div key={index} className="image-item">
@@ -159,7 +143,7 @@ export default function Information (props) {
                                 <Col lg={9.5}><Input type="text" placeholder={userInfor.phone}/></Col>
                             </Row>
                         </ContainerInput>
-                        <Row>
+                        {/* <Row>
                             <Col lg={2.5}><NameInput>Gender</NameInput></Col>
                             <Col lg={9.5}>
                             {choices.map(choice => (
@@ -173,7 +157,7 @@ export default function Information (props) {
                                 </SpanChoice>
                             ))}
                             </Col>
-                        </Row>
+                        </Row> */}
                         <Row>
                             <Col lg={2.5}><NameInput>Birthday</NameInput></Col>
                             <Col lg={9.5}><Input type="date" id="start" name="trip-start" value={userInfor.birthday} min="2018-01-01" max="2022-12-31"/></Col>
