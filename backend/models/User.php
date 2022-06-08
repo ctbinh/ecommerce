@@ -37,6 +37,7 @@ class User
                 $this->username = $row['username'];
                 $this->password = $row['password'];
                 $this->user_id = $row['user_id'];
+                $this->isBlocked = $row['isBlocked'];
                 return true;
             }
         }
