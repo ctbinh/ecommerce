@@ -122,7 +122,7 @@ const Cart = () => {
   const ClearAll = () => {
     setCart([]);
     const data = {
-      user_id: 1,
+      user_id: sessionStorage.getItem('user_id'),
     };
     let config = {
       headers: {

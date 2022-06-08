@@ -7,7 +7,7 @@ import { MdOutlineLocationOn } from 'react-icons/md';
 import { BsPhoneVibrate } from 'react-icons/bs';
 import { BsPersonCircle } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import swal from "sweetalert";
 import axios from 'axios';
 
@@ -20,7 +20,7 @@ const Checkout = () => {
     const onPay = () => {
         swal("Completely!", "Payment success", "success");
         const data = {
-            user_id: 1, 
+            user_id: sessionStorage.getItem('user_id'), 
             state: "Pending",
             total_ship: 21.00,
             date: new Date().toISOString().slice(0, 10),
