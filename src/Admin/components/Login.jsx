@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { AiOutlineUser } from "react-icons/ai";
 import { GiPadlock } from "react-icons/gi";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 const Wraper = styled.div`
   /* display: flex;
   justify-content: center;
@@ -105,6 +108,33 @@ const ContainerWraper = styled.div`
   box-shadow: 0 0 6px #b2b2b2;
 `;
 const Login = () => {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  useEffect(() => {
+    if (sessionStorage.getItem("admin")) {
+      navigate("/admin");
+    }
+  }, []);
+  const handleLogin = async () => {
+    console.log(username, password);
+    const res = await axios.post(
+      "http://localhost/ecommerce/backend/api/auth/loginAdmin.php",
+      {
+        username: username,
+        password: password,
+      }
+    );
+    if (res.data.status === "OK") {
+      swal("Login success", "Administrative welcome", "success");
+      sessionStorage.setItem("admin", res.data.admin_id);
+      navigate("/admin");
+    } else {
+      swal("Your username or email incorrect", "", "warning");
+      setPassword("");
+      setUsername("");
+    }
+  };
   return (
     <Wraper>
       <ContainerWraper>
@@ -116,7 +146,11 @@ const Login = () => {
               <Icon>
                 <AiOutlineUser />
               </Icon>
-              <Input type="text"></Input>
+              <Input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              ></Input>
             </InputWrap>
           </Container>
           <Container>
@@ -125,7 +159,11 @@ const Login = () => {
               <Icon>
                 <GiPadlock />
               </Icon>
-              <Input type="password"></Input>
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              ></Input>
             </InputWrap>
           </Container>
           <ContainerBottom>
@@ -138,7 +176,7 @@ const Login = () => {
             </Remember>
           </ContainerBottom>
           <ContainerButton>
-            <Button>Login</Button>
+            <Button onClick={() => handleLogin()}>Login</Button>
           </ContainerButton>
         </InputLeft>
         <Img>

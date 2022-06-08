@@ -91,7 +91,7 @@ if ($num > 0) {
     }
 
     // Turn to JSON & output
-    echo json_encode($pd_arr);
+    echo json_encode($pd_arr[0]);
 
 } else {
     // No Categories

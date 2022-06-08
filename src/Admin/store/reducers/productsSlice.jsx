@@ -92,6 +92,16 @@ export const deleteImg = createAsyncThunk("product/img/delete", async (id) => {
   return parseInt(res.data.id);
 });
 
+export const toggleStatus = createAsyncThunk(
+  "product/togglestatus",
+  async (id) => {
+    const res = await axios.get(
+      `http://localhost/ecommerce/backend/api/product/status.php?id=${id}`
+    );
+    return id;
+  }
+);
+
 const productsSlice = createSlice({
   name: "products",
   initialState: {
@@ -216,6 +226,25 @@ const productsSlice = createSlice({
     },
     [deleteImg.rejected]: (state, action) => {
       console.log("Failed to delete!!!");
+    },
+    // delete img by id
+    [toggleStatus.pending]: (state, action) => {
+      console.log("toggle status pending");
+    },
+    [toggleStatus.fulfilled]: (state, action) => {
+      console.log("Done toggle");
+      state.allProducts = state.allProducts.map((singleProduct) => {
+        if (singleProduct.product_id === action.payload) {
+          return {
+            ...singleProduct,
+            isDisabled: 1 - singleProduct.isDisabled,
+          };
+        }
+        return singleProduct;
+      });
+    },
+    [toggleStatus.rejected]: (state, action) => {
+      console.log("Failed to toggle status!!!");
     },
   },
 });

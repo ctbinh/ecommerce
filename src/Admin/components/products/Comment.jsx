@@ -131,8 +131,12 @@ export default function Comments({ id }) {
   React.useEffect(() => {
     dispatch(getCommentById(id));
   }, [id]);
+  if (comments.message) return <h1>No comment For product</h1>;
   return (
-    <TableContainer component={Paper} style={{ marginBottom: "140px" }}>
+    <TableContainer
+      component={Paper}
+      style={{ marginBottom: "140px", padding: "0 14px" }}
+    >
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>

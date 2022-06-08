@@ -48,7 +48,7 @@ class ImageProduct
         return $stmt;
 
     }
-// Get Single Post
+// Get Img vua ms upload
     public function read_last()
     {
         // Create query

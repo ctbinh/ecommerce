@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import styled from "styled-components";
 import { MdModeEditOutline } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllUser,
+  toggleStatus,
+  usersSelector,
+} from "../../store/reducers/usersSlice";
+import Avatar from "@mui/material/Avatar";
+import { Button } from "@mui/material";
+
 const Wraper = styled.div`
   background-color: #f3f3f9;
   height: 85vh;
@@ -25,6 +34,17 @@ const IconWraper = styled.div`
   cursor: pointer;
 `;
 const Customer = () => {
+  // redux
+  const dispatch = useDispatch();
+  const allUser = useSelector(usersSelector);
+  useEffect(() => {
+    dispatch(getAllUser());
+  }, []);
+
+  // handle toggle
+  const handleToggle = (id) => {
+    dispatch(toggleStatus(id));
+  };
   return (
     <Wraper>
       <TableWraper>
@@ -32,266 +52,49 @@ const Customer = () => {
         <Table responsive="sm">
           <thead>
             <tr>
-              <th>#</th>
+              <th>ID</th>
               <th>Avatar</th>
-              <th>UserID</th>
               <th>Username</th>
               <th>Password</th>
               <th>Fullname</th>
               <th>Email</th>
               <th>Phone</th>
               <th>BirtDay</th>
-              <th>Action</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>xx</td>
-              <td>abas5das66x</td>
-              <td>anmoi</td>
-              <td>anmoi123</td>
-              <td>Nguyễn Đình An</td>
-              <td>an.nguyendinh@hcmut.edu.vn</td>
-              <td>0123456789</td>
-              <td>1/1/2001</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-            </tr>
+            {allUser.map((user) => {
+              console.log(user);
+              return (
+                <tr>
+                  <td>{user.user_id}</td>
+                  <td>
+                    {" "}
+                    <Avatar
+                      alt="Remy Sharp"
+                      sx={{ width: 30, height: 30 }}
+                      src="https://mui.com/static/images/avatar/1.jpg"
+                    />
+                  </td>
+                  <td>{user.username}</td>
+                  <td>{user.password}</td>
+                  <td>{user.fName + " " + user.lName}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone}</td>
+                  <td>{user.birthday}</td>
+                  <td>
+                    {" "}
+                    <Button
+                      // style={{ fontSize: "8px" }}
+                      onClick={() => handleToggle(user.user_id)}
+                    >
+                      {user.isBlocked === 0 ? "Blocked" : "Active"}
+                    </Button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </TableWraper>

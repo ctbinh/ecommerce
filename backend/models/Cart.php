@@ -21,7 +21,7 @@ class Cart
   public function find_product($id) {
     $query = "
             SELECT 
-            cart.product_id, name, product.img_cover, price, cart.amount, cpu, screen
+            cart.product_id, name, product.img_cover, price, cart.amount, cpu, screen, product.amount as available
             FROM
                 cart, product
             WHERE cart.user_id = 1 AND cart.product_id = product.product_id

@@ -42,7 +42,7 @@ if ($num > 0) {
             'img_cover' => $img_cover,
             'cpu' => $cpu,
             'description' => $description,
-            'isDisabled' => $isDisabled
+            'isDisabled' => $isDisabled,
         );
 
         // Push to "data"
