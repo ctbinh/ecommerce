@@ -9,9 +9,10 @@ const Product = (props) => {
   const addToWishlist = (e) => {
     alert('Đã thêm vào wish list của bạn')
   }
+  
   const product = props.product;
   return (
-    <Container key={props.idx} display={props.display}>
+    <Container key={props.idx} display={props.display} onClick={()=>props.onClick(product.product_id)}>
       {product.amount > 0 ?
         <Status display={props.display}>
           <i className="fa fa-check-circle" aria-hidden="true"></i> in stock

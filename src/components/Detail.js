@@ -14,6 +14,7 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 import axios from 'axios';
+import { useLocation } from "react-router-dom";
 
 function TableRow(props) {
   return (
@@ -62,6 +63,8 @@ function Status(props) {
 }
 
 const Detail = () => {
+  const search = useLocation().search;
+  const id = new URLSearchParams(search).get('id');
   let sampleCarousel = [
     "https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/133670/Originals/acer-nitro-5-an515-55-1(1).jpg",
     // "https://mayxaugiacao.com/wp-content/uploads/2022/02/top-laptop-dell-tot-nhat-2022.jpg",
@@ -78,15 +81,15 @@ const Detail = () => {
   }
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get('http://localhost/ecommerce/backend/api/product/read_single.php?id=2');
-      const res_img = await axios.get('http://localhost/ecommerce/backend/api/product_image/read_single.php?product_id=2');
+      const res = await axios.get('http://localhost/ecommerce/backend/api/product/read_single.php?id='+id);
+      const res_img = await axios.get('http://localhost/ecommerce/backend/api/product_image/read_single.php?product_id='+id);
       let _product = res.data;
       // _product["listImg"] = sampleCarousel;
       _product["listImg"] = res_img.data;
       console.log("product", _product)
       setProduct(_product)
 
-      const res_comment = await axios.get('http://localhost/ecommerce/backend/api/comment/read_single.php?product_id=2');
+      const res_comment = await axios.get('http://localhost/ecommerce/backend/api/comment/read_single.php?product_id='+id);
       console.log("comment: ", res_comment.data)
       // let rating = res_comment.data.reduce((a, b) => {
       //   return a + parseInt(b.rate);
@@ -99,7 +102,7 @@ const Detail = () => {
       setSimilarProduct(res_similarProduct.data.data)
     }
     getData()
-  }, [])
+  }, [id])
 
   // tab is about product or specs
   const [tab, setTab] = useState(0);

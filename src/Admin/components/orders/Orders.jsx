@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MdModeEditOutline } from "react-icons/md";
 import { AiFillDelete, AiFillEye } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllOrder, ordersSelector } from "../../store/reducers/ordersSlice";
+import { useEffect } from "react";
 // import { GrFormView } from "react-icons/gr";
 const Wraper = styled.div`
   background-color: #f3f3f9;
@@ -31,7 +34,17 @@ const IconWraper = styled.div`
   font-size: 18px;
 `;
 const Orders = () => {
+  // navigate
   const navigate = useNavigate();
+
+  // redux
+  const allOrder = useSelector(ordersSelector);
+  const dispatch = useDispatch();
+
+  // effect
+  useEffect(() => {
+    dispatch(getAllOrder());
+  }, []);
   return (
     <Wraper>
       <TableWraper>
@@ -39,174 +52,47 @@ const Orders = () => {
         <Table responsive="sm">
           <thead>
             <tr>
-              <th>#</th>
+              <th>Order ID</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Ship Fee</th>
+              <th>Total</th>
               <th>Date</th>
-              <th>OrderID</th>
-              <th>UserName</th>
-              <th>SĐT</th>
               <th>State</th>
-              <th>Total(vnđ)</th>
-              <th>Action</th>
+              {/* <th>Action</th> */}
               <th>Invoice</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>20/1/2001</td>
-              <td>abas5das66x</td>
-              <td>Nguyễn Đình An</td>
-              <td>0123456789</td>
-              <td>Đang giao</td>
-              <td>115000</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-
-              <Td onClick={() => navigate(`../invoice?id=xxx`)}>
-                <IconWraper>
-                  <AiFillEye />
-                </IconWraper>
-              </Td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>20/1/2001</td>
-              <td>abas5das66x</td>
-              <td>Nguyễn Đình An</td>
-              <td>0123456789</td>
-              <td>Đang giao</td>
-              <td>115000</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-
-              <Td onClick={() => navigate(`../invoice?id=xxx`)}>
-                <IconWraper>
-                  <AiFillEye />
-                </IconWraper>
-              </Td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>20/1/2001</td>
-              <td>abas5das66x</td>
-              <td>Nguyễn Đình An</td>
-              <td>0123456789</td>
-              <td>Đang giao</td>
-              <td>115000</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-              <Td onClick={() => navigate(`../invoice?id=xxx`)}>
-                <IconWraper>
-                  <AiFillEye />
-                </IconWraper>
-              </Td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>20/1/2001</td>
-              <td>abas5das66x</td>
-              <td>Nguyễn Đình An</td>
-              <td>0123456789</td>
-              <td>Đang giao</td>
-              <td>115000</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-              <Td onClick={() => navigate(`../invoice?id=xxx`)}>
-                <IconWraper>
-                  <AiFillEye />
-                </IconWraper>
-              </Td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>20/1/2001</td>
-              <td>abas5das66x</td>
-              <td>Nguyễn Đình An</td>
-              <td>0123456789</td>
-              <td>Đang giao</td>
-              <td>115000</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-              <Td onClick={() => navigate(`../invoice?id=xxx`)}>
-                <IconWraper>
-                  <AiFillEye />
-                </IconWraper>
-              </Td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>20/1/2001</td>
-              <td>abas5das66x</td>
-              <td>Nguyễn Đình An</td>
-              <td>0123456789</td>
-              <td>Đang giao</td>
-              <td>115000</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-              <Td onClick={() => navigate(`../invoice?id=xxx`)}>
-                <IconWraper>
-                  <AiFillEye />
-                </IconWraper>
-              </Td>
-            </tr>
-            <tr>
-              <td>1</td>
-              <td>20/1/2001</td>
-              <td>abas5das66x</td>
-              <td>Nguyễn Đình An</td>
-              <td>0123456789</td>
-              <td>Đang giao</td>
-              <td>115000</td>
-              <td>
-                <IconWraper>
-                  <MdModeEditOutline />
-                </IconWraper>
-                <IconWraper color="red">
-                  <AiFillDelete />
-                </IconWraper>
-              </td>
-              <Td onClick={() => navigate(`../invoice?id=xxx`)}>
-                <IconWraper>
-                  <AiFillEye />
-                </IconWraper>
-              </Td>
-            </tr>
+            {allOrder.map((order) => {
+              return (
+                <tr>
+                  <td>{order.order_id}</td>
+                  <td>{order.name}</td>
+                  <td>{order.phone}</td>
+                  <td>{order.total_ship}</td>
+                  <td>{order.total}</td>
+                  <td>{order.date}</td>
+                  <td>{order.state}</td>
+                  {/* <td>
+                  <IconWraper>
+                    <MdModeEditOutline />
+                  </IconWraper>
+                  <IconWraper color="red">
+                    <AiFillDelete />
+                  </IconWraper>
+                </td>
+   */}
+                  <Td
+                    onClick={() => navigate(`../invoice?id=${order.order_id}`)}
+                  >
+                    <IconWraper>
+                      <AiFillEye />
+                    </IconWraper>
+                  </Td>
+                </tr>
+              );
+            })}
           </tbody>
         </Table>
       </TableWraper>

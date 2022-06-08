@@ -21,10 +21,17 @@ $user->username = $data->username;
 $user->password = $data->password;
 
 if($user->login()) {
+  if($user->isBlocked) {
+    echo json_encode(
+      array('message' => 'Your account has been blocked!',
+      'status' => 'Blocked')
+    );
+    return;
+  }
   if(password_verify($data->password, $user->password)) {
     echo json_encode(
-      array('message' => 'Login successful',
-      'status' => 'OK',
+      array('message' => 'Login successful.',
+      'status' => 'Success',
       'user_id' => $user->user_id)
     );
     return;
@@ -32,6 +39,6 @@ if($user->login()) {
 }
 echo json_encode(
   array('message' => 'Login failed.', 
-  'status' => 'error')
+  'status' => 'Fail')
 );
 

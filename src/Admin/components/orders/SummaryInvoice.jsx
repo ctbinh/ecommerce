@@ -16,7 +16,8 @@ const SpanContent = styled.span`
   font-weight: ${(props) => (props.color ? 700 : 600)};
   line-height: 21px;
 `;
-const SummaryInvoice = () => {
+const SummaryInvoice = ({ order }) => {
+  if (!order.item) return <h1>Loading</h1>;
   return (
     <>
       <Wrapper>
@@ -25,7 +26,7 @@ const SummaryInvoice = () => {
       </Wrapper>
       <Wrapper>
         <SpanHeading>SHIPPING COST</SpanHeading>
-        <SpanContent>$60.00</SpanContent>
+        <SpanContent>{order.total_ship}</SpanContent>
       </Wrapper>
       <Wrapper>
         <SpanHeading>DISCOUNT</SpanHeading>
@@ -33,7 +34,7 @@ const SummaryInvoice = () => {
       </Wrapper>
       <Wrapper>
         <SpanHeading>TOTAL AMOUNT</SpanHeading>
-        <SpanContent color="red">$497.00</SpanContent>
+        <SpanContent color="red">{order.total_ship + order.total}</SpanContent>
       </Wrapper>
     </>
   );
