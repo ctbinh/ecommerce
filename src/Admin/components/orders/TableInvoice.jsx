@@ -1,5 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+
+import { useSelector } from "react-redux";
+import { orderSingleSelector } from "../../store/reducers/ordersSlice";
+
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -43,7 +47,9 @@ const Td = styled.td`
   font-weight: ${(props) => (props.textAlign ? 700 : 400)};
 `;
 
-const TableInvoice = () => {
+const TableInvoice = ({ order }) => {
+  // const order = useSelector(orderSingleSelector);
+  if (!order.item) return <h1>LOADING</h1>;
   return (
     <>
       <Table>
@@ -57,60 +63,19 @@ const TableInvoice = () => {
           </TrHead>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td textAlign="center">1</Td>
-            <Td>Wild King Salmon Steak</Td>
-            <Td textAlign="center">1</Td>
-            <Td textAlign="center">$12.00</Td>
-            <Td textAlign="center" color="red">
-              $12.00
-            </Td>
-          </Tr>
-          <Tr>
-            <Td textAlign="center">1</Td>
-            <Td>Wild King Salmon Steak</Td>
-            <Td textAlign="center">1</Td>
-            <Td textAlign="center">$12.00</Td>
-            <Td textAlign="center" color="red">
-              $12.00
-            </Td>
-          </Tr>
-          <Tr>
-            <Td textAlign="center">1</Td>
-            <Td>Wild King Salmon Steak</Td>
-            <Td textAlign="center">1</Td>
-            <Td textAlign="center">$12.00</Td>
-            <Td textAlign="center" color="red">
-              $12.00
-            </Td>
-          </Tr>
-          <Tr>
-            <Td textAlign="center">1</Td>
-            <Td>Wild King Salmon Steak</Td>
-            <Td textAlign="center">1</Td>
-            <Td textAlign="center">$12.00</Td>
-            <Td textAlign="center" color="red">
-              $12.00
-            </Td>
-          </Tr>
-          <Tr>
-            <Td textAlign="center">1</Td>
-            <Td>Wild King Salmon Steak</Td>
-            <Td textAlign="center">1</Td>
-            <Td textAlign="center">$12.00</Td>
-            <Td textAlign="center" color="red">
-              $12.00
-            </Td>
-          </Tr>
-          <Tr>
-            <Td textAlign="center">1</Td>
-            <Td>Wild King Salmon Steak</Td>
-            <Td textAlign="center">1</Td>
-            <Td textAlign="center">$12.00</Td>
-            <Td textAlign="center" color="red">
-              $12.00
-            </Td>
-          </Tr>
+          {order.item.map((oneProduct, index) => {
+            return (
+              <Tr key={oneProduct.product_id}>
+                <Td textAlign="center">{index + 1}</Td>
+                <Td>{oneProduct.name}</Td>
+                <Td textAlign="center">{oneProduct.amount}</Td>
+                <Td textAlign="center">${oneProduct.price}</Td>
+                <Td textAlign="center" color="red">
+                  ${oneProduct.amount * oneProduct.price}
+                </Td>
+              </Tr>
+            );
+          })}
         </Tbody>
       </Table>
     </>

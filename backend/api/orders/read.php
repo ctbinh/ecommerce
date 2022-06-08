@@ -35,9 +35,9 @@ if ($num > 0) {
             'amount' => $amount,
             'img_cover' => $img_cover,
             'cpu' => $cpu,
-            'description' => $description
+            'description' => $description,
         );
-        if($curr_ord_id != $order_id) {
+        if ($curr_ord_id != $order_id) {
             $curr_ord_id = $order_id;
             $idx++;
             array_push($ord_arr['data'], array(
@@ -46,13 +46,15 @@ if ($num > 0) {
                 'item' => array($ord_item),
                 'date' => $date,
                 'total_ship' => $total_ship,
-                'total' => 0
+                'total' => 0,
+                'phone' => $phone,
+                'name' => $name,
+                'username' => $username,
             ));
-            $ord_arr['data'][$idx]['total'] += $price*$amount;
-        }
-        else {
+            $ord_arr['data'][$idx]['total'] += $price * $amount;
+        } else {
             array_push($ord_arr['data'][$idx]['item'], $ord_item);
-            $ord_arr['data'][$idx]['total'] += $price*$amount;
+            $ord_arr['data'][$idx]['total'] += $price * $amount;
         }
     }
 
