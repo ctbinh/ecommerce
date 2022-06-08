@@ -6,33 +6,33 @@ const Orders = (props) => {
   const [orders, setOrders] = useState([]);
   const [targetTypeOrders, setTargetTypeOrders] = useState("All");
   const filterOrders = (state) => {
-    setTargetTypeOrders(state)
-  }
+    setTargetTypeOrders(state);
+  };
   const cancelOrders = (id) => {
     const data = {
-      'order_id': id,
-      'state': "Cancelled",
-      'date': new Date()
-    }
-    axios.post(`http://localhost/ecommerce/backend/api/orders/update.php`, data)
-    .then(function (response) {
-      console.log(response.data);
-      if(response.data.status === 'Success') {
-        alert('ok')
-      }
-      else {
-        alert('ko ok')
-      }
-    })
-    .catch(function (error) {
+      order_id: id,
+      state: "Cancelled",
+      date: new Date(),
+    };
+    axios
+      .post(`http://localhost/ecommerce/backend/api/order/update.php`, data)
+      .then(function (response) {
+        console.log(response.data);
+        if (response.data.status === "Success") {
+          alert("ok");
+        } else {
+          alert("ko ok");
+        }
+      })
+      .catch(function (error) {
         console.log(error);
-    });
-  }
+      });
+  };
   useEffect(() => {
     const fetchOrders = async () => {
       const id = sessionStorage.getItem("user_id");
       const res = await axios.get(
-        "http://localhost/ecommerce/backend/api/orders/read_single_user.php?user_id=" +
+        "http://localhost/ecommerce/backend/api/order/read_single_user.php?user_id=" +
           id
       );
       setOrders(res.data.data);
@@ -76,7 +76,10 @@ const Orders = (props) => {
         </TypeOrders>
       </NavOrders>
       <Hr color="#b8b8b8" />
-      {(targetTypeOrders === 'All' ? orders : orders.filter((ord) => ord.state === targetTypeOrders)).map((ord, idx) => {
+      {(targetTypeOrders === "All"
+        ? orders
+        : orders.filter((ord) => ord.state === targetTypeOrders)
+      ).map((ord, idx) => {
         return (
           <Order key={idx}>
             {ord.item.map((item, idx) => {
@@ -91,12 +94,10 @@ const Orders = (props) => {
                   </Image>
                   <Detail>
                     <Name>{item.name}</Name>
-                    <Desc>
-                      {item.description}
-                    </Desc>
+                    <Desc>{item.description}</Desc>
                     <Price>${item.price}</Price>
                     <Qty>x{item.amount}</Qty>
-                    <Price fw="bold">${item.price*item.amount}</Price>
+                    <Price fw="bold">${item.price * item.amount}</Price>
                   </Detail>
                 </Item>
               );
@@ -109,7 +110,14 @@ const Orders = (props) => {
               <Text className="time">Date: {ord.date}</Text>
               <Text className="total">Total: ${ord.total}</Text>
             </Total>
-            {ord.state === "Delivering" && <div style={{textAlign:"right"}} onClick={() => cancelOrders(ord.order_id)}><CancelBtn>Cancel</CancelBtn></div>}
+            {ord.state === "Delivering" && (
+              <div
+                style={{ textAlign: "right" }}
+                onClick={() => cancelOrders(ord.order_id)}
+              >
+                <CancelBtn>Cancel</CancelBtn>
+              </div>
+            )}
           </Order>
         );
       })}
@@ -124,7 +132,7 @@ const CancelBtn = styled.button`
   color: gray;
   border-width: 1px;
   border-radius: 5px;
-`
+`;
 const Text = styled.p`
   margin: 0px;
   font-size: 14px;

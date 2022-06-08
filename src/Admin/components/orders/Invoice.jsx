@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import SummaryInvoice from "./SummaryInvoice";
 import TableInvoice from "./TableInvoice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getOrder,
+  orderSingleSelector,
+} from "../../store/reducers/ordersSlice";
+import { useSearchParams } from "react-router-dom";
+
 const Wraper = styled.div`
   width: 100%;
   margin-top: 14px;
@@ -123,6 +130,17 @@ const ContentInfo = styled.span`
   }
 `;
 const Invoice = () => {
+  // param
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  // redux
+  const order = useSelector(orderSingleSelector);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getOrder(searchParams.get("id")));
+    console.log("cc");
+  }, [dispatch]);
+  // console.log(order);
   return (
     <Wraper>
       <Header>
@@ -130,7 +148,7 @@ const Invoice = () => {
           <StatusHeader>
             <H1>INVOICE</H1>
             <P>STATUS: </P>
-            <Process>Processing</Process>
+            <Process>{order.state}</Process>
           </StatusHeader>
           <Address>
             <H1 textAlign="right">Dashtar</H1>
@@ -143,11 +161,11 @@ const Invoice = () => {
         <Info>
           <WraperInfo>
             <HeadingInfo>Date</HeadingInfo>
-            <ContentInfo>March 28,2022</ContentInfo>
+            <ContentInfo>{order.date}</ContentInfo>
           </WraperInfo>
           <WraperInfo>
             <HeadingInfo>invoice no</HeadingInfo>
-            <ContentInfo>#10012</ContentInfo>
+            <ContentInfo>#{order.order_id}</ContentInfo>
           </WraperInfo>
           <WraperInfo>
             <HeadingInfo textAlign="right">invoice to</HeadingInfo>
@@ -162,10 +180,10 @@ const Invoice = () => {
         </Info>
       </Header>
       <Content>
-        <TableInvoice />
+        <TableInvoice order={order} />
       </Content>
       <MainContent>
-        <SummaryInvoice />
+        <SummaryInvoice order={order} />
       </MainContent>
     </Wraper>
   );

@@ -8,6 +8,8 @@ import { BsPhoneVibrate } from 'react-icons/bs';
 import { BsPersonCircle } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom'
 import {useState} from 'react'
+import swal from "sweetalert";
+import axios from 'axios';
 
 const Checkout = () => {
     const location = useLocation()
@@ -15,6 +17,26 @@ const Checkout = () => {
     console.log("asadaf", lstCart)
     const [cod, setCod] = useState("bank");
     const navigate = useNavigate(); 
+    const onPay = () => {
+        swal("Completely!", "Payment success", "success");
+        const data = {
+            user_id: 1, 
+            state: "Pending",
+            total_ship: 21.00,
+            date: new Date().toISOString().slice(0, 10),
+            username: name,
+            phone: phone,
+            address: address,
+            cart: lstCart
+        }
+        axios.post("http://localhost/ecommerce/backend/api/order/create.php", data)
+            .then((response) => {
+                console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
     return (
         <div>
             <Header/>
@@ -95,10 +117,10 @@ const Checkout = () => {
                                     </Row>
                                     <Row>
                                         <Col md={7}>
-                                           <ButtonPay>
+                                           <ButtonPay onClick={() => onPay()}>
                                                Pay $
                                                {/* {lstCart.reduce((a, b) => {return a.amount *Number(a.price) + b.amount *Number(b.price)}, 0)} */}
-                                               {lstCart.reduce((sum, product) => {return sum + product.amount* product.price }, 0)}
+                                               {lstCart.reduce((sum, product) => {return sum + product.amount* product.price }, 0).toFixed(2)}
                                             </ButtonPay> 
                                         </Col>
                                         <Col md= {5}>

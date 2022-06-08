@@ -168,7 +168,10 @@ CREATE TABLE `orders` (
   `user_id` int(11) NOT NULL,
   `state` varchar(255) NOT NULL,
   `total_ship` float NOT NULL,
-  `date` date NOT NULL
+  `date` date NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
