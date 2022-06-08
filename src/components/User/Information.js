@@ -49,9 +49,30 @@ export default function Information (props) {
     // const maxNumber = 69;
     const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-        console.log(imageList, addUpdateIndex);
+        console.log("test", sessionStorage.getItem('user_id'));
         setImages(imageList);
+        const data = {
+            user_id: sessionStorage.getItem('user_id'),
+            img: imageList[imageList.length - 1].data_url
+          };
+          let config = {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          };
+          axios
+            .post(
+              "http://localhost/ecommerce/backend/api/user/updateImg.php",
+              data,
+              config
+            )
+            .then((response) => {
+              console.log(response.data);
+            });
     };
+    const changImg = () => {
+
+    }
     useEffect(() => {
         const fetchUser = async () => {
             const id = sessionStorage.getItem('user_id')
@@ -93,7 +114,7 @@ export default function Information (props) {
                                     // <div key={index} className="image-item">
                                     //     <img src={image.data_url} alt="" width="100" />
                                     // </div>
-                                    <ContainerImg> 
+                                    <ContainerImg key={index}> 
                                         <ImgProduct src={image.data_url} alt="UserImage"/>
                                     </ContainerImg>
                                 ))}
