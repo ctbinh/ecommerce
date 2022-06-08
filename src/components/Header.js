@@ -77,7 +77,7 @@ const Header = () => {
                             </UserIcon>
                         </Dropdown.Toggle>
                         
-                        <Dropdown.Menu>
+                        <Dropdown.Menu style={{zIndex: '9999'}}>
                         {user ?
                           <>
                             

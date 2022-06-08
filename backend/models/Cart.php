@@ -18,7 +18,8 @@ class Cart
   }
 
   // Find user from produc-id
-  public function find_product($id) {
+  public function find_product($id)
+  {
     $query = "
             SELECT 
             cart.product_id, name, product.img_cover, price, cart.amount, cpu, screen, product.amount as available
@@ -32,16 +33,54 @@ class Cart
     $stmt->execute();
     return $stmt;
   }
-  public function updateItem($user_id, $product_id, $amount) {
+  public function create()
+  {
+    $query = "INSERT into cart (user_id, product_id, amount) VALUES (?,?,?)";
+    // Prepare statement
+    $stmt = $this->conn->prepare($query);
+
+    // Bind ID
+    $stmt->bindParam(1, $this->user_id);
+    $stmt->bindParam(2, $this->product_id);
+    $stmt->bindParam(3, $this->amount);
+
+    // Execute query
+    if ($stmt->execute()) {
+      return true;
+    }
+
+    // Print error if something goes wrong
+    printf("Error: %s.\n", $stmt->error);
+    return false;
+  }
+  public function read_single()
+  {
+    $query = 'SELECT *
+              FROM ' . $this->table . ' WHERE product_id = ' . $this->product_id . ' AND user_id = ' . $this->user_id;
+    // Prepare statement
+    $stmt = $this->conn->prepare($query);
+    // Execute query
+    $stmt->execute();
+    return $stmt;
+  }
+  public function updateItem($user_id, $product_id, $amount)
+  {
     $query = 'UPDATE cart 
               SET amount =' . $amount . '
               WHERE product_id = ' . $product_id . ' AND user_id = ' . $user_id;
     // Prepare statement
     $stmt = $this->conn->prepare($query);
     // Execute query
-    $stmt->execute();
+    if ($stmt->execute()) {
+      return true;
+    }
+
+    // Print error if something goes wrong
+    printf("Error: %s.\n", $stmt->error);
+    return false;
   }
-  public function deleteItem($user_id, $product_id) {
+  public function deleteItem($user_id, $product_id)
+  {
     $query = 'DELETE FROM cart 
               WHERE product_id = ' . $product_id . ' AND user_id = ' . $user_id;
     // Prepare statement
@@ -49,7 +88,8 @@ class Cart
     // Execute query
     $stmt->execute();
   }
-  public function deleteAll($user_id) {
+  public function deleteAll($user_id)
+  {
     $query = 'DELETE FROM cart 
               WHERE user_id = ' . $user_id;
     // Prepare statement

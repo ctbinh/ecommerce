@@ -47,7 +47,7 @@ function App() {
           <Route path="cart" element={<Cart user={user}/>} />
           <Route path="checkout" element={<Checkout user={user}/>} />
           {user && <Route path="user" element={<User user={user}/>} />}
-          <Route path="detail" element={<Detail user={user}/>} />
+          <Route path="detail/:product_id" element={<Detail user={user}/>} />
         </Routes>
       </BrowserRouter>
     </div>

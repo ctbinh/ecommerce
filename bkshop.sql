@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2022 at 05:59 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Generation Time: Jun 06, 2022 at 05:24 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 7.4.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -152,7 +152,10 @@ INSERT INTO `comment` (`id`, `product_id`, `username`, `comment`, `rate`, `datet
 (68, 27, 'Ngọc', 'máy đẹp , mua cho em gái dùng khá thích , màu vàng gold nhìn sang lắm', 5, '2020-01-07 00:00:00'),
 (69, 28, 'Thư', 'máy xài mượt các ứng dụng vp , bản lề mở thoải mái', 5, '2020-02-22 00:00:00'),
 (70, 29, 'Nguyễn Hữu Thạnh', 'Tốt', 5, '2020-03-03 00:00:00'),
-(71, 1, 'hoangkui', 'asdasddsds', 5, '2022-06-05 05:54:12');
+(71, 1, 'hoangkui', 'asdasddsds', 5, '2022-06-05 05:54:12'),
+(74, 2, 'Thalo', 'Máy rất đẹp và không có lỗi gì, giao hành thân thiện, bảo hành uy tín, xứng đáng 5 sao nhưng mình chỉ cho 4 sao thôi vì cái web hơi lag', 4, '2022-06-05 15:31:00'),
+(75, 3, 'hoang_kui', 'Máy rất đẹp và không có lỗi gì, giao hành thân thiện, bảo hành uy tín, xứng đáng 5 sao nhưng mình chỉ cho 4 sao thôi vì cái web hơi lag', 4, '2022-06-05 15:31:00'),
+(76, 4, 'binh_cao', 'Máy rất đẹp và không có lỗi gì, giao hành thân thiện, bảo hành uy tín, xứng đáng 5 sao nhưng mình chỉ cho 4 sao thôi vì cái web hơi lag', 5, '2022-06-05 15:31:00');
 
 -- --------------------------------------------------------
 
@@ -230,7 +233,7 @@ INSERT INTO `product` (`product_id`, `name`, `url`, `product_code`, `brand`, `cp
 (13, 'Laptop LG Gram 2021 14Z90P-G.AH75A5', 'https://hangchinhhieu.vn/products/laptop-lg-gram-2021-14z90p-g-ah75a5-i7-1165g7', 'LG Gram 14Z90P-G.AH75A5', 'LG', 'Intel Core i7-1165G7 2.8GHz up to 4.7GHz 12MB', '16GB (8GBx2) LPDDR4X 4266MHz (Onboard)', 'Intel Iris Xe Graphics', 'Windows 10 Home', 47.99, 39.99, '14\" WUXGA (1920x1200), 16:10, IPS, DCI-P3 99%', '313.4 x 215.2 x 16.8 mm', 72, 0, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 6, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_14z90p-g.ah75a5_65b9a5140ca6490db2e77217f0ee142e_master.png', 0),
 (14, 'Laptop LG Gram 2021 16Z90P-G.AH75A5', 'https://hangchinhhieu.vn/products/laptop-lg-gram-2021-16z90p-g-ah75a5-i7-1165g7', '16Z90P-G.AH75A5', 'LG', 'Intel Core i7-1165G7 2.8GHz up to 4.7GHz 12MB', '16GB (8GBx2) LPDDR4X 4266MHz (Onboard)', 'Intel Iris Xe Graphics', 'Windows 10 Home', 50.99, 42.89, '16\" WQXGA (2560 x 1600), 16:10, IPS, DCI-P3 99%', '355.9 x 243.4 x 16.8 mm', 80, 0, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah75a5_2c4cec86ac4b4970910719e71b8440ec_master.png', 0),
 (15, 'Laptop LG Gram 2021 14ZD90P-G.AX56A5', 'https://hangchinhhieu.vn/products/laptop-lg-gram-2021-14zd90p-g-ax56a5-i5-1135g7', '14ZD90P-G.AX56A5', 'LG', 'Intel Core i5-1135G7 2.4GHz up to 4.2GHz 8MB', '16GB (8GBx2) LPDDR4X 4266MHz (Onboard)', 'Intel Iris Xe Graphics', 'FreeDos', 37.99, 34.49, '14\" WUXGA (1920x1200), 16:10, IPS, DCI-P3 99%', '313.4 x 215.2 x 16.8 mm', 72, 1, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 1, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax56a5_514e3b112baa48c88bf7a25c65dec831_master.png', 0),
-(16, 'Laptop ASUS ZenBook Flip 13 UX363EA-HP726W', 'https://hangchinhhieu.vn/products/laptop-asus-zenbook-flip-13-ux363ea-hp726w-i5-1135g7', 'UX363EA-HP726W', 'ASUS', 'Intel Core i5-1135G7 2.4GHz up to 4.2GHz 8MB', '8GB LPDDR4X on board', 'Intel Iris Xe Graphics', 'Windows 11 Home', 27.99, 23.69, '13.3\" OLED FHD (1920 x 1080) 16:9 aspect ratio, 0.2ms response time, 550nits peak brightness, ', '30.5 x 21.1 x 1.19 ~ 1.39 (cm)', 0, 4, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 3, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w_60f1e35971f6430faa01581f979d55a4_master.png', 0),
+(16, 'Laptop ASUS ZenBook Flip 13 UX363EA-HP726W', 'https://hangchinhhieu.vn/products/laptop-asus-zenbook-flip-13-ux363ea-hp726w-i5-1135g7', 'UX363EA-HP726W', 'ASUS', 'Intel Core i5-1135G7 2.4GHz up to 4.2GHz 8MB', '8GB LPDDR4X on board', 'Intel Iris Xe Graphics', 'Windows 11 Home', 27.99, 23.69, '13.3\" OLED FHD (1920 x 1080) 16:9 aspect ratio, 0.2ms response time, 550nits peak brightness, ', '30.5 x 21.1 x 1.19 ~ 1.39 (cm)', 0, 4, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 3, 'https://bizweb.dktcdn.net/thumb/grande/100/372/934/products/asus-zenbook-flip-ux363ea-20317cf6-3abd-43ec-9689-43c9424036e7.jpg', 0),
 (17, 'Laptop Acer Nitro 5 Eagle AN515-57-71VV', 'https://hangchinhhieu.vn/products/laptop-acer-nitro-5-eagle-an515-57-71vv-i7-11800h', 'AN515-57-71VV', 'ACER', 'Intel Core i7-11800H 2.3GHz up to 4.6GHz 24MB', '4GB DDR4', 'NVIDIA GeForce RTX 3050 4GB GDDR6', 'Windows 11 Home', 28.99, 25.49, '15.6\" FHD (1920 x 1080) IPS, 144Hz, Anti-Glare, 45% NTSC, 65% sRGB', '363.4 x 255 x 23.9 mm', 4, 4, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 4, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv_4671e13d89574fb99e37db9be1fdd633_master.png', 0),
 (18, 'Laptop HP Victus 16-d0204TX', 'https://hangchinhhieu.vn/products/laptop-hp-victus-16-d0204tx-4r0u5pa-i5-11400h', '4R0U5PA', 'HP', 'Intel Core i5-11400H 2.7GHz up to 4.5GHz 12MB', '4GB DDR4', 'NVIDIA GeForce RTX 3050 4GB GDDR6', 'Windows 11 Home', 26.99, 24.49, '16.1\" FHD (1920 x 1080), 144Hz, IPS, micro-edge, Anti-Glare, 250nits, 45% NTSC', '37 x 26 x 2,35 cm', 4, 2, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 0, 0, 'https://product.hstatic.net/1000233206/product/hp-victus-16-d0204tx-4r0u5pa-i5-11400h_db7305379f8341beb100cab8edc07f0d_master.png', 0),
 (19, 'Laptop HP Victus 16-e0175AX', 'https://hangchinhhieu.vn/products/laptop-hp-victus-16-e0175ax-4r0u8pa-r5-5600h', '4R0U8PA', 'HP', 'AMD Ryzen 5 5600H 3.3GHz up to 4.2GHz 16MB', '4GB DDR4', 'NVIDIA GeForce RTX 3050 4GB GDDR6', 'Windows 11 Home', 24.49, 20.99, '16.1\" FHD (1920 x 1080), 144 Hz, IPS, micro-edge, anti-glare, 250 nits, 45% NTSC', '37 x 26 x 2,35 cm', 4, 4, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 2, 'https://product.hstatic.net/1000233206/product/hp-victus-16-e0175ax-4r0u8pa_48d317e08aea4bd195fe9b0cf09b6610_master.png', 0),
@@ -360,7 +363,6 @@ INSERT INTO `product_image` (`id`, `product_id`, `url`) VALUES
 (94, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-6_167d2c53105a4ec6a51bb5c4670a668f_master.png'),
 (95, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-7_47298bc61dc341ee80a121f1363f1fa9_master.png'),
 (96, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w-8_0f72e0eadd20455e99c86f85e9400425_master.png'),
-(97, 16, 'https://product.hstatic.net/1000233206/product/asus-zenbook-flip-13-ux363ea-hp726w_60f1e35971f6430faa01581f979d55a4_master.png'),
 (98, 17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-1_91517bdc672c47ada270941d0735e381_master.png'),
 (99, 17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-2_13c4d0d1bee94ae28d5bea2350c2be64_master.png'),
 (100, 17, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-71vv-i7-11800h-3_565a11c6ceca4bd8ba2416c3a34c817f_master.png'),
@@ -533,7 +535,8 @@ ALTER TABLE `product`
 -- Indexes for table `product_image`
 --
 ALTER TABLE `product_image`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_image_ibfk_1` (`product_id`);
 
 --
 -- Indexes for table `user`
@@ -556,7 +559,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `orders`
