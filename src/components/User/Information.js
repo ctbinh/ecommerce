@@ -7,7 +7,6 @@ import { GrEdit } from "react-icons/gr";
 import axios from 'axios';
 import swal from "sweetalert";
 export default function Information (props) {
-    const [checked, setChecked] = useState(1);
 
     const [images, setImages] = useState([]);
     const [userInfor, setUserInfor] = useState([])
@@ -200,14 +199,6 @@ const Input = styled.input`
 `
 const ColStyled = styled(Col)`
     /* background-color: red; */
-`
-const SpanChoice = styled.span`
-    margin-right: 10px;
-    font-size: 90%;
-`
-const InputChoice = styled.input`
-    margin: 5px;
-    font-size: 90%;
 `
 const ButtonSave = styled.button`
     width: 90px;

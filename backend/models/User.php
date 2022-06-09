@@ -170,4 +170,24 @@ class User
     $stmt->execute();
     return $stmt;
   }
+  public function update_pass($username, $password)
+  {
+    $query = 'UPDATE user SET password = :password WHERE username = :username';
+
+    // Prepare statement
+    $stmt = $this->conn->prepare($query);
+    $password = htmlspecialchars(strip_tags($password));
+    $username = htmlspecialchars(strip_tags($username));
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':username', $username);
+    // Execute query
+
+    if($stmt->execute()) {
+        return true;
+    }
+    printf("Error: %s.\n", $stmt->error);
+    return false;
+  }
 }
