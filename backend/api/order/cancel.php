@@ -7,6 +7,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,
 
 include_once '../../config/Database.php';
 include_once '../../models/Orders.php';
+include_once '../../models/Product.php';
 
 // Instantiate DB & connect
 $database = new Database();
@@ -22,8 +23,7 @@ $data = json_decode(file_get_contents("php://input"));
 $orders->state = $data->state;
 $orders->order_id = $data->order_id;
 
-// Update post
-if ($orders->update()) {
+if ($orders->cancel()) {
     echo json_encode(
         array('message' => 'Orders Updated',
         'status' => 'Success'

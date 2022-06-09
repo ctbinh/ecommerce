@@ -28,7 +28,7 @@ class User
         $query = 'SELECT * FROM ' . $this->table . ' WHERE username = ? LIMIT 1';
 
         $stmt = $this->conn->prepare($query);
-
+        $this->username = htmlspecialchars(strip_tags($this->username));
         $stmt->bindParam(1, $this->username);
 
         if ($stmt->execute()) {
@@ -83,15 +83,21 @@ class User
 
     public function create()
     {
-        $query = "INSERT into user (username,password, fName, lName) VALUES (?,?,?,?)";
+        $query = "INSERT into user (username,password, fName, lName, url_avt) VALUES (?,?,?,?,?)";
         // Prepare statement
         $stmt = $this->conn->prepare($query);
 
+        $this->username = htmlspecialchars(strip_tags($this->username));
+        $this->password = htmlspecialchars(strip_tags($this->password));
+        $this->fName = htmlspecialchars(strip_tags($this->fName));
+        $this->lName = htmlspecialchars(strip_tags($this->lName));
+        $this->url_avt = htmlspecialchars(strip_tags($this->url_avt));
         // Bind ID
         $stmt->bindParam(1, $this->username);
         $stmt->bindParam(2, $this->password);
         $stmt->bindParam(3, $this->fName);
         $stmt->bindParam(4, $this->lName);
+        $stmt->bindParam(5, $this->url_avt);
 
         // Execute query
         return $stmt->execute();

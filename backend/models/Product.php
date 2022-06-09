@@ -286,4 +286,13 @@ class Product
     }
     public function delete()
     {}
+    public function restock() {
+        $query = 'UPDATE product SET amount = ? WHERE product_id = ?';
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(1, $this->amount);
+        $stmt->bindParam(2, $this->product_id);
+        $stmt->execute();
+        return $stmt;
+    }
 }

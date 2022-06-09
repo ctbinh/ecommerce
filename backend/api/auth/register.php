@@ -21,6 +21,7 @@ $user->username = $data->username;
 $user->password = password_hash($data->password, PASSWORD_DEFAULT);
 $user->fName = $data->fName;
 $user->lName = $data->lName;
+$user->url_avt = $data->url_avt;
 // Create Category
 if($user->create()) {
   echo json_encode(
