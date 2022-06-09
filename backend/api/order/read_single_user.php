@@ -63,10 +63,15 @@ if ($num > 0) {
             $ord_arr['data'][$idx]['total'] += $price * $amount;
         }
     }
-
     // Turn to JSON & output
+    function date_compare($element1, $element2) {
+        $datetime1 = strtotime($element1['date']);
+        $datetime2 = strtotime($element2['date']);
+        return $datetime2 - $datetime1;
+    }
+    // Sort the array 
+    usort($ord_arr['data'], 'date_compare');
     echo json_encode($ord_arr);
-
 } else {
     // No Categories
     echo json_encode(

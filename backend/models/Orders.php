@@ -88,15 +88,58 @@ class Orders
     {
         $query = 'UPDATE orders SET state = ?, date = ?,total_ship = ?,  username = ?, phone = ?, address = ? WHERE order_id = ? ';
         $stmt = $this->conn->prepare($query);
-
+        $d = strtotime("+5 Hours");
+        $date = date("Y-m-d H:i:sa", $d);
         $stmt->bindParam(1, $this->state);
-        $stmt->bindParam(2, $this->date);
+        $stmt->bindParam(2, $date);
+        $stmt->bindParam(3, $this->order_id);
         $stmt->bindParam(3, $this->total_ship);
         $stmt->bindParam(4, $this->username);
         $stmt->bindParam(5, $this->phone);
         $stmt->bindParam(6, $this->address);
         $stmt->bindParam(7, $this->order_id);
         $stmt->execute();
+        return $stmt;
+    }
+
+    public function cancel()
+    {
+        $query = 'UPDATE orders SET state = ?, date = ? WHERE order_id = ? AND state = "Pending"';
+        $stmt = $this->conn->prepare($query);
+        $d = strtotime("+5 Hours");
+        $date = date("Y-m-d H:i:s", $d);
+        $stmt->bindParam(1, $this->state);
+        $stmt->bindParam(2, $date);
+        $stmt->bindParam(3, $this->order_id);
+        $stmt->execute();
+
+        $query1 = 'SELECT I.product_id, I.amount AS res_amount, P.amount AS cur_amount 
+            FROM product AS P, order_item AS I 
+            WHERE I.product_id IN (
+                SELECT I.product_id 
+                FROM orders AS O, order_item AS I 
+                WHERE O.order_id = ? AND I.order_id = ?) 
+            AND I.product_id = P.product_id';
+        $stmt1 = $this->conn->prepare($query1);
+        $stmt1->bindParam(1, $this->order_id);
+        $stmt1->bindParam(2, $this->order_id);
+        $stmt1->execute();
+        $num = $stmt1->rowCount();
+        if ($num > 0) {
+            // Cat array
+            while ($row = $stmt1->fetch(PDO::FETCH_ASSOC)) {
+                extract($row);
+                $query_restock = 'UPDATE product SET amount = ? + ? WHERE product_id = ?';
+                $stmt_restock = $this->conn->prepare($query_restock);
+                $stmt_restock->bindParam(1, $res_amount);
+                $stmt_restock->bindParam(2, $cur_amount);
+                $stmt_restock->bindParam(3, $product_id);
+                $stmt_restock->execute();
+                if (!$stmt_restock) {
+                    return $stmt_restock;
+                }
+            }
+        }
         return $stmt;
     }
 }
