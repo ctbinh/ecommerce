@@ -18,7 +18,7 @@ $user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
 
 // Get product
 $result = $orders->read_single_user($user_id);
-
+// print_r($result);
 $num = $result->rowCount();
 // Create array
 if ($num > 0) {
@@ -35,10 +35,10 @@ if ($num > 0) {
             'amount' => $amount,
             'price' => $price,
             'name' => $name,
-            'amount' => $amount,
             'img_cover' => $img_cover,
             'cpu' => $cpu,
             'description' => $description,
+
         );
         if ($curr_ord_id != $order_id) {
             $curr_ord_id = $order_id;
@@ -50,9 +50,12 @@ if ($num > 0) {
                 'date' => $date,
                 'total_ship' => $total_ship,
                 'total' => 0,
-                'phone' => $phone,
                 'name' => $nameUser,
-                'username' => $username,
+                'receiver' => $receiver,
+                'phone' => $phoneReceiver,
+                'address' => $address,
+                'user_id' => $user_id,
+
             ));
             $ord_arr['data'][$idx]['total'] += $price * $amount;
         } else {

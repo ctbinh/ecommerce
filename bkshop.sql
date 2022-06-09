@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2022 at 05:24 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 7.4.25
+-- Generation Time: Jun 09, 2022 at 05:37 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -57,7 +57,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`user_id`, `product_id`, `amount`) VALUES
-(1, 1, 2),
+(1, 1, 5),
 (1, 2, 3),
 (1, 3, 1),
 (2, 2, 4);
@@ -155,7 +155,8 @@ INSERT INTO `comment` (`id`, `product_id`, `username`, `comment`, `rate`, `datet
 (71, 1, 'hoangkui', 'asdasddsds', 5, '2022-06-05 05:54:12'),
 (74, 2, 'Thalo', 'Máy rất đẹp và không có lỗi gì, giao hành thân thiện, bảo hành uy tín, xứng đáng 5 sao nhưng mình chỉ cho 4 sao thôi vì cái web hơi lag', 4, '2022-06-05 15:31:00'),
 (75, 3, 'hoang_kui', 'Máy rất đẹp và không có lỗi gì, giao hành thân thiện, bảo hành uy tín, xứng đáng 5 sao nhưng mình chỉ cho 4 sao thôi vì cái web hơi lag', 4, '2022-06-05 15:31:00'),
-(76, 4, 'binh_cao', 'Máy rất đẹp và không có lỗi gì, giao hành thân thiện, bảo hành uy tín, xứng đáng 5 sao nhưng mình chỉ cho 4 sao thôi vì cái web hơi lag', 5, '2022-06-05 15:31:00');
+(76, 4, 'binh_cao', 'Máy rất đẹp và không có lỗi gì, giao hành thân thiện, bảo hành uy tín, xứng đáng 5 sao nhưng mình chỉ cho 4 sao thôi vì cái web hơi lag', 5, '2022-06-05 15:31:00'),
+(77, 1, 'hihi', 'test', 1, '2022-05-09 09:37:32');
 
 -- --------------------------------------------------------
 
@@ -168,11 +169,18 @@ CREATE TABLE `orders` (
   `user_id` int(11) NOT NULL,
   `state` varchar(255) NOT NULL,
   `total_ship` float NOT NULL,
-  `date` date NOT NULL,
+  `date` datetime NOT NULL,
   `username` varchar(255) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `state`, `total_ship`, `date`, `username`, `phone`, `address`) VALUES
+(1, 3, 'Pending', 12000, '2022-06-09 00:00:00', 'Cao Thanh Binh', '0123456789', 'Hoang Dieu 2 Thu Duc');
 
 -- --------------------------------------------------------
 
@@ -186,6 +194,14 @@ CREATE TABLE `order_item` (
   `amount` int(11) NOT NULL,
   `price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_item`
+--
+
+INSERT INTO `order_item` (`order_id`, `product_id`, `amount`, `price`) VALUES
+(1, 27, 2, 15000),
+(1, 28, 1, 12000);
 
 -- --------------------------------------------------------
 
@@ -221,7 +237,7 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`product_id`, `name`, `url`, `product_code`, `brand`, `cpu`, `ram`, `gpu`, `os`, `old_price`, `price`, `screen`, `size`, `battery`, `amount`, `description`, `rating`, `num_reviewer`, `img_cover`, `isDisabled`) VALUES
-(1, 'Laptop Acer Nitro 5 Eagle AN515-57-54MV', 'https://hangchinhhieu.vn/products/laptop-lg-gram-2021-14zd90p-g-ax51a5-i5-1135g7', '14ZD90P-G.AX51A5', 'ACER', 'Intel Core i5-11400H 2.7GHz up to 4.5GHz 12MB', '4GB DDR4', 'NVIDIA GeForce RTX™ 3050 4GB GDDR6', 'Windows 11 Home', 34.99, 22.49, ' 15.6&amp;amp;amp;amp;amp;amp;amp;amp;amp;#039; FHD (1920 x 1080) IPS, 144Hz, Anti-Glare, 45% NTSC, 65% sRGB', '363.4 x 255 x 23.9 mm', 72, 10, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 0, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5_a2e71f3575f543d8940d22d64592e887_master.png', 0),
+(1, 'Laptop Acer Nitro 5 Eagle AN515-57-54MV', 'https://hangchinhhieu.vn/products/laptop-lg-gram-2021-14zd90p-g-ax51a5-i5-1135g7', '14ZD90P-G.AX51A5', 'ACER', 'Intel Core i5-11400H 2.7GHz up to 4.5GHz 12MB', '4GB DDR4', 'NVIDIA GeForce RTX™ 3050 4GB GDDR6', 'Windows 11 Home', 34.99, 22.49, ' 15.6&amp;amp;amp;amp;amp;amp;amp;amp;amp;#039; FHD (1920 x 1080) IPS, 144Hz, Anti-Glare, 45% NTSC, 65% sRGB', '363.4 x 255 x 23.9 mm', 72, 10, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 5, 'https://product.hstatic.net/1000233206/product/lg-gram-2021-14zd90p-g-ax51a5_a2e71f3575f543d8940d22d64592e887_master.png', 0),
 (2, 'Laptop LG Gram 2021 16Z90P-G.AH73A5', 'https://hangchinhhieu.vn/products/laptop-lg-gram-2021-16z90p-g-ah73a5-i7-1165g7', '16Z90P-G.AH73A5', 'LG', 'Intel Core i7-1165G7 2.8GHz up to 4.7GHz 12MB', '16GB (8GBx2) LPDDR4X 4266MHz (Onboard)', 'Intel Iris Xe Graphics', 'Windows 10 Home', 49.99, 40.89, '16\" WQXGA (2560 x 1600), 16:10, IPS, DCI-P3 99%', '355.9 x 243.4 x 16.8 mm', 80, 4, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 3, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_16z90p-g.ah73a5_1022f07220d34034b8ca6da3ca669dea_master.png', 0),
 (3, 'Laptop LG Gram 2021 17ZD90P-G.AX71A5', 'https://hangchinhhieu.vn/products/laptop-lg-gram-2021-17zd90p-g-ax71a5-i7-1165g7', '17ZD90P-G.AX71A5', 'LG', 'Intel Core i7-1165G7 2.8GHz up to 4.7GHz 12MB', '16GB (8GBx2) LPDDR4X 4266MHz (Onboard)', 'Intel Iris Xe Graphics', NULL, 44.99, 39.99, '17\" WQXGA (2560 x 1600), 16:10, IPS, DCI-P3 99%', '380.2 x 260.1 x 17.8 mm', 80, 4, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 1, 'https://product.hstatic.net/1000233206/product/lg_gram_2021_17zd90p-g.ax71a5_40aab526d08649d89764e9934615febd_master.png', 0),
 (4, 'Laptop Acer Nitro 5 Eagle AN515-57-54MV', 'https://hangchinhhieu.vn/products/laptop-acer-nitro-5-eagle-an515-57-54mv-i5-11400h', 'AN515-57-54MV', 'ACER', 'Intel Core i5-11400H 2.7GHz up to 4.5GHz 12MB', '4GB DDR4', 'NVIDIA GeForce RTX™ 3050 4GB GDDR6', 'Windows 11 Home', 26.49, 22.49, '15.6\" FHD (1920 x 1080) IPS, 144Hz, Anti-Glare, 45% NTSC, 65% sRGB', '363.4 x 255 x 23.9 mm', 4, 4, 'The metal chassis is built well and houses a comfortable keyboard and touchpad. Ports include USB-C, two USB-A, HDMI, 3.5mm audio, and an SD card reader. Wi-Fi 6 is included, but theres no Thunderbolt due to the AMD platform. Otherwise, this is a beautiful laptop thats available at a great price.', 5, 3, 'https://product.hstatic.net/1000233206/product/acer-nitro-5-eagle-an515-57-54mv-i5-11400h_b20e2a1a86f04fd7ae3921d1a60b1edd_master.png', 0),
@@ -488,7 +504,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `fName`, `lName`, `email`, `phone`, `birthday`, `url_avt`, `isBlocked`) VALUES
 (1, 'Thalo', '123456', 'Nguyễn', 'Long', 'vodanh@gmail.com', '0123445667', '0000-00-00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:AN', 0),
-(2, 'Thalo1', '123456', 'Nguyễn', 'Long', 'vodanh@gmail.com', '0123445667', '0000-00-00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:AN', 0);
+(2, 'Thalo1', '123456', 'Nguyễn', 'Long', 'vodanh@gmail.com', '0123445667', '0000-00-00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:AN', 0),
+(3, 'hoangkui', '$2y$10$aHcFNfVwjlmdE9C1gVdzP.tI9rC9iKF53Rta7XfXzKN9GtyMHoQda', 'Nguyen Tran', 'Hoang', '', '', '0000-00-00', 'http://res.cloudinary.com/dd8b69mls/image/upload/v', 0);
 
 --
 -- Indexes for dumped tables
@@ -562,13 +579,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product`
@@ -586,7 +603,7 @@ ALTER TABLE `product_image`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

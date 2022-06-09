@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // import { MainContentWrap } from "./style";
 const MainContentWrap = styled.div`
@@ -126,12 +127,15 @@ const CustomerName = styled.h4`
 
 // const Orders=styled.div``;
 const MainContent = () => {
+  const navigate = useNavigate();
   return (
     <MainContentWrap>
       <Orders>
         <OrderHeader>
           <OrderHeaderTitle>Recent Orders</OrderHeaderTitle>
-          <OrderHeaderBtn>View All</OrderHeaderBtn>
+          <OrderHeaderBtn onClick={() => navigate("orders")}>
+            View All
+          </OrderHeaderBtn>
         </OrderHeader>
         <OrderContent>
           <Table>

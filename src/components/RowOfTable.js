@@ -30,7 +30,7 @@ const RowOfTable = (props) => {
             return;
         }
         const data = {
-            user_id: 1, 
+            user_id: sessionStorage.getItem('user_id'), 
             product_id: props.product.product_id, 
             amount: count + 1
         }
@@ -52,7 +52,7 @@ const RowOfTable = (props) => {
         console.log("Run here")
         if (count > 1) {
             const data = {
-                user_id: 1, 
+                user_id: sessionStorage.getItem('user_id'), 
                 product_id: props.product.product_id, 
                 amount: count - 1
             }
@@ -78,7 +78,7 @@ const RowOfTable = (props) => {
     const Delete = () => {
         // props.setCart(props.cart.filter(pro => pro.product_id !== props.product.product_id))
         const data = {
-            user_id: 1, 
+            user_id: sessionStorage.getItem('user_id'), 
             product_id: props.product.product_id, 
         }
         let config = {

@@ -78,6 +78,7 @@ const Detail = () => {
   const [product, setProduct] = useState({})
   const [comment, setComment] = useState([])
   const [ratingStar, setRatingStar] = useState(4)
+  const [ratingInfo, setRatingInfo] = useState({})
   const [userComment, setUserComment] = useState("")
   const [similarProduct, setSimilarProduct] = useState([])
   // let similarProduct;
@@ -106,22 +107,56 @@ const Detail = () => {
         console.log(response.data);
       });
     getComment();
+
+    let data_updateRating = {
+      "product_id": product_id,
+      "rating": Math.floor((ratingInfo.total_rating + ratingStar) / (ratingInfo.num_reviewer + 1)),
+      "num_reviewer": ratingInfo.num_reviewer + 1
+    }
+    updateRating(data_updateRating)
+    let _rating = {
+      "total_rating": ratingInfo.total_rating + ratingStar,
+      "num_reviewer": ratingInfo.num_reviewer + 1
+    }
+    setRatingInfo(_rating)
+
     handleClose();
   };
+  const updateRating = async (data_updateRating) => {
+    console.log("update rating: ", data_updateRating)
+    await axios.post('http://localhost/ecommerce/backend/api/product/updateRating.php', data_updateRating)
+      .then((response) => {
+        console.log(response.data);
+      });
+  }
   const handleClick = (url) => {
     navigate(url)
   };
-  const handleAddToCart = () => {
-
+  const handleAddToCart = async () => {
+    let data = {
+      "product_id": product_id,
+      "user_id": "1", /////////////////////////////////
+      "amount": count
+    };
+    console.log("data addToCart: ", data)
+    await axios.post('http://localhost/ecommerce/backend/api/cart/addToCart.php', data)
+      .then((response) => {
+        console.log(response.data);
+      });
   }
   const getComment = async () => {
     const res_comment = await axios.get('http://localhost/ecommerce/backend/api/comment/read_single.php?product_id=' + String(product_id));
     console.log("comment: ", res_comment.data)
-    // let rating = res_comment.data.reduce((a, b) => {
-    //   return a + parseInt(b.rate);
-    // }, 0);
-    // console.log(rating)
+    let total_rating = res_comment.data.reduce((a, b) => {
+      return a + parseInt(b.rate);
+    }, 0);
+    let _rating = {
+      "total_rating": total_rating,
+      "num_reviewer": res_comment.data.length
+    }
+    console.log("ratingInfo: ", _rating)
     setComment(res_comment.data)
+    setRatingInfo(_rating)
   }
   useEffect(() => {
     const getData = async () => {
@@ -223,11 +258,11 @@ const Detail = () => {
 
           <Rate>
             <div className="d-flex flex-row align-items-center" >
-              <Rating size="small" name="read-only" value={parseInt(product.rating)} readOnly />
+              <Rating size="small" name="read-only" value={parseInt(ratingInfo.total_rating / ratingInfo.num_reviewer)} readOnly />
               <p
                 style={{ fontSize: "13px", color: "#a6a6a6", margin: "0 2px" }}
               >
-                Reviews ({product.num_reviewer})
+                Reviews ({ratingInfo.num_reviewer})
               </p>
             </div>
             <Status amount={product.amount}>
@@ -280,7 +315,7 @@ const Detail = () => {
                   </div>
                 </Input>
 
-                <Button disabled={parseInt(product.amount) < 1} style={{ borderRadius: "20px", padding: "6px 20px" }}>
+                <Button disabled={parseInt(product.amount) < 1} style={{ borderRadius: "20px", padding: "6px 20px" }} onClick={handleAddToCart}>
                   {/* Add to cart */}
                   {parseInt(product.amount) > 0 ? "Add to cart" : "Out of stock"}
                 </Button>

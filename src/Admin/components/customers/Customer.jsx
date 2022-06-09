@@ -55,7 +55,6 @@ const Customer = () => {
               <th>ID</th>
               <th>Avatar</th>
               <th>Username</th>
-              <th>Password</th>
               <th>Fullname</th>
               <th>Email</th>
               <th>Phone</th>
@@ -78,7 +77,6 @@ const Customer = () => {
                     />
                   </td>
                   <td>{user.username}</td>
-                  <td>{user.password}</td>
                   <td>{user.fName + " " + user.lName}</td>
                   <td>{user.email}</td>
                   <td>{user.phone}</td>

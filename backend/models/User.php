@@ -149,12 +149,51 @@ class User
     }
     public function delete()
     {}
-    public function update_Img($user_id, $img)
+    public function update_Img($user_id, $url_avt)
     {
-        $query = 'UPDATE user SET url_avt = ' . $img . ' WHERE user_id = ' . $user_id;
+        $query = 'UPDATE user SET url_avt = :url_avt WHERE user_id = :user_id';
         // Prepare statement
         $stmt = $this->conn->prepare($query);
+        $url_avt = htmlspecialchars(strip_tags($url_avt));
+        $user_id = htmlspecialchars(strip_tags($user_id));
+
+        $stmt->bindParam(':url_avt', $url_avt);
+        $stmt->bindParam(':user_id', $user_id);
         // Execute query
-        $stmt->execute();
+
+        if($stmt->execute()) {
+            return TRUE;
+        }
+        printf("Error: %s.\n", $stmt->error);
+        return FALSE;
     }
+    public function find_user($id)
+  {
+    $query = 'SELECT * FROM user WHERE user_id = ' . $id;
+    // Prepare statement
+    $stmt = $this->conn->prepare($query);
+    // Execute query
+    $stmt->execute();
+    return $stmt;
+  }
+  public function update_pass($username, $password)
+  {
+    $query = 'UPDATE user SET password = :password WHERE username = :username';
+
+    // Prepare statement
+    $stmt = $this->conn->prepare($query);
+    $password = htmlspecialchars(strip_tags($password));
+    $username = htmlspecialchars(strip_tags($username));
+
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':username', $username);
+    // Execute query
+
+    if($stmt->execute()) {
+        return true;
+    }
+    printf("Error: %s.\n", $stmt->error);
+    return false;
+  }
 }

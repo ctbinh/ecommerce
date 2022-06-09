@@ -3,86 +3,66 @@ import { Container, Row, Col } from "react-grid-system";
 import { useEffect, useState } from 'react';
 
 import ImageUploading from "react-images-uploading";
-import { GrEdit } from "react-icons/gr"
-import axios from 'axios'
-const User = {
-    "username": "Long",
-    "password": "123456",
-    "fname": "Nguyen",
-    "lname": "Long",
-    "email": "Nothing@gmail.com",
-    "phone": "0984046827",
-    "url_avt": "https://pdp.edu.vn/wp-content/uploads/2021/05/hinh-anh-avatar-trang-dep-1.jpg",
-    "birthday": "2001-01-01",
-}
+import { GrEdit } from "react-icons/gr";
+import axios from 'axios';
+import swal from "sweetalert";
 export default function Information (props) {
 
-    const choices = [
-        {
-            id: 1,
-            name: "Male"
-        },
-        {
-            id: 2,
-            name: "Female"
-        },
-        {
-            id: 3,
-            name: "Other"
-        }
-    ]
-
-    const [checked, setChecked] = useState(1);
-
     const [images, setImages] = useState([]);
-    const [userInfor, setUserInfor] = useState(
-        {   
-            'username': '', 
-            'fName': '', 
-            'lName':'',
-            'birthday': '',
-            'phone':'',
-            'email':'',
-            'gender': 'M'
-        })
+    const [userInfor, setUserInfor] = useState([])
     // images.data_url = User.url_avt;
     // const maxNumber = 69;
-    const onChange = (imageList, addUpdateIndex) => {
+    const onChange = async (imageList, addUpdateIndex) => {
     // data for submit
-        console.log("test", sessionStorage.getItem('user_id'));
         setImages(imageList);
+        const formData = new FormData();
+        formData.append("file", imageList[0].file);
+        formData.append("api_key", 174989952789425);
+        formData.append("upload_preset", "iinnk03t");
+        const res = await axios.post("https://api.cloudinary.com/v1_1/dd8b69mls/image/upload", formData)
         const data = {
             user_id: sessionStorage.getItem('user_id'),
-            img: imageList[imageList.length - 1].data_url
-          };
-          let config = {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          };
-          axios
-            .post(
-              "http://localhost/ecommerce/backend/api/user/updateImg.php",
-              data,
-              config
-            )
+            url_avt: res.data.url
+        };
+        axios.post("http://localhost/ecommerce/backend/api/user/updateImg.php", data)
             .then((response) => {
-              console.log(response.data);
-            });
+                console.log(response);
+            })  
     };
-    const changImg = () => {
-
-    }
     useEffect(() => {
         const fetchUser = async () => {
             const id = sessionStorage.getItem('user_id')
-            const res = await axios.get('http://localhost/ecommerce/backend/api/user/read_single.php?user_id='+id);
-            setUserInfor(res.data)
-            console.log(res.data)
+            const res = await axios.get('http://localhost/ecommerce/backend/api/user/getUser.php?user_id=' + id);
+            setUserInfor(res.data.data[0])
           }
           fetchUser()
     }, [])
-    
+    const update = (e) => {
+        let newdate = e.target.value;
+        console.log("value", e.target.value)
+        if (e.target.name === 'date') {
+            let date = e.target.value;
+            
+            let datearray = date.split("-");
+            let newdate = datearray[2] + '-' + datearray[1] + '-' + datearray[0];
+        }
+        setUserInfor ({
+            ...userInfor,
+            [e.target.name]: newdate
+        })
+    }
+    const onSave = () => {
+        swal("Completely!", "Change information success", "success");
+        const data = {
+            ...userInfor,
+            user_id: sessionStorage.getItem('user_id')
+        }
+        console.log("data->>>>>", data)
+        axios.post("http://localhost/ecommerce/backend/api/user/update.php", data)
+            .then((response) => {
+                console.log(response);
+            })  
+    }
     return (
         <div>
             <Title>Account Information</Title>
@@ -108,7 +88,7 @@ export default function Information (props) {
                         }) => (
                             <ContainerEdit className="upload__image-wrapper">
                                 {imageList.length === 0 && <ContainerImg> 
-                                    <ImgProduct src={User.url_avt} alt="UserImage"/>     
+                                    <ImgProduct src={userInfor["url_avt"]} alt="UserImage"/>     
                                 </ContainerImg>}
                                 {imageList.map((image, index) => (
                                     // <div key={index} className="image-item">
@@ -138,47 +118,34 @@ export default function Information (props) {
                         <ContainerInput>
                             <Row>
                                 <Col lg={2.5}><NameInput>First Name</NameInput></Col>
-                                <Col lg={9.5}><Input type="text" placeholder={userInfor.fName}/></Col>
+                                <Col lg={9.5}>
+                                    <Input type="text" name="fName" placeholder={userInfor.fName} onChange={update}/>
+                                </Col>
                             </Row>
                         </ContainerInput>
                         <ContainerInput>
                             <Row>
                                 <Col lg={2.5}><NameInput>Last Name</NameInput></Col>
-                                <Col lg={9.5}><Input type="text" placeholder={userInfor.lName}/></Col>
+                                <Col lg={9.5}><Input type="text" name="lName" placeholder={userInfor.lName} onChange={update}/></Col>
                             </Row>
                         </ContainerInput>
                         <ContainerInput>
                             <Row>
                                 <Col lg={2.5}><NameInput>Email</NameInput></Col>
-                                <Col lg={9.5}><Input type="text" placeholder={userInfor.email}/></Col>
+                                <Col lg={9.5}><Input type="text" name="email" placeholder={userInfor.email} onChange={update}/></Col>
                             </Row>
                         </ContainerInput>
                         <ContainerInput>
                             <Row>
                                 <Col lg={2.5}><NameInput>Phone</NameInput></Col>
-                                <Col lg={9.5}><Input type="text" placeholder={userInfor.phone}/></Col>
+                                <Col lg={9.5}><Input type="text" name="phone" placeholder={userInfor.phone} onChange={update}/></Col>
                             </Row>
                         </ContainerInput>
                         <Row>
-                            <Col lg={2.5}><NameInput>Gender</NameInput></Col>
-                            <Col lg={9.5}>
-                            {choices.map(choice => (
-                                <SpanChoice  key={choice.id}>
-                                    <InputChoice 
-                                        type="radio" 
-                                        onChange={() => setChecked(choice.id)}
-                                        checked={choice.id === checked}
-                                    />
-                                        {choice.name} 
-                                </SpanChoice>
-                            ))}
-                            </Col>
-                        </Row>
-                        <Row>
                             <Col lg={2.5}><NameInput>Birthday</NameInput></Col>
-                            <Col lg={9.5}><Input type="date" id="start" name="trip-start" value={userInfor.birthday} min="2018-01-01" max="2022-12-31"/></Col>
+                            <Col lg={9.5}><Input type="date" id="start" name="birthday" value={userInfor.birthday} min="1990-01-01" max="2022-12-31" onChange={update}/></Col>
                         </Row>
-                            <ButtonSave>Save</ButtonSave>
+                            <ButtonSave onClick={() => onSave()}>Save</ButtonSave>
                     </Col>
                 </Row>
             </Container>
@@ -232,14 +199,6 @@ const Input = styled.input`
 `
 const ColStyled = styled(Col)`
     /* background-color: red; */
-`
-const SpanChoice = styled.span`
-    margin-right: 10px;
-    font-size: 90%;
-`
-const InputChoice = styled.input`
-    margin: 5px;
-    font-size: 90%;
 `
 const ButtonSave = styled.button`
     width: 90px;

@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { MdModeEditOutline } from "react-icons/md";
 import { AiFillDelete, AiFillEye } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllOrder, ordersSelector } from "../../store/reducers/ordersSlice";
+import {
+  changeStateOrder,
+  getAllOrder,
+  ordersSelector,
+} from "../../store/reducers/ordersSlice";
 import { useEffect } from "react";
+import { Button, Menu, MenuItem } from "@mui/material";
+import { ArrowDropDownCircleOutlined } from "@mui/icons-material";
+import swal from "sweetalert";
 // import { GrFormView } from "react-icons/gr";
 const Wraper = styled.div`
   background-color: #f3f3f9;
@@ -33,7 +40,31 @@ const IconWraper = styled.div`
   cursor: pointer;
   font-size: 18px;
 `;
+const Span = styled.span`
+  background-color: ${(props) => props.color};
+  padding: 3px;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+`;
 const Orders = () => {
+  // state
+  const [listStatus, setListStatus] = useState([
+    "Pending",
+    "Delivering",
+    "Delivered",
+    "Cancelled",
+  ]);
+  // drop down
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   // navigate
   const navigate = useNavigate();
 
@@ -41,10 +72,19 @@ const Orders = () => {
   const allOrder = useSelector(ordersSelector);
   const dispatch = useDispatch();
 
+  // change
+  const handleChangeState = (id, state) => {
+    // alert(id + state);
+    dispatch(changeStateOrder({ id, state }));
+    handleClose();
+    swal("Changing success", "", "success");
+  };
+
   // effect
   useEffect(() => {
     dispatch(getAllOrder());
   }, []);
+  if (!allOrder) return <h1>No order here</h1>;
   return (
     <Wraper>
       <TableWraper>
@@ -73,20 +113,48 @@ const Orders = () => {
                   <td>{order.total_ship}</td>
                   <td>{order.total}</td>
                   <td>{order.date}</td>
-                  <td>{order.state}</td>
-                  {/* <td>
-                  <IconWraper>
-                    <MdModeEditOutline />
-                  </IconWraper>
-                  <IconWraper color="red">
-                    <AiFillDelete />
-                  </IconWraper>
-                </td>
-   */}
+                  <td>
+                    <Span
+                      style={{ marginLeft: "-12px" }}
+                      aria-controls={open ? "basic-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? "true" : undefined}
+                      onClick={handleClick}
+                      src=""
+                      color="green"
+                    >
+                      {order.state}
+                    </Span>
+                    {/* </Button> */}
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleClose}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                    >
+                      {listStatus.map((item) => {
+                        if (item !== order.state) {
+                          return (
+                            <MenuItem
+                              key={item}
+                              onClick={() =>
+                                handleChangeState(order.order_id, item)
+                              }
+                            >
+                              {item}
+                            </MenuItem>
+                          );
+                        }
+                      })}
+                    </Menu>
+                  </td>
                   <Td
                     onClick={() => navigate(`../invoice?id=${order.order_id}`)}
                   >
-                    <IconWraper>
+                    <IconWraper style={{ marginLeft: "-45px" }}>
                       <AiFillEye />
                     </IconWraper>
                   </Td>

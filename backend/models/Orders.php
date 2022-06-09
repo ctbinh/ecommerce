@@ -15,7 +15,6 @@ class Orders
     public $username;
     public $address;
 
-
     // Constructor with DB
     public function __construct($db)
     {
@@ -77,7 +76,7 @@ class Orders
     // Get Single Category
     public function read_single_user($user_id)
     {
-        $query = 'SELECT O.order_id, O.state, O.total_ship, O.date, I.amount, I.product_id, I.price, P.name, P.cpu, P.description, P.img_cover, U.phone , CONCAT(U.fName ," ",U.lName) AS nameUser ,U.username FROM orders AS O, order_item AS I, product AS P,user AS U WHERE O.user_id = ? AND O.order_id = I.order_id AND I.product_id = P.product_id  AND U.user_id= O.user_id ORDER BY O.order_id';
+        $query = 'SELECT O.order_id, O.state, O.total_ship, O.date,O.username AS receiver,O.phone AS phoneReceiver,O.address, I.amount, I.product_id, I.price, P.name, P.cpu, P.description, P.img_cover, U.phone , CONCAT(U.fName ," ",U.lName) AS nameUser ,U.username FROM orders AS O, order_item AS I, product AS P,user AS U WHERE O.order_id = ? AND O.order_id = I.order_id AND I.product_id = P.product_id  AND U.user_id= O.user_id ORDER BY O.order_id';
 
         $stmt = $this->conn->prepare($query);
 
@@ -87,13 +86,18 @@ class Orders
     }
     public function update()
     {
-        $query = 'UPDATE orders SET state = ?, date = ? WHERE order_id = ? AND state = "Pending"';
+        $query = 'UPDATE orders SET state = ?, date = ?,total_ship = ?,  username = ?, phone = ?, address = ? WHERE order_id = ? ';
         $stmt = $this->conn->prepare($query);
         $d = strtotime("+5 Hours");
-        $date = date("Y-m-d h:i:sa", $d);
+        $date = date("Y-m-d H:i:sa", $d);
         $stmt->bindParam(1, $this->state);
         $stmt->bindParam(2, $date);
         $stmt->bindParam(3, $this->order_id);
+        $stmt->bindParam(3, $this->total_ship);
+        $stmt->bindParam(4, $this->username);
+        $stmt->bindParam(5, $this->phone);
+        $stmt->bindParam(6, $this->address);
+        $stmt->bindParam(7, $this->order_id);
         $stmt->execute();
         return $stmt;
     }

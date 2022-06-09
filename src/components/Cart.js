@@ -91,7 +91,7 @@ const Cart = () => {
     });
   };
   useEffect(() => {
-    axios.get("http://localhost/ecommerce/backend/api/cart/finditems.php").then((response) => {
+    axios.get(`http://localhost/ecommerce/backend/api/cart/finditems.php?user_id=${sessionStorage.getItem('user_id')}`).then((response) => {
         if (response.data.data) setCart(response.data.data);
         console.log(response.data.message);
     });
@@ -136,8 +136,8 @@ const Cart = () => {
         config
       )
       .then((response) => {
-        console.log(response.data);
-      });
+       console.log(response.data);
+      }); 
   };
   return (
     <div>
