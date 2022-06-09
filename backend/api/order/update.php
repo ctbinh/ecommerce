@@ -13,26 +13,36 @@ $database = new Database();
 $db = $database->connect();
 
 // Instantiate blog post object
-$orders = new Orders($db);
+$order = new Orders($db);
 
 // Get raw posted data
 $data = json_decode(file_get_contents("php://input"));
+$order->order_id = isset($_GET['id']) ? $_GET['id'] : die();
 
-// Set ID to update
-$orders->state = $data->state;
-$orders->order_id = $data->order_id;
-$orders->date = $data->date;
+$result = $order->read_single_user($order->order_id);
+$num = $result->rowCount();
+
+while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+    extract($row);
+
+    $order->state = $data->state;
+    $order->total_ship = $total_ship;
+    $order->date = $date;
+    $order->phone = $phoneReceiver;
+    $order->username = $receiver;
+    $order->address = $address;
+}
 
 // Update post
-if ($orders->update()) {
+if ($order->update()) {
     echo json_encode(
         array('message' => 'Orders Updated',
-        'status' => 'Success'
+            'data' => $data->state,
         )
     );
 } else {
     echo json_encode(
         array('message' => 'Orders Not Updated',
-        'status' => 'Fail')
+            'status' => 'Fail')
     );
 }

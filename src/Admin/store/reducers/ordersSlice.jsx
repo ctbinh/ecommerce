@@ -14,6 +14,21 @@ export const getOrder = createAsyncThunk("orders/single", async (id) => {
   );
   return res.data.data;
 });
+export const changeStateOrder = createAsyncThunk(
+  "orders/change",
+  async ({ id, state }) => {
+    const res = await axios.put(
+      `http://localhost/ecommerce/backend/api/order/update.php?id=${id}`,
+      {
+        state,
+      }
+    );
+    return {
+      id: id,
+      data: res.data.data,
+    };
+  }
+);
 
 // Create slice
 const ordersSlice = createSlice({
@@ -47,7 +62,26 @@ const ordersSlice = createSlice({
     [getOrder.rejected]: (state, action) => {
       console.log("Failed to get one order");
     },
-
+    // change one order from backend
+    [changeStateOrder.pending]: (state, action) => {
+      console.log("Changing one order from backend");
+    },
+    [changeStateOrder.fulfilled]: (state, action) => {
+      const { id, data } = action.payload;
+      console.log("Done");
+      state.allOrder = state.allOrder.map((item) => {
+        if (item.order_id === id) {
+          return {
+            ...item,
+            state: data,
+          };
+        }
+        return item;
+      });
+    },
+    [changeStateOrder.rejected]: (state, action) => {
+      console.log("Failed to change one order");
+    },
     // toggle status
     // [toggleStatus.pending]: (state, action) => {
     //   console.log("Toggle  status ");

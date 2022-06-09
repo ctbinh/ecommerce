@@ -170,11 +170,11 @@ const Invoice = () => {
           <WraperInfo>
             <HeadingInfo textAlign="right">invoice to</HeadingInfo>
             <ContentInfo textAlign="right">
-              Mo Salah
+              {order.receiver}
               <br />
-              Nagrig, Egypt
+              VietNam
               <br />
-              Dhaka, Bangladesh, 2030
+              {order.address}
             </ContentInfo>
           </WraperInfo>
         </Info>
