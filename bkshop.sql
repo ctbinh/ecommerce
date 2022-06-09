@@ -494,7 +494,7 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(15) NOT NULL,
   `birthday` date NOT NULL,
-  `url_avt` varchar(50) NOT NULL,
+  `url_avt` varchar(100) NOT NULL,
   `isBlocked` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
