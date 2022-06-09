@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const Orders = (props) => {
+const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [targetTypeOrders, setTargetTypeOrders] = useState("All");
   const filterOrders = (state) => {
@@ -12,14 +12,15 @@ const Orders = (props) => {
     const data = {
       order_id: id,
       state: "Cancelled",
-      date: new Date(),
     };
+    console.log(data)
     axios
-      .post(`http://localhost/ecommerce/backend/api/order/update.php`, data)
+      .post(`http://localhost/ecommerce/backend/api/order/cancel.php`, data)
       .then(function (response) {
         console.log(response.data);
         if (response.data.status === "Success") {
           alert("ok");
+          fetchOrders()
         } else {
           alert("ko ok");
         }
@@ -28,16 +29,16 @@ const Orders = (props) => {
         console.log(error);
       });
   };
+  const fetchOrders = async () => {
+    const id = sessionStorage.getItem("user_id");
+    const res = await axios.get(
+      "http://localhost/ecommerce/backend/api/order/read_single_user.php?user_id=" +
+        id
+    );
+    setOrders(res.data.data);
+    console.log(res.data.data);
+  };
   useEffect(() => {
-    const fetchOrders = async () => {
-      const id = sessionStorage.getItem("user_id");
-      const res = await axios.get(
-        "http://localhost/ecommerce/backend/api/order/read_single_user.php?user_id=" +
-          id
-      );
-      setOrders(res.data.data);
-      console.log(res.data.data);
-    };
     fetchOrders();
   }, []);
 
@@ -108,7 +109,7 @@ const Orders = (props) => {
             <Hr />
             <Total>
               <Text className="time">Date: {ord.date}</Text>
-              <Text className="total">Total: ${ord.total}</Text>
+              <Text className="total">Total: ${Math.round((ord.total+ord.total_ship) * 100) / 100}</Text>
             </Total>
             {ord.state === "Pending" && (
               <div

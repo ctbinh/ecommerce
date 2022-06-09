@@ -141,6 +141,7 @@ const Detail = () => {
       // similarProduct = res_similarProduct.data.data;
       setSimilarProduct(res_similarProduct.data.data);
     }
+    window.scrollTo(0, 0)
     getData()
   }, [])
 
