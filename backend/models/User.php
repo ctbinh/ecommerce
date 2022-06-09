@@ -84,14 +84,13 @@ class User
     public function create()
     {
         $query = "INSERT into user (username,password, fName, lName, url_avt) VALUES (?,?,?,?,?)";
-        // Prepare statement
-        $stmt = $this->conn->prepare($query);
-
         $this->username = htmlspecialchars(strip_tags($this->username));
         $this->password = htmlspecialchars(strip_tags($this->password));
         $this->fName = htmlspecialchars(strip_tags($this->fName));
         $this->lName = htmlspecialchars(strip_tags($this->lName));
         $this->url_avt = htmlspecialchars(strip_tags($this->url_avt));
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
         // Bind ID
         $stmt->bindParam(1, $this->username);
         $stmt->bindParam(2, $this->password);

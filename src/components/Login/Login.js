@@ -17,6 +17,11 @@ const Login = (props) => {
   const [isSuccess, setIsSuccess] = useState(-1);
   const [msg, setMsg] = useState("");
   const login = () => {
+    if(username === "" || password === "") {
+      setMsg("Invalid username or password!")
+      setIsSuccess(0);
+      return;
+    }
     const data = {
       username: username,
       password: password,
@@ -43,6 +48,11 @@ const Login = (props) => {
   const signup = async () => {
     if (password !== cfPassword) {
       setMsg("Password incorrect!");
+      setIsSuccess(0);
+      return;
+    }
+    if(username === "" || password === "" || fName === "" || lName === "") {
+      setMsg("Missing data required!")
       setIsSuccess(0);
       return;
     }

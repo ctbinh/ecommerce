@@ -56,7 +56,7 @@ const Header = (props) => {
               <SearchInput
                 type="text"
                 name="search_product"
-                id=""
+                id="search_product"
                 value={searchVal}
                 onChange={(e)=>setSearchVal(e.target.value)}
                 placeholder="Search by name..."
