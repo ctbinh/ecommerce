@@ -284,6 +284,35 @@ class Product
 
         return false;
     }
+    // Update Post
+    public function updateRating()
+    {
+        // Create query
+        $query = 'UPDATE ' . $this->table . '
+                              SET rating=:rating,num_reviewer=:num_reviewer WHERE product_id = :product_id';
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+
+        // Clean data
+        $this->rating = htmlspecialchars(strip_tags($this->rating));
+        $this->rating = htmlspecialchars(strip_tags($this->num_reviewer));
+        $this->product_id = htmlspecialchars(strip_tags($this->product_id));
+
+        // Bind data
+        $stmt->bindParam(':rating', $this->rating);
+        $stmt->bindParam(':num_reviewer', $this->num_reviewer);
+        $stmt->bindParam(':product_id', $this->product_id);
+        // Execute query
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        // Print error if something goes wrong
+        printf("Error: %s.\n", $stmt->error);
+
+        return false;
+    }
     public function delete()
     {}
 }
