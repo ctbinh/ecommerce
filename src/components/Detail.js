@@ -76,6 +76,7 @@ const Detail = () => {
     "https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg"
   ]
   const [product, setProduct] = useState({})
+  const [user, setUser] = useState({})
   const [comment, setComment] = useState([])
   const [ratingStar, setRatingStar] = useState(4)
   const [ratingInfo, setRatingInfo] = useState({})
@@ -135,7 +136,7 @@ const Detail = () => {
   const handleAddToCart = async () => {
     let data = {
       "product_id": product_id,
-      "user_id": "1", /////////////////////////////////
+      "user_id": sessionStorage.getItem('user_id'),
       "amount": count
     };
     console.log("data addToCart: ", data)
@@ -158,6 +159,11 @@ const Detail = () => {
     setComment(res_comment.data)
     setRatingInfo(_rating)
   }
+  const getUser = async () => {
+    const user = await axios.get("http://localhost/ecommerce/backend/api/user/getUser.php?user_id=" + sessionStorage.getItem('user_id'));
+    console.log("user: ", user.data)
+    setUser(user.data.data[0])
+  }
   useEffect(() => {
     const getData = async () => {
       const res = await axios.get('http://localhost/ecommerce/backend/api/product/read_single.php?id=' + String(product_id));
@@ -170,6 +176,7 @@ const Detail = () => {
       setProduct(_product)
 
       getComment()
+      getUser()
 
       const res_similarProduct = await axios.get('http://localhost/ecommerce/backend/api/product/read.php');
       console.log("similarProduct: ", res_similarProduct.data.data)
