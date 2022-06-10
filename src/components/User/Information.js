@@ -19,15 +19,18 @@ export default function Information (props) {
         formData.append("file", imageList[0].file);
         formData.append("api_key", 174989952789425);
         formData.append("upload_preset", "iinnk03t");
-        const res = await axios.post("https://api.cloudinary.com/v1_1/dd8b69mls/image/upload", formData)
-        const data = {
-            user_id: sessionStorage.getItem('user_id'),
-            url_avt: res.data.url
-        };
-        axios.post("http://localhost/ecommerce/backend/api/user/updateImg.php", data)
-            .then((response) => {
-                console.log(response);
-            })  
+        const res = await axios .post("https://api.cloudinary.com/v1_1/dd8b69mls/image/upload", formData)
+        const sendUpImage = (url) => {
+            const data = {
+                user_id: sessionStorage.getItem('user_id'),
+                url_avt: url
+            };
+            axios.post("http://localhost/ecommerce/backend/api/user/updateImg.php", data)
+                .then((response) => {
+                    console.log(response);
+                }) 
+        }
+        await sendUpImage(res.data.url);
     };
     useEffect(() => {
         const fetchUser = async () => {
