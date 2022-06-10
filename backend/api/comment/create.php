@@ -46,18 +46,20 @@ $comment = new Comment($db);
 $data = json_decode(file_get_contents("php://input"));
 
 $comment->product_id = $data->product_id;
-$comment->username = $data->username;
+$comment->user_id = $data->user_id;
 $comment->comment = $data->comment;
 $comment->rate = $data->rate;
-$comment->datetime = $data->datetime;
+$d = strtotime("+5 Hours");
+$date = date("Y-m-d H:i:sa", $d);
+$comment->datetime = $date;
 
 // Create Category
 if ($comment->create()) {
   echo json_encode(
-    array('message' => 'Comment Created')
+    array('message' => 1)
   );
 } else {
   echo json_encode(
-    array('message' => 'Comment Not Created')
+    array('message' => 1)
   );
 }
