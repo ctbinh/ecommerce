@@ -4,8 +4,10 @@ import { ShoppingCart, Person } from "@mui/icons-material";
 import { Navbar, Container, Nav, NavDropdown, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Header = (props) => {
+  let navigate = useNavigate();
   const signout = () => {
     sessionStorage.clear();
   };
@@ -70,8 +72,8 @@ const Header = (props) => {
               {/* <Nav.Link eventKey={2} href="#memes">
                             Dank memes
                         </Nav.Link> */}
-              <Nav.Link href="#features">ABOUT</Nav.Link>
-              <Nav.Link href="#pricing">NEWS</Nav.Link>
+              <Nav.Link onClick={() => navigate("/about")}>ABOUT</Nav.Link>
+              <Nav.Link href="/news">NEWS</Nav.Link>
               <NavDropdown title="COLLECTION" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">
                   Best Seller

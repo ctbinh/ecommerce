@@ -17,6 +17,7 @@ import Orders from "./Admin/components/orders/Orders";
 import Invoice from "./Admin/components/orders/Invoice";
 import Login from "./components/Login/Login";
 import { useEffect, useState } from "react";
+import About from "./components/About";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -46,6 +47,7 @@ function App() {
           <Route path="login" element={<Login user={user}/>} />
           <Route path="cart" element={<Cart user={user}/>} />
           <Route path="checkout" element={<Checkout user={user}/>} />
+          <Route path="about" element={<About/>} />
           {user && <Route path="user" element={<User user={user}/>} />}
           <Route path="detail/:product_id" element={<Detail user={user}/>} />
         </Routes>
