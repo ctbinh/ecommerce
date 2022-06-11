@@ -32,8 +32,8 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
     $product->phone = $data->phone;
     $product->address = $data->address;
 
+    $order_last_insert = $product->create();
     for($i = 0; $i < count($data->cart); $i ++) {
-        $order_last_insert = $product->create();
 
         $order_item->order_id = $order_last_insert;
         $order_item->product_id = $data->cart[$i]->product_id;
