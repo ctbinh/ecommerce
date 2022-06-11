@@ -9,6 +9,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Information from './Information'
 import Password from './Password'
 import axios from 'axios'
+import { Navigate } from 'react-router-dom'
 
 const User = () => {
   // const wishlist = [
@@ -106,6 +107,7 @@ const User = () => {
   
   return (
     <>
+    {!sessionStorage.getItem('user_id') && <Navigate to="/login" replace={true} />}
     <Header/>
     <Container>
       <Head onClick={()=>setIsEnabled(!isEnabled)}>
