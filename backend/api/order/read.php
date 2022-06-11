@@ -47,7 +47,7 @@ if ($num > 0) {
                 'date' => $date,
                 'total_ship' => $total_ship,
                 'total' => 0,
-                'phone' => $phone,
+                'phone' => $phoneReciver,
                 'name' => $name,
                 'username' => $username,
             ));

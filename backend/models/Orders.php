@@ -65,7 +65,7 @@ class Orders
     }
     public function read()
     {
-        $query = 'SELECT O.order_id, O.state, O.total_ship, O.date, I.amount, I.product_id, I.price, P.name, P.cpu, P.description, P.img_cover, U.phone , CONCAT(U.fName ," ",U.lName) AS name,U.username FROM orders AS O, order_item AS I, product AS P,user AS U WHERE O.order_id = I.order_id AND I.product_id = P.product_id AND U.user_id= O.user_id ORDER BY O.order_id';
+        $query = 'SELECT O.order_id, O.state, O.total_ship, O.date,O.phone AS phoneReciver, I.amount, I.product_id, I.price, P.name, P.cpu, P.description, P.img_cover, U.phone , CONCAT(U.fName ," ",U.lName) AS name,U.username FROM orders AS O, order_item AS I, product AS P,user AS U WHERE O.order_id = I.order_id AND I.product_id = P.product_id AND U.user_id= O.user_id ORDER BY O.order_id';
 
         $stmt = $this->conn->prepare($query);
 
@@ -90,6 +90,7 @@ class Orders
         $stmt = $this->conn->prepare($query);
         $d = strtotime("+5 Hours");
         $date = date("Y-m-d H:i:sa", $d);
+        print_r($date);
         $stmt->bindParam(1, $this->state);
         $stmt->bindParam(2, $date);
         $stmt->bindParam(3, $this->order_id);
@@ -113,12 +114,12 @@ class Orders
         $stmt->bindParam(3, $this->order_id);
         $stmt->execute();
 
-        $query1 = 'SELECT I.product_id, I.amount AS res_amount, P.amount AS cur_amount 
-            FROM product AS P, order_item AS I 
+        $query1 = 'SELECT I.product_id, I.amount AS res_amount, P.amount AS cur_amount
+            FROM product AS P, order_item AS I
             WHERE I.product_id IN (
-                SELECT I.product_id 
-                FROM orders AS O, order_item AS I 
-                WHERE O.order_id = ? AND I.order_id = ?) 
+                SELECT I.product_id
+                FROM orders AS O, order_item AS I
+                WHERE O.order_id = ? AND I.order_id = ?)
             AND I.product_id = P.product_id';
         $stmt1 = $this->conn->prepare($query1);
         $stmt1->bindParam(1, $this->order_id);

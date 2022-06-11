@@ -160,39 +160,39 @@ class User
         $stmt->bindParam(':user_id', $user_id);
         // Execute query
 
-        if($stmt->execute()) {
-            return TRUE;
+        if ($stmt->execute()) {
+            return true;
         }
         printf("Error: %s.\n", $stmt->error);
-        return FALSE;
+        return false;
     }
     public function find_user($id)
-  {
-    $query = 'SELECT * FROM user WHERE user_id = ' . $id;
-    // Prepare statement
-    $stmt = $this->conn->prepare($query);
-    // Execute query
-    $stmt->execute();
-    return $stmt;
-  }
-  public function update_pass($username, $password)
-  {
-    $query = 'UPDATE user SET password = :password WHERE username = :username';
-
-    // Prepare statement
-    $stmt = $this->conn->prepare($query);
-    $password = htmlspecialchars(strip_tags($password));
-    $username = htmlspecialchars(strip_tags($username));
-
-    $password = password_hash($password, PASSWORD_DEFAULT);
-    $stmt->bindParam(':password', $password);
-    $stmt->bindParam(':username', $username);
-    // Execute query
-
-    if($stmt->execute()) {
-        return true;
+    {
+        $query = 'SELECT * FROM user WHERE user_id = ' . $id;
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        // Execute query
+        $stmt->execute();
+        return $stmt;
     }
-    printf("Error: %s.\n", $stmt->error);
-    return false;
-  }
+    public function update_pass($username, $password)
+    {
+        $query = 'UPDATE user SET password = :password WHERE username = :username';
+
+        // Prepare statement
+        $stmt = $this->conn->prepare($query);
+        $password = htmlspecialchars(strip_tags($password));
+        $username = htmlspecialchars(strip_tags($username));
+
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':username', $username);
+        // Execute query
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        printf("Error: %s.\n", $stmt->error);
+        return false;
+    }
 }
