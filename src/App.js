@@ -18,6 +18,7 @@ import Invoice from "./Admin/components/orders/Invoice";
 import Login from "./components/Login/Login";
 import { useEffect, useState } from "react";
 import About from "./components/About";
+import News from "./components/News";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -48,6 +49,7 @@ function App() {
           <Route path="cart" element={<Cart user={user}/>} />
           <Route path="checkout" element={<Checkout user={user}/>} />
           <Route path="about" element={<About/>} />
+          <Route path="news" element={<News/>} />
           <Route path="user" element={<User/>} />
           <Route path="detail/:product_id" element={<Detail user={user}/>} />
         </Routes>

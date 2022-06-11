@@ -75,7 +75,7 @@ const Header = (props) => {
                             Dank memes
                         </Nav.Link> */}
               <Nav.Link onClick={() => navigate("/about")}>ABOUT</Nav.Link>
-              <Nav.Link href="/news">NEWS</Nav.Link>
+              <Nav.Link as={Link} to='/news'>NEWS</Nav.Link>
               <NavDropdown title="COLLECTION" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">
                   Best Seller
