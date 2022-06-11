@@ -55,6 +55,10 @@ const Orders = () => {
     "Delivered",
     "Cancelled",
   ]);
+  const [stateTemp, setStateTemp] = useState({
+    id: null,
+    state: null,
+  });
   // drop down
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -97,7 +101,7 @@ const Orders = () => {
               <th>Phone</th>
               <th>Ship Fee</th>
               <th>Total</th>
-              <th>Date</th>
+              <th>Last updated</th>
               <th>State</th>
               {/* <th>Action</th> */}
               <th>Invoice</th>
@@ -119,37 +123,19 @@ const Orders = () => {
                       aria-controls={open ? "basic-menu" : undefined}
                       aria-haspopup="true"
                       aria-expanded={open ? "true" : undefined}
-                      onClick={handleClick}
+                      onClick={(e) => {
+                        handleClick(e);
+                        setStateTemp({
+                          id: order.order_id,
+                          state: order.state,
+                        });
+                      }}
                       src=""
                       color="green"
                     >
                       {order.state}
                     </Span>
                     {/* </Button> */}
-                    <Menu
-                      id="basic-menu"
-                      anchorEl={anchorEl}
-                      open={open}
-                      onClose={handleClose}
-                      MenuListProps={{
-                        "aria-labelledby": "basic-button",
-                      }}
-                    >
-                      {listStatus.map((item) => {
-                        if (item !== order.state) {
-                          return (
-                            <MenuItem
-                              key={item}
-                              onClick={() =>
-                                handleChangeState(order.order_id, item)
-                              }
-                            >
-                              {item}
-                            </MenuItem>
-                          );
-                        }
-                      })}
-                    </Menu>
                   </td>
                   <Td
                     onClick={() => navigate(`../invoice?id=${order.order_id}`)}
@@ -161,6 +147,28 @@ const Orders = () => {
                 </tr>
               );
             })}
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              {listStatus.map((item) => {
+                if (item !== stateTemp.state) {
+                  return (
+                    <MenuItem
+                      key={item}
+                      onClick={() => handleChangeState(stateTemp.id, item)}
+                    >
+                      {item}
+                    </MenuItem>
+                  );
+                }
+              })}
+            </Menu>
           </tbody>
         </Table>
       </TableWraper>
