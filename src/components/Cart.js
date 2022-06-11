@@ -237,7 +237,6 @@ const Cart = () => {
                 name: name,
                 address: address,
                 phone: phone,
-                lstCart: cart,
               }}
             >
               {name.length >= 3 &&
