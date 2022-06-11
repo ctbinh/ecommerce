@@ -52,15 +52,35 @@ CREATE TABLE `cart` (
   `amount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `cart`
+-- Table structure for table `user`
 --
 
-INSERT INTO `cart` (`user_id`, `product_id`, `amount`) VALUES
-(5, 1, 5),
-(5, 2, 3),
-(5, 3, 1),
-(2, 2, 4);
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `fName` varchar(255) NOT NULL,
+  `lName` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `birthday` date NOT NULL,
+  `url_avt` varchar(100) NOT NULL,
+  `isBlocked` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password`, `fName`, `lName`, `email`, `phone`, `birthday`, `url_avt`, `isBlocked`) VALUES
+(1, 'an', '$2y$10$2oh/7z/zop6LA0MOQ68QluBjKH/ePAgjuI.DxA8y8YJYNkCA4Yrf2', 'An', 'Đình', '', '', '0000-00-00', 'https://www.seekpng.com/png/full/514-5147412_default-avatar-icon.png', 0),
+(2, 'hoang', '$2y$10$bUKn2wmkuzZHZAhFycNAhO2UmvN6oJDXVM40pkWVSV1J5EEKKFu4a', 'Nguyễn Trần', 'Hoàng', '', '', '0000-00-00', 'https://www.seekpng.com/png/full/514-5147412_default-avatar-icon.png', 0),
+(3, 'binh', '$2y$10$k7KP2LWDLM26f8AZXxLCI.lrno42MFYGi3F33C4VpOLCueQmWv8FO', 'Cao Thanh', 'Bình', '', '', '0000-00-00', 'https://www.seekpng.com/png/full/514-5147412_default-avatar-icon.png', 0),
+(4, 'long', '$2y$10$L9Cwb.lPwmrcV7DfZs7Q..SebOjeKAn8yFx7WU03oB8/wzlfZ83uq', 'Nguyễn Thành', 'Long', '', '', '0000-00-00', 'https://www.seekpng.com/png/full/514-5147412_default-avatar-icon.png', 0);
 
 -- --------------------------------------------------------
 
@@ -71,7 +91,7 @@ INSERT INTO `cart` (`user_id`, `product_id`, `amount`) VALUES
 CREATE TABLE `comment` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `comment` varchar(500) NOT NULL,
   `rate` int(11) NOT NULL,
   `datetime` datetime NOT NULL
@@ -81,82 +101,77 @@ CREATE TABLE `comment` (
 -- Dumping data for table `comment`
 --
 
-INSERT INTO `comment` (`id`, `product_id`, `username`, `comment`, `rate`, `datetime`) VALUES
-(1, 1, 'Ngọc Phúc', ' giải pháp tản nhiệt mới Up-Down Air - tản nhiệt theo hai hướng khác nhau giúp hiệu suất tuần hoàn nhiệt nhanh hơn, tốt hơn.', 5, '2020-08-03 00:00:00'),
-(2, 1, 'Nguyễn Hoàng Quân', 'Thiết kế bắt mắt, sang trọng, máy gọn nhẹ. Pin sử dụng được lâu, sạc nhanh.', 5, '2020-08-03 00:00:00'),
-(3, 1, 'PwNForCard', 'PwNForCard', 5, '2020-07-27 00:00:00'),
-(4, 2, 'DAI VO', 'tuy 16\" nhưng máy rất mỏn nhẹ, rất đáng đồng tiền', 5, '2020-07-08 00:00:00'),
-(5, 2, 'Lê Hà Giang', 'màn hình hiển thị sắc nét, sống động', 5, '2020-07-15 00:00:00'),
-(6, 2, 'Phạm Thị Minh Hậu', 'thời gian sử dụng pin lâu', 5, '2020-07-15 00:00:00'),
-(7, 3, 'Lê Đại', 'không chỉ máy đẹp mỏng nhẹ mà màn hình 2k cực kì đẹp, đáng đồng tiền', 5, '2020-07-08 00:00:00'),
-(8, 4, 'Quốc', 'máy xài mát, led rgb đẹp', 5, '2020-12-04 00:00:00'),
-(9, 4, 'Tùng', 'chơi game mượt , mát mình rất thích . Balo tặng kèm dày dặn , đẹp', 5, '2020-02-23 00:00:00'),
-(10, 5, 'Khoa', 'xài ok lắm nha , con này xứng đáng lap gaming quốc dân', 5, '2020-01-07 00:00:00'),
-(11, 5, 'Youtuber Papacn', 'Xài tốt cho nhu cầu học, văn phòng và cả gaming, máy chạy nhanh, mát, 15.6inch nhưng gọn nhẹ, mang vác rất thoải mái', 5, '2020-12-20 00:00:00'),
-(12, 6, 'BiBi', 'máy mát , loa hơi nhỏ nhưng mò ra dc phần mềm chỉnh loa nên fix lại xai ok , nên nâng cây ram để hiệu năng tốt nhất', 5, '2020-01-14 00:00:00'),
-(13, 6, 'Minh', 'chơi phê', 5, '2020-01-07 00:00:00'),
-(14, 6, 'Phạm Khánh', 'Có máy gaming chất liệu kim loại dưới 23 triệu CPU i5 hoặc i7 chip h ram >8GB,dung lượng khoảng 500 GB k', 5, '2020-01-28 00:00:00'),
-(15, 6, 'Phi', 'trải nghiệm máy 3 tháng máy xài khá hài lòng , không ngờ sáng gửi máy vệ sinh mà trưa đã có máy rồi , dịch vụ Acer rất tốt và nhanh ', 5, '2020-02-22 00:00:00'),
-(16, 6, 'Quang', 'máy chạy tốt các phần mềm , mát mẻ khá thích', 5, '2020-01-07 00:00:00'),
-(17, 6, 'Trung', 'máy xài mát', 5, '2020-12-04 00:00:00'),
-(18, 7, 'Hải Đăng', 'máy mình đánh giá nhiệt độ khá mát mặc dù chơi game nặng 2-3 tiếng liên tục , led mượt lắm nha mn ', 5, '2020-02-23 00:00:00'),
-(19, 7, 'Hòa', 'máy xài ok , dc vệ sinh miễn phí vs khá nhanh , sáng gửi chiều đã có máy , service hãng tốt', 5, '2020-01-07 00:00:00'),
-(20, 7, 'Hoàng Minh', 'máy xài dc 1 tháng quay lại feedback cho shop , máy rất mướt , chạy tốt các phần mềm', 5, '2020-01-14 00:00:00'),
-(21, 7, 'Hoàng Phúc', 'máy rất ok nha , led đẹp , chỉnh được quạt nên mát lắm', 5, '2020-01-07 00:00:00'),
-(22, 7, 'hùng', 'không có gì để chê , máy mát , đầy đủ wc', 5, '2020-01-03 00:00:00'),
-(23, 7, 'Nguyễn Ngọc Quý', 'Phân vân giữa Intel và AMD, nên lấy con nào nhỉ?', 5, '2020-12-29 00:00:00'),
-(24, 7, 'Quang Hà', 'máy cầm chắc tay , nâng cấp tốt , service nhanh lẹ', 5, '2020-02-28 00:00:00'),
-(25, 7, 'Tâm', 'đã mua , dùng ổn , game mượt', 5, '2020-03-12 00:00:00'),
-(26, 7, 'Thu', 'máy xài ok lắm , mua bên shop giá tốt hơn các shop khác , tuy cửa hàng hơi nhỏ nhưng nhân viên tư vấn nhiệt tình , máy chính hãng', 5, '2020-02-21 00:00:00'),
-(27, 7, 'Vinh', 'máy ok , khá gọn không quá to so với máy dòng Victus , máy mở bằng 1 tay thoải mái', 5, '2020-02-27 00:00:00'),
-(28, 8, 'Đinh Văn Chiến', 'Mua vào dịp sale cuối năm của shop, giá đúng tốt, ko uổng công từ Long An chạy lên mua, nv nhiệt tình, có dịp sẽ ủng hộ tiếp', 5, '2020-12-29 00:00:00'),
-(29, 9, 'Le Minh', 'Bên mình có hỗ trợ đổi ram 2x4gb của máy này lên 16gb ko ạ? Nếu có thì giá bn ạ. Xin  cảm ơn', 5, '2020-02-06 00:00:00'),
-(30, 9, 'Nguyễn Minh Tiến', 'Phân vân giữa Nitro 5 và Victus 16, nhưng cuối cùng chọn HP, dùng qua khá hài lòng, bàn phím led trắng đơn giãn vì mình là người đi làm', 5, '2020-12-16 00:00:00'),
-(31, 10, 'Khoa', 'Phiên bản 2021 đã được cải tiến thay đổi về bản lề được giấu kín một cách hoàn hảo. Thiết kế mỏng nhẹ, dễ dàng di chuyển, màu sang trọng.', 5, '2020-08-28 00:00:00'),
-(32, 10, 'Tiến', 'Tốc độ kết nối wifi nhanh, ổn định. Xử lý tác vụ mượt mà.', 5, '2020-08-28 00:00:00'),
-(33, 11, 'Dai', 'Tỷ lệ khung hình 16:10 của màn hình mang lại nhiều lợi ích khi sử dụng như đọc tài lại, nhiều không gian dọc hơn, ít phải cuộn xuống hơn.', 5, '2020-07-08 00:00:00'),
-(34, 11, 'Mỹ An', 'Thiết kế gọn nhẹ, sang trọng, cấu hình cao, xử lý công việc nhanh chóng.', 5, '2020-08-28 00:00:00'),
-(35, 11, 'Nhung', 'Pin sử dụng được lâu, sạc Pin nhanh. Bàn phím đánh rất êm và thoải mái.', 5, '2020-08-28 00:00:00'),
-(36, 12, 'DAI VO', 'tuy 17\" nhưng sản phẩm rất mỏng nhẹ, thiết kế đẹp, pin trâu, khá ngon', 5, '2020-07-08 00:00:00'),
-(37, 13, 'dai vo', 'Thiết kế máy rất đẹp, cầm rất nhẹ tay, pin sử dụng được lâu trên 10 tiếng', 5, '2020-07-08 00:00:00'),
-(38, 13, 'Phạm Đình Văn', 'Máy xử lý nhanh. Thiết kế đẹp, sang trọng.', 5, '2020-07-15 00:00:00'),
-(39, 13, 'Vũ Ngọc Khánh Trang', 'tản nhiệt mới Up-Down Air - tản nhiệt theo hai hướng khác nhau, cho phép hiệu suất tuần hoàn nhiệt nhanh hơn, tốt hơn trong thời gian dài sử dụng.', 5, '2020-07-28 00:00:00'),
-(40, 13, 'Vương Trung Tín', 'Thiết kế mỏng nhẹ bản lề sẽ được giấu kín sang trọng, đẹp mắt', 5, '2020-07-28 00:00:00'),
-(41, 13, 'Đặng Phước Vinh', 'sạc nhanh, pin sử dụng được lâu', 5, '2020-07-15 00:00:00'),
-(42, 14, 'Lê Trung Thiên', 'màn hình hiển thị sắc nét, sống động', 5, '2020-07-15 00:00:00'),
-(43, 14, 'Nguyễn Như Ý', 'tản nhiệt theo hai hướng khác nhau tản nhiệt nhanh hơn, tốt hơn trong thời gian dài sử dụng.', 5, '2020-07-15 00:00:00'),
-(44, 14, 'ĐẠI', 'sản phẩm thiết kế nhỏ gọn, mỏng, nhẹ, rất phù hợp cho mang vác đi làm việc', 5, '2020-07-08 00:00:00'),
-(45, 15, 'Dai vo', 'laptop nhỏ gọn , dễ dàng bỏ túi và mang đến bất kỳ đâu, tuyệt vời', 5, '2020-07-08 00:00:00'),
-(46, 16, 'Lê Đăng Khôi', 'Shop rất chuyên nghiệp, chu đáo, làm việc cũng nhanh chóng. Máy mình mua dùng thấy chất lượng, bản lề trước khi mua hơi sợ nhưng dùng rồi thì rất thích, màn hình máy đẹp, sáng, màu hiển thị đẹp. Màn hình cảm ứng cũng mượt, hiệu năng ổn. 5 sao cho cả shop và máy.', 5, '2020-12-15 00:00:00'),
-(47, 16, 'Ngo Ky', 'Sau nhiều so sánh cân nhắc nhu cầu sử dụng với các thương hiệu và kiểu máy, mình quyết định chọn Asus dòng ZenBook flip13. Thật sự hài lòng sau 8 tháng sử dụng. Thật sự ấn tượng với khả năng màn hình gập 180 rất hữu ích trong các cuộc gặp mặt đối tác chia sẽ trình bày thông tin dữ liệu. và thú vị hơn nữa khi mình có thể ký trực tiếp bằng bút cám ứng lên màn hình cho các file words, điều này giúp ích rất nhiều trong giai đoạn giản cách và phải làm việc tại nhà. Trọng lượng thì rất vừa tay dễ di c', 5, '2020-12-29 00:00:00'),
-(48, 17, 'Duy Minh', 'Cấu hình khá ngon trong tầm giá, mua về chơi CSGO mượt luôn', 5, '2020-11-23 00:00:00'),
-(49, 17, 'Hải Lê', 'máy chạy tốt , mát thật , được vệ sinh máy free', 5, '2020-02-25 00:00:00'),
-(50, 17, 'Hoàng ', 'máy xài mướt , lặn lội từ Tây ninh lên mua khá ưng ý , led đẹp', 5, '2020-02-14 00:00:00'),
-(51, 17, 'Phúc', 'mới dùng 1 tháng quay lại feedback , máy xài mượt , mát lắm , nhân viên tư vấn nhiệt tình', 5, '2020-01-07 00:00:00'),
-(52, 19, 'An Duy', 'Choi h hỏi bên shop có hỗ trợ nhập lại quà tặng nếu khách ko lấy quà ko v? Nếu có thì giá nhập lại sẽ ntn?', 5, '2020-02-08 00:00:00'),
-(53, 19, 'Huy Phan', 'Bây giờ mình mua thì có nhận được quà trong mục \"Quà tặng: Ưu đãi dành cho khách đặt trước\" không?', 5, '2020-09-13 00:00:00'),
-(54, 23, 'Hào', 'Giá mua trực tiếp là 19tr990 hay là 18tr490 giống mua onl vậy shop', 5, '2020-01-13 00:00:00'),
-(55, 23, 'Huy', 'Shop có thay main con này ko ạ', 5, '2020-02-17 00:00:00'),
-(56, 23, 'Khang', 'Khá ung thiết kế đơn giản con này ,xài mượt', 5, '2020-12-04 00:00:00'),
-(57, 24, 'Anh thể', 'Cửa hàng ơi cho hỏi là khi nào mình về bản 17,3 và chạy chip Amd vậy', 5, '2020-01-18 00:00:00'),
-(58, 24, 'Dương Phong', 'Bây giờ có hàng chưa vậy shop ?', 5, '2020-02-12 00:00:00'),
-(59, 24, 'hoài phong', 'nitro 5 tiger bản amd 6000 series có hàng ở shop mình chưa v ạ ?', 5, '2020-02-11 00:00:00'),
-(60, 24, 'Jay', 'bản này hiện tại store thủ đức có hàng chưa ạ ??', 5, '2020-02-15 00:00:00'),
-(61, 24, 'Khoa', 'Nitro 5 Tiger chừng nào về hàng ạ , hóng con này quá', 5, '2020-01-18 00:00:00'),
-(62, 24, 'Phúc', 'Mình muốn mua online nhưng không đặt cọc đc, thì mua máy rồi nhận tiền có được không shop', 5, '2020-02-20 00:00:00'),
-(63, 24, 'Quang', 'ad ơi e có đặt cọc , bao lâu về vậy ạ , nôn máy về quá', 5, '2020-02-16 00:00:00'),
-(64, 24, 'tâm ', 'store thủ đức đã có hàng chưa ạ ?', 5, '2020-02-16 00:00:00'),
-(65, 24, 'thanh thanh ', 'bản này làm từ nhựa hả shop ', 5, '2020-01-17 00:00:00'),
-(66, 25, 'Dũng', 'máy cấu hình ổn so với giá thành, ngoại hình đẹp, điểm trừ duy nhất là mặt A và C bám dấu vân tay quá', 5, '2020-01-07 00:00:00'),
-(67, 27, 'MinXù', 'máy xài ok lắm , nhẹ ', 5, '2020-02-18 00:00:00'),
-(68, 27, 'Ngọc', 'máy đẹp , mua cho em gái dùng khá thích , màu vàng gold nhìn sang lắm', 5, '2020-01-07 00:00:00'),
-(69, 28, 'Thư', 'máy xài mượt các ứng dụng vp , bản lề mở thoải mái', 5, '2020-02-22 00:00:00'),
-(70, 29, 'Nguyễn Hữu Thạnh', 'Tốt', 5, '2020-03-03 00:00:00'),
-(71, 1, 'hoangkui', 'asdasddsds', 5, '2022-06-05 05:54:12'),
-(74, 2, 'Thalo', 'Máy rất đẹp và không có lỗi gì, giao hành thân thiện, bảo hành uy tín, xứng đáng 5 sao nhưng mình chỉ cho 4 sao thôi vì cái web hơi lag', 4, '2022-06-05 15:31:00'),
-(75, 3, 'hoang_kui', 'Máy rất đẹp và không có lỗi gì, giao hành thân thiện, bảo hành uy tín, xứng đáng 5 sao nhưng mình chỉ cho 4 sao thôi vì cái web hơi lag', 4, '2022-06-05 15:31:00'),
-(76, 4, 'binh_cao', 'Máy rất đẹp và không có lỗi gì, giao hành thân thiện, bảo hành uy tín, xứng đáng 5 sao nhưng mình chỉ cho 4 sao thôi vì cái web hơi lag', 5, '2022-06-05 15:31:00'),
-(77, 1, 'hihi', 'test', 1, '2022-05-09 09:37:32');
+INSERT INTO `comment` (`id`, `product_id`, `user_id`, `comment`, `rate`, `datetime`) VALUES
+(1, 1, 1, ' giải pháp tản nhiệt mới Up-Down Air - tản nhiệt theo hai hướng khác nhau giúp hiệu suất tuần hoàn nhiệt nhanh hơn, tốt hơn.', 5, '2020-08-03 00:00:00'),
+(2, 1, 2, 'Thiết kế bắt mắt, sang trọng, máy gọn nhẹ. Pin sử dụng được lâu, sạc nhanh.', 5, '2020-08-03 00:00:00'),
+(3, 1, 3, 'PwNForCard', 5, '2020-07-27 00:00:00'),
+(4, 2, 4, 'tuy 16\" nhưng máy rất mỏn nhẹ, rất đáng đồng tiền', 5, '2020-07-08 00:00:00'),
+(5, 2, 1, 'màn hình hiển thị sắc nét, sống động', 5, '2020-07-15 00:00:00'),
+(6, 2, 2, 'thời gian sử dụng pin lâu', 5, '2020-07-15 00:00:00'),
+(7, 3, 3, 'không chỉ máy đẹp mỏng nhẹ mà màn hình 2k cực kì đẹp, đáng đồng tiền', 5, '2020-07-08 00:00:00'),
+(8, 4, 4, 'máy xài mát, led rgb đẹp', 5, '2020-12-04 00:00:00'),
+(9, 4, 1, 'chơi game mượt , mát mình rất thích . Balo tặng kèm dày dặn , đẹp', 5, '2020-02-23 00:00:00'),
+(10, 5, 2, 'xài ok lắm nha , con này xứng đáng lap gaming quốc dân', 5, '2020-01-07 00:00:00'),
+(11, 5, 3, 'Xài tốt cho nhu cầu học, văn phòng và cả gaming, máy chạy nhanh, mát, 15.6inch nhưng gọn nhẹ, mang vác rất thoải mái', 5, '2020-12-20 00:00:00'),
+(12, 6, 4, 'máy mát , loa hơi nhỏ nhưng mò ra dc phần mềm chỉnh loa nên fix lại xai ok , nên nâng cây ram để hiệu năng tốt nhất', 5, '2020-01-14 00:00:00'),
+(13, 6, 1, 'chơi phê', 5, '2020-01-07 00:00:00'),
+(14, 6, 2, 'Có máy gaming chất liệu kim loại dưới 23 triệu CPU i5 hoặc i7 chip h ram >8GB,dung lượng khoảng 500 GB k', 5, '2020-01-28 00:00:00'),
+(15, 6, 3, 'trải nghiệm máy 3 tháng máy xài khá hài lòng , không ngờ sáng gửi máy vệ sinh mà trưa đã có máy rồi , dịch vụ Acer rất tốt và nhanh ', 5, '2020-02-22 00:00:00'),
+(16, 6, 4, 'máy chạy tốt các phần mềm , mát mẻ khá thích', 5, '2020-01-07 00:00:00'),
+(17, 6, 1, 'máy xài mát', 5, '2020-12-04 00:00:00'),
+(18, 7, 2, 'máy mình đánh giá nhiệt độ khá mát mặc dù chơi game nặng 2-3 tiếng liên tục , led mượt lắm nha mn ', 5, '2020-02-23 00:00:00'),
+(19, 7, 3, 'máy xài ok , dc vệ sinh miễn phí vs khá nhanh , sáng gửi chiều đã có máy , service hãng tốt', 5, '2020-01-07 00:00:00'),
+(20, 7, 4, 'máy xài dc 1 tháng quay lại feedback cho shop , máy rất mướt , chạy tốt các phần mềm', 5, '2020-01-14 00:00:00'),
+(21, 7, 1, 'máy rất ok nha , led đẹp , chỉnh được quạt nên mát lắm', 5, '2020-01-07 00:00:00'),
+(22, 7, 2, 'không có gì để chê , máy mát , đầy đủ wc', 5, '2020-01-03 00:00:00'),
+(23, 7, 3, 'Phân vân giữa Intel và AMD, nên lấy con nào nhỉ?', 5, '2020-12-29 00:00:00'),
+(24, 7, 4, 'máy cầm chắc tay , nâng cấp tốt , service nhanh lẹ', 5, '2020-02-28 00:00:00'),
+(25, 7, 1, 'đã mua , dùng ổn , game mượt', 5, '2020-03-12 00:00:00'),
+(26, 7, 2, 'máy xài ok lắm , mua bên shop giá tốt hơn các shop khác , tuy cửa hàng hơi nhỏ nhưng nhân viên tư vấn nhiệt tình , máy chính hãng', 5, '2020-02-21 00:00:00'),
+(27, 7, 3, 'máy ok , khá gọn không quá to so với máy dòng Victus , máy mở bằng 1 tay thoải mái', 5, '2020-02-27 00:00:00'),
+(28, 8, 4, 'Mua vào dịp sale cuối năm của shop, giá đúng tốt, ko uổng công từ Long An chạy lên mua, nv nhiệt tình, có dịp sẽ ủng hộ tiếp', 5, '2020-12-29 00:00:00'),
+(29, 9, 1, 'Bên mình có hỗ trợ đổi ram 2x4gb của máy này lên 16gb ko ạ? Nếu có thì giá bn ạ. Xin  cảm ơn', 5, '2020-02-06 00:00:00'),
+(30, 9, 2, 'Phân vân giữa Nitro 5 và Victus 16, nhưng cuối cùng chọn HP, dùng qua khá hài lòng, bàn phím led trắng đơn giãn vì mình là người đi làm', 5, '2020-12-16 00:00:00'),
+(31, 10, 3, 'Phiên bản 2021 đã được cải tiến thay đổi về bản lề được giấu kín một cách hoàn hảo. Thiết kế mỏng nhẹ, dễ dàng di chuyển, màu sang trọng.', 5, '2020-08-28 00:00:00'),
+(32, 10, 4, 'Tốc độ kết nối wifi nhanh, ổn định. Xử lý tác vụ mượt mà.', 5, '2020-08-28 00:00:00'),
+(33, 11, 1, 'Tỷ lệ khung hình 16:10 của màn hình mang lại nhiều lợi ích khi sử dụng như đọc tài lại, nhiều không gian dọc hơn, ít phải cuộn xuống hơn.', 5, '2020-07-08 00:00:00'),
+(34, 11, 2, 'Thiết kế gọn nhẹ, sang trọng, cấu hình cao, xử lý công việc nhanh chóng.', 5, '2020-08-28 00:00:00'),
+(35, 11, 3, 'Pin sử dụng được lâu, sạc Pin nhanh. Bàn phím đánh rất êm và thoải mái.', 5, '2020-08-28 00:00:00'),
+(36, 12, 4, 'tuy 17\" nhưng sản phẩm rất mỏng nhẹ, thiết kế đẹp, pin trâu, khá ngon', 5, '2020-07-08 00:00:00'),
+(37, 13, 1, 'Thiết kế máy rất đẹp, cầm rất nhẹ tay, pin sử dụng được lâu trên 10 tiếng', 5, '2020-07-08 00:00:00'),
+(38, 13, 2, 'Máy xử lý nhanh. Thiết kế đẹp, sang trọng.', 5, '2020-07-15 00:00:00'),
+(39, 13, 3, 'tản nhiệt mới Up-Down Air - tản nhiệt theo hai hướng khác nhau, cho phép hiệu suất tuần hoàn nhiệt nhanh hơn, tốt hơn trong thời gian dài sử dụng.', 5, '2020-07-28 00:00:00'),
+(40, 13, 4, 'Thiết kế mỏng nhẹ bản lề sẽ được giấu kín sang trọng, đẹp mắt', 5, '2020-07-28 00:00:00'),
+(41, 13, 1, 'sạc nhanh, pin sử dụng được lâu', 5, '2020-07-15 00:00:00'),
+(42, 14, 2, 'màn hình hiển thị sắc nét, sống động', 5, '2020-07-15 00:00:00'),
+(43, 14, 3, 'tản nhiệt theo hai hướng khác nhau tản nhiệt nhanh hơn, tốt hơn trong thời gian dài sử dụng.', 5, '2020-07-15 00:00:00'),
+(44, 14, 4, 'sản phẩm thiết kế nhỏ gọn, mỏng, nhẹ, rất phù hợp cho mang vác đi làm việc', 5, '2020-07-08 00:00:00'),
+(45, 15, 1, 'laptop nhỏ gọn , dễ dàng bỏ túi và mang đến bất kỳ đâu, tuyệt vời', 5, '2020-07-08 00:00:00'),
+(46, 16, 2, 'Shop rất chuyên nghiệp, chu đáo, làm việc cũng nhanh chóng. Máy mình mua dùng thấy chất lượng, bản lề trước khi mua hơi sợ nhưng dùng rồi thì rất thích, màn hình máy đẹp, sáng, màu hiển thị đẹp. Màn hình cảm ứng cũng mượt, hiệu năng ổn. 5 sao cho cả shop và máy.', 5, '2020-12-15 00:00:00'),
+(47, 16, 3, 'Sau nhiều so sánh cân nhắc nhu cầu sử dụng với các thương hiệu và kiểu máy, mình quyết định chọn Asus dòng ZenBook flip13. Thật sự hài lòng sau 8 tháng sử dụng. Thật sự ấn tượng với khả năng màn hình gập 180 rất hữu ích trong các cuộc gặp mặt đối tác chia sẽ trình bày thông tin dữ liệu. và thú vị hơn nữa khi mình có thể ký trực tiếp bằng bút cám ứng lên màn hình cho các file words, điều này giúp ích rất nhiều trong giai đoạn giản cách và phải làm việc tại nhà. Trọng lượng thì rất vừa tay dễ di c', 5, '2020-12-29 00:00:00'),
+(48, 17, 4, 'Cấu hình khá ngon trong tầm giá, mua về chơi CSGO mượt luôn', 5, '2020-11-23 00:00:00'),
+(49, 17, 1, 'máy chạy tốt , mát thật , được vệ sinh máy free', 5, '2020-02-25 00:00:00'),
+(50, 17, 2, 'máy xài mướt , lặn lội từ Tây ninh lên mua khá ưng ý , led đẹp', 5, '2020-02-14 00:00:00'),
+(51, 17, 3, 'mới dùng 1 tháng quay lại feedback , máy xài mượt , mát lắm , nhân viên tư vấn nhiệt tình', 5, '2020-01-07 00:00:00'),
+(52, 19, 4, 'Choi h hỏi bên shop có hỗ trợ nhập lại quà tặng nếu khách ko lấy quà ko v? Nếu có thì giá nhập lại sẽ ntn?', 5, '2020-02-08 00:00:00'),
+(53, 19, 1, 'Bây giờ mình mua thì có nhận được quà trong mục \"Quà tặng: Ưu đãi dành cho khách đặt trước\" không?', 5, '2020-09-13 00:00:00'),
+(54, 23, 2, 'Giá mua trực tiếp là 19tr990 hay là 18tr490 giống mua onl vậy shop', 5, '2020-01-13 00:00:00'),
+(55, 23, 3, 'Shop có thay main con này ko ạ', 5, '2020-02-17 00:00:00'),
+(56, 23, 4, 'Khá ung thiết kế đơn giản con này ,xài mượt', 5, '2020-12-04 00:00:00'),
+(57, 24, 1, 'Cửa hàng ơi cho hỏi là khi nào mình về bản 17,3 và chạy chip Amd vậy', 5, '2020-01-18 00:00:00'),
+(58, 24, 2, 'Bây giờ có hàng chưa vậy shop ?', 5, '2020-02-12 00:00:00'),
+(59, 24, 3, 'nitro 5 tiger bản amd 6000 series có hàng ở shop mình chưa v ạ ?', 5, '2020-02-11 00:00:00'),
+(60, 24, 4, 'bản này hiện tại store thủ đức có hàng chưa ạ ??', 5, '2020-02-15 00:00:00'),
+(61, 24, 1, 'Nitro 5 Tiger chừng nào về hàng ạ , hóng con này quá', 5, '2020-01-18 00:00:00'),
+(62, 24, 2, 'Mình muốn mua online nhưng không đặt cọc đc, thì mua máy rồi nhận tiền có được không shop', 5, '2020-02-20 00:00:00'),
+(63, 24, 3, 'ad ơi e có đặt cọc , bao lâu về vậy ạ , nôn máy về quá', 5, '2020-02-16 00:00:00'),
+(64, 24, 4, 'store thủ đức đã có hàng chưa ạ ?', 5, '2020-02-16 00:00:00'),
+(65, 24, 1, 'bản này làm từ nhựa hả shop ', 5, '2020-01-17 00:00:00'),
+(66, 25, 2, 'máy cấu hình ổn so với giá thành, ngoại hình đẹp, điểm trừ duy nhất là mặt A và C bám dấu vân tay quá', 5, '2020-01-07 00:00:00'),
+(67, 27, 3, 'máy xài ok lắm , nhẹ ', 5, '2020-02-18 00:00:00'),
+(68, 27, 4, 'máy đẹp , mua cho em gái dùng khá thích , màu vàng gold nhìn sang lắm', 5, '2020-01-07 00:00:00'),
+(69, 28, 1, 'máy xài mượt các ứng dụng vp , bản lề mở thoải mái', 5, '2020-02-22 00:00:00'),
+(70, 29, 2, 'Tốt', 5, '2020-03-03 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -175,12 +190,6 @@ CREATE TABLE `orders` (
   `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`order_id`, `user_id`, `state`, `total_ship`, `date`, `username`, `phone`, `address`) VALUES
-(1, 3, 'Pending', 12000, '2022-06-09 00:00:00', 'Cao Thanh Binh', '0123456789', 'Hoang Dieu 2 Thu Duc');
 
 -- --------------------------------------------------------
 
@@ -199,9 +208,6 @@ CREATE TABLE `order_item` (
 -- Dumping data for table `order_item`
 --
 
-INSERT INTO `order_item` (`order_id`, `product_id`, `amount`, `price`) VALUES
-(1, 27, 2, 15000),
-(1, 28, 1, 12000);
 
 -- --------------------------------------------------------
 
@@ -479,33 +485,6 @@ INSERT INTO `product_image` (`id`, `product_id`, `url`) VALUES
 (193, 1, 'http://res.cloudinary.com/dd8b69mls/image/upload/v1654171543/jq6ztjvsqcijtdnrnobr.jpg'),
 (195, 1, 'http://res.cloudinary.com/dd8b69mls/image/upload/v1654171846/dtndg4nhtkslzyamsc1q.jpg');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `fName` varchar(255) NOT NULL,
-  `lName` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone` varchar(15) NOT NULL,
-  `birthday` date NOT NULL,
-  `url_avt` varchar(100) NOT NULL,
-  `isBlocked` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`user_id`, `username`, `password`, `fName`, `lName`, `email`, `phone`, `birthday`, `url_avt`, `isBlocked`) VALUES
-(1, 'Thalo', '123456', 'Nguyễn', 'Long', 'vodanh@gmail.com', '0123445667', '0000-00-00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:AN', 0),
-(2, 'Thalo1', '123456', 'Nguyễn', 'Long', 'vodanh@gmail.com', '0123445667', '0000-00-00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:AN', 0),
-(3, 'hoangkui', '$2y$10$aHcFNfVwjlmdE9C1gVdzP.tI9rC9iKF53Rta7XfXzKN9GtyMHoQda', 'Nguyen Tran', 'Hoang', '', '', '0000-00-00', 'http://res.cloudinary.com/dd8b69mls/image/upload/v', 0);
 
 --
 -- Indexes for dumped tables
@@ -603,7 +582,7 @@ ALTER TABLE `product_image`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -621,6 +600,12 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `order_item`

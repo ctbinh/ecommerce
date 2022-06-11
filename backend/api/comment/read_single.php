@@ -31,12 +31,16 @@ if ($num > 0) {
         extract($row);
 
         $pd_item = array(
-            'id' => $id,
+            // 'id' => $id,
             'product_id' => $product_id,
-            'username' => $username,
+            'user_id' => $user_id,
             'comment' => $comment,
             'rate' => $rate,
             'datetime' => $datetime,
+            'username' => $username,
+            'fName' => $fName,
+            'lName' => $lName,
+            'url_avt' => $url_avt,
         );
 
         array_push($pd_arr, $pd_item);

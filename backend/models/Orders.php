@@ -76,7 +76,7 @@ class Orders
     // Get Single Category
     public function read_single_user($user_id)
     {
-        $query = 'SELECT O.order_id, O.state, O.total_ship, O.date,O.username AS receiver,O.phone AS phoneReceiver,O.address, I.amount, I.product_id, I.price, P.name, P.cpu, P.description, P.img_cover, U.phone , CONCAT(U.fName ," ",U.lName) AS nameUser ,U.username FROM orders AS O, order_item AS I, product AS P,user AS U WHERE O.order_id = ? AND O.order_id = I.order_id AND I.product_id = P.product_id  AND U.user_id= O.user_id ORDER BY O.order_id';
+        $query = 'SELECT O.order_id, O.state, O.total_ship, O.date, O.username AS receiver,O.phone AS phoneReceiver,O.address, I.amount, I.product_id, I.price, P.name, P.cpu, P.description, P.img_cover, U.phone , CONCAT(U.fName ," ",U.lName) AS nameUser ,U.username FROM orders AS O, order_item AS I, product AS P,user AS U WHERE O.user_id = ? AND O.order_id = I.order_id AND I.product_id = P.product_id  AND U.user_id= O.user_id ORDER BY O.order_id';
 
         $stmt = $this->conn->prepare($query);
 
@@ -89,7 +89,7 @@ class Orders
         $query = 'UPDATE orders SET state = ?, date = ?,total_ship = ?,  username = ?, phone = ?, address = ? WHERE order_id = ? ';
         $stmt = $this->conn->prepare($query);
         $d = strtotime("+5 Hours");
-        $date = date("Y-m-d H:i:sa", $d);
+        $date = date("Y-m-d H:i:s", $d);
         $stmt->bindParam(1, $this->state);
         $stmt->bindParam(2, $date);
         $stmt->bindParam(3, $this->order_id);

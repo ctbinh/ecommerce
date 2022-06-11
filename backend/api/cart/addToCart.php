@@ -64,22 +64,22 @@ if ($num > 0) {
     
     if ($cart->updateItem($cart->user_id, $cart->product_id, $cart->amount + $oldAmount)) {
         echo json_encode(
-            array('message' => 'Update success')
+            array('message' => 1)
         );
     } else {
         echo json_encode(
-            array('message' => 'Update not success')
+            array('message' => 0)
         );
     }
 } else {
     // not exist in database
     if ($cart->create()) {
         echo json_encode(
-            array('message' => 'Cart Created')
+            array('message' => 1)
         );
     } else {
         echo json_encode(
-            array('message' => 'Cart Not Created')
+            array('message' => 0)
         );
     }
 }
