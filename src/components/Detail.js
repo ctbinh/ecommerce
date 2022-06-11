@@ -15,6 +15,7 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 import axios from 'axios';
+import swal from "sweetalert";
 import { useLocation } from "react-router-dom";
 
 function TableRow(props) {
@@ -76,6 +77,7 @@ const Detail = () => {
     "https://innovavietnam.vn/wp-content/uploads/poster-561x800.jpg"
   ]
   const [product, setProduct] = useState({})
+  const [user, setUser] = useState({})
   const [comment, setComment] = useState([])
   const [ratingStar, setRatingStar] = useState(4)
   const [ratingInfo, setRatingInfo] = useState({})
@@ -90,21 +92,34 @@ const Detail = () => {
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
-  const handleShow = () => setShowModal(true);
+  const handleShow = () => {
+    if (sessionStorage.getItem('user_id')) {
+      setShowModal(true);
+    }
+    else {
+      navigate('/login')
+    }
+  }
   const handleRating = async () => {
     var today = new Date();
-    let datetime = today.getFullYear() + ':' + today.getMonth() + ':' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    // let datetime = today.getFullYear() + ':' + today.getMonth() + ':' + today.getDate() + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
     let data = {
       "product_id": product_id,
-      "username": "hihi",
+      "user_id": sessionStorage.getItem('user_id'),
       "comment": userComment,
       "rate": ratingStar,
-      "datetime": datetime
+      // "datetime": datetime
     };
     console.log("data feedback: ", data)
     await axios.post('http://localhost/ecommerce/backend/api/comment/create.php', data)
       .then((response) => {
         console.log(response.data);
+        if (response.data.message === 0) {
+          swal("Fail!", "Comment fail !", "error");
+        }
+        else if (response.data.message === 1) {
+          swal("Completely!", "Comment success", "success");
+        }
       });
     getComment();
 
@@ -133,15 +148,25 @@ const Detail = () => {
     navigate(url)
   };
   const handleAddToCart = async () => {
+    if (!sessionStorage.getItem('user_id')) {
+      navigate('/login')
+      return;
+    }
     let data = {
       "product_id": product_id,
-      "user_id": "1", /////////////////////////////////
+      "user_id": sessionStorage.getItem('user_id'),
       "amount": count
     };
     console.log("data addToCart: ", data)
     await axios.post('http://localhost/ecommerce/backend/api/cart/addToCart.php', data)
       .then((response) => {
         console.log(response.data);
+        if (response.data.message === 0) {
+          swal("Fail!", "Add to cart fail !", "error");
+        }
+        else if (response.data.message === 1) {
+          swal("Completely!", "Add to cart success", "success");
+        }
       });
   }
   const getComment = async () => {
@@ -158,6 +183,11 @@ const Detail = () => {
     setComment(res_comment.data)
     setRatingInfo(_rating)
   }
+  const getUser = async () => {
+    const user = await axios.get("http://localhost/ecommerce/backend/api/user/getUser.php?user_id=" + sessionStorage.getItem('user_id'));
+    console.log("user: ", user.data.data[0])
+    setUser(user.data.data[0])
+  }
   useEffect(() => {
     const getData = async () => {
       const res = await axios.get('http://localhost/ecommerce/backend/api/product/read_single.php?id=' + String(product_id));
@@ -170,6 +200,7 @@ const Detail = () => {
       setProduct(_product)
 
       getComment()
+      getUser()
 
       const res_similarProduct = await axios.get('http://localhost/ecommerce/backend/api/product/read.php');
       console.log("similarProduct: ", res_similarProduct.data.data)
@@ -463,9 +494,9 @@ const Detail = () => {
           return (
             <Review key={index}>
               <div className="d-flex flex-row">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(3).jpg" alt="laptop" />
+                <img src={review.url_avt} alt="laptop" />
                 <div className="w-100">
-                  <div className="username">{review.username}</div>
+                  <div className="username">{review.fName + " " + review.lName}</div>
                   <div className="d-flex flex-row justify-content-between">
                     <div className="d-flex flex-row align-items-center">
                       <Rating

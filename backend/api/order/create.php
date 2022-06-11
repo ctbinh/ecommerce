@@ -22,8 +22,12 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
     $product->user_id = $data->user_id;
     $product->state = $data->state;
     $product->total_ship = $data->total_ship;
-    $product->date = $data->date;
-    $product->date = $data->date;
+
+    $d = strtotime("+5 Hours");
+    $date = date("Y-m-d H:i:s", $d);
+
+    $product->date = $date;
+    
     $product->username = $data->username;
     $product->phone = $data->phone;
     $product->address = $data->address;

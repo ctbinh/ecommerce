@@ -6,6 +6,10 @@ import ImageUploading from "react-images-uploading";
 import { GrEdit } from "react-icons/gr";
 import axios from "axios";
 import swal from "sweetalert";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 export default function Information(props) {
   const [images, setImages] = useState([]);
   const [userInfor, setUserInfor] = useState([]);
@@ -22,15 +26,18 @@ export default function Information(props) {
       "https://api.cloudinary.com/v1_1/dd8b69mls/image/upload",
       formData
     );
-    const data = {
-      user_id: sessionStorage.getItem("user_id"),
-      url_avt: res.data.url,
+    const sendUpImage = (url) => {
+      const data = {
+        user_id: sessionStorage.getItem("user_id"),
+        url_avt: url,
+      };
+      axios
+        .post("http://localhost/ecommerce/backend/api/user/updateImg.php", data)
+        .then((response) => {
+          console.log(response);
+        });
     };
-    axios
-      .post("http://localhost/ecommerce/backend/api/user/updateImg.php", data)
-      .then((response) => {
-        console.log(response);
-      });
+    await sendUpImage(res.data.url);
   };
   useEffect(() => {
     const fetchUser = async () => {
@@ -57,6 +64,12 @@ export default function Information(props) {
     });
   };
   const onSave = () => {
+    let re =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(userInfor.email)) {
+      NotificationManager.error("Email not true !!!", "Error Email!", 3000);
+      return;
+    }
     swal("Completely!", "Change information success", "success");
     const data = {
       ...userInfor,
@@ -159,11 +172,11 @@ export default function Information(props) {
             <ContainerInput>
               <Row>
                 <Col lg={2.5}>
-                  <NameInput>Email</NameInput>
+                  <NameInput type="email">Email</NameInput>
                 </Col>
                 <Col lg={9.5}>
                   <Input
-                    type="text"
+                    type="email"
                     name="email"
                     placeholder={userInfor.email}
                     onChange={update}
@@ -178,7 +191,7 @@ export default function Information(props) {
                 </Col>
                 <Col lg={9.5}>
                   <Input
-                    type="text"
+                    type="number"
                     name="phone"
                     placeholder={userInfor.phone}
                     onChange={update}
@@ -202,6 +215,7 @@ export default function Information(props) {
                 />
               </Col>
             </Row>
+            <NotificationContainer />
             <ButtonSave onClick={() => onSave()}>Save</ButtonSave>
           </Col>
         </Row>
