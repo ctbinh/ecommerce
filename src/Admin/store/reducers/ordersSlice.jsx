@@ -10,7 +10,7 @@ export const getAllOrder = createAsyncThunk("orders/all", async () => {
 });
 export const getOrder = createAsyncThunk("orders/single", async (id) => {
   const res = await axios.get(
-    `http://localhost/ecommerce/backend/api/order/read_single_user.php?user_id=${id}`
+    `http://localhost/ecommerce/backend/api/order/read_single.php?user_id=${id}`
   );
   return res.data.data;
 });

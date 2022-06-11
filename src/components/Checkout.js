@@ -7,15 +7,18 @@ import { MdOutlineLocationOn } from 'react-icons/md';
 import { BsPhoneVibrate } from 'react-icons/bs';
 import { BsPersonCircle } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useState} from 'react'
+import { useState, useEffect } from 'react'
 import swal from "sweetalert";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
     const location = useLocation()
-    const { name, address, phone, lstCart } = location.state
-    console.log("asadaf", lstCart)
+    const { name, address, phone } = location.state
+
     const [cod, setCod] = useState("bank");
+    const [lstCart, setLstCart] = useState([]);
+
     const navigate = useNavigate(); 
     const onPay = () => {
         swal("Completely!", "Payment success", "success");
@@ -50,6 +53,16 @@ const Checkout = () => {
             }); 
             navigate("../");
     }
+    useEffect(() => {
+        axios.get(`http://localhost/ecommerce/backend/api/cart/finditems.php?user_id=${sessionStorage.getItem('user_id')}`).then((response) => {
+            if (response.data.data) setLstCart(response.data.data);
+            console.log(response.data.message);
+        });
+        // const data = sessionStorage.getItem('user_id');
+        // if(data) {
+        //   setUser(data)
+        // }
+      }, []);
     return (
         <div>
             <Header/>
@@ -137,7 +150,9 @@ const Checkout = () => {
                                             </ButtonPay> 
                                         </Col>
                                         <Col md= {5}>
-                                        <ButtonBack onClick={ () => navigate(-1)}>Back</ButtonBack>
+                                            <Link to="/cart">
+                                                <ButtonBack>Back</ButtonBack>
+                                            </Link>
                                         </Col>
                                     </Row>
                                     

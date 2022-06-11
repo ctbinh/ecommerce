@@ -19,8 +19,9 @@ $order = new Orders($db);
 $data = json_decode(file_get_contents("php://input"));
 $order->order_id = isset($_GET['id']) ? $_GET['id'] : die();
 
-$result = $order->read_single_user($order->order_id);
+$result = $order->read_single($order->order_id);
 $num = $result->rowCount();
+// print_r($result);
 
 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     extract($row);
