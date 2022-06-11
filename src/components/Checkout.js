@@ -36,18 +36,18 @@ const Checkout = () => {
             .catch(function (error) {
                 console.log(error);
             });
-        // const data_delete = {
-        //     user_id: sessionStorage.getItem('user_id'),
-        //     };
-        //     let config = {
-        //     headers: {
-        //         "Content-Type": "multipart/form-data",
-        //     },
-        //     };
-        // axios.post("http://localhost/ecommerce/backend/api/cart/deleteAll.php", data_delete, config)
-        //     .then((response) => {
-        //         console.log(response.data);
-        //     }); 
+        const data_delete = {
+            user_id: sessionStorage.getItem('user_id'),
+            };
+            let config = {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            };
+        axios.post("http://localhost/ecommerce/backend/api/cart/deleteAll.php", data_delete, config)
+            .then((response) => {
+                console.log(response.data);
+            }); 
             navigate("../");
     }
     return (
