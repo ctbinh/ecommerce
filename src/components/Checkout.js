@@ -7,7 +7,7 @@ import { MdOutlineLocationOn } from 'react-icons/md';
 import { BsPhoneVibrate } from 'react-icons/bs';
 import { BsPersonCircle } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom'
-import {useEffect, useState} from 'react'
+import { useState} from 'react'
 import swal from "sweetalert";
 import axios from 'axios';
 
@@ -35,7 +35,20 @@ const Checkout = () => {
             })
             .catch(function (error) {
                 console.log(error);
-            })
+            });
+        // const data_delete = {
+        //     user_id: sessionStorage.getItem('user_id'),
+        //     };
+        //     let config = {
+        //     headers: {
+        //         "Content-Type": "multipart/form-data",
+        //     },
+        //     };
+        // axios.post("http://localhost/ecommerce/backend/api/cart/deleteAll.php", data_delete, config)
+        //     .then((response) => {
+        //         console.log(response.data);
+        //     }); 
+            navigate("../");
     }
     return (
         <div>

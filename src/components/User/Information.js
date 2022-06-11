@@ -6,6 +6,7 @@ import ImageUploading from "react-images-uploading";
 import { GrEdit } from "react-icons/gr";
 import axios from 'axios';
 import swal from "sweetalert";
+import {NotificationContainer, NotificationManager } from "react-notifications";
 export default function Information (props) {
 
     const [images, setImages] = useState([]);
@@ -55,6 +56,15 @@ export default function Information (props) {
         })
     }
     const onSave = () => {
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if ( !re.test(userInfor.email) ) {
+            NotificationManager.error(
+                "Email not true !!!",
+                "Error Email!",
+                3000
+            );
+            return;
+        }
         swal("Completely!", "Change information success", "success");
         const data = {
             ...userInfor,
@@ -134,21 +144,22 @@ export default function Information (props) {
                         </ContainerInput>
                         <ContainerInput>
                             <Row>
-                                <Col lg={2.5}><NameInput>Email</NameInput></Col>
-                                <Col lg={9.5}><Input type="text" name="email" placeholder={userInfor.email} onChange={update}/></Col>
+                                <Col lg={2.5}><NameInput type="email">Email</NameInput></Col>
+                                <Col lg={9.5}><Input type="email" name="email" placeholder={userInfor.email} onChange={update}/></Col>
                             </Row>
                         </ContainerInput>
                         <ContainerInput>
                             <Row>
                                 <Col lg={2.5}><NameInput>Phone</NameInput></Col>
-                                <Col lg={9.5}><Input type="text" name="phone" placeholder={userInfor.phone} onChange={update}/></Col>
+                                <Col lg={9.5}><Input type="number" name="phone" placeholder={userInfor.phone} onChange={update}/></Col>
                             </Row>
                         </ContainerInput>
                         <Row>
                             <Col lg={2.5}><NameInput>Birthday</NameInput></Col>
                             <Col lg={9.5}><Input type="date" id="start" name="birthday" value={userInfor.birthday} min="1990-01-01" max="2022-12-31" onChange={update}/></Col>
                         </Row>
-                            <ButtonSave onClick={() => onSave()}>Save</ButtonSave>
+                        <NotificationContainer />
+                        <ButtonSave onClick={() => onSave()}>Save</ButtonSave>
                     </Col>
                 </Row>
             </Container>
