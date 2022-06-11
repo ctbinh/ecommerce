@@ -12,22 +12,24 @@ const Header = (props) => {
     sessionStorage.clear();
   };
   const [user, setUser] = useState(null);
-  const [searchVal, setSearchVal] = useState('')
+  const [searchVal, setSearchVal] = useState("");
   const searchProduct = (e) => {
-    if(e.code === "Enter") {
-      const filteredProduct = props.data.filter((p) => p.name.toLowerCase().includes(e.target.value.toLowerCase()))
-      props.setcurrPage(1)
-      props.setfilteredProducts(filteredProduct)
-      props.getProductPerPage(filteredProduct)
-      props.setcountPage(Math.ceil(filteredProduct.length / props.num))
+    if (e.code === "Enter") {
+      const filteredProduct = props.data.filter((p) =>
+        p.name.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      props.setcurrPage(1);
+      props.setfilteredProducts(filteredProduct);
+      props.getProductPerPage(filteredProduct);
+      props.setcountPage(Math.ceil(filteredProduct.length / props.num));
     }
-  }
+  };
   useEffect(() => {
     const data = sessionStorage.getItem("user_id");
     if (data) {
       setUser(data);
     }
-    console.log(props.data)
+    console.log(props.data);
   }, [props.data]);
   return (
     <>
@@ -39,7 +41,7 @@ const Header = (props) => {
         style={{ backgroundColor: "black" }}
       >
         <Container style={{}}>
-          <Navbar.Brand href="/" className="d-flex flex-row align-items-center">
+          <Navbar.Brand as={Link} to='/' className="d-flex flex-row align-items-center">
             <img
               src="https://www.hcmut.edu.vn/images/hcmut/logoBK.png"
               alt="Logo HCMUT"
@@ -60,9 +62,9 @@ const Header = (props) => {
                 name="search_product"
                 id="search_product"
                 value={searchVal}
-                onChange={(e)=>setSearchVal(e.target.value)}
+                onChange={(e) => setSearchVal(e.target.value)}
                 placeholder="Search by name..."
-                onKeyUp={(e)=> searchProduct(e)}
+                onKeyUp={(e) => searchProduct(e)}
               />
             </SearchBar>
 
@@ -110,16 +112,23 @@ const Header = (props) => {
               <Dropdown.Menu style={{ zIndex: "9999" }}>
                 {user ? (
                   <>
-                    <Dropdown.Item href="/user">My Account</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/user">
+                      My Account
+                    </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item href="/login" onClick={signout}>
+                    <Dropdown.Item onClick={signout} href="/login">
                       Sign out
                     </Dropdown.Item>
                   </>
                 ) : (
                   <>
-                    <Dropdown.Item href="/login">Sign In</Dropdown.Item>
-                    <Dropdown.Item href="/login">Sign Up</Dropdown.Item>
+                    <Dropdown.Item as={Link} to="/login">
+                      Sign In
+                    </Dropdown.Item>
+
+                    <Dropdown.Item as={Link} to="/login">
+                      Sign Up
+                    </Dropdown.Item>
                   </>
                 )}
               </Dropdown.Menu>
