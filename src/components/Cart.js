@@ -10,21 +10,21 @@ import RowOfTable from "./RowOfTable";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "react-notifications/lib/notifications.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const Cart = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
-//   const location = useLocation();
-//   const { cartt } = location.state;
-//   const [cart, setCart] = useState(cartt);
+  //   const location = useLocation();
+  //   const { cartt } = location.state;
+  //   const [cart, setCart] = useState(cartt);
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
   const createNotification = (type) => {
@@ -62,39 +62,45 @@ const Cart = () => {
           "Error Address!",
           3000
         );
-        break;          
+        break;
       case "noItems":
         NotificationManager.warning(
           "There is no item in cart",
           "Empty cart !!!",
           2000
         );
-        break;          
+        break;
       default:
         break;
     }
   };
   const IsSure = () => {
     confirmAlert({
-      title: 'Are you sure !!!',
+      title: "Are you sure !!!",
       // message: 'Are you sure to delete !!!',
       buttons: [
         {
-          label: 'Yes',
-          onClick: () => ClearAll()
+          label: "Yes",
+          onClick: () => ClearAll(),
         },
         {
-          label: 'No',
-          onClick: () => console.log("Ignore delete all product")
-        }
-      ]
+          label: "No",
+          onClick: () => console.log("Ignore delete all product"),
+        },
+      ],
     });
   };
   useEffect(() => {
-    axios.get(`http://localhost/ecommerce/backend/api/cart/finditems.php?user_id=${sessionStorage.getItem('user_id')}`).then((response) => {
+    axios
+      .get(
+        `http://localhost/ecommerce/backend/api/cart/finditems.php?user_id=${sessionStorage.getItem(
+          "user_id"
+        )}`
+      )
+      .then((response) => {
         if (response.data.data) setCart(response.data.data);
         console.log(response.data.message);
-    });
+      });
     // const data = sessionStorage.getItem('user_id');
     // if(data) {
     //   setUser(data)
@@ -103,26 +109,25 @@ const Cart = () => {
   const ContainerNotification = (name, phone, address) => {
     if (cart.length === 0) {
       createNotification("noItems");
-      return 
+      return;
     }
     if (name.length < 3 || name.length > 14) {
       createNotification("errorName");
-      return
+      return;
     }
     if (!Number(phone)) {
       createNotification("errorPhone");
-      return
+      return;
     }
     if (address.length < 3 || address.length > 30) {
-
       createNotification("errorAddress");
-      return
+      return;
     }
   };
   const ClearAll = () => {
     setCart([]);
     const data = {
-      user_id: sessionStorage.getItem('user_id'),
+      user_id: sessionStorage.getItem("user_id"),
     };
     let config = {
       headers: {
@@ -136,8 +141,8 @@ const Cart = () => {
         config
       )
       .then((response) => {
-       console.log(response.data);
-      }); 
+        console.log(response.data);
+      });
   };
   return (
     <div>
@@ -243,7 +248,7 @@ const Cart = () => {
                 name.length <= 14 &&
                 address.length >= 3 &&
                 address.length <= 30 &&
-                cart.length !== 0 && 
+                cart.length !== 0 &&
                 !/\D/.test(phone) && (
                   <ButtonCheckout>Proceed to Checkout</ButtonCheckout>
                 )}

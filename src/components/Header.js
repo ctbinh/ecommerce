@@ -4,9 +4,17 @@ import { ShoppingCart, Person } from "@mui/icons-material";
 import { Navbar, Container, Nav, NavDropdown, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { getNumCart, numCartSelector } from "../store/reducers/numCartSlice";
 
 const Header = (props) => {
+  const numCart = useSelector(numCartSelector);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getNumCart());
+  }, [dispatch]);
   let navigate = useNavigate();
   const signout = () => {
     sessionStorage.clear();
@@ -41,7 +49,11 @@ const Header = (props) => {
         style={{ backgroundColor: "black" }}
       >
         <Container style={{}}>
-          <Navbar.Brand as={Link} to='/' className="d-flex flex-row align-items-center">
+          <Navbar.Brand
+            as={Link}
+            to="/"
+            className="d-flex flex-row align-items-center"
+          >
             <img
               src="https://www.hcmut.edu.vn/images/hcmut/logoBK.png"
               alt="Logo HCMUT"
@@ -75,7 +87,9 @@ const Header = (props) => {
                             Dank memes
                         </Nav.Link> */}
               <Nav.Link onClick={() => navigate("/about")}>ABOUT</Nav.Link>
-              <Nav.Link as={Link} to='/news'>NEWS</Nav.Link>
+              <Nav.Link as={Link} to="/news">
+                NEWS
+              </Nav.Link>
               <NavDropdown title="COLLECTION" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">
                   Best Seller
@@ -96,7 +110,7 @@ const Header = (props) => {
             <div style={{ marginLeft: "auto", minWidth: "60px" }}>
               <Link style={{ textDecoration: "none" }} to="/cart">
                 <CartIcon />
-                <CartCounter>20</CartCounter>
+                <CartCounter>{numCart}</CartCounter>
               </Link>
             </div>
 
