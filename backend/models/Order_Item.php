@@ -53,4 +53,22 @@ class Order_item
 
       return false;
   }
+  public function update_amount($available)
+  {
+      $query = 'UPDATE product SET amount = :amount WHERE product_id = :product_id';
+
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      $stmt->bindParam(':product_id', $this->product_id);
+      $up = $available - $this->amount;
+      $stmt->bindParam(':amount', $up);
+      // Execute query
+
+      if ($stmt->execute()) {
+          return true;
+      }
+      printf("Error: %s.\n", $stmt->error);
+      return false;
+  }
 }

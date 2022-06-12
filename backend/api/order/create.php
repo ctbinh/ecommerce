@@ -40,6 +40,7 @@ header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type
         $order_item->amount = $data->cart[$i]->amount;
         $order_item->price = $data->cart[$i]->price;
         $order_item->create();
+        $order_item->update_amount($data->cart[$i]->available);
     }
 
 echo "Create done";
