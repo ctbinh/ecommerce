@@ -4,7 +4,7 @@ import { ShoppingCart, Person } from "@mui/icons-material";
 import { Navbar, Container, Nav, NavDropdown, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = (props) => {
   let navigate = useNavigate();
@@ -29,7 +29,6 @@ const Header = (props) => {
     if (data) {
       setUser(data);
     }
-    console.log(props.data);
   }, [props.data]);
   return (
     <>
