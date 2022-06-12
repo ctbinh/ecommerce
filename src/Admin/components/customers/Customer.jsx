@@ -65,33 +65,35 @@ const Customer = () => {
           <tbody>
             {allUser.map((user) => {
               console.log(user);
-              return (
-                <tr>
-                  <td>{user.user_id}</td>
-                  <td>
-                    {" "}
-                    <Avatar
-                      alt="Remy Sharp"
-                      sx={{ width: 30, height: 30 }}
-                      src="https://mui.com/static/images/avatar/1.jpg"
-                    />
-                  </td>
-                  <td>{user.username}</td>
-                  <td>{user.fName + " " + user.lName}</td>
-                  <td>{user.email}</td>
-                  <td>{user.phone}</td>
-                  <td>{user.birthday}</td>
-                  <td>
-                    {" "}
-                    <Button
-                      // style={{ fontSize: "8px" }}
-                      onClick={() => handleToggle(user.user_id)}
-                    >
-                      {user.isBlocked === 0 ? "Blocked" : "Active"}
-                    </Button>
-                  </td>
-                </tr>
-              );
+              if(user.username !== '') {
+                return (
+                  <tr>
+                    <td>{user.user_id}</td>
+                    <td>
+                      {" "}
+                      <Avatar
+                        alt="Remy Sharp"
+                        sx={{ width: 30, height: 30 }}
+                        src="https://mui.com/static/images/avatar/1.jpg"
+                      />
+                    </td>
+                    <td>{user.username}</td>
+                    <td>{user.fName + " " + user.lName}</td>
+                    <td>{user.email}</td>
+                    <td>{user.phone}</td>
+                    <td>{user.birthday}</td>
+                    <td>
+                      {" "}
+                      <Button
+                        // style={{ fontSize: "8px" }}
+                        onClick={() => handleToggle(user.user_id)}
+                      >
+                        {user.isBlocked === 0 ? "Blocked" : "Active"}
+                      </Button>
+                    </td>
+                  </tr>
+                );
+              }
             })}
           </tbody>
         </Table>

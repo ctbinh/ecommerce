@@ -93,7 +93,7 @@ const Cart = () => {
   useEffect(() => {
     axios.get(`http://localhost/ecommerce/backend/api/cart/finditems.php?user_id=${sessionStorage.getItem('user_id')}`).then((response) => {
         if (response.data.data) setCart(response.data.data);
-        console.log(response.data.message);
+        console.log(response.data.data);
     });
     // const data = sessionStorage.getItem('user_id');
     // if(data) {
@@ -168,7 +168,7 @@ const Cart = () => {
             >
               {cart.length !== 0 ? (
                 cart.map((product) => (
-                  <RowOfTable product={product} cart={cart} setCart={setCart} />
+                  <RowOfTable key={product.product_id} product={product} cart={cart} setCart={setCart} />
                   // <RowOfTable product={product}/>
                 ))
               ) : (
