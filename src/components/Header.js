@@ -37,7 +37,6 @@ const Header = (props) => {
     if (data) {
       setUser(data);
     }
-    console.log(props.data);
   }, [props.data]);
   return (
     <>

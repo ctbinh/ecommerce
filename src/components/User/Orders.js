@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { confirmAlert } from "react-confirm-alert";
+import swal from "sweetalert";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -19,7 +21,7 @@ const Orders = () => {
       .then(function (response) {
         console.log(response.data);
         if (response.data.status === "Success") {
-          alert("ok");
+          swal("Completely!", "Cancel orders success", "success");
           fetchOrders()
         } else {
           alert("ko ok");
@@ -37,6 +39,22 @@ const Orders = () => {
     );
     setOrders(res.data.data);
     console.log(res.data.data);
+  };
+  const IsSure = (id) => {
+    confirmAlert({
+      title: 'Are you sure !!!',
+      // message: 'Are you sure to delete !!!',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => cancelOrders(id)
+        },
+        {
+          label: 'No',
+          onClick: () => console.log("Ignore delete all product")
+        }
+      ]
+    });
   };
   useEffect(() => {
     fetchOrders();
@@ -114,7 +132,7 @@ const Orders = () => {
             {ord.state === "Pending" && (
               <div
                 style={{ textAlign: "right" }}
-                onClick={() => cancelOrders(ord.order_id)}
+                onClick={() => IsSure(ord.order_id)}
               >
                 <CancelBtn>Cancel</CancelBtn>
               </div>

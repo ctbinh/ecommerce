@@ -10,7 +10,7 @@ const News = () => {
       <Container>
         <Posts>
           <Post>
-            <Img src="https://miro.medium.com/max/2560/1*RDJUHnLJoiEbkWvA3MBRGw.jpeg" />
+            <Img src="https://images.businessnewsdaily.com/app/uploads/2022/04/04074553/1554244010.jpeg" />
             <Content>
               <Title>How to fix my laptop?</Title>
               <Date>2022-06-11</Date>
@@ -77,6 +77,9 @@ const Container = styled.div`
   margin: 40px auto;
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const Post = styled.div`
@@ -97,6 +100,9 @@ const Posts = styled.div`
   width: 75%;
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 const Tags = styled.div`
   width: 25%;
@@ -106,6 +112,9 @@ const Tags = styled.div`
   padding: 5px;
   padding-top: 0px;
   height: fit-content;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const TagItem = styled.div`
@@ -123,12 +132,20 @@ const TagItem = styled.div`
   }
 `;
 
-const Title = styled.h4`
+const Title = styled.div`
   color: #427ef5;
   font-weight: bold;
+  font-size: 24px;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 const Description = styled.div`
   color: gray;
+  @media (max-width: 768px) {
+    height: 50px;
+    overflow: hidden;
+  }
 `;
 const Img = styled.img`
   width: 30%;

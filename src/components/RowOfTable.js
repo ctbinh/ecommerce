@@ -110,7 +110,6 @@ const RowOfTable = (props) => {
       )
       .then((response) => {
         console.log(response.data);
-        console.log("cc");
         dispatch(subCart());
       })
       .catch(function (error) {

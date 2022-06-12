@@ -67,22 +67,22 @@ const Filter = (props) => {
       <TypeFilter>RAM</TypeFilter>
       <Ram>
         <input type="checkbox" name="4gbram" id="4gbram" value='4GB' checked={props.ramFilter.includes('4GB')} onChange={() => targetRam('4GB')}/>
-        <label for="4gbram"><span>4GB</span><span></span></label>
+        <label><span>4GB</span><span></span></label>
       </Ram>
       <Ram>
         <input type="checkbox" name="8gbram" id="8gbram" value='8GB' checked={props.ramFilter.includes('8GB')} onChange={() => targetRam('8GB')}/>
-        <label for="8gbram"><span>8GB</span><span></span></label>
+        <label><span>8GB</span><span></span></label>
       </Ram>
       <Ram>
         <input type="checkbox" name="16gbram" id="16gbram" value='16GB' checked={props.ramFilter.includes('16GB')} onChange={() => targetRam('16GB')}/>
-        <label for="16gbram"><span>16GB</span><span></span></label>
+        <label><span>16GB</span><span></span></label>
       </Ram>
       <TypeFilter>Price</TypeFilter>
       <Slider
         style={{width: '90%', margin: '0 5%'}}
         getAriaLabel={() => 'Minimum distance'}
         value={props.value}
-        max='3000'
+        max={3000}
         onChange={handleChange}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}

@@ -173,7 +173,12 @@ const Cart = () => {
             >
               {cart.length !== 0 ? (
                 cart.map((product) => (
-                  <RowOfTable product={product} cart={cart} setCart={setCart} />
+                  <RowOfTable
+                    key={product.product_id}
+                    product={product}
+                    cart={cart}
+                    setCart={setCart}
+                  />
                   // <RowOfTable product={product}/>
                 ))
               ) : (

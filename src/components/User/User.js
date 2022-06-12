@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Footer from '../Footer'
 import Header from '../Header'
 import styled from 'styled-components'
@@ -8,7 +8,6 @@ import Wishlist from './Wishlist'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Information from './Information'
 import Password from './Password'
-import axios from 'axios'
 import { Navigate } from 'react-router-dom'
 
 const User = () => {
@@ -124,7 +123,7 @@ const User = () => {
         <ArrowDropDownIcon className='dropdown-icon'/>
       </Head>
       <Row>
-        <NavBox display={isEnabled}>
+        <NavBox disp={isEnabled}>
           <NavItem className={targetNavItem==='my-account'?'active':''} onClick={() => changeNavItem('my-account')}>My Account</NavItem>
           <NavChildItem className={targetNavChildItem==='infor'?'active':''} onClick={() => changeNavChildItem('infor')}>Account information</NavChildItem>
           <NavChildItem className={targetNavChildItem==='change-pass'?'active':''} onClick={() => changeNavChildItem('change-pass')}>Change password</NavChildItem>
@@ -200,7 +199,7 @@ const NavBox = styled.div`
   padding: 5px 15px 5px 0;
   height: fit-content;
   @media (max-width: 768px){
-    display: ${props=> props.display ? '' : 'none'};
+    display: ${props=> props.disp ? '' : 'none'};
     width: 100%;
   }
 `
