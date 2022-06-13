@@ -8,7 +8,7 @@ export const getNumCart = createAsyncThunk("numcart", async () => {
       "user_id"
     )}`
   );
-  return response.data.count;
+  return response.data;
 });
 
 // Create slice
@@ -16,6 +16,7 @@ const numCartSlice = createSlice({
   name: "numCart",
   initialState: {
     numCart: 0,
+    listCart: [],
   },
   reducers: {
     /* addTodo: {
@@ -33,9 +34,13 @@ const numCartSlice = createSlice({
 			}
 		}, */
     addCart(state, action) {
-      state.numCart += 1;
+      if (!state.listCart.includes(action.payload)) {
+        state.numCart += 1;
+        state.listCart = [...state.listCart, action.payload];
+      }
     },
     subCart(state, action) {
+      state.listCart = state.listCart.filter((item) => item !== action.payload);
       state.numCart -= 1;
     },
     /* deleteTodo(state, action) {
@@ -53,7 +58,9 @@ const numCartSlice = createSlice({
     },
     [getNumCart.fulfilled]: (state, action) => {
       console.log("Done");
-      state.numCart = action.payload;
+
+      state.numCart = action.payload.data[0].count;
+      state.listCart = action.payload.list.map((item) => item.id);
     },
     [getNumCart.rejected]: (state, action) => {
       console.log("Failed to get num cart by id!!!");

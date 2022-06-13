@@ -16,11 +16,13 @@ $product = new Cart($db);
 // Get ID
 $product->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
 $result = $product->getCountCart();
+$result2 = $product->getListCart();
 // print_r($result);
 if (1 > 0) {
     // Cat array
     $pd_arr = array();
     $pd_arr['data'] = array();
+    $pd_arr['list'] = array();
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
 
@@ -32,8 +34,19 @@ if (1 > 0) {
         // Push to "data"
         array_push($pd_arr['data'], $pd_item);
     }
+    while ($row = $result2->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+
+        $pd_item = array(
+            'id' => $product_id,
+
+        );
+
+        // Push to "data"
+        array_push($pd_arr['list'], $pd_item);
+    }
 
     // Turn to JSON & output
-    echo json_encode($pd_arr['data'][0]);
+    echo json_encode($pd_arr);
 
 }

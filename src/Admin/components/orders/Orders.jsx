@@ -110,7 +110,7 @@ const Orders = () => {
           <tbody>
             {allOrder.map((order) => {
               return (
-                <tr>
+                <tr key={order.order_id}>
                   <td>{order.order_id}</td>
                   <td>{order.name}</td>
                   <td>{order.phone}</td>

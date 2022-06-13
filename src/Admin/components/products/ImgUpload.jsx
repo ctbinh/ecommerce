@@ -29,11 +29,9 @@ const ImgUpload = ({ idProduct }) => {
       "https://api.cloudinary.com/v1_1/dd8b69mls/image/upload",
       formData
     );
-    console.log("tt", idProduct, res.data.url);
     dispatch(createImg({ id: idProduct, url: res.data.url }));
 
     // dispatch(getImgForProduct(idProduct));
-    console.log("xongggg");
     swal("Good job!", "One Img da dc them", "success");
   };
   return (

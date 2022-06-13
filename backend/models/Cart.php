@@ -103,4 +103,11 @@ class Cart
         $stmt->execute();
         return $stmt;
     }
+    public function getListCart()
+    {
+        $query = 'SELECT product_id FROM cart WHERE user_id= ' . $this->user_id;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
 }

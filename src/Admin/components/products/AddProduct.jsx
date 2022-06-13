@@ -97,12 +97,10 @@ const AddProduct = () => {
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
   const onChangeAdd = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
     setImagesAdd(imageList);
   };
   //  navigate
@@ -149,11 +147,9 @@ const AddProduct = () => {
       "https://api.cloudinary.com/v1_1/dd8b69mls/image/upload",
       formData
     );
-    // console.log("tt", idProduct, res.data.url);
     return res.data.url;
   };
 
-  // console.log;
   // handle add product
   const handleAddProduct = async () => {
     if (imagesAdd.length === 0) {
@@ -163,7 +159,6 @@ const AddProduct = () => {
 
     // for (let index = 0; index < imagesAdd.length; index++) {
     //   const element = imagesAdd[index];
-    //   console.log(element);
     // }
     // get url
     const formData = new FormData();
@@ -174,7 +169,6 @@ const AddProduct = () => {
       "https://api.cloudinary.com/v1_1/dd8b69mls/image/upload",
       formData
     );
-    console.log("url", res.data.url);
     // post
     const res2 = await axios.post(
       "http://localhost/ecommerce/backend/api/product/create.php",
@@ -193,8 +187,7 @@ const AddProduct = () => {
     for (let index = 0; index < imagesAdd.length; index++) {
       const element = imagesAdd[index];
       const url = await getUrlFormImgAdd(element.file);
-      console.log("url", url);
-      // console.log(element);
+
       await axios.post(
         `http://localhost/ecommerce/backend/api/imgProduct/create.php?id=${res2.data.product_id}`,
         {
@@ -263,9 +256,9 @@ const AddProduct = () => {
               <Input onChange={(e) => handleChange(e)} name="gpu"></Input>
             </InputContainer>
             <InputContainer>
-              <InputLabel for="ram">RAM</InputLabel>
+              <InputLabel htmlfor="ram">RAM</InputLabel>
               <Select onChange={(e) => handleChange(e)} name="ram" id="ram">
-                <Option value="" disabled selected>
+                <Option disabled value={""}>
                   Select your option
                 </Option>
 

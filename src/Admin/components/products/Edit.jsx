@@ -107,10 +107,7 @@ const Detail = () => {
   };
 
   // handle change carosel
-  const handleChangeCarosel = (index, item) => {
-    console.log("index item", index, item);
-  };
-  console.log("????", updatedProduct);
+  const handleChangeCarosel = (index, item) => {};
   return (
     <>
       <Wrap className="mb-10">
@@ -119,7 +116,6 @@ const Detail = () => {
             selectedItem={numberSelected}
             onChange={(index, item) => handleChangeCarosel(index, item)}
             // onSwipeEnd={() => setNumberSelected(10000)}
-            // renderItem={(isSeleted) => console.log(isSeleted)}
           >
             <div className="position-relative">
               <img src={product.img_cover} alt="" />

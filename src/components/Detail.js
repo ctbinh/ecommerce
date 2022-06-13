@@ -208,7 +208,7 @@ const Detail = () => {
         if (response.data.message === 0) {
           swal("Fail!", "Add to cart fail !", "error");
         } else if (response.data.message === 1) {
-          dispatch(addCart());
+          dispatch(addCart(product_id));
           swal("Completely!", "Add to cart success", "success");
         }
       });

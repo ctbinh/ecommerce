@@ -84,7 +84,6 @@ const TableExport = () => {
   );
 
   const products = useSelector(productsSelector);
-  console.log("???", products);
   const dispatch = useDispatch();
   useEffect(() => {
     // send request to jsonplaceholder

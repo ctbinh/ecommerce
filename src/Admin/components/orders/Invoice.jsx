@@ -138,9 +138,7 @@ const Invoice = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getOrder(searchParams.get("id")));
-    console.log("cc");
   }, [dispatch]);
-  // console.log(order);
   return (
     <Wraper>
       <Header>

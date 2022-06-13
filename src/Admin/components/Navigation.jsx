@@ -25,7 +25,6 @@ const Navigation = ({ toogleNav, setIdOnClick }) => {
     if (textPath === "orders") return 3;
   };
   const width = window.innerWidth;
-  // console.log("a", width);
   const [IdClick, setIdClick] = useState(getId());
   return (
     <Container toogle={!toogleNav}>

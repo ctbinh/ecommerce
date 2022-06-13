@@ -64,10 +64,9 @@ const Customer = () => {
           </thead>
           <tbody>
             {allUser.map((user) => {
-              console.log(user);
-              if(user.username !== '') {
+              if (user.username !== "") {
                 return (
-                  <tr>
+                  <tr key={user.user_id}>
                     <td>{user.user_id}</td>
                     <td>
                       {" "}

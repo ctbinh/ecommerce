@@ -117,7 +117,6 @@ const Login = () => {
     }
   }, []);
   const handleLogin = async () => {
-    console.log(username, password);
     const res = await axios.post(
       "http://localhost/ecommerce/backend/api/auth/loginAdmin.php",
       {
