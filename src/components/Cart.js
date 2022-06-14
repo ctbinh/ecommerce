@@ -26,6 +26,7 @@ const Cart = () => {
   //   const { cartt } = location.state;
   //   const [cart, setCart] = useState(cartt);
   const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
   const navigate = useNavigate();
   const createNotification = (type) => {
     switch (type) {
@@ -99,6 +100,9 @@ const Cart = () => {
       )
       .then((response) => {
         if (response.data.data) setCart(response.data.data);
+        setTotal(response.data.data.reduce((sum, product) => {
+          return sum + product.amount * product.price;
+        }, 0).toFixed(2))
         console.log(response.data.message);
       });
     // const data = sessionStorage.getItem('user_id');
@@ -126,6 +130,7 @@ const Cart = () => {
   };
   const ClearAll = () => {
     setCart([]);
+    setTotal(0)
     const data = {
       user_id: sessionStorage.getItem("user_id"),
     };
@@ -177,7 +182,8 @@ const Cart = () => {
                     key={product.product_id}
                     product={product}
                     cart={cart}
-                    setCart={setCart}
+                    total={total}
+                    setTotal={setTotal}
                   />
                   // <RowOfTable product={product}/>
                 ))
@@ -230,12 +236,7 @@ const Cart = () => {
               </Col>
               <Col sm={2.5} xs={2.5}>
                 <ValueShip>
-                  $
-                  {cart
-                    .reduce((sum, product) => {
-                      return sum + product.amount * product.price;
-                    }, 0)
-                    .toFixed(2)}
+                  ${total}
                 </ValueShip>
               </Col>
             </Row>

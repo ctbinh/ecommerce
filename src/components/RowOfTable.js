@@ -35,6 +35,7 @@ const RowOfTable = (props) => {
       createNotification("notavailable");
       return;
     }
+    props.setTotal((Number(props.total) + Number(props.product.price)).toFixed(2))
     const data = {
       user_id: sessionStorage.getItem("user_id"),
       product_id: props.product.product_id,
@@ -62,6 +63,7 @@ const RowOfTable = (props) => {
   const decrementCount = () => {
     console.log("Run here");
     if (count > 1) {
+    props.setTotal((Number(props.total) - Number(props.product.price)).toFixed(2))
       const data = {
         user_id: sessionStorage.getItem("user_id"),
         product_id: props.product.product_id,
@@ -92,6 +94,7 @@ const RowOfTable = (props) => {
   };
   const Delete = () => {
     // props.setCart(props.cart.filter(pro => pro.product_id !== props.product.product_id))
+    props.setTotal((Number(props.total) - Number(props.product.price)*Number(count)).toFixed(2))
     const data = {
       user_id: sessionStorage.getItem("user_id"),
       product_id: props.product.product_id,
