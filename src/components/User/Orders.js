@@ -6,7 +6,7 @@ import swal from "sweetalert";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  const [targetTypeOrders, setTargetTypeOrders] = useState("All");
+  const [targetTypeOrders, setTargetTypeOrders] = useState("Pending");
   const filterOrders = (state) => {
     setTargetTypeOrders(state);
   };

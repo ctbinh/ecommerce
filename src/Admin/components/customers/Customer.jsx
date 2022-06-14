@@ -87,7 +87,7 @@ const Customer = () => {
                         // style={{ fontSize: "8px" }}
                         onClick={() => handleToggle(user.user_id)}
                       >
-                        {user.isBlocked === 0 ? "Blocked" : "Active"}
+                        {user.isBlocked === 1 ? "Blocked" : "Active"}
                       </Button>
                     </td>
                   </tr>

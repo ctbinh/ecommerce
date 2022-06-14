@@ -330,7 +330,7 @@ const AddProduct = () => {
             </InputContainer>
             <InputContainer>
               <InputLabel>Price</InputLabel>
-              <Input onChange={(e) => handleChange(e)} name="price"></Input>
+              <Input onChange={(e) => handleChange(e)} type='number' name="price"></Input>
             </InputContainer>
             <InputContainer>
               <InputLabel>Screen</InputLabel>
@@ -347,7 +347,7 @@ const AddProduct = () => {
             <InputContainer>
               <InputLabel>Amount</InputLabel>
               <Input
-                tpye="number"
+                type="number"
                 onChange={(e) => handleChange(e)}
                 name="amount"
               ></Input>

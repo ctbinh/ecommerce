@@ -25,7 +25,7 @@ const Checkout = () => {
         const data = {
             user_id: sessionStorage.getItem('user_id'), 
             state: "Pending",
-            total_ship: 21.00,
+            total_ship: 20.00,
             date: new Date().toISOString().slice(0, 10),
             username: name,
             phone: phone,
@@ -137,7 +137,7 @@ const Checkout = () => {
                                             <Ship>Shipping</Ship>
                                         </Col>
                                         <Col xs={2.5}>
-                                            <ValueShip>{(21000).toLocaleString()}</ValueShip>
+                                            <ValueShip>{(20).toLocaleString()}</ValueShip>
                                             {/* <ValueShip>{document.getElementById("name").value}</ValueShip> */}
                                         </Col>
                                     </Row>

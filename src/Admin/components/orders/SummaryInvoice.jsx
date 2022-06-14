@@ -26,7 +26,7 @@ const SummaryInvoice = ({ order }) => {
       </Wrapper>
       <Wrapper>
         <SpanHeading>SHIPPING COST</SpanHeading>
-        <SpanContent>{order.total_ship}</SpanContent>
+        <SpanContent>${order.total_ship}</SpanContent>
       </Wrapper>
       <Wrapper>
         <SpanHeading>DISCOUNT</SpanHeading>
@@ -34,7 +34,7 @@ const SummaryInvoice = ({ order }) => {
       </Wrapper>
       <Wrapper>
         <SpanHeading>TOTAL AMOUNT</SpanHeading>
-        <SpanContent color="red">{order.total_ship + order.total}</SpanContent>
+        <SpanContent color="red">${(order.total_ship + order.total).toFixed(2)}</SpanContent>
       </Wrapper>
     </>
   );

@@ -219,7 +219,7 @@ const Cart = () => {
                 <Ship>Shipping</Ship>
               </Col>
               <Col sm={2.5} xs={2.5}>
-                <ValueShip>${(21000).toLocaleString()}</ValueShip>
+                <ValueShip>${(20).toLocaleString()}</ValueShip>
                 {/* <ValueShip>{document.getElementById("name").value}</ValueShip> */}
               </Col>
             </Row>

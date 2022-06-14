@@ -257,6 +257,7 @@ const Detail = () => {
             label="Amount"
             variant="outlined"
             name="amount"
+            type='number'
             value={updatedProduct.amount}
             onChange={handleChange}
             fullWidth
@@ -312,6 +313,7 @@ const Detail = () => {
             label="Price"
             variant="outlined"
             name="price"
+            type='number'
             value={updatedProduct.price}
             onChange={handleChange}
             fullWidth
